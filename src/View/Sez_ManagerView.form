@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="View.Sez_ManagerView">
+  <grid id="27dc6" binding="Intermedio0" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="3437" binding="Bottonbar" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints border-constraint="South"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="50ab0" class="javax.swing.JButton" binding="salvaButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Salva"/>
+            </properties>
+          </component>
+          <component id="e8105" class="javax.swing.JButton" binding="indietroButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="&lt;Indietro"/>
+            </properties>
+          </component>
+          <component id="ed083" class="javax.swing.JButton" binding="avantiButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Avanti&gt;"/>
+            </properties>
+          </component>
+          <component id="df46" class="javax.swing.JButton" binding="esciButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Esci"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="503" binding="Intermedio1" layout-manager="CardLayout" hgap="0" vgap="0" show="49d9d">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="49d9d" binding="SezA" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <card name="uno"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </grid>
+          <grid id="5ffd7" binding="SezB" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <card name="due"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </grid>
+          <grid id="f42ce" binding="SezC" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <card name="Card1"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </grid>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
