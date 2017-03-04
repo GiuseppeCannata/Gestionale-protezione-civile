@@ -1,4 +1,3 @@
-
 package Controller;
 
 import View.BasicFrameView;
@@ -13,13 +12,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-
 public class Sez_ManagerController {
 
     BasicFrameView basicframe;
     Sez_ManagerView sez_managerview;
     LoginController logincontroller;
 
+    /*
+     COSTRUTTORE
+    */
     public Sez_ManagerController(BasicFrameView view,String utilizzatore,LoginController Logincontroller) {
 
         basicframe = view;

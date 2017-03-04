@@ -1,8 +1,9 @@
-
 package Controller;
 
 
-/*Pagine_Manager è un manager che ci aiuta nella gestione delle pagine Avanti-Indietro*/
+/*
+  Pagine_Manager è un manager che ci aiuta nella gestione delle pagine Avanti-Indietro
+*/
 public class Pagine_Manager {
 
     private static int Pagina_Corrente;

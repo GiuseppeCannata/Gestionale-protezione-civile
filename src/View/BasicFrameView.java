@@ -3,17 +3,13 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 
-
-
 public class BasicFrameView extends JFrame{
-
-
 
     private JPanel Intermedio0;
     private JPanel sinistra;
     private JScrollPane destra;
 
-
+    /*COSTRUTTORE*/
     public BasicFrameView(){
 
         super("Protezione Civile");
@@ -29,15 +25,14 @@ public class BasicFrameView extends JFrame{
     }
 
 
-    //GETTER
-    public JPanel getIntermedio0(JPanel momentaneo) {
+    //GETTERS
+    public JPanel getIntermedio0() {
 
         return Intermedio0;
 
     }
 
     //SETTER
-
     public void setdestra(Component DESTRA) {
 
        destra.setViewportView(DESTRA);

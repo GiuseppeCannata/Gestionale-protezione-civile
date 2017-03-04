@@ -7,15 +7,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-
 public class LoginController {
 
     BasicFrameView basicframe;
     LoginView loginview;
-    /*Mi serve per evitare che l utente istanzi più di una Sez_ManagerView, quando ne è già istanziata una*/
+    /*
+      Mi serve per evitare che l utente istanzi più di una Sez_ManagerView, quando ne è già istanziata una
+    */
     int REGISTRATI;
 
-    /*COSTRUTTORE*/
+    /*
+      COSTRUTTORE
+    */
     public LoginController(BasicFrameView view) {
 
         basicframe = view;
@@ -29,14 +32,18 @@ public class LoginController {
 
     }
 
-    /*SETTER*/
+    /*
+     SETTER
+    */
     public void setREGISTRATI(int registrati) {
 
         REGISTRATI = registrati;
 
     }
 
-    /*loginListener() gestisce gli eventi scatenati dall utente interagendo con la LoginView*/
+    /*
+      loginListener gestisce gli eventi scatenati dall utente interagendo con la LoginView
+    */
     private void loginListener(){
 
         /*Registrazione*/
@@ -45,7 +52,7 @@ public class LoginController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if(REGISTRATI==0) {
+                if(REGISTRATI == 0) {
                     /*Settando Registrati con 1 dico che eiste gia un istanza di Sez_ManagerController*/
                     REGISTRATI = 1;
                     Sez_ManagerController sez_managerController = new Sez_ManagerController(basicframe,

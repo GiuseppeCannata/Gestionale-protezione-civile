@@ -39,8 +39,7 @@ public class Sez_AView{
     }
 
 
-    //GETTER
-
+    /*GETTER*/
     public JPanel getIntermedio0() {
 
 
