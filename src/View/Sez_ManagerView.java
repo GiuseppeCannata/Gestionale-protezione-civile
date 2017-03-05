@@ -3,7 +3,7 @@ package View;
 import javax.swing.*;
 
 
-public class Sez_ManagerView extends JFrame{
+public class Sez_ManagerView{
 
     private JPanel Intermedio0;
     private JPanel Bottonbar;
@@ -11,7 +11,7 @@ public class Sez_ManagerView extends JFrame{
     private JPanel SezA;
     private JPanel SezB;
     private JPanel SezC;
-    private JButton esciButton;
+    private JButton paginaLoginButton;
     private JButton salvaButton;
     private JButton indietroButton;
     private JButton avantiButton;
@@ -20,32 +20,26 @@ public class Sez_ManagerView extends JFrame{
 
     public Sez_ManagerView() {
 
-        super();
-        setSize(500, 500);
-        setLocation(450,150);
-        setResizable(false);
-        setContentPane(Intermedio0);
-        setVisible(true);
-
+        return;
 
     }
 
     //GETTER
     public JPanel getIntermedio0() {
 
-        /*PERCHE E QUI CHE HO IL CARD LAYOUT*/
         return Intermedio0;
     }
 
     public JPanel getIntermedio1() {
 
+        //PERCHE E QUI CHE HO IL CARD LAYOUT
         return Intermedio1;
     }
 
 
-    public JButton getEsciButton() {
+    public JButton getPaginaLoginButton() {
 
-        return esciButton;
+        return paginaLoginButton;
     }
 
     public JButton getSalvaButton() {
@@ -69,6 +63,11 @@ public class Sez_ManagerView extends JFrame{
 
     }
 
+    public JPanel getSezA() {
+
+        return SezA;
+
+    }
 
     public void setSezB(JPanel sezB) {
 

@@ -9,8 +9,10 @@ public class MainController{
 
         LoginController ApplicazioneStart;
 
-        /*Genero la frame principale(BasicFrameView) passandola al LoginController che porrà all interno il
-         *pannello di accesso*/
+        /*
+         *Genero la frame principale(BasicFrameView) passandola al LoginController che porrà all interno il
+         *pannello di login
+         */
         ApplicazioneStart=new LoginController(new BasicFrameView());
 
     }

@@ -9,62 +9,44 @@ import java.awt.event.ActionListener;
 
 public class LoginController {
 
-    BasicFrameView basicframe;
-    LoginView loginview;
-    /*
-      Mi serve per evitare che l utente istanzi più di una Sez_ManagerView, quando ne è già istanziata una
-    */
-    int REGISTRATI;
+    public BasicFrameView basicframe;
+    public LoginView loginview;
 
-    /*
-      COSTRUTTORE
-    */
+
+    /*COSTRUTTORE*/
     public LoginController(BasicFrameView view) {
 
         basicframe = view;
         loginview = new LoginView();
-        /*Vado a mettere nella sezione di destra della basicframe il pannello di login */
+        //Il pannello di login va messo nella parte destra della basicframe
         basicframe.setdestra(loginview.getIntermedio0());
-        /*Ovviamente all inizio ne ho zero istanziate*/
-        REGISTRATI = 0;
 
         loginListener();
 
     }
 
-    /*
-     SETTER
-    */
-    public void setREGISTRATI(int registrati) {
-
-        REGISTRATI = registrati;
-
-    }
 
     /*
-      loginListener gestisce gli eventi scatenati dall utente interagendo con la LoginView
-    */
+     *loginListener gestisce gli eventi scatenati dall utente interagendo con la LoginView
+     */
     private void loginListener(){
 
         /*Registrazione*/
-        JButton loginRegistratiButton=loginview.getRegistratiButton();
+        JButton loginRegistratiButton = loginview.getRegistratiButton();
         loginRegistratiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if(REGISTRATI == 0) {
-                    /*Settando Registrati con 1 dico che eiste gia un istanza di Sez_ManagerController*/
-                    REGISTRATI = 1;
-                    Sez_ManagerController sez_managerController = new Sez_ManagerController(basicframe,
-                            "Registrazione", LoginController.this);
-                }
+                    CFVerificaController verificaframe;
+                    verificaframe = new CFVerificaController(basicframe , loginview);
+
 
             }
         });
 
         /*Accesso*/
-        JButton loginAccediButton=loginview.getAccediButton();
-        loginRegistratiButton.addActionListener(new ActionListener() {
+        JButton loginAccediButton = loginview.getAccediButton();
+        loginAccediButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 

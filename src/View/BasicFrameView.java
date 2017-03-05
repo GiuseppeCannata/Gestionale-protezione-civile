@@ -24,7 +24,6 @@ public class BasicFrameView extends JFrame{
 
     }
 
-
     //GETTERS
     public JPanel getIntermedio0() {
 

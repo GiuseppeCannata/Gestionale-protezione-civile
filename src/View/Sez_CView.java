@@ -26,7 +26,6 @@ public class Sez_CView {
     }
 
     //GETTER
-
     public JPanel getIntermedio0() {
 
         return Intermedio0;

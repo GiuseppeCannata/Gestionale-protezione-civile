@@ -1,11 +1,6 @@
 package Controller;
 
-import View.BasicFrameView;
-import View.Sez_ManagerView;
-import View.Sez_AView;
-import View.Sez_BView;
-import View.Sez_CView;
-
+import View.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,46 +9,49 @@ import java.awt.event.ActionListener;
 
 public class Sez_ManagerController {
 
-    BasicFrameView basicframe;
-    Sez_ManagerView sez_managerview;
-    LoginController logincontroller;
+   public BasicFrameView basicframe;
+   public Sez_ManagerView sez_managerview;
+   public LoginView loginview;
 
-    /*
-     COSTRUTTORE
-    */
-    public Sez_ManagerController(BasicFrameView view,String utilizzatore,LoginController Logincontroller) {
+    /*COSTRUTTORE*/
+    public Sez_ManagerController(BasicFrameView frame, LoginView view,String utilizzatore) {
 
-        basicframe = view;
-        logincontroller = Logincontroller;
+        basicframe = frame;
+        loginview = view;
         sez_managerview = new Sez_ManagerView();
-
         sceltapannelli(utilizzatore);
-        /*Setto il mio manager di pagine*/
+        //Setto il mio manager di pagine
         Pagine_Manager.setPagina_Corrente();
+        basicframe.setdestra(sez_managerview.getIntermedio0());
+
         sezmanagerListener();
 
     }
 
-    /*sceltapannelli(String utilizzatore) gestisce i pannelli da inserire nella Sez_managerView*/
+    /*
+     *sceltapannelli gestisce i pannelli da inserire nella Sez_managerView
+     */
     private void sceltapannelli(String utilizzatore){
 
         if(utilizzatore.equals("Registrazione")){
 
-            sez_managerview.setTitle(utilizzatore);
             sez_managerview.setSezA(new Sez_AView().getIntermedio0());
             sez_managerview.setSezB(new Sez_BView().getIntermedio0());
             sez_managerview.setSezC(new Sez_CView().getIntermedio0());
 
         }
+
     }
 
-    /*sezmanagerListener() gestisce gli eventi scatenati dall utente interagendo con la Sez_managerView*/
+    /*
+     *sezmanagerListener() gestisce gli eventi scatenati dall utente interagendo con la Sez_managerView
+     */
     private void sezmanagerListener(){
 
         CardLayout CL=(CardLayout) sez_managerview.getIntermedio1().getLayout();
 
         /*Avanti*/
-        JButton sez_managerviewAvanti= sez_managerview.getAvantiButton();
+        JButton sez_managerviewAvanti = sez_managerview.getAvantiButton();
         sez_managerviewAvanti.addActionListener(new ActionListener() {
                 @Override
                     public void actionPerformed(ActionEvent e) {
@@ -62,11 +60,12 @@ public class Sez_ManagerController {
 
                             CL.next(sez_managerview.getIntermedio1());
                             Pagine_Manager.addPagina_Corrente();
+
                         }
 
                     }
 
-            });
+        });
 
 
         /*Indietro*/
@@ -82,36 +81,18 @@ public class Sez_ManagerController {
                     }
 
                 }
-            });
-
-
-        /*Esci*/
-        JButton sez_managerviewEsci=sez_managerview.getEsciButton();
-        sez_managerviewEsci.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                /*
-                 * Il metodo showConfirmDialog() ritorna un valore intero; in questo
-                 * caso: 0==Si 1==No Sapendo questo sono in grado di capire la
-                 * scelta dell utente e di poterla gestire di conseguenza
-                 */
-                int risposta;
-                risposta = JOptionPane.showConfirmDialog(sez_managerview, "Sei proprio sicuro di voler uscire \n" +
-                                "dalla registrazione?", "Warning", JOptionPane.YES_NO_OPTION,
-                                 JOptionPane.WARNING_MESSAGE);
-
-                /* L utente ha premuto Si per questo chiudo la sez_managerView */
-                if (risposta == 0) {
-
-                    sez_managerview.dispose();
-                    /*chiudendo la sez_managerview, ho zero istanze*/
-                    logincontroller.setREGISTRATI(0);
-
-                }
-            }
         });
 
 
-    }
+        /*PaginaLogin*/
+        JButton PaginaLoginbutton = sez_managerview.getPaginaLoginButton();
+        PaginaLoginbutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
+                basicframe.setdestra(loginview.getIntermedio0());
+
+            }
+        });
+    }
 }

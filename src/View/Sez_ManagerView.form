@@ -30,10 +30,10 @@
               <text value="Avanti&gt;"/>
             </properties>
           </component>
-          <component id="df46" class="javax.swing.JButton" binding="esciButton" default-binding="true">
+          <component id="df46" class="javax.swing.JButton" binding="paginaLoginButton">
             <constraints/>
             <properties>
-              <text value="Esci"/>
+              <text value="Pagina Login"/>
             </properties>
           </component>
         </children>
@@ -61,7 +61,7 @@
           </grid>
           <grid id="f42ce" binding="SezC" layout-manager="BorderLayout" hgap="0" vgap="0">
             <constraints>
-              <card name="Card1"/>
+              <card name="tre"/>
             </constraints>
             <properties/>
             <border type="none"/>
