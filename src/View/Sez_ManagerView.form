@@ -18,6 +18,12 @@
               <text value="Salva"/>
             </properties>
           </component>
+          <component id="9004b" class="javax.swing.JButton" binding="modificaButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Modifica"/>
+            </properties>
+          </component>
           <component id="e8105" class="javax.swing.JButton" binding="indietroButton" default-binding="true">
             <constraints/>
             <properties>
@@ -30,10 +36,10 @@
               <text value="Avanti&gt;"/>
             </properties>
           </component>
-          <component id="df46" class="javax.swing.JButton" binding="paginaLoginButton">
+          <component id="df46" class="javax.swing.JButton" binding="ibridoButton">
             <constraints/>
             <properties>
-              <text value="Pagina Login"/>
+              <text value="Ibrido"/>
             </properties>
           </component>
         </children>

@@ -9,7 +9,7 @@ public class LoginView {
     private JPanel Bottonbar;
     private JButton registratiButton;
     private JPanel Intermedio1;
-    private JTextField usernametext;
+    private JTextField Usernametext;
     private JPasswordField passwordField1;
     private JButton accediButton;
     private JLabel usernameLabel;
@@ -19,6 +19,13 @@ public class LoginView {
 
         return;
 
+    }
+
+
+
+
+    public void ErrorMessage(BasicFrameView frame,String nomeErrore){
+        JOptionPane.showMessageDialog(frame, nomeErrore, "Warning!", JOptionPane.ERROR_MESSAGE);
     }
 
 
@@ -42,5 +49,11 @@ public class LoginView {
 
     }
 
+    public String getUsernametext() {
+        return Usernametext.getText();
+    }
 
+    public char[] getPasswordField1() {
+        return passwordField1.getPassword();
+    }
 }

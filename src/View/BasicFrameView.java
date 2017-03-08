@@ -6,18 +6,20 @@ import java.awt.*;
 public class BasicFrameView extends JFrame{
 
     private JPanel Intermedio0;
-    private JPanel sinistra;
+    private JScrollPane sinistra;
     private JScrollPane destra;
 
     /*COSTRUTTORE*/
     public BasicFrameView(){
 
-        super("Protezione Civile");
+        super("Protezione Civile Gestionale");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(950, 500);
         setLocation(250, 100);
         setContentPane(Intermedio0);
+        Image icon = Toolkit.getDefaultToolkit().getImage("immagini/Logo_PC_Nazionale.png");
+        setIconImage(icon);
         setResizable(false);
 
         setVisible(true);
@@ -38,9 +40,9 @@ public class BasicFrameView extends JFrame{
 
     }
 
-    public void setSinistra(JPanel SINISTRA) {
+    public void setsinistra(Component SINISTRA) {
 
-        sinistra = SINISTRA;
+        sinistra.setViewportView(SINISTRA);
 
     }
 }

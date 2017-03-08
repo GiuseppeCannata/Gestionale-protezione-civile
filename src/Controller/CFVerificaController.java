@@ -1,11 +1,13 @@
 package Controller;
 
+import Model.CFVerificaModel;
 import View.BasicFrameView;
 import View.CFVerificaView;
 import View.LoginView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 
 
 public class CFVerificaController {
@@ -16,7 +18,7 @@ public class CFVerificaController {
 
 
    /*COSTRUTTORE*/
-   public CFVerificaController(BasicFrameView frame, LoginView view) {
+   public CFVerificaController(BasicFrameView frame , LoginView view) {
 
         basicframe = frame;
         loginview = view;
@@ -27,49 +29,60 @@ public class CFVerificaController {
 
    }
 
-    private void VerificaEsistenzaUtente(){
+   /**
+    *Metodo di servizio.
+    *VerificaCodiceFiscale gestisce eventuali errori dell utente nella digitazione del codice fiscale, o nella mancata
+    *immisione di quest'ultimo. Nel caso di errori l utente verrà avvertito con un messaggio di errore.
+    */
+    private void VerificaCodiceFiscale(){
 
-       String codicefiscale = verificaview.getText();
+        String codicefiscale = verificaview.getText();
 
-        if(codicefiscale.length() > 16)
-            JOptionPane.showMessageDialog(basicframe, "Errore!\nCodice fiscale troppo lungo.", "Warning!",
-                                          JOptionPane.ERROR_MESSAGE);
-        else
-         if(codicefiscale.length() == 0)
-            JOptionPane.showMessageDialog(basicframe, "Errore!\nNessun codice fiscale inserito.", "Warning!",
-                                          JOptionPane.ERROR_MESSAGE);
-         else
-           if(codicefiscale.equals("si")) {
-                JOptionPane.showMessageDialog(basicframe, "Sei già registrato!", "Warning!",
-                                              JOptionPane.ERROR_MESSAGE);
+        try{
 
-           }
-           else{
-                /*Apro la finestra di registrazione*/
-                Sez_ManagerController sez_managerController ;
-                sez_managerController = new Sez_ManagerController(basicframe,loginview,"Registrazione");
-                JOptionPane.showMessageDialog(basicframe, "Benvenuto nelle sezione registrazione!\nCompleta " +
-                        "tutti i campi obbligatori\ne successivamente clicca su salva.", "Benvenuto",
-                        JOptionPane.INFORMATION_MESSAGE);
-           }
+            if(codicefiscale.length() == 0)
+                throw new Exception("Inserire Codice fiscale!");
+            else
+              if((codicefiscale.length() > 16) || (codicefiscale.length() < 16))
+                throw new Exception("Lunghezza Codice fiscale errata!");
+              else{
+
+                  CFVerificaModel cfVerificaModel = new CFVerificaModel(codicefiscale);
+                  if(cfVerificaModel.VerificaEntità())
+                      throw new Exception("Codice fiscale già presente col seguente username:\n"+cfVerificaModel.getUser());
+              }
+
+
+            /*Apro la finestra di registrazione*/
+            Sez_ManagerController sez_managerController ;
+            sez_managerController = new Sez_ManagerController(basicframe,loginview,"Registrazione");
+
+
+        }catch(Exception e){
+            verificaview.ErrorMessage(basicframe,e.getMessage());
+        }
+
+
 
         //ALTRA IPOTESI VADO NEL DB CON IL CFVerificaModel
     }
 
     private void CFVerificaListener(){
 
+        /*OK*/
         JButton OKButton = verificaview.getOkButton();
         OKButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                VerificaEsistenzaUtente();
+                VerificaCodiceFiscale();
 
             }
         });
 
-        JButton getpaginaLoginButton = verificaview.getpaginaLoginButton();
-        getpaginaLoginButton.addActionListener(new ActionListener() {
+        /*paginaLogin*/
+        JButton paginaLoginButton = verificaview.getpaginaLoginButton();
+        paginaLoginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 

@@ -15,6 +15,10 @@ public class CFVerificaView {
 
     }
 
+    public void ErrorMessage(BasicFrameView frame,String nomeErrore){
+        JOptionPane.showMessageDialog(frame, nomeErrore, "Warning!", JOptionPane.ERROR_MESSAGE);
+    }
+
     public JPanel getIntermedio0() {
 
         return Intermedio0;

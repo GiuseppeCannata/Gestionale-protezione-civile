@@ -11,17 +11,24 @@ public class Sez_ManagerView{
     private JPanel SezA;
     private JPanel SezB;
     private JPanel SezC;
-    private JButton paginaLoginButton;
+    private JButton ibridoButton;
     private JButton salvaButton;
     private JButton indietroButton;
     private JButton avantiButton;
-
+    private JButton modificaButton;
 
 
     public Sez_ManagerView() {
 
         return;
 
+    }
+
+    public void MessaggioBenvenuto (BasicFrameView frame){
+
+        JOptionPane.showMessageDialog(frame, "Benvenuto nelle sezione registrazione!\nCompleta " +
+                        "tutti i campi obbligatori\ne successivamente clicca su salva.", "Benvenuto",
+                         JOptionPane.INFORMATION_MESSAGE);
     }
 
     //GETTER
@@ -37,9 +44,9 @@ public class Sez_ManagerView{
     }
 
 
-    public JButton getPaginaLoginButton() {
+    public JButton getIbridoButton() {
 
-        return paginaLoginButton;
+        return ibridoButton;
     }
 
     public JButton getSalvaButton() {
@@ -57,15 +64,15 @@ public class Sez_ManagerView{
         return avantiButton;
     }
 
+    public JButton getModificaButton() {
+
+        return modificaButton;
+    }
+
+    //SETTERS
     public void setSezA(JPanel sezA) {
 
         SezA.add(sezA);
-
-    }
-
-    public JPanel getSezA() {
-
-        return SezA;
 
     }
 
@@ -79,5 +86,16 @@ public class Sez_ManagerView{
 
         SezC.add(sezC);
 
+    }
+
+    public void setIbridoButton(String nuovo) {
+
+        ibridoButton.setText(nuovo);
+
+    }
+
+    public void setmodificaButton(Boolean visibilita) {
+
+       modificaButton.setVisible(visibilita);
     }
 }

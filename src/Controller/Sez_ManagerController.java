@@ -12,24 +12,64 @@ public class Sez_ManagerController {
    public BasicFrameView basicframe;
    public Sez_ManagerView sez_managerview;
    public LoginView loginview;
+   public CandidatoDestraView Dview;
+   private String Utilizzatore;
 
-    /*COSTRUTTORE*/
-    public Sez_ManagerController(BasicFrameView frame, LoginView view,String utilizzatore) {
+    /*COSTRUTTORI*/
+    public Sez_ManagerController(BasicFrameView frame , LoginView view , String utilizzatore) {
 
         basicframe = frame;
         loginview = view;
-        sez_managerview = new Sez_ManagerView();
-        sceltapannelli(utilizzatore);
-        //Setto il mio manager di pagine
-        Pagine_Manager.setPagina_Corrente();
-        basicframe.setdestra(sez_managerview.getIntermedio0());
+        Utilizzatore = utilizzatore;
+
+        InizializzazioneRegistrazione();
 
         sezmanagerListener();
 
     }
 
+    public Sez_ManagerController(BasicFrameView frame , CandidatoDestraView view , String utilizzatore) {
+
+        basicframe = frame;
+        Dview = view;
+        Utilizzatore = utilizzatore;
+
+        InizializzazioneCandidato();
+
+        sezmanagerListener();
+
+    }
+
+
+    private void InizializzazioneRegistrazione(){
+
+        sez_managerview = new Sez_ManagerView();
+        sez_managerview.setIbridoButton("Pagina Login");
+        sez_managerview.setmodificaButton(false);
+        sceltapannelli(Utilizzatore);
+        //Setto il mio manager di pagine
+        Pagine_Manager.setPagina_Corrente();
+        basicframe.setdestra(sez_managerview.getIntermedio0());
+        sez_managerview.MessaggioBenvenuto(basicframe);
+
+    }
+
+    private void InizializzazioneCandidato(){
+
+        sez_managerview = new Sez_ManagerView();
+        sez_managerview.setIbridoButton("Home");
+        sez_managerview.setmodificaButton(true);
+        sceltapannelli(Utilizzatore);
+        //Setto il mio manager di pagine
+        Pagine_Manager.setPagina_Corrente();
+        basicframe.setdestra(sez_managerview.getIntermedio0());
+
+    }
+
+
     /*
-     *sceltapannelli gestisce i pannelli da inserire nella Sez_managerView
+     *sceltapannelli gestisce i pannelli da inserire nella Sez_managerView.
+     *La scelta è eseguita in base all utilizzatore--> Registrazione, Persona, Volontario
      */
     private void sceltapannelli(String utilizzatore){
 
@@ -41,11 +81,16 @@ public class Sez_ManagerController {
 
         }
 
+        else if(utilizzatore.equals("Persona")){
+
+            sez_managerview.setSezA(new Sez_AView().getIntermedio0());
+            sez_managerview.setSezB(new Sez_BView().getIntermedio0());
+            sez_managerview.setSezC(new Sez_CView().getIntermedio0());
+
+        }
+
     }
 
-    /*
-     *sezmanagerListener() gestisce gli eventi scatenati dall utente interagendo con la Sez_managerView
-     */
     private void sezmanagerListener(){
 
         CardLayout CL=(CardLayout) sez_managerview.getIntermedio1().getLayout();
@@ -84,13 +129,18 @@ public class Sez_ManagerController {
         });
 
 
-        /*PaginaLogin*/
-        JButton PaginaLoginbutton = sez_managerview.getPaginaLoginButton();
-        PaginaLoginbutton.addActionListener(new ActionListener() {
+        /*ibrido*/
+        JButton button = sez_managerview.getIbridoButton();
+        button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+               if(Utilizzatore.equals("Registrazione"))
                 basicframe.setdestra(loginview.getIntermedio0());
+               if(Utilizzatore.equals("Persona"))
+                   basicframe.setdestra(Dview.getIntermedio0());
+
+
 
             }
         });
