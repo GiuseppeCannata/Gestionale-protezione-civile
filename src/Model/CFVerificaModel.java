@@ -18,9 +18,6 @@ public class CFVerificaModel extends Model {
         CodiceFiscaleInserito = codicefiscaleinserito;
 
         trovatocf = false;
-
-
-
     }
 
     /**
@@ -45,10 +42,13 @@ public class CFVerificaModel extends Model {
     }
 
     /**
-     *
+     *Metodo di servizio.
+     * TrovaCF Controlla la presenza o meno dell codice fiscale inserito in fase di verifica.
+     * Qualora il codice fiscale fosse contenuto nel DB TrovaCF è in grado di prelevare l user e salvarlo
+     * in modo tale da poterlo riutilizzare.
      *
      * @param query
-     * @return true
+     * @return true -->
      * @return false
      */
     private boolean TrovaCF(ResultSet query){

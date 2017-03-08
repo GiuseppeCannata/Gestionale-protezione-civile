@@ -3,7 +3,7 @@ import View.BasicFrameView;
 
 
 /**
- *Gestione dell'avvio dell applicazione
+ *Gestione dell'avvio dell applicazione ProtezioneCivileGestionale
  */
 
 public class MainApplicazione {

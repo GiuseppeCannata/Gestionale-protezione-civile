@@ -28,6 +28,7 @@ public class LoginController {
     }
 
     /**
+     * Metodo di servizio.
      *loginListener gestisce gli eventi scatenati dall utente interagendo con la LoginView
      */
     private void loginListener(){
@@ -66,7 +67,7 @@ public class LoginController {
 
         try{
 
-            if(userInserito.length()== 0 || passInserita.length==0)
+            if(userInserito.length() == 0 || passInserita.length == 0)
                 throw new Exception("Completare tutti i campi");
 
             else{

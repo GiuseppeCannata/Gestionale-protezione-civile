@@ -24,7 +24,7 @@ public class LoginModel extends Model {
     }
 
     /**
-     * Controlla l' esatezza dell username e password inseriti dall'utente.
+     * VerificaEntità controlla l' esatezza dell username e password inseriti dall'utente.
      * Fa uso di due metodi di servizio.
      *
      * @return true --> ok
