@@ -81,6 +81,7 @@ public class Persona extends Model{
 
     }
 
+
     /*GETTERS&SETTERS*/
 
     public String getNome() {

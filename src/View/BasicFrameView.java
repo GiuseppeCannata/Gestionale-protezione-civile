@@ -27,6 +27,11 @@ public class BasicFrameView extends JFrame{
     }
 
     //GETTERS
+
+    public void ErrorMessage(String nomeErrore){
+        JOptionPane.showMessageDialog(BasicFrameView.this, nomeErrore, "Warning!", JOptionPane.ERROR_MESSAGE);
+    }
+
     public JPanel getIntermedio0() {
 
         return Intermedio0;

@@ -1,6 +1,7 @@
 package View;
 
 import javax.swing.*;
+import java.sql.Date;
 
 
 public class Sez_AView{
@@ -18,6 +19,16 @@ public class Sez_AView{
     private JTextField professionetext;
     private JTextField specializzazionetext;
     private JTextField datatext;
+    private JTextField passwordtext;
+    private JTextField usernametext;
+    private JTextField annoText;
+    private JTextField meseText;
+    private JTextField giornoText;
+    private JTextField annonascitaText;
+    private JTextField mesenascitaText;
+    private JTextField giornonascitaText;
+
+    private String[] VectorA;
     private JLabel nomeLabel;
     private JLabel cognomeLabel;
     private JLabel luogoDiNascitaLabel;
@@ -30,6 +41,10 @@ public class Sez_AView{
     private JLabel specializzazioneLabel;
     private JLabel dataLabel;
     private JLabel emailLabel;
+    private JLabel usernameLabel;
+    private JLabel passwordLabel;
+
+
 
     //Costruttore vuoto
     public Sez_AView() {
@@ -46,59 +61,76 @@ public class Sez_AView{
         return Intermedio0;
     }
 
-    public JTextField getNometext() {
+    public String getNometext() {
 
 
-        return nometext;
+        return nometext.getText();
     }
 
-    public JTextField getLuogodinascitatext() {
+    public String getCognometext() {
 
-        return luogodinascitatext;
+        return cognometext.getText();
+
     }
 
-    public JTextField getDatadinascitatext() {
+    public String getLuogodinascitatext() {
 
-        return datadinascitatext;
+        return luogodinascitatext.getText();
     }
 
-    public JTextField getIndirizzodiresidenzatext() {
+    public String getDatadinascitatext() {
 
-        return indirizzodiresidenzatext;
+        return annonascitaText+"-"+mesenascitaText+"-"+giornonascitaText;
     }
 
-    public JTextField getTelefonofissotext() {
+    public String getIndirizzodiresidenzatext() {
 
-        return telefonofissotext;
+        return indirizzodiresidenzatext.getText();
     }
 
-    public JTextField getTelefonocellularetext() {
+    public String getTelefonofissotext() {
 
-        return telefonocellularetext;
+        return telefonofissotext.getText();
     }
 
-    public JTextField getEmailtext() {
+    public String getTelefonocellularetext() {
 
-        return emailtext;
+        return telefonocellularetext.getText();
     }
 
-    public JTextField getCodicefiscaletext() {
+    public String getEmailtext() {
 
-        return codicefiscaletext;
+        return emailtext.getText();
     }
 
-    public JTextField getProfessionetext() {
+    public String getCodicefiscaletext() {
 
-        return professionetext;
+        return codicefiscaletext.getText();
     }
 
-    public JTextField getSpecializzazionetext() {
+    public String getProfessionetext() {
 
-        return specializzazionetext;
+        return professionetext.getText();
     }
 
-    public JTextField getDatatext() {
+    public String getSpecializzazionetext() {
 
-        return datatext;
+        return specializzazionetext.getText();
     }
+
+    public String getDatatext() {
+
+        return annoText+"-"+meseText+"-"+giornoText;
+    }
+
+    public String getPasswordtext() {
+        return passwordtext.getText();
+    }
+
+    public String getUsernametext() {
+
+        return usernametext.getText();
+    }
+
+
 }

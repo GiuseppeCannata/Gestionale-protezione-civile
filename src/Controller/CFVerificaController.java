@@ -59,7 +59,9 @@ public class CFVerificaController {
 
 
         }catch(Exception e){
-            verificaview.ErrorMessage(basicframe,e.getMessage());
+
+           basicframe.ErrorMessage(e.getMessage());
+
         }
 
 

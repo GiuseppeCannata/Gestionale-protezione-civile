@@ -70,20 +70,21 @@ public class LoginController {
             if(userInserito.length() == 0 || passInserita.length == 0)
                 throw new Exception("Completare tutti i campi");
 
-            else{
 
-                LoginModel RichiestaDiAccesso= new LoginModel(userInserito, passInserita);
-                if(!RichiestaDiAccesso.VerificaEntità())
-                    throw new Exception("Username o Password errati");
+
+            LoginModel RichiestaDiAccesso= new LoginModel(userInserito, passInserita);
+            if(!RichiestaDiAccesso.VerificaEntità())
+                throw new Exception("Username o Password errati");
+
                 else{
-                }
+
 
 
             }
 
         }
         catch (Exception e ){
-            loginview.ErrorMessage(basicframe, e.getMessage());
+            basicframe.ErrorMessage(e.getMessage());
         }
     }
 }

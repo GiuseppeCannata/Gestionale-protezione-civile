@@ -31,33 +31,33 @@ public class Sez_CView {
         return Intermedio0;
     }
 
-    public JTextField getDenominazioneDatoreDiLavorotext() {
+    public String getDenominazioneDatoreDiLavorotext() {
 
-        return denominazioneDatoreDiLavorotext;
+        return denominazioneDatoreDiLavorotext.getText();
     }
 
-    public JTextField getTelDatoreDiLavorotext() {
+    public String getTelDatoreDiLavorotext() {
 
-        return TelDatoreDiLavorotext;
+        return TelDatoreDiLavorotext.getText();
     }
 
-    public JTextField getFaxDatoreDiLavorotext() {
+    public String getFaxDatoreDiLavorotext() {
 
-        return faxDatoreDiLavorotext;
+        return faxDatoreDiLavorotext.getText();
     }
 
-    public JTextField getEmailDatoreDiLavorotext() {
+    public String getEmailDatoreDiLavorotext() {
 
-        return emailDatoreDiLavorotext;
+        return emailDatoreDiLavorotext.getText();
     }
 
-    public JTextField getNumeroCodicePostaletext() {
+    public String getNumeroCodicePostaletext() {
 
-        return numeroCodicePostaletext;
+        return numeroCodicePostaletext.getText();
     }
 
-    public JTextField getIbantext() {
+    public String getIbantext() {
 
-        return ibantext;
+        return ibantext.getText();
     }
 }

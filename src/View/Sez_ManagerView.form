@@ -55,7 +55,14 @@
             </constraints>
             <properties/>
             <border type="none"/>
-            <children/>
+            <children>
+              <component id="2383c" class="javax.swing.JLabel">
+                <constraints border-constraint="South"/>
+                <properties>
+                  <text value="    Tutti i campi obbligatori sono segnati con *"/>
+                </properties>
+              </component>
+            </children>
           </grid>
           <grid id="5ffd7" binding="SezB" layout-manager="BorderLayout" hgap="0" vgap="0">
             <constraints>
