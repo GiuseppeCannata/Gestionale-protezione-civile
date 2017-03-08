@@ -58,13 +58,15 @@ public class CFVerificaModel extends Model {
 
                 String cf = query.getString("cf");
                 // System.out.println(user);
-                if (cf.equals(CodiceFiscaleInserito))
+                if (cf.equals(CodiceFiscaleInserito)) {
                     trovatocf = true;
+                    setUser(query.getString("user"));
+                }
                 //System.out.println(trovato);
 
             }
 
-            setUser(query.getString("user"));
+
 
         }catch(SQLException se){
             se.printStackTrace();
@@ -82,3 +84,4 @@ public class CFVerificaModel extends Model {
         this.user = user;
     }
 }
+

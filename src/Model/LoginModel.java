@@ -12,6 +12,7 @@ public class LoginModel extends Model {
     private Boolean trovatoPass;
 
 
+    /*COSTRUTTORE*/
     public LoginModel(String userInserito, char[] passInserita){
 
         openConnection();
@@ -25,10 +26,13 @@ public class LoginModel extends Model {
     /**
      * Controlla l' esatezza dell username e password inseriti dall'utente.
      * Fa uso di due metodi di servizio.
-     */
+     *
+     * @return true --> ok
+     * @return false --> errormessage --> username e password errati
+     **/
     public Boolean VerificaEntità(){
 
-        Boolean result = true;
+        Boolean result = false;
 
         String sql ="SELECT* FROM pass ";
 
@@ -36,7 +40,7 @@ public class LoginModel extends Model {
 
 
         if(TrovaUser(query) && TrovaPass(query))
-            result = false;
+            result = true;
 
         closeConnection();
 
@@ -45,7 +49,8 @@ public class LoginModel extends Model {
     }
 
     /**
-     * Metodo di servizio che controlla la presenza o meno dell username inseriti in fase di login
+     * Metodo di servizio
+     * TrovaUser Controlla la presenza o meno dell username inserito in fase di login
      *
      * @param query
      * @return true   --> L'username è corretto     (presente nel DB)
@@ -73,14 +78,13 @@ public class LoginModel extends Model {
 
 
     /**
-     * Metodo di servizio che controlla la presenza o meno della password inseriti in fase di login
+     * Metodo di servizio.
+     * TrovaPass controlla la presenza o meno della password inserito in fase di login
      *
      * @param query
      * @return true   --> La password è corretta     (presente nel DB)
      * @return false  --> La password non è corretto (non presente nel DB)
      */
-
-
     private boolean TrovaPass(ResultSet query){
 
         try {

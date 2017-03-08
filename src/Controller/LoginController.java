@@ -38,8 +38,8 @@ public class LoginController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                    CFVerificaController verificaframe;
-                    verificaframe = new CFVerificaController(basicframe , loginview);
+                CFVerificaController verificaframe;
+                verificaframe = new CFVerificaController(basicframe , loginview);
 
             }
         });
@@ -72,7 +72,7 @@ public class LoginController {
             else{
 
                 LoginModel RichiestaDiAccesso= new LoginModel(userInserito, passInserita);
-                if(RichiestaDiAccesso.VerificaEntità())
+                if(!RichiestaDiAccesso.VerificaEntità())
                     throw new Exception("Username o Password errati");
                 else{
                 }

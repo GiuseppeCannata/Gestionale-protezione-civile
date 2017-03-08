@@ -2,6 +2,10 @@ import Controller.LoginController;
 import View.BasicFrameView;
 
 
+/**
+ *Gestione dell'avvio dell applicazione
+ */
+
 public class MainApplicazione {
 
     public static void main(String[] args) {
