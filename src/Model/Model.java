@@ -84,31 +84,4 @@ public abstract class Model {
         return result;
     }
 
-    /**
-     * Metodo che esegue una query sql per l'inserimento di una tupla nel DB nel caso in cui la tabella presenti
-     * una chiave int auto increment
-     *
-     * @param sql string sql
-     * @return true se andata a buon fine altrimenti false
-     */
-    protected boolean insertQueryAutoIncrement(String sql) {
-
-        boolean result = false;
-        try {
-            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            stmt.executeUpdate();
-            ResultSet res = stmt.getGeneratedKeys();
-            if (res.next()) {
-                id_auto_increment = res.getInt(1);
-            }
-            result = true;
-        } catch (SQLException se) {
-            se.printStackTrace();
-        }
-
-        return result;
-    }
-
-
-
 }

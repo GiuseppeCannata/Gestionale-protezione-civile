@@ -3,19 +3,21 @@ package Model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
+/**
+ * LoginModel extends Model
+ * Si preoccupa di stabilire la connessione col DB, e di controllare la presenza o meno dell username e password nel DB
+ */
 public class LoginModel extends Model {
 
     private String UserInserito;
     private char[] PassInserita;
     private Boolean trovatoUser;
     private Boolean trovatoPass;
+    private String volocand;
 
 
     /*COSTRUTTORE*/
     public LoginModel(String userInserito, char[] passInserita){
-
-        openConnection();
 
         UserInserito = userInserito;
         PassInserita = passInserita;
@@ -25,26 +27,26 @@ public class LoginModel extends Model {
 
     /**
      * VerificaEntità controlla l' esatezza dell username e password inseriti dall'utente.
-     * Fa uso di due metodi di servizio.
+     * Fa uso di due metodi di servizio. --> TrovaUser, TrovaPass
      *
      * @return true --> ok
      * @return false --> errormessage --> username e password errati
+     *
      **/
     public Boolean VerificaEntità(){
 
-        Boolean result = false;
+        Boolean controllo = false;
 
+        openConnection();
         String sql ="SELECT* FROM pass ";
-
         ResultSet query = selectQuery(sql);
 
-
         if(TrovaUser(query) && TrovaPass(query))
-            result = true;
+            controllo = true;
 
         closeConnection();
 
-        return result;
+        return controllo;
 
     }
 
@@ -63,9 +65,11 @@ public class LoginModel extends Model {
 
                 String user = query.getString("user");
                 // System.out.println(user);
-                if (user.equals(UserInserito))
+                if (user.equals(UserInserito)) {
                     trovatoUser = true;
-                //System.out.println(trovato);
+                     volocand = query.getString("vol_o_cand");
+                    //System.out.println(trovato);
+                }
 
             }
         }catch(SQLException se){
@@ -112,6 +116,12 @@ public class LoginModel extends Model {
 
                 return trovatoPass;
         }
+    }
+
+
+    public String getVolocand() {
+
+        return volocand;
     }
 }
 

@@ -2,12 +2,18 @@ package Controller;
 
 import Model.LoginModel;
 import View.BasicFrameView;
+import View.CandidatoDestraView;
+import View.CandidatoSinistraView;
 import View.LoginView;
 
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * LoginController --> Controller per la LoginView
+ * Classe pubblica
+ */
 
 public class LoginController {
 
@@ -29,7 +35,7 @@ public class LoginController {
 
     /**
      * Metodo di servizio.
-     *loginListener gestisce gli eventi scatenati dall utente interagendo con la LoginView
+     * loginListener gestisce gli eventi scatenati dall utente interagendo con la LoginView
      */
     private void loginListener(){
 
@@ -40,7 +46,7 @@ public class LoginController {
             public void actionPerformed(ActionEvent e) {
 
                 CFVerificaController verificaframe;
-                verificaframe = new CFVerificaController(basicframe , loginview);
+                verificaframe = new CFVerificaController(basicframe, loginview);
 
             }
         });
@@ -51,19 +57,23 @@ public class LoginController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                ControlloImmissione(loginview.getUsernametext(),loginview.getPasswordField1());
+               Action();
 
             }
         });
     }
 
     /**
-     *Metodo di servizio.
-     *ControlloImmisione controlla se:
+     * Metodo di servizio.
+     * Action controlla se:
      *      1)L'utente non ha completato uno dei due campi(Userame, Password) nella pagina Login
      *      2)Segnala all'utente,grazie ad una finestra di errore, se l username e la password inseriti sono non corretti
      */
-    private void ControlloImmissione(String userInserito, char[] passInserita){
+    private void Action(){
+
+        String userInserito = loginview.getUsernametext();
+        char[] passInserita = loginview.getPasswordField1();
+
 
         try{
 
@@ -71,14 +81,15 @@ public class LoginController {
                 throw new Exception("Completare tutti i campi");
 
 
-
-            LoginModel RichiestaDiAccesso= new LoginModel(userInserito, passInserita);
+            LoginModel RichiestaDiAccesso = new LoginModel(userInserito, passInserita);
             if(!RichiestaDiAccesso.VerificaEntità())
                 throw new Exception("Username o Password errati");
 
-                else{
-
-
+            else{
+                if(RichiestaDiAccesso.getVolocand().equals("0")) {
+                    CandidatoController aaa;
+                    aaa = new CandidatoController(basicframe);
+                }
 
             }
 
@@ -87,4 +98,6 @@ public class LoginController {
             basicframe.ErrorMessage(e.getMessage());
         }
     }
+
+
 }

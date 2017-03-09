@@ -8,17 +8,22 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * CandidatoController --> Controller per la CandidatoView
+ *
+ */
 public class CandidatoController {
 
-    BasicFrameView basicframe;
-    CandidatoDestraView Dview;
-    CandidatoSinistraView Sview;
+   private BasicFrameView basicframe;
+   private CandidatoDestraView Dview;
+   private CandidatoSinistraView Sview;
 
     public CandidatoController(BasicFrameView frame) {
 
         basicframe = frame;
         Dview = new CandidatoDestraView();
         Sview = new CandidatoSinistraView();
+        //Settaggio della basicframe con inserimento dei due pannelli a destra e sinistra
         basicframe.setdestra(Dview.getIntermedio0());
         basicframe.setsinistra(Sview.getIntermedio0());
 
@@ -26,6 +31,9 @@ public class CandidatoController {
 
     }
 
+    /**
+     * Ascolto delle azioni dell utente
+     */
     private void  CandidatoControllerListener(){
 
         /*DatiPersonali*/
@@ -33,8 +41,10 @@ public class CandidatoController {
         DatiPersonaliButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 Sez_ManagerController sez_managerController ;
-                sez_managerController = new Sez_ManagerController(basicframe,Dview,"Persona");
+                sez_managerController = new Sez_ManagerController(basicframe, Dview,"Candidato");
+
             }
 
         });

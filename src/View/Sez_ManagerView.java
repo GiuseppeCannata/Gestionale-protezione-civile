@@ -11,11 +11,12 @@ public class Sez_ManagerView{
     private JPanel SezA;
     private JPanel SezB;
     private JPanel SezC;
-    private JButton ibridoButton;
+    private JButton paginaLoginButton;
     private JButton salvaButton;
     private JButton indietroButton;
     private JButton avantiButton;
     private JButton modificaButton;
+    private JButton homeButton;
 
 
     public Sez_ManagerView() {
@@ -32,6 +33,11 @@ public class Sez_ManagerView{
     }
 
     //GETTER
+
+    public JButton getHomeButton() {
+        return homeButton;
+    }
+
     public JPanel getIntermedio0() {
 
         return Intermedio0;
@@ -44,9 +50,9 @@ public class Sez_ManagerView{
     }
 
 
-    public JButton getIbridoButton() {
+    public JButton getPaginaLoginButton() {
 
-        return ibridoButton;
+        return paginaLoginButton;
     }
 
     public JButton getSalvaButton() {
@@ -70,6 +76,12 @@ public class Sez_ManagerView{
     }
 
     //SETTERS
+
+    public void setSalvaButton(boolean visibilita) {
+        salvaButton.setContentAreaFilled(visibilita);
+
+    }
+
     public void setSezA(JPanel sezA) {
 
         SezA.add(sezA);
@@ -88,14 +100,17 @@ public class Sez_ManagerView{
 
     }
 
-    public void setIbridoButton(String nuovo) {
+    public void setPaginaLoginButton(boolean visibilita) {
 
-        ibridoButton.setText(nuovo);
+        paginaLoginButton.setVisible(visibilita);
 
     }
 
-    public void setmodificaButton(Boolean visibilita) {
+    public void setModificaButton(boolean visibilità) {
+        modificaButton.setVisible(visibilità);
+    }
 
-       modificaButton.setVisible(visibilita);
+    public void setHomeButton(boolean visibilita) {
+        homeButton.setVisible(visibilita);
     }
 }

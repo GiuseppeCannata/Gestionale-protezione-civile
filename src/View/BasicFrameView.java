@@ -32,6 +32,20 @@ public class BasicFrameView extends JFrame{
         JOptionPane.showMessageDialog(BasicFrameView.this, nomeErrore, "Warning!", JOptionPane.ERROR_MESSAGE);
     }
 
+    public int OpotionalMessage(String nomeMessage){
+            /*
+			 * Il metodo showConfirmDialog() ritorna un valore intero; in questo
+			 * caso: 0==Si 1==No Sapendo questo sono in grado di capire la
+			 * scelta dell utente e di poterla gestire di conseguenza
+			 */
+
+        return JOptionPane.showConfirmDialog(this, nomeMessage, "Warning",
+                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+    }
+
+
+
     public JPanel getIntermedio0() {
 
         return Intermedio0;

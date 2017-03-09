@@ -80,7 +80,7 @@ public class Sez_AView{
 
     public String getDatadinascitatext() {
 
-        return annonascitaText+"-"+mesenascitaText+"-"+giornonascitaText;
+        return annonascitaText.getText()+"-"+mesenascitaText.getText()+"-"+giornonascitaText.getText();
     }
 
     public String getIndirizzodiresidenzatext() {
@@ -120,7 +120,7 @@ public class Sez_AView{
 
     public String getDatatext() {
 
-        return annoText+"-"+meseText+"-"+giornoText;
+        return annoText.getText()+"-"+meseText.getText()+"-"+giornoText.getText();
     }
 
     public String getPasswordtext() {

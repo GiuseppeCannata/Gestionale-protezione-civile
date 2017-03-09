@@ -36,10 +36,16 @@
               <text value="Avanti&gt;"/>
             </properties>
           </component>
-          <component id="df46" class="javax.swing.JButton" binding="ibridoButton">
+          <component id="df46" class="javax.swing.JButton" binding="paginaLoginButton">
             <constraints/>
             <properties>
-              <text value="Ibrido"/>
+              <text value="Pagina Login"/>
+            </properties>
+          </component>
+          <component id="8b143" class="javax.swing.JButton" binding="homeButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Home"/>
             </properties>
           </component>
         </children>
