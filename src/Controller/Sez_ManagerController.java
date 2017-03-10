@@ -2,13 +2,16 @@ package Controller;
 
 import Model.GestioneModel;
 import View.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *Sez_ManagerController --> Controller per la Sez_ManagerView
+ * Sez_ManagerController --> Controller per la Sez_ManagerView
+ * Classe pubblica
+ *
  */
 public class Sez_ManagerController {
 
@@ -16,6 +19,7 @@ public class Sez_ManagerController {
    public Sez_ManagerView sez_managerview;
    public LoginView loginview;
    public CandidatoDestraView Dview;
+   public String codicefiscale;
 
    public Sez_AView sez_Aview;
    public Sez_BView sez_Bview;
@@ -24,11 +28,12 @@ public class Sez_ManagerController {
    private String Utilizzatore;
 
     /*COSTRUTTORI*/
-    public Sez_ManagerController(BasicFrameView frame, LoginView view, String utilizzatore) {
+    public Sez_ManagerController(BasicFrameView frame, LoginView view, String utilizzatore, String CodiceFiscale) {
 
         basicframe = frame;
         loginview = view;
         Utilizzatore = utilizzatore;
+        codicefiscale = CodiceFiscale ;
 
         InizializzazioneRegistrazione();
 
@@ -73,7 +78,6 @@ public class Sez_ManagerController {
 
         sez_managerview = new Sez_ManagerView();
 
-        System.out.println("ddddd");
         sez_Aview = new Sez_AView();
         sez_Bview = new Sez_BView();
         sez_Cview = new Sez_CView();
@@ -92,8 +96,8 @@ public class Sez_ManagerController {
 
 
     /**
-     *sceltapannelli gestisce i pannelli da inserire nella Sez_managerView.
-     *La scelta è eseguita in base all utilizzatore--> Registrazione, Candidato , Volontario
+     * sceltapannelli gestisce i pannelli da inserire nella Sez_managerView.
+     * La scelta è eseguita in base all utilizzatore--> Registrazione, Candidato , Volontario
      */
     private void sceltapannelli(String utilizzatore){
 
@@ -115,7 +119,9 @@ public class Sez_ManagerController {
 
     }
 
-
+    /**
+     * Ascolto operazioni dell'utente
+     */
 
     private void sezmanagerListener(){
 
@@ -175,9 +181,11 @@ public class Sez_ManagerController {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-                    Salvataggio();
+                       Salvataggio();
+
                 }
             });
+
 
     }
     /**
@@ -188,16 +196,26 @@ public class Sez_ManagerController {
      */
     private void Salvataggio(){
 
-        if(VerificaCompletamentoCampiObbligatori()){
-            GestioneModel Gestione;
-            Gestione = new GestioneModel();
-            if(!Gestione.InsertRegistrazione(sez_Aview, sez_Bview, sez_Cview))
-                basicframe.ErrorMessage("Errore nell'inserimento!\nRicontrollare!");
-        }
+           if(Pagine_Manager.getFine_Pagina() == 3 && basicframe.OpotionalMessage("Una volta effettuato il salvataggio verrai\nrindirizzato" +
+                   "alla pagina login.Salvare?") == 0 && VerificaCompletamentoCampiObbligatori()){
+
+                       GestioneModel Gestione;
+                       Gestione = new GestioneModel(codicefiscale);
+                       if (Gestione.VerificaDisponibilitaUsername(sez_Aview))
+                           basicframe.ErrorMessage("Username già utilizzato!Cambialo!");
+                       else if (!Gestione.InsertRegistrazione(sez_Aview, sez_Bview, sez_Cview))
+                               basicframe.ErrorMessage("Errore nell'inserimento!\nRicontrollare!");
+
+
+
+           }
 
     }
 
     /**
+     * Metodo di servizio.
+     * VerificaCompletamentoCampiObbligatori si preoccupa di controllare se l utente per sbaglio o volutamente abbia mancato
+     * l inserimento dei campi necessari alla sua scheda anagrafica
      *
      * @return false --> non tutti i campi obbligatori sono completi
      * @return true  --> tutti i campi obbligatori sono completi
@@ -207,9 +225,9 @@ public class Sez_ManagerController {
         boolean controllo= false;
 
         try{
-            if((sez_Aview.getNometext().length() == 0) || (sez_Aview.getCognometext().length()==0) ||
-                    (sez_Aview.getDatadinascitatext().length()==0) || (sez_Aview.getIndirizzodiresidenzatext().length()==0)
-                    || (sez_Aview.getTelefonocellularetext().length()==0) || (sez_Aview.getCodicefiscaletext().length()==0)
+            if((sez_Aview.getNometext().length() == 0) || (sez_Aview.getCognometext().length()==0)
+                    || (sez_Aview.getDatadinascitatext().length()==0) || (sez_Aview.getIndirizzodiresidenzatext().length()==0)
+                    || (sez_Aview.getTelefonocellularetext().length()==0) || (sez_Aview.getTelefonofissotext().length()==0)
                     || (sez_Aview.getUsernametext().length()==0) || (sez_Aview.getPasswordtext().length()==0))
               throw new Exception("Completare tutti i campi obbligatori");
             //ANCHE PER LA SEZIONE C E B????
@@ -223,4 +241,9 @@ public class Sez_ManagerController {
             return controllo;
         }
      }
+
+    @Override
+    public String toString() {
+        return "Sez_ManagerController{}";
+    }
 }

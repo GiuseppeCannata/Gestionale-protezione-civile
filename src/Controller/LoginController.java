@@ -2,8 +2,6 @@ package Controller;
 
 import Model.LoginModel;
 import View.BasicFrameView;
-import View.CandidatoDestraView;
-import View.CandidatoSinistraView;
 import View.LoginView;
 
 import javax.swing.JButton;
@@ -57,7 +55,7 @@ public class LoginController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-               Action();
+               AccediAction();
 
             }
         });
@@ -65,11 +63,11 @@ public class LoginController {
 
     /**
      * Metodo di servizio.
-     * Action controlla se:
+     * AccediAction controlla se:
      *      1)L'utente non ha completato uno dei due campi(Userame, Password) nella pagina Login
      *      2)Segnala all'utente,grazie ad una finestra di errore, se l username e la password inseriti sono non corretti
      */
-    private void Action(){
+    private void AccediAction(){
 
         String userInserito = loginview.getUsernametext();
         char[] passInserita = loginview.getPasswordField1();
@@ -85,11 +83,11 @@ public class LoginController {
             if(!RichiestaDiAccesso.VerificaEntità())
                 throw new Exception("Username o Password errati");
 
-            else{
-                if(RichiestaDiAccesso.getVolocand().equals("0")) {
-                    CandidatoController aaa;
-                    aaa = new CandidatoController(basicframe);
-                }
+
+            if(RichiestaDiAccesso.getVolocand().equals("0")) {
+                CandidatoController aaa;
+                aaa = new CandidatoController(basicframe);
+
 
             }
 
@@ -99,5 +97,10 @@ public class LoginController {
         }
     }
 
+    @Override
+    public String toString() {
 
+        return "Sono LoginController e mi occupo della gestione delle azioni scatenate dall utente interagendo con"
+                +"la LoginView";
+    }
 }

@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class Persona extends Model{
+public abstract class Persona extends Model{
 
     /*VARIABILI D'ISTANZA DI PERSONA*/
 
@@ -18,12 +18,10 @@ public class Persona extends Model{
     private String Telefono_Cellulare;
     private String Email;
     private String Codice_Fiscale;
-    private String Data_Prima_Iscrizione; /*Data in cui il volontario si è iscritto alla protezione
-	                                        civile MA NON DEVE PER FORZA COMBACIARE CON LA DATA IN
-	                                        CUI E' STATA INFORMATIZZATA NELL'APPLICAZIONE LA SUA
-	                                        ISCRIZIONE*/
+    private String Data_Prima_Iscrizione;
     private String Professione;
     private String Eventuale_Specializzazione;
+
 
 
     /*SEZIONE (B) */
@@ -43,43 +41,52 @@ public class Persona extends Model{
     private String IBAN;
 
 
-    /*
-     * Costruttore vuoto
-     **/
+    private String Username;
+    private String Password;
 
+
+
+    /* Costruttore vuoto*/
     public Persona(){
 
         return;
     }
 
+    public Persona(String username){
 
-    public Persona (String CodiceFiscale){
+        Username = username;
+        /**popolaA();
+        popolaB();
+        popolaC();**/
 
-        openConnection();
+    }
 
-        String sql ="SELECT cf,nome,cognome FROM a  ";
+
+    public void popolaA(){
+
+      /**  openConnection();
+
+        String sql = "SELECT* FROM a ";
 
         ResultSet query = selectQuery(sql);
 
-        try{
+        try {
 
-            boolean trovato=false;
+            if(query.next()){
 
-            while(!trovato && query.next()){
-                String cf1= query.getString(1);//1-->cf
-                System.out.println(cf1);
-               trovato = cf1.equals(CodiceFiscale);
+                setCodice_Fiscale(query.getString(cf));
+
+
+                }
+
             }
-               setNome(query.getString("nome"));
-               setCognome(query.getString("cognome"));
-               System.out.println(getCognome());
+
         }catch(SQLException se){
             se.printStackTrace();
-        }finally{
-            closeConnection();
-        }
+        }**/
 
-    }
+     }
+
 
 
     /*GETTERS&SETTERS*/
@@ -266,5 +273,21 @@ public class Persona extends Model{
 
     public void setIBAN(String iBAN) {
         IBAN = iBAN;
+    }
+
+    public String getUsername() {
+        return Username;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setUsername(String username) {
+        Username = username;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
     }
 }

@@ -27,7 +27,7 @@ public class Sez_ManagerView{
 
     public void MessaggioBenvenuto (BasicFrameView frame){
 
-        JOptionPane.showMessageDialog(frame, "Benvenuto nelle sezione registrazione!\nCompleta " +
+        JOptionPane.showMessageDialog(frame, "Benvenuto nella sezione registrazione!\nCompleta " +
                         "tutti i campi obbligatori\ne successivamente clicca su salva.", "Benvenuto",
                          JOptionPane.INFORMATION_MESSAGE);
     }

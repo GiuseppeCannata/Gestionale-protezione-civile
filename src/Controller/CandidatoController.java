@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 /**
  * CandidatoController --> Controller per la CandidatoView
- *
+ * Classe pubblica
  */
 public class CandidatoController {
 
@@ -32,7 +32,7 @@ public class CandidatoController {
     }
 
     /**
-     * Ascolto delle azioni dell utente
+     * Ascolto azioni dell utente
      */
     private void  CandidatoControllerListener(){
 
@@ -68,5 +68,13 @@ public class CandidatoController {
             }
 
         });
+    }
+
+    @Override
+    public String toString() {
+
+        return "Sono Candidato Controller e mi occupo della gestione delle azioni scatenate dall utente interagendo con" +
+                "la CandidatoDestraView e CandidatoSinistraView";
+
     }
 }

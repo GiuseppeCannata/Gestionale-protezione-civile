@@ -67,7 +67,7 @@ public class LoginModel extends Model {
                 // System.out.println(user);
                 if (user.equals(UserInserito)) {
                     trovatoUser = true;
-                     volocand = query.getString("vol_o_cand");
+                    volocand = query.getString("vol_o_cand");
                     //System.out.println(trovato);
                 }
 
