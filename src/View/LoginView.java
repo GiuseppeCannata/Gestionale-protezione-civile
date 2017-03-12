@@ -54,6 +54,7 @@ public class LoginView {
     }
 
     public char[] getPasswordField1() {
+
         return passwordField1.getPassword();
     }
 }

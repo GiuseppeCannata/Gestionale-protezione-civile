@@ -4,6 +4,7 @@ import Model.CFVerificaModel;
 import View.BasicFrameView;
 import View.CFVerificaView;
 import View.LoginView;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +28,8 @@ public class CFVerificaController {
         basicframe = frame;
         loginview = view;
         verificaview = new CFVerificaView();
+        codicefiscale = null;
+        //imposto la view nello scroll a destra
         basicframe.setdestra(verificaview.getIntermedio0());
 
         CFVerificaListener();
@@ -70,7 +73,7 @@ public class CFVerificaController {
      */
     private void VerificaCodiceFiscale(){
 
-       setCodicefiscale(verificaview.getText());
+       codicefiscale = verificaview.getText();
 
         try{
 
@@ -83,13 +86,13 @@ public class CFVerificaController {
 
             //Verifica se il codice fiscale è contenuto o meno nel DB
             CFVerificaModel cfVerificaModel = new CFVerificaModel(codicefiscale);
-            if(cfVerificaModel.VerificaEntità())
-                throw new Exception("Codice fiscale già presente col seguente username:\n"+cfVerificaModel.getUser());
+            if(cfVerificaModel.SearchSQL())
+                throw new Exception("Codice fiscale già presente.");
 
 
             /*Apro la finestra di registrazione*/
-            Sez_ManagerController sez_managerController ;
-            sez_managerController = new Sez_ManagerController(basicframe, loginview, "Registrazione", codicefiscale);
+            RegistrazioneController registrazioneController;
+            registrazioneController = new RegistrazioneController(basicframe, loginview, codicefiscale);
 
 
 
@@ -98,12 +101,6 @@ public class CFVerificaController {
             basicframe.ErrorMessage(e.getMessage());
 
         }
-
-    }
-
-    public void setCodicefiscale(String codicefiscale) {
-
-        this.codicefiscale = codicefiscale;
     }
 
     @Override

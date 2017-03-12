@@ -10,35 +10,37 @@ import java.sql.SQLException;
 public class LoginModel extends Model {
 
     private String UserInserito;
-    private char[] PassInserita;
-    private Boolean trovatoUser;
-    private Boolean trovatoPass;
+    private String PassInserita;
     private String volocand;
 
 
     /*COSTRUTTORE*/
-    public LoginModel(String userInserito, char[] passInserita){
+    public LoginModel(String userInserito, String passInserita){
 
+        super();
         UserInserito = userInserito;
         PassInserita = passInserita;
-        trovatoUser = false;
-        trovatoPass = false;
+        volocand = null;  //oggetto non valido o no creato--> non noto
+
     }
 
     /**
-     * VerificaEntità controlla l' esatezza dell username e password inseriti dall'utente.
+     * SearchSQL controlla l' esatezza dell username e password inseriti dall'utente.
      * Fa uso di due metodi di servizio. --> TrovaUser, TrovaPass
      *
      * @return true --> ok
-     * @return false --> errormessage --> username e password errati
+     * @return false --> username e password errati
      *
      **/
-    public Boolean VerificaEntità(){
+
+    @Override
+    public boolean SearchSQL() {
 
         Boolean controllo = false;
 
         openConnection();
-        String sql ="SELECT* FROM pass ";
+
+        String sql ="SELECT user,pass,vol_o_cand FROM pass ";
         ResultSet query = selectQuery(sql);
 
         if(TrovaUser(query) && TrovaPass(query))
@@ -47,6 +49,20 @@ public class LoginModel extends Model {
         closeConnection();
 
         return controllo;
+
+    }
+
+    @Override
+    public boolean UpdateSQL() {
+
+        return false;
+
+    }
+
+    @Override
+    public boolean InsertSQL() {
+
+        return false;
 
     }
 
@@ -60,24 +76,32 @@ public class LoginModel extends Model {
      */
     private boolean TrovaUser(ResultSet query){
 
+     /*
+     appunto su query.next()
+     inizialmente query.next è posto prima della prima riga
+     alla prima chiaata si posiziona sulla prima row
+     alla seconda chiamata si posiziona sulla seconda row e cosi via
+    */
+        boolean trovatoUser = false;
+        String user;
+
         try {
             while (!trovatoUser && query.next()) {
 
-                String user = query.getString("user");
-                // System.out.println(user);
-                if (user.equals(UserInserito)) {
-                    trovatoUser = true;
-                    volocand = query.getString("vol_o_cand");
-                    //System.out.println(trovato);
-                }
+                user = query.getString("user");
+                    if (user.equals(UserInserito)) {
+                      trovatoUser = true;
+                      volocand = query.getString("vol_o_cand");
+                      //System.out.println(trovato);
+                    }
 
             }
         }catch(SQLException se){
           se.printStackTrace();
-        }finally {
-
-            return trovatoUser;
         }
+
+        return trovatoUser;
+
     }
 
 
@@ -91,34 +115,24 @@ public class LoginModel extends Model {
      */
     private boolean TrovaPass(ResultSet query){
 
+        boolean trovatoPass = false;
+
         try {
-
+                           //se questa colonna non esiste mi genera una eccezione
             String pass = query.getString("pass");
-            //conversione
-            char[] passw = pass.toCharArray();
-
-
-            if (passw.length == PassInserita.length) {
-
-                int i = 0;
-                while (i < passw.length && passw[i] == PassInserita[i]) {
-
-                    i++;
-
-                }
-                if (i == passw.length)
+            if(pass.equals(PassInserita))
                     trovatoPass = true;
 
-            }
-        }catch(SQLException se){
-            se.printStackTrace();
-        }finally {
 
-                return trovatoPass;
+        }catch(SQLException se) {
+            se.printStackTrace();
         }
+
+        return trovatoPass;
+
     }
 
-
+    //getter
     public String getVolocand() {
 
         return volocand;

@@ -22,15 +22,10 @@ public abstract class Persona extends Model{
     private String Professione;
     private String Eventuale_Specializzazione;
 
-
-
     /*SEZIONE (B) */
-    private String Brevetti;
     private String Patenti;
-    private String Licenze_Possedute;
     private String Abilitazioni_Possedute;
     private String Corsi_Frequentati;
-
 
     /*SEZIONE (C) */
     private String Denominazione_Datore_di_Lavoro;
@@ -55,18 +50,18 @@ public abstract class Persona extends Model{
     public Persona(String username){
 
         Username = username;
-        /**popolaA();
+        popolaA();
         popolaB();
-        popolaC();**/
+        popolaC();
 
     }
 
 
-    public void popolaA(){
+    private void popolaA(){
 
-      /**  openConnection();
+        openConnection();
 
-        String sql = "SELECT* FROM a ";
+        String sql = "select * from a join pass where user ='"+ Username +"'";;
 
         ResultSet query = selectQuery(sql);
 
@@ -74,19 +69,77 @@ public abstract class Persona extends Model{
 
             if(query.next()){
 
-                setCodice_Fiscale(query.getString(cf));
-
-
-                }
+               Codice_Fiscale = query.getString("cf");
+               Nome = query.getString("nome");
+               Cognome = query.getString("cognome");
+               Luogo_di_Nascita = query.getString("luogodinascita");
+               Indirizzo_di_residenza = query.getString("indirizzodiresidenza");
+               Telefono_Fisso = query.getString("telefonofisso");
+               Telefono_Cellulare = query.getString("telefonomobile");
+               Email = query.getString("email");
+               Data_Prima_Iscrizione = query.getString("dataprimaiscrizione");
+               Professione = query.getString("professione");
+               Eventuale_Specializzazione = query.getString("eventualespecializzazione");
+               Data_di_Nascita = query.getString("datadinascita");
 
             }
-
         }catch(SQLException se){
             se.printStackTrace();
-        }**/
+        }finally{
+            closeConnection();
+        }
+    }
 
-     }
+    private void popolaB(){
 
+        openConnection();
+
+        String sql = "select * from a join pass where user ='"+ Username +"'";;
+
+        ResultSet query = selectQuery(sql);
+
+        try {
+
+            while(query.next()){
+
+
+
+
+
+            }
+        }catch(SQLException se){
+            se.printStackTrace();
+        }finally{
+            closeConnection();
+        }
+    }
+
+    private void popolaC(){
+
+        openConnection();
+
+        String sql = "select * from c join pass where user ='"+ Username +"'";;
+
+        ResultSet query = selectQuery(sql);
+
+        try {
+
+            if(query.next()){
+
+                  Denominazione_Datore_di_Lavoro = query.getString("nomedatore");
+                  Telefono_Datore_Lavoro = query.getString("telefono");
+                  Fax_Datore_di_Lavoro = query.getString("faxdatore");
+                  email_Datore_di_Lavoro = query.getString("email");
+                  Numero_Civico_Postale = query.getString("numero_codice_postale");
+                  IBAN = query.getString("iban");
+
+            }
+        }catch(SQLException se){
+            se.printStackTrace();
+        }finally{
+            closeConnection();
+        }
+    }
 
 
     /*GETTERS&SETTERS*/
@@ -187,28 +240,12 @@ public abstract class Persona extends Model{
         Eventuale_Specializzazione = eventuale_Specializzazione;
     }
 
-    public String getBrevetti() {
-        return Brevetti;
-    }
-
-    public void setBrevetti(String brevetti) {
-        Brevetti = brevetti;
-    }
-
     public String getPatenti() {
         return Patenti;
     }
 
     public void setPatenti(String patenti) {
         Patenti = patenti;
-    }
-
-    public String getLicenze_Possedute() {
-        return Licenze_Possedute;
-    }
-
-    public void setLicenze_Possedute(String licenze_Possedute) {
-        Licenze_Possedute = licenze_Possedute;
     }
 
     public String getAbilitazioni_Possedute() {

@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.GestioneModel;
+import Model.RegistrazioneModel;
 import View.*;
 
 import javax.swing.*;
@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
  * Classe pubblica
  *
  */
-public class Sez_ManagerController {
+public class RegistrazioneController {
 
    public BasicFrameView basicframe;
    public Sez_ManagerView sez_managerview;
@@ -23,31 +23,18 @@ public class Sez_ManagerController {
 
    public Sez_AView sez_Aview;
    public Sez_BView sez_Bview;
+   public Sez_BController sez_bController;
    public Sez_CView sez_Cview;
 
-   private String Utilizzatore;
 
     /*COSTRUTTORI*/
-    public Sez_ManagerController(BasicFrameView frame, LoginView view, String utilizzatore, String CodiceFiscale) {
+    public RegistrazioneController(BasicFrameView frame, LoginView view, String CodiceFiscale) {
 
         basicframe = frame;
         loginview = view;
-        Utilizzatore = utilizzatore;
         codicefiscale = CodiceFiscale ;
 
         InizializzazioneRegistrazione();
-
-        sezmanagerListener();
-
-    }
-
-    public Sez_ManagerController(BasicFrameView frame, CandidatoDestraView view, String utilizzatore) {
-
-        basicframe = frame;
-        Dview = view;
-        Utilizzatore = utilizzatore;
-
-        InizializzazioneDatipersonaliCandidato();
 
         sezmanagerListener();
 
@@ -61,12 +48,12 @@ public class Sez_ManagerController {
         sez_Aview = new Sez_AView();
         sez_Bview = new Sez_BView();
         sez_Cview = new Sez_CView();
+        sez_bController = new Sez_BController(sez_Bview, basicframe);
 
         sez_managerview.setPaginaLoginButton(true);
         sez_managerview.setModificaButton(false);
         sez_managerview.setHomeButton(false);
        // sez_managerview.setSalvaButton(false);
-        sceltapannelli(Utilizzatore);
         //Setto il mio manager di pagine
         Pagine_Manager.setPagina_Corrente();
         basicframe.setdestra(sez_managerview.getIntermedio0());
@@ -74,55 +61,23 @@ public class Sez_ManagerController {
 
     }
 
-    private void InizializzazioneDatipersonaliCandidato(){
-
-        sez_managerview = new Sez_ManagerView();
-
-        sez_Aview = new Sez_AView();
-        sez_Bview = new Sez_BView();
-        sez_Cview = new Sez_CView();
-
-        sez_managerview.setPaginaLoginButton(false);
-        sez_managerview.setModificaButton(true);
-        sez_managerview.setHomeButton(true);
-        //sez_managerview.setSalvaButton(true);
-        sceltapannelli(Utilizzatore);
-
-        //Setto il mio manager di pagine
-        Pagine_Manager.setPagina_Corrente();
-        basicframe.setdestra(sez_managerview.getIntermedio0());
-
-    }
 
 
     /**
      * sceltapannelli gestisce i pannelli da inserire nella Sez_managerView.
-     * La scelta è eseguita in base all utilizzatore--> Registrazione, Candidato , Volontario
+     *
      */
-    private void sceltapannelli(String utilizzatore){
-
-        if(utilizzatore.equals("Registrazione")){
+    private void sceltapannelli(){
 
             sez_managerview.setSezA(sez_Aview.getIntermedio0());
             sez_managerview.setSezB(sez_Bview.getIntermedio0());
             sez_managerview.setSezC(sez_Cview.getIntermedio0());
-
-        }
-
-        else if(utilizzatore.equals("Candidato")){
-
-            sez_managerview.setSezA(sez_Aview.getIntermedio0());
-            sez_managerview.setSezB(sez_Bview.getIntermedio0());
-            sez_managerview.setSezC(sez_Cview.getIntermedio0());
-
-        }
 
     }
 
     /**
      * Ascolto operazioni dell'utente
      */
-
     private void sezmanagerListener(){
 
         CardLayout CL=(CardLayout) sez_managerview.getIntermedio1().getLayout();
@@ -196,14 +151,14 @@ public class Sez_ManagerController {
      */
     private void Salvataggio(){
 
-           if(Pagine_Manager.getFine_Pagina() == 3 && basicframe.OpotionalMessage("Una volta effettuato il salvataggio verrai\nrindirizzato" +
+           if(basicframe.OpotionalMessage("Una volta effettuato il salvataggio verrai\nrindirizzato" +
                    "alla pagina login.Salvare?") == 0 && VerificaCompletamentoCampiObbligatori()){
 
-                       GestioneModel Gestione;
-                       Gestione = new GestioneModel(codicefiscale);
-                       if (Gestione.VerificaDisponibilitaUsername(sez_Aview))
+                       RegistrazioneModel Gestione;
+                       Gestione = new RegistrazioneModel(codicefiscale, sez_Aview, sez_Bview, sez_Cview, sez_bController);
+                       if (Gestione.SearchSQL())
                            basicframe.ErrorMessage("Username già utilizzato!Cambialo!");
-                       else if (!Gestione.InsertRegistrazione(sez_Aview, sez_Bview, sez_Cview))
+                       else if (!Gestione.InsertSQL())
                                basicframe.ErrorMessage("Errore nell'inserimento!\nRicontrollare!");
 
 
@@ -222,28 +177,36 @@ public class Sez_ManagerController {
      */
      private Boolean VerificaCompletamentoCampiObbligatori(){
 
-        boolean controllo= false;
+        boolean controllo = false;
 
         try{
-            if((sez_Aview.getNometext().length() == 0) || (sez_Aview.getCognometext().length()==0)
-                    || (sez_Aview.getDatadinascitatext().length()==0) || (sez_Aview.getIndirizzodiresidenzatext().length()==0)
-                    || (sez_Aview.getTelefonocellularetext().length()==0) || (sez_Aview.getTelefonofissotext().length()==0)
-                    || (sez_Aview.getUsernametext().length()==0) || (sez_Aview.getPasswordtext().length()==0))
+            if((sez_Aview.getNometext().length() == 0)
+                    || (sez_Aview.getCognometext().length()== 0)
+                    || (sez_Aview.getDatadinascitatext().length()== 0)
+                    || (sez_Aview.getIndirizzodiresidenzatext().length()== 0)
+                    || (sez_Aview.getTelefonocellularetext().length()== 0)
+                    || (sez_Aview.getTelefonofissotext().length()== 0)
+                    || (sez_Aview.getUsernametext().length()== 0)
+                    || (sez_Aview.getPasswordtext().length()== 0)
+                    )
               throw new Exception("Completare tutti i campi obbligatori");
-            //ANCHE PER LA SEZIONE C E B????
+
 
 
             controllo= true;
 
         }catch(Exception e){
             basicframe.ErrorMessage(e.getMessage());
-        }finally {
-            return controllo;
         }
+
+        return controllo;
+
      }
 
     @Override
     public String toString() {
-        return "Sez_ManagerController{}";
+
+         return "Sez_ManagerController{}";
+
     }
 }

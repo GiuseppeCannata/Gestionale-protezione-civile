@@ -42,8 +42,8 @@ public class CandidatoController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Sez_ManagerController sez_managerController ;
-                sez_managerController = new Sez_ManagerController(basicframe, Dview,"Candidato");
+               /* Sez_ManagerController sez_managerController ;
+                sez_managerController = new Sez_ManagerController(basicframe, Dview,"Candidato");*/
 
             }
 

@@ -11,88 +11,69 @@ import java.sql.SQLException;
 public class CFVerificaModel extends Model {
 
     private String CodiceFiscaleInserito;
-    private Boolean trovatocf;
-    private String user;
 
 
     public CFVerificaModel(String codicefiscaleinserito){
 
+        super();
         CodiceFiscaleInserito = codicefiscaleinserito;
-        trovatocf = false;
+
     }
 
     /**
-     * VerificaEntità controlla se il codicefiscale inserito dall utente in fase di verifica(ante registrazione)
-     * sia contenuto o meno all interno del DB
+     * SearchSQL Controlla la presenza o meno dell codice fiscale inserito in fase di verifica.
      *
-     * @return true --> ok
-     * @return false --> errormessage --> username e password errati
+     * @return true  --> il codice fiscale è presente nel DB(l utente era gia registrato)
+     * @return false --> il codice fiscale non è nel DB(l utente ha bisogno di registrarsi)
      *
      */
-    public Boolean VerificaEntità(){
+
+    @Override
+    public boolean SearchSQL() {
 
         Boolean controllo = false;
 
         openConnection();
 
-        String sql ="SELECT* FROM pass ";
-
+        String sql ="SELECT cf FROM pass ";
         ResultSet query = selectQuery(sql);
 
-
-        if(TrovaCF(query))
-            controllo = true;
-
-        closeConnection();
-
-        return controllo;
-
-    }
-
-    /**
-     * Metodo di servizio.
-     * TrovaCF Controlla la presenza o meno dell codice fiscale inserito in fase di verifica.
-     * Qualora il codice fiscale fosse contenuto nel DB TrovaCF è in grado di prelevare l user e salvarlo
-     * in modo tale da poterlo riutilizzare.--> lo scopo è quello di indicare all utente una sua precedente iscrizione
-     * e di mostrargli l username con la quale si era registrato
-     *
-     * @param query
-     * @return true  --> il codice fiscale è presente nel DB(l utente era gia registrato)
-     * @return false --> il codice fiscale non è nel DB(l utente ha bisogno di registrarsi)
-     *
-     */
-    private boolean TrovaCF(ResultSet query){
-
         try {
-            while (!trovatocf && query.next()) {
 
-                String cf = query.getString("cf");
-                // System.out.println(user);
-                if (cf.equals(CodiceFiscaleInserito)) {
-                    trovatocf = true;
-                    setUser(query.getString("user"));
-                }
-                //System.out.println(trovato);
+            String cf;
+
+            while (!controllo && query.next()) {
+
+                cf = query.getString("cf");
+                if (cf.equals(CodiceFiscaleInserito))
+                   controllo = true;
 
             }
 
         }catch(SQLException se){
             se.printStackTrace();
         }finally {
-
-            return trovatocf;
+            closeConnection();
         }
+
+        return controllo;
+
     }
 
-    //GETTER
-    public String getUser() {
+    @Override
+    public boolean InsertSQL() {
 
-        return user;
+        return false;
+
     }
 
-    public void setUser(String userDB) {
+    @Override
+    public boolean UpdateSQL() {
 
-       user = userDB;
+        return false;
+
     }
+
+
 }
 

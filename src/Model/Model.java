@@ -11,12 +11,11 @@ import java.sql.*;
  */
 public abstract class Model {
 
-    protected Connection conn = null;
-    private Statement stmt = null;
-    private ResultSet rs = null;
+    protected Connection conn;
+    private Statement stmt;
+    private ResultSet rs;
     private DBConnessione db;
 
-    private int id_auto_increment = -1;
 
 
 
@@ -25,11 +24,14 @@ public abstract class Model {
      */
     public Model() {
 
+        conn = null;
+        stmt = null;
+        rs = null;
         db = new DBConnessione();
     }
 
     /**
-     * Metodo per aprire la connessione col DB
+     * OpenConnection apre la connessione col DB
      */
     protected void openConnection() {
 
@@ -38,7 +40,7 @@ public abstract class Model {
     }
 
     /**
-     * Metodo per chiudere la connessione col DB
+     * CloseConnection chiude la connessione col DB
      */
     protected void closeConnection() {
 
@@ -47,7 +49,7 @@ public abstract class Model {
     }
 
     /**
-     * Metodo che esegue una query sql per la selezione di dati
+     * selectQuery esegue una query sql per la selezione di dati
      *
      * @param sql stringa contenente la query in sql
      * @return risultato della query
@@ -65,7 +67,7 @@ public abstract class Model {
     }
 
     /**
-     * Metodo che esegue una query sql per l'update dei dati (nel dattaglio: inserimento, modifica e eliminazione)
+     * updateQuery  esegue una query sql per l'update dei dati (nel dattaglio: inserimento, modifica e eliminazione)
      *
      * @param sql stringa sql
      * @return true se andata a buon fine altrimenti false
@@ -84,5 +86,8 @@ public abstract class Model {
         return result;
     }
 
+   public abstract boolean InsertSQL();
+    public abstract boolean SearchSQL();
+    public abstract boolean UpdateSQL();
 
 }

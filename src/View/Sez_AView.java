@@ -1,7 +1,6 @@
 package View;
 
 import javax.swing.*;
-import java.sql.Date;
 
 
 public class Sez_AView{
@@ -30,7 +29,6 @@ public class Sez_AView{
     private JLabel telefonoCellullareLabel;
     private JLabel professioneLabel;
     private JLabel specializzazioneLabel;
-    private JLabel dataLabel;
     private JLabel emailLabel;
     private JLabel usernameLabel;
     private JLabel passwordLabel;
@@ -38,9 +36,7 @@ public class Sez_AView{
     private JComboBox comboBox1;
     private JComboBox comboBox2;
     private JComboBox comboBox3;
-    private JComboBox comboBox4;
-    private JComboBox comboBox5;
-    private JComboBox comboBox6;
+
 
 
     //Costruttore vuoto
@@ -81,14 +77,6 @@ public class Sez_AView{
         return (String)comboBox1.getSelectedItem()+"-"+ (String)comboBox2.getSelectedItem()+"-"+(String)comboBox3.getSelectedItem();
 
     }
-    public String getDatatext(){
-
-        return (String)comboBox4.getSelectedItem()+"-"+ (String)comboBox5.getSelectedItem()+"-"+(String)comboBox6.getSelectedItem();
-    }
-
-    public String getCodicefiscaletext() {
-        return codicefiscaletext.getText();
-    }
 
     public String getIndirizzodiresidenzatext() {
 
@@ -109,11 +97,6 @@ public class Sez_AView{
 
         return emailtext.getText();
     }
-
-   /* public String getCodicefiscaletext() {
-
-        return codicefiscaletext.getText();
-    }*/
 
     public String getProfessionetext() {
 

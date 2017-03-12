@@ -20,9 +20,9 @@ public class LoginController {
 
 
     /*COSTRUTTORE*/
-    public LoginController(BasicFrameView view) {
+    public LoginController(BasicFrameView frame) {
 
-        basicframe = view;
+        basicframe = frame;
         loginview = new LoginView();
         //Il pannello di login va messo nella parte destra della basicframe
         basicframe.setdestra(loginview.getIntermedio0());
@@ -70,25 +70,23 @@ public class LoginController {
     private void AccediAction(){
 
         String userInserito = loginview.getUsernametext();
-        char[] passInserita = loginview.getPasswordField1();
+        String passInserita = new String (loginview.getPasswordField1());  //conversione a stringa del char[] restituito da JPasswordText
 
 
         try{
 
-            if(userInserito.length() == 0 || passInserita.length == 0)
+            if(userInserito.length() == 0 || passInserita.length() == 0)
                 throw new Exception("Completare tutti i campi");
 
 
             LoginModel RichiestaDiAccesso = new LoginModel(userInserito, passInserita);
-            if(!RichiestaDiAccesso.VerificaEntità())
+            if(!RichiestaDiAccesso.SearchSQL())
                 throw new Exception("Username o Password errati");
 
 
             if(RichiestaDiAccesso.getVolocand().equals("0")) {
                 CandidatoController aaa;
                 aaa = new CandidatoController(basicframe);
-
-
             }
 
         }
