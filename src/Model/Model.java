@@ -86,7 +86,7 @@ public abstract class Model {
         return result;
     }
 
-   public abstract boolean InsertSQL();
+    public abstract boolean InsertSQL();
     public abstract boolean SearchSQL();
     public abstract boolean UpdateSQL();
 

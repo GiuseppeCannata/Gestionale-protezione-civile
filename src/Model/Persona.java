@@ -24,9 +24,9 @@ public abstract class Persona extends Model{
     private String Eventuale_Specializzazione;
 
     /*SEZIONE (B) */
-    private ArrayList<String> Patenti;
-    private ArrayList<String> Abilitazioni_Possedute;
-    private ArrayList<String> Corsi_Frequentati;
+    private ArrayList<Patente> PATENTI;
+    private ArrayList<Abilitazione> ABILITAZIONI;
+    private ArrayList<Corso> CORSI;
 
     /*SEZIONE (C) */
     private String Denominazione_Datore_di_Lavoro;
@@ -62,7 +62,7 @@ public abstract class Persona extends Model{
 
         openConnection();
 
-        String sql = "select * from a join pass where user ='"+ Username +"'";;
+        String sql = "select* from a join pass where user ='"+Username+"'";;
 
         ResultSet query = selectQuery(sql);
 
@@ -93,17 +93,74 @@ public abstract class Persona extends Model{
 
     private void popolaB(){
 
+        CORSI = new ArrayList<>(25);
+        ABILITAZIONI = new ArrayList<>(25);
+        PATENTI = new ArrayList<>(25);
+
         openConnection();
 
-        String sql = "select * from a join pass where user ='"+ Username +"'";;
-
+        String sql = "select* from abilitazioni where cf ='"+ Codice_Fiscale +"'";
         ResultSet query = selectQuery(sql);
 
         try {
 
             while(query.next()){
 
+                Abilitazione temporaneo = new Abilitazione();
 
+                temporaneo.setNome(query.getString("nome"));
+            temporaneo.setDatascadenza(query.getString("datascadenza"));
+            temporaneo.setDataacquisizione(query.getString("dataacquisizione"));
+            temporaneo.setEntedirilascio(query.getString("entedirilascio"));
+            temporaneo.setN_documento(query.getString("n_documento"));
+
+               ABILITAZIONI.add(temporaneo);
+            }
+        }catch(SQLException se){
+            se.printStackTrace();
+        }finally{
+            closeConnection();
+        }
+
+        sql = "select* from patenti where cf ='"+ Codice_Fiscale +"'";
+        query = selectQuery(sql);
+
+        try {
+
+            while(query.next()){
+                Patente temporaneo = new Patente();
+
+                temporaneo.setNome(query.getString("nome"));
+                temporaneo.setDatascadenza(query.getString("datascadenza"));
+                temporaneo.setDataacquisizione(query.getString("dataacquisizione"));
+                temporaneo.setEntedirilascio(query.getString("entedirilascio"));
+                temporaneo.setN_documento(query.getString("n_documento"));
+
+                PATENTI.add(temporaneo);
+
+            }
+        }catch(SQLException se){
+            se.printStackTrace();
+        }finally{
+            closeConnection();
+        }
+
+        sql = "select* from corsi where cf ='"+ Codice_Fiscale +"'";
+        query = selectQuery(sql);
+
+        try {
+
+            while(query.next()){
+
+                Corso temporaneo = new Corso();
+
+                temporaneo.setNome(query.getString("nome"));
+                temporaneo.setDatascadenza(query.getString("datascadenza"));
+                temporaneo.setDataacquisizione(query.getString("dataacquisizione"));
+                temporaneo.setEntedirilascio(query.getString("entedirilascio"));
+                temporaneo.setN_documento(query.getString("n_documento"));
+
+                CORSI.add(temporaneo);
 
 
 
@@ -113,13 +170,16 @@ public abstract class Persona extends Model{
         }finally{
             closeConnection();
         }
+
+
+
     }
 
     private void popolaC(){
 
         openConnection();
 
-        String sql = "select * from c join pass where user ='"+ Username +"'";;
+        String sql = "select * from c where cf ='"+ Username +"'";;
 
         ResultSet query = selectQuery(sql);
 
@@ -230,107 +290,159 @@ public abstract class Persona extends Model{
     }
 
     public String getEmail() {
+
         return Email;
+
     }
 
     public void setEmail(String email) {
+
         Email = email;
+
     }
 
     public String getCodice_Fiscale() {
+
         return Codice_Fiscale;
+
     }
 
     public void setCodice_Fiscale(String codice_Fiscale) {
+
         Codice_Fiscale = codice_Fiscale;
+
     }
 
     public String getData_Prima_Iscrizione() {
+
         return Data_Prima_Iscrizione;
+
     }
 
     public void setData_Prima_Iscrizione(String data_Prima_Iscrizione) {
+
         Data_Prima_Iscrizione = data_Prima_Iscrizione;
+
     }
 
     public String getProfessione() {
+
         return Professione;
+
     }
 
     public void setProfessione(String professione) {
+
         Professione = professione;
+
     }
 
     public String getEventuale_Specializzazione() {
+
         return Eventuale_Specializzazione;
+
     }
 
     public void setEventuale_Specializzazione(String eventuale_Specializzazione) {
+
         Eventuale_Specializzazione = eventuale_Specializzazione;
+
     }
 
 
     public String getDenominazione_Datore_di_Lavoro() {
+
         return Denominazione_Datore_di_Lavoro;
+
     }
 
     public void setDenominazione_Datore_di_Lavoro(String denominazione_Datore_di_Lavoro) {
+
         Denominazione_Datore_di_Lavoro = denominazione_Datore_di_Lavoro;
+
     }
 
     public String getTelefono_Datore_Lavoro() {
+
         return Telefono_Datore_Lavoro;
+
     }
 
     public void setTelefono_Datore_Lavoro(String telefono_Datore_Lavoro) {
+
         Telefono_Datore_Lavoro = telefono_Datore_Lavoro;
+
     }
 
     public String getFax_Datore_di_Lavoro() {
+
         return Fax_Datore_di_Lavoro;
+
     }
 
     public void setFax_Datore_di_Lavoro(String fax_Datore_di_Lavoro) {
+
         Fax_Datore_di_Lavoro = fax_Datore_di_Lavoro;
+
     }
 
     public String getEmail_Datore_di_Lavoro() {
+
         return email_Datore_di_Lavoro;
+
     }
 
-    public void setEmail_Datore_di_Lavoro(String email_Datore_di_Lavoro) {
-        this.email_Datore_di_Lavoro = email_Datore_di_Lavoro;
+    public void setEmail_Datore_di_Lavoro(String email_datore_di_Lavoro) {
+
+        email_Datore_di_Lavoro = email_datore_di_Lavoro;
+
     }
 
     public String getNumero_Civico_Postale() {
+
         return Numero_Civico_Postale;
+
     }
 
     public void setNumero_Civico_Postale(String numero_Civico_Postale) {
+
         Numero_Civico_Postale = numero_Civico_Postale;
+
     }
 
     public String getIBAN() {
+
         return IBAN;
+
     }
 
     public void setIBAN(String iBAN) {
+
         IBAN = iBAN;
+
     }
 
     public String getUsername() {
+
         return Username;
+
     }
 
     public String getPassword() {
+
         return Password;
+
     }
 
     public void setUsername(String username) {
+
         Username = username;
+
     }
 
     public void setPassword(String password) {
+
         Password = password;
+
     }
 }

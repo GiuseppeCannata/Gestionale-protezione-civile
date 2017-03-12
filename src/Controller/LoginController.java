@@ -3,6 +3,7 @@ package Controller;
 import Model.LoginModel;
 import View.BasicFrameView;
 import View.LoginView;
+import Model.Candidato;
 
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
@@ -85,8 +86,11 @@ public class LoginController {
 
 
             if(RichiestaDiAccesso.getVolocand().equals("0")) {
-                CandidatoController aaa;
-                aaa = new CandidatoController(basicframe);
+
+                CandidatoController UController;
+                Candidato utente = new Candidato();
+                UController = new CandidatoController(basicframe, utente);
+
             }
 
         }

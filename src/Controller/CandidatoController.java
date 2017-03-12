@@ -4,6 +4,8 @@ package Controller;
 import View.BasicFrameView;
 import View.CandidatoDestraView;
 import View.CandidatoSinistraView;
+import Model.Candidato;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,12 +17,14 @@ import java.awt.event.ActionListener;
 public class CandidatoController {
 
    private BasicFrameView basicframe;
+   private Candidato Utente;
    private CandidatoDestraView Dview;
    private CandidatoSinistraView Sview;
 
-    public CandidatoController(BasicFrameView frame) {
+    public CandidatoController(BasicFrameView frame, Candidato utente) {
 
         basicframe = frame;
+        Utente = utente;
         Dview = new CandidatoDestraView();
         Sview = new CandidatoSinistraView();
         //Settaggio della basicframe con inserimento dei due pannelli a destra e sinistra
