@@ -2,6 +2,7 @@ package Model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public abstract class Persona extends Model{
@@ -23,9 +24,9 @@ public abstract class Persona extends Model{
     private String Eventuale_Specializzazione;
 
     /*SEZIONE (B) */
-    private String Patenti;
-    private String Abilitazioni_Possedute;
-    private String Corsi_Frequentati;
+    private ArrayList<String> Patenti;
+    private ArrayList<String> Abilitazioni_Possedute;
+    private ArrayList<String> Corsi_Frequentati;
 
     /*SEZIONE (C) */
     private String Denominazione_Datore_di_Lavoro;
@@ -145,59 +146,87 @@ public abstract class Persona extends Model{
     /*GETTERS&SETTERS*/
 
     public String getNome() {
+
         return Nome;
+
     }
 
     public void setNome(String nome) {
+
         Nome = nome;
+
     }
 
     public String getCognome() {
+
         return Cognome;
+
     }
 
     public void setCognome(String cognome) {
+
         Cognome = cognome;
+
     }
 
     public String getLuogo_di_Nascita() {
+
         return Luogo_di_Nascita;
+
     }
 
     public void setLuogo_di_Nascita(String luogo_di_Nascita) {
+
         Luogo_di_Nascita = luogo_di_Nascita;
+
     }
 
     public String getData_di_Nascita() {
+
         return Data_di_Nascita;
+
     }
 
     public void setData_di_Nascita(String data_di_Nascita) {
+
         Data_di_Nascita = data_di_Nascita;
+
     }
 
     public String getIndirizzo_di_residenza() {
+
         return Indirizzo_di_residenza;
+
     }
 
     public void setIndirizzo_di_residenza(String indirizzo_di_residenza) {
+
         Indirizzo_di_residenza = indirizzo_di_residenza;
+
     }
 
     public String getTelefono_Fisso() {
+
         return Telefono_Fisso;
+
     }
 
     public void setTelefono_Fisso(String telefono_Fisso) {
+
         Telefono_Fisso = telefono_Fisso;
+
     }
 
     public String getTelefono_Cellulare() {
+
         return Telefono_Cellulare;
+
     }
 
     public void setTelefono_Cellulare(String telefono_Cellulare) {
+
         Telefono_Cellulare = telefono_Cellulare;
+
     }
 
     public String getEmail() {
@@ -240,29 +269,6 @@ public abstract class Persona extends Model{
         Eventuale_Specializzazione = eventuale_Specializzazione;
     }
 
-    public String getPatenti() {
-        return Patenti;
-    }
-
-    public void setPatenti(String patenti) {
-        Patenti = patenti;
-    }
-
-    public String getAbilitazioni_Possedute() {
-        return Abilitazioni_Possedute;
-    }
-
-    public void setAbilitazioni_Possedute(String abilitazioni_Possedute) {
-        Abilitazioni_Possedute = abilitazioni_Possedute;
-    }
-
-    public String getCorsi_Frequentati() {
-        return Corsi_Frequentati;
-    }
-
-    public void setCorsi_Frequentati(String corsi_Frequentati) {
-        Corsi_Frequentati = corsi_Frequentati;
-    }
 
     public String getDenominazione_Datore_di_Lavoro() {
         return Denominazione_Datore_di_Lavoro;

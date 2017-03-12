@@ -54,6 +54,7 @@ public class RegistrazioneController {
         sez_managerview.setModificaButton(false);
         sez_managerview.setHomeButton(false);
        // sez_managerview.setSalvaButton(false);
+        sceltapannelli();
         //Setto il mio manager di pagine
         Pagine_Manager.setPagina_Corrente();
         basicframe.setdestra(sez_managerview.getIntermedio0());

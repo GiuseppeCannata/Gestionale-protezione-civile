@@ -1,6 +1,8 @@
 package View;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class Sez_BView {
@@ -16,16 +18,31 @@ public class Sez_BView {
     private JComboBox giorno_acq_Box;
     private JPanel Intermedio0;
     private JButton aggiornaButton;
+    private JComboBox ListBox;
 
     public Sez_BView() {
 
         return;
+
     }
 
-    public String getCertif_Box() {
+    public JComboBox getListBox() {
 
-        return (String)certif_Box.getSelectedItem();
+        return ListBox;
+
     }
+    public String NomeCertificazione(){
+
+        return (String)ListBox.getSelectedItem();
+
+    }
+
+    public JComboBox getCertif_Box() {
+
+        return certif_Box;
+    }
+
+
 
     public String getDataScadenza(){
 
