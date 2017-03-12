@@ -141,7 +141,6 @@ public class RegistrazioneModel extends Model {
        ArrayList<String> listaPATENTE = sez_bController.getListaPATENTE();
        ArrayList<String> listaCORSO= sez_bController.getListaCORSO();
 
-
        int i = 0;
 
        while (i < listaABILITAZIONE.size()) {

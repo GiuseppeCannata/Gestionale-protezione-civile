@@ -4,7 +4,6 @@ import View.BasicFrameView;
 import View.Sez_BView;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
@@ -50,7 +49,7 @@ public class Sez_BController{
         });
 
         JComboBox boxcertificazioni = sez_Bview.getCertif_Box();
-        JComboBox boxlist = sez_Bview.getListBox();
+        JComboBox boxlist = sez_Bview.getBoxlist();
         boxcertificazioni.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -116,7 +115,7 @@ public class Sez_BController{
 
         if(aggiorna == 5)
             basicframe.ErrorMessage("stop");
-        if(sez_Bview.getEnte_r_Text().length()==0 || sez_Bview.getnDoc_Text().length()==0)
+        if(sez_Bview.getEnte_r_Text().length() == 0 || sez_Bview.getnDoc_Text().length() == 0)
             basicframe.ErrorMessage("Errore! nessun ente e numero documento inserirti");
 
 
@@ -135,6 +134,7 @@ public class Sez_BController{
                 System.out.println(listaABILITAZIONE.get(0));
 
             }
+
             if (sez_Bview.getCertif_Box().getSelectedItem().equals("CORSO")) {
 
                 listaCORSO.add(sez_Bview.NomeCertificazione());
@@ -146,6 +146,7 @@ public class Sez_BController{
                 System.out.println(listaCORSO.get(0));
 
             }
+
             if (sez_Bview.getCertif_Box().getSelectedItem().equals("PATENTE")) {
 
                 listaPATENTE.add(sez_Bview.NomeCertificazione());
@@ -157,6 +158,9 @@ public class Sez_BController{
                 System.out.println(listaPATENTE.get(0));
 
             }
+
+            //RESET
+            sez_Bview.Reset();
         }
     }
 
