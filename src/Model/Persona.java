@@ -62,16 +62,24 @@ public abstract class Persona extends Model{
 
         openConnection();
 
-        String sql = "select* from a join pass where user ='"+Username+"'";;
-
-        ResultSet query = selectQuery(sql);
-
         try {
 
+            String sql = "select cf from pass where user='"+Username+"'";
+            ResultSet query = selectQuery(sql);
+            if(query.next())
+            Codice_Fiscale = query.getString("cf");
+
+            System.out.println(Codice_Fiscale);
+
+
+            sql = "select* from a where cf ='"+Codice_Fiscale+"'";
+
+            query = selectQuery(sql);
             if(query.next()){
 
-               Codice_Fiscale = query.getString("cf");
+                Codice_Fiscale = query.getString("cf");
                Nome = query.getString("nome");
+                System.out.println(Nome);
                Cognome = query.getString("cognome");
                Luogo_di_Nascita = query.getString("luogodinascita");
                Indirizzo_di_residenza = query.getString("indirizzodiresidenza");
@@ -173,7 +181,7 @@ public abstract class Persona extends Model{
 
         openConnection();
 
-        String sql = "select * from c where cf ='"+ Username +"'";;
+        String sql = "select * from c where cf ='"+ Codice_Fiscale +"'";;
 
         ResultSet query = selectQuery(sql);
 

@@ -238,8 +238,8 @@ public class RegistrazioneModel extends Model {
 
        String sql = "Insert into pass(cf,pass,user,vol_o_cand) values('" +
                codicefiscale                                    + "','" +
-               sez_Aview.getUsernametext()                      + "','" +
                sez_Aview.getPasswordtext()                      + "','" +
+               sez_Aview.getUsernametext()                      + "','" +
                "0"                                              + "')";
 
 

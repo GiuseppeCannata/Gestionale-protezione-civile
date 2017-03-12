@@ -47,8 +47,8 @@ public class CandidatoController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-               /* Sez_ManagerController sez_managerController ;
-                sez_managerController = new Sez_ManagerController(basicframe, Dview,"Candidato");*/
+                AnagraficaController datipersonali ;
+                datipersonali = new AnagraficaController(basicframe, Dview, Utente, "Candidato");
 
             }
 

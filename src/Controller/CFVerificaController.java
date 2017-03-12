@@ -91,8 +91,8 @@ public class CFVerificaController {
 
 
             /*Apro la finestra di registrazione*/
-            RegistrazioneController registrazioneController;
-            registrazioneController = new RegistrazioneController(basicframe, loginview, codicefiscale);
+            AnagraficaController anagraficaController;
+            anagraficaController = new AnagraficaController(basicframe, loginview, codicefiscale);
 
 
 

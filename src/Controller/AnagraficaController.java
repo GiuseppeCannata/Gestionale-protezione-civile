@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Candidato;
 import Model.RegistrazioneModel;
 import View.*;
 
@@ -13,13 +14,15 @@ import java.awt.event.ActionListener;
  * Classe pubblica
  *
  */
-public class RegistrazioneController {
+public class AnagraficaController {
 
    public BasicFrameView basicframe;
    public Sez_ManagerView sez_managerview;
    public LoginView loginview;
    public CandidatoDestraView Dview;
    public String codicefiscale;
+   public CandidatoDestraView candidatoview;
+   private Candidato Utente;
 
    public Sez_AView sez_Aview;
    public Sez_BView sez_Bview;
@@ -28,20 +31,13 @@ public class RegistrazioneController {
 
 
     /*COSTRUTTORI*/
-    public RegistrazioneController(BasicFrameView frame, LoginView view, String CodiceFiscale) {
+
+    //REGISTRAZIONE
+    public AnagraficaController(BasicFrameView frame, LoginView view, String CodiceFiscale) {
 
         basicframe = frame;
         loginview = view;
         codicefiscale = CodiceFiscale ;
-
-        InizializzazioneRegistrazione();
-
-        sezmanagerListener();
-
-    }
-
-
-    private void InizializzazioneRegistrazione(){
 
         sez_managerview = new Sez_ManagerView();
 
@@ -53,17 +49,48 @@ public class RegistrazioneController {
         sez_managerview.setPaginaLoginButton(true);
         sez_managerview.setModificaButton(false);
         sez_managerview.setHomeButton(false);
-       // sez_managerview.setSalvaButton(false);
+        // sez_managerview.setSalvaButton(false);
         sceltapannelli();
         //Setto il mio manager di pagine
         Pagine_Manager.setPagina_Corrente();
         basicframe.setdestra(sez_managerview.getIntermedio0());
         sez_managerview.MessaggioBenvenuto(basicframe);
 
+       Listener();
+       RegistrazioneListner();
+
     }
 
+    //CANDIDATO
+    public AnagraficaController(BasicFrameView frame, CandidatoDestraView view,Candidato utente ,String utilizzatore) {
+
+        basicframe = frame;
+        candidatoview = view;
+        codicefiscale = null ;
+        Utente = utente;
 
 
+        sez_managerview = new Sez_ManagerView();
+
+        sez_Aview = new Sez_AView();
+        sez_Bview = new Sez_BView();
+        sez_Cview = new Sez_CView();
+
+        sez_managerview.setPaginaLoginButton(false);
+        sez_managerview.setModificaButton(true);
+        sez_managerview.setHomeButton(true);
+        //sez_managerview.setSalvaButton(true);
+        sceltapannelli();
+
+        //Setto il mio manager di pagine
+        Pagine_Manager.setPagina_Corrente();
+        AcquisizioneCampi();
+        basicframe.setdestra(sez_managerview.getIntermedio0());
+
+        Listener();
+        CandidatoListner();
+
+    }
     /**
      * sceltapannelli gestisce i pannelli da inserire nella Sez_managerView.
      *
@@ -79,7 +106,7 @@ public class RegistrazioneController {
     /**
      * Ascolto operazioni dell'utente
      */
-    private void sezmanagerListener(){
+    private void Listener(){
 
         CardLayout CL=(CardLayout) sez_managerview.getIntermedio1().getLayout();
 
@@ -117,6 +144,13 @@ public class RegistrazioneController {
         });
 
 
+
+
+
+    }
+
+    private void RegistrazioneListner(){
+
         /*PaginaLogin*/
         JButton paginaLoginbutton = sez_managerview.getPaginaLoginButton();
         paginaLoginbutton.addActionListener(new ActionListener() {
@@ -132,18 +166,37 @@ public class RegistrazioneController {
         /*Salva*/
         //rivedere in fase di candidato
 
-            JButton Salvabutton = sez_managerview.getSalvaButton();
-            Salvabutton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
+        JButton Salvabutton = sez_managerview.getSalvaButton();
+        Salvabutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-                       Salvataggio();
+                Salvataggio();
 
-                }
-            });
+            }
+        });
 
 
     }
+
+    private void CandidatoListner(){
+
+
+
+        /*Salva*/
+        JButton Modificabutton = sez_managerview.getModificaButton();
+        Modificabutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                sez_Aview.Abilita_Disabilita_Campi(true);
+
+            }
+        });
+
+
+    }
+
     /**
      * Metodo Privato.
      * Salvataggio si preoccupa di verificare la compilazione,da parte dell utente di tutti i campi contrassegnati
@@ -210,4 +263,24 @@ public class RegistrazioneController {
          return "Sez_ManagerController{}";
 
     }
+
+
+
+    private void AcquisizioneCampi(){
+
+         sez_Aview.setNometext(Utente.getNome());
+       /** sez_Aview.setCognometext(Utente.get);
+        sez_Aview.setNometext(Utente.getNome());
+        sez_Aview.setNometext(Utente.getNome());
+        sez_Aview.setNometext(Utente.getNome());
+        sez_Aview.setNometext(Utente.getNome());
+        sez_Aview.setNometext(Utente.getNome());
+        sez_Aview.setNometext(Utente.getNome());**/
+
+        sez_Aview.Abilita_Disabilita_Campi(false);
+
+
+    }
+
+
 }

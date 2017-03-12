@@ -13,7 +13,6 @@ public class Sez_AView{
     private JTextField telefonofissotext;
     private JTextField telefonocellularetext;
     private JTextField emailtext;
-    private JTextField codicefiscaletext;
     private JTextField professionetext;
     private JTextField specializzazionetext;
     private JTextField passwordtext;
@@ -49,7 +48,6 @@ public class Sez_AView{
 
     /*GETTER*/
     public JPanel getIntermedio0() {
-
 
         return Intermedio0;
     }
@@ -119,6 +117,93 @@ public class Sez_AView{
     public String getUsernametext() {
 
         return usernametext.getText();
+    }
+
+
+    //setter
+
+    public void setNometext(String Nometext) {
+
+        nometext.setText(Nometext);
+
+    }
+
+    public void setCognometext(String Cognometext) {
+
+        cognometext.setText(Cognometext);
+
+    }
+
+    public void setLuogodinascitatext(String Luogodinascitatext) {
+
+        luogodinascitatext.setText(Luogodinascitatext);
+
+    }
+
+
+    public void setIndirizzodiresidenzatext(String Indirizzodiresidenzatext) {
+
+        indirizzodiresidenzatext.setText(Indirizzodiresidenzatext);
+
+    }
+
+    public void setTelefonofissotext(String Telefonofissotext) {
+
+        telefonofissotext.setText(Telefonofissotext);
+
+    }
+
+    public void setTelefonocellularetext(String Telefonocellularetext) {
+
+        telefonocellularetext.setText(Telefonocellularetext);
+
+    }
+
+    public void setEmailtext(String Emailtext) {
+
+        emailtext.setText(Emailtext);
+
+    }
+
+
+    public void setProfessionetext(String Professionetext) {
+
+       professionetext.setText(Professionetext);
+
+    }
+
+    public void setSpecializzazionetext(String Specializzazionetext) {
+
+        specializzazionetext.setText(Specializzazionetext);
+
+    }
+
+    public void setPasswordtext(String Passwordtext) {
+
+       passwordtext.setText(Passwordtext);
+
+    }
+
+    public void setUsernametext(String Usernametext) {
+
+        usernametext.setText(Usernametext);
+
+    }
+
+    public void Abilita_Disabilita_Campi(boolean editabile){
+
+         nometext.setEditable(editabile);
+         cognometext.setEditable(editabile);
+         luogodinascitatext.setEditable(editabile);
+         indirizzodiresidenzatext.setEditable(editabile);
+         telefonofissotext.setEditable(editabile);
+         telefonocellularetext.setEditable(editabile);
+         emailtext.setEditable(editabile);
+         professionetext.setEditable(editabile);
+         specializzazionetext.setEditable(editabile);
+         passwordtext.setEditable(editabile);
+         usernametext.setEditable(editabile);
+
     }
 
 
