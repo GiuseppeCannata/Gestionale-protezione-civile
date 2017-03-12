@@ -112,6 +112,7 @@ public class LoginModel extends Model {
      * @param query
      * @return true   --> La password è corretta     (presente nel DB)
      * @return false  --> La password non è corretto (non presente nel DB)
+
      */
     private boolean TrovaPass(ResultSet query){
 
