@@ -9,13 +9,14 @@ public class Candidato extends Persona {
 
     //--> Oltre alle sue quelle ereditate da Persona
 
+
     private int Conf_Giunta;
 
     /*COSTRUTTORI*/
 
-    public Candidato(){
+    public Candidato(String userInserito){
 
-      super();
+      super(userInserito);
 
       openConnection();
 

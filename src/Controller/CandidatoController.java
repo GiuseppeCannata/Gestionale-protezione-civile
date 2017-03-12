@@ -18,6 +18,7 @@ public class CandidatoController {
 
    private BasicFrameView basicframe;
    private Candidato Utente;
+   private String user;
    private CandidatoDestraView Dview;
    private CandidatoSinistraView Sview;
 

@@ -88,6 +88,7 @@ public abstract class Persona extends Model{
             se.printStackTrace();
         }finally{
             closeConnection();
+            System.out.println("A tutto bene");
         }
     }
 
@@ -102,30 +103,26 @@ public abstract class Persona extends Model{
         String sql = "select* from abilitazioni where cf ='"+ Codice_Fiscale +"'";
         ResultSet query = selectQuery(sql);
 
-        try {
+        try{
 
             while(query.next()){
 
                 Abilitazione temporaneo = new Abilitazione();
 
                 temporaneo.setNome(query.getString("nome"));
-            temporaneo.setDatascadenza(query.getString("datascadenza"));
-            temporaneo.setDataacquisizione(query.getString("dataacquisizione"));
-            temporaneo.setEntedirilascio(query.getString("entedirilascio"));
-            temporaneo.setN_documento(query.getString("n_documento"));
+                temporaneo.setDatascadenza(query.getString("datascadenza"));
+                temporaneo.setDataacquisizione(query.getString("dataacquisizione"));
+                temporaneo.setEntedirilascio(query.getString("entedirilascio"));
+                temporaneo.setN_documento(query.getString("n_documento"));
 
-               ABILITAZIONI.add(temporaneo);
+                ABILITAZIONI.add(temporaneo);
             }
-        }catch(SQLException se){
-            se.printStackTrace();
-        }finally{
-            closeConnection();
-        }
+
 
         sql = "select* from patenti where cf ='"+ Codice_Fiscale +"'";
         query = selectQuery(sql);
 
-        try {
+
 
             while(query.next()){
                 Patente temporaneo = new Patente();
@@ -139,16 +136,12 @@ public abstract class Persona extends Model{
                 PATENTI.add(temporaneo);
 
             }
-        }catch(SQLException se){
-            se.printStackTrace();
-        }finally{
-            closeConnection();
-        }
+
 
         sql = "select* from corsi where cf ='"+ Codice_Fiscale +"'";
         query = selectQuery(sql);
 
-        try {
+
 
             while(query.next()){
 
@@ -169,6 +162,7 @@ public abstract class Persona extends Model{
             se.printStackTrace();
         }finally{
             closeConnection();
+            System.out.println("B tutto bene");
         }
 
 
@@ -199,6 +193,7 @@ public abstract class Persona extends Model{
             se.printStackTrace();
         }finally{
             closeConnection();
+            System.out.println("C tutto bene");
         }
     }
 

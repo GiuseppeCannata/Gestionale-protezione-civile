@@ -88,7 +88,7 @@ public class LoginController {
             if(RichiestaDiAccesso.getVolocand().equals("0")) {
 
                 CandidatoController UController;
-                Candidato utente = new Candidato();
+                Candidato utente = new Candidato(userInserito);
                 UController = new CandidatoController(basicframe, utente);
 
             }
