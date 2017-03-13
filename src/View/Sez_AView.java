@@ -37,7 +37,6 @@ public class Sez_AView{
     private JComboBox comboBox3;
 
 
-
     //Costruttore vuoto
     public Sez_AView() {
 
@@ -182,11 +181,23 @@ public class Sez_AView{
 
        passwordtext.setText(Passwordtext);
 
+
     }
 
     public void setUsernametext(String Usernametext) {
 
         usernametext.setText(Usernametext);
+
+    }
+
+
+
+    public void setCombobox(String anno, String mese, String giorno){
+
+        comboBox1.setSelectedItem(anno);
+        comboBox2.setSelectedItem(mese);
+        comboBox3.setSelectedItem(giorno);
+
 
     }
 
@@ -203,6 +214,10 @@ public class Sez_AView{
          specializzazionetext.setEditable(editabile);
          passwordtext.setEditable(editabile);
          usernametext.setEditable(editabile);
+
+         comboBox1.setEnabled(editabile);
+         comboBox2.setEnabled(editabile);
+         comboBox3.setEnabled(editabile);
 
     }
 

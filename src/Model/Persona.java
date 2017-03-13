@@ -64,10 +64,12 @@ public abstract class Persona extends Model{
 
         try {
 
-            String sql = "select cf from pass where user='"+Username+"'";
+            String sql = "select cf,pass from pass where user='"+Username+"'";
             ResultSet query = selectQuery(sql);
-            if(query.next())
-            Codice_Fiscale = query.getString("cf");
+            if(query.next()) {
+                Codice_Fiscale = query.getString("cf");
+                Password = query.getString("pass");
+            }
 
             System.out.println(Codice_Fiscale);
 
@@ -79,7 +81,7 @@ public abstract class Persona extends Model{
 
                 Codice_Fiscale = query.getString("cf");
                Nome = query.getString("nome");
-                System.out.println(Nome);
+                //System.out.println(Nome);
                Cognome = query.getString("cognome");
                Luogo_di_Nascita = query.getString("luogodinascita");
                Indirizzo_di_residenza = query.getString("indirizzodiresidenza");
@@ -446,6 +448,24 @@ public abstract class Persona extends Model{
     public void setPassword(String password) {
 
         Password = password;
+
+    }
+
+    public ArrayList<Patente> getPATENTI() {
+
+        return PATENTI;
+
+    }
+
+    public ArrayList<Abilitazione> getABILITAZIONI() {
+
+        return ABILITAZIONI;
+
+    }
+
+    public ArrayList<Corso> getCORSI() {
+
+        return CORSI;
 
     }
 }

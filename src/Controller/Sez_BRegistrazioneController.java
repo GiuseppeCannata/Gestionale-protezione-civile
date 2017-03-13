@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-public class Sez_BController{
+public class Sez_BRegistrazioneController {
 
     private Sez_BView sez_Bview;
     private BasicFrameView basicframe;
@@ -20,7 +20,7 @@ public class Sez_BController{
     private ArrayList<String> listaABILITAZIONE;
     private ArrayList<String> listaPATENTE;
 
-    public Sez_BController(Sez_BView view2, BasicFrameView frame) {
+    public Sez_BRegistrazioneController(Sez_BView view2, BasicFrameView frame) {
 
         sez_Bview = view2;
         basicframe = frame;
@@ -29,11 +29,11 @@ public class Sez_BController{
         listaPATENTE = new ArrayList<>(25);
 
         aggiorna = 1;
-        sez_BcontrellerListener();
+        Listener();
 
     }
 
-    private void sez_BcontrellerListener(){
+    private void Listener(){
 
 
         /*Aggiorna*/

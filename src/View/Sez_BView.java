@@ -72,6 +72,60 @@ public class Sez_BView {
         return aggiornaButton;
     }
 
+    public void setEnte_r_Text(String Ente_r_Text) {
+
+        ente_r_Text.setText(Ente_r_Text);
+
+    }
+
+    public void setnDoc_Text(String NDoc_Text) {
+
+        nDoc_Text.setText(NDoc_Text);
+
+    }
+
+    public void setComboboxDataAcquisizione(String Data){
+
+        String anno, mese, giorno;
+        anno = Data.substring(0,4);
+        mese = Data.substring(5,7);
+        giorno = Data.substring(8,10);
+        System.out.println(giorno);
+        anno_acq_Box.setSelectedItem(anno);
+        mese_acq_Box.setSelectedItem(mese);
+        giorno_acq_Box.setSelectedItem(giorno);
+
+
+    }
+
+    public void setComboboxDataScadenza(String Data){
+
+        String anno, mese, giorno;
+        anno = Data.substring(0,4);
+        mese = Data.substring(5,7);
+        giorno = Data.substring(8,10);
+        anno_scad_Box.setSelectedItem(anno);
+        mese_scad_Box.setSelectedItem(mese);
+        giorno_scad_Box.setSelectedItem(giorno);
+
+
+    }
+
+    public void  Abilita_Disabilita_Campi(boolean editabile){
+
+        ente_r_Text.setEditable(editabile);
+        nDoc_Text.setEditable(editabile);
+        anno_acq_Box.setEnabled(editabile);
+        mese_acq_Box.setEnabled(editabile);
+        giorno_acq_Box.setEnabled(editabile);
+        anno_scad_Box.setEnabled(editabile);
+        mese_scad_Box.setEnabled(editabile);
+        giorno_scad_Box.setEnabled(editabile);
+
+
+
+    }
+
 
 
     public void Reset(){

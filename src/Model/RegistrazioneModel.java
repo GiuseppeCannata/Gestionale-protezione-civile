@@ -1,6 +1,6 @@
 package Model;
 
-import Controller.Sez_BController;
+import Controller.Sez_BRegistrazioneController;
 import View.Sez_AView;
 import View.Sez_BView;
 import View.Sez_CView;
@@ -16,17 +16,17 @@ public class RegistrazioneModel extends Model {
     private Sez_BView sez_Bview;
     private Sez_CView sez_Cview;
     private String ElementoCercato;
-    private Sez_BController sez_bController;
+    private Sez_BRegistrazioneController sez_bRegistrazioneController;
 
 
     /*COSTRUTTORE*/
-    public RegistrazioneModel(String CodiceFiscale, Sez_AView view1, Sez_BView view2, Sez_CView view3, Sez_BController controller) {
+    public RegistrazioneModel(String CodiceFiscale, Sez_AView view1, Sez_BView view2, Sez_CView view3, Sez_BRegistrazioneController controller) {
 
           super();
           codicefiscale = CodiceFiscale;
           sez_Aview = view1;
           sez_Bview = view2;
-          sez_bController= controller;
+          sez_bRegistrazioneController = controller;
           sez_Cview = view3;
 
           ElementoCercato = sez_Aview.getUsernametext();
@@ -137,9 +137,9 @@ public class RegistrazioneModel extends Model {
 
        System.out.println("\nB");
        boolean controllo = false;
-       ArrayList<String> listaABILITAZIONE = sez_bController.getListaABILITAZIONE();
-       ArrayList<String> listaPATENTE = sez_bController.getListaPATENTE();
-       ArrayList<String> listaCORSO= sez_bController.getListaCORSO();
+       ArrayList<String> listaABILITAZIONE = sez_bRegistrazioneController.getListaABILITAZIONE();
+       ArrayList<String> listaPATENTE = sez_bRegistrazioneController.getListaPATENTE();
+       ArrayList<String> listaCORSO= sez_bRegistrazioneController.getListaCORSO();
 
        int i = 0;
 

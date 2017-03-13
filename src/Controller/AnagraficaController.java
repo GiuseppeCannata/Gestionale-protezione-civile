@@ -16,18 +16,18 @@ import java.awt.event.ActionListener;
  */
 public class AnagraficaController {
 
-   public BasicFrameView basicframe;
-   public Sez_ManagerView sez_managerview;
-   public LoginView loginview;
-   public CandidatoDestraView Dview;
-   public String codicefiscale;
-   public CandidatoDestraView candidatoview;
+   private BasicFrameView basicframe;
+   private Sez_ManagerView sez_managerview;
+   private LoginView loginview;
+   private String codicefiscale;
+   private CandidatoDestraView candidatoview;
    private Candidato Utente;
 
-   public Sez_AView sez_Aview;
-   public Sez_BView sez_Bview;
-   public Sez_BController sez_bController;
-   public Sez_CView sez_Cview;
+   private Sez_AView sez_Aview;
+   private Sez_BView sez_Bview;
+   private Sez_BRegistrazioneController sez_bRegistrazioneController;
+   private Sez_BCandidatoController sez_bUtenteController;
+   private Sez_CView sez_Cview;
 
 
     /*COSTRUTTORI*/
@@ -36,20 +36,21 @@ public class AnagraficaController {
     public AnagraficaController(BasicFrameView frame, LoginView view, String CodiceFiscale) {
 
         basicframe = frame;
+        sez_managerview = new Sez_ManagerView();
         loginview = view;
         codicefiscale = CodiceFiscale ;
-
-        sez_managerview = new Sez_ManagerView();
+        candidatoview = null;
+        Utente = null;
 
         sez_Aview = new Sez_AView();
         sez_Bview = new Sez_BView();
+        sez_bRegistrazioneController = new Sez_BRegistrazioneController(sez_Bview, basicframe);
         sez_Cview = new Sez_CView();
-        sez_bController = new Sez_BController(sez_Bview, basicframe);
+
 
         sez_managerview.setPaginaLoginButton(true);
         sez_managerview.setModificaButton(false);
         sez_managerview.setHomeButton(false);
-        // sez_managerview.setSalvaButton(false);
         sceltapannelli();
         //Setto il mio manager di pagine
         Pagine_Manager.setPagina_Corrente();
@@ -69,12 +70,14 @@ public class AnagraficaController {
         codicefiscale = null ;
         Utente = utente;
 
-
         sez_managerview = new Sez_ManagerView();
 
         sez_Aview = new Sez_AView();
         sez_Bview = new Sez_BView();
         sez_Cview = new Sez_CView();
+        sez_bUtenteController = new Sez_BCandidatoController(sez_Bview,Utente.getABILITAZIONI(),Utente.getCORSI(),Utente.getPATENTI());
+
+
 
         sez_managerview.setPaginaLoginButton(false);
         sez_managerview.setModificaButton(true);
@@ -164,7 +167,6 @@ public class AnagraficaController {
 
 
         /*Salva*/
-        //rivedere in fase di candidato
 
         JButton Salvabutton = sez_managerview.getSalvaButton();
         Salvabutton.addActionListener(new ActionListener() {
@@ -209,11 +211,13 @@ public class AnagraficaController {
                    "alla pagina login.Salvare?") == 0 && VerificaCompletamentoCampiObbligatori()){
 
                        RegistrazioneModel Gestione;
-                       Gestione = new RegistrazioneModel(codicefiscale, sez_Aview, sez_Bview, sez_Cview, sez_bController);
+                       Gestione = new RegistrazioneModel(codicefiscale, sez_Aview, sez_Bview, sez_Cview, sez_bRegistrazioneController);
                        if (Gestione.SearchSQL())
                            basicframe.ErrorMessage("Username già utilizzato!Cambialo!");
                        else if (!Gestione.InsertSQL())
                                basicframe.ErrorMessage("Errore nell'inserimento!\nRicontrollare!");
+                       else
+                           basicframe.setdestra(loginview.getIntermedio0());
 
 
 
@@ -268,16 +272,31 @@ public class AnagraficaController {
 
     private void AcquisizioneCampi(){
 
-         sez_Aview.setNometext(Utente.getNome());
-       /** sez_Aview.setCognometext(Utente.get);
         sez_Aview.setNometext(Utente.getNome());
-        sez_Aview.setNometext(Utente.getNome());
-        sez_Aview.setNometext(Utente.getNome());
-        sez_Aview.setNometext(Utente.getNome());
-        sez_Aview.setNometext(Utente.getNome());
-        sez_Aview.setNometext(Utente.getNome());**/
+        sez_Aview.setCognometext(Utente.getCognome());
+        sez_Aview.setLuogodinascitatext(Utente.getLuogo_di_Nascita());
+        sez_Aview.setTelefonofissotext(Utente.getTelefono_Fisso());
+        sez_Aview.setTelefonocellularetext(Utente.getTelefono_Cellulare());
+        sez_Aview.setCombobox(Utente.getData_di_Nascita().substring(0,4),Utente.getData_di_Nascita().substring(5,7),Utente.getData_di_Nascita().substring(8,10));
+        sez_Aview.setEmailtext(Utente.getEmail());
+        sez_Aview.setProfessionetext(Utente.getProfessione());
+        sez_Aview.setSpecializzazionetext(Utente.getEventuale_Specializzazione());
+        sez_Aview.setUsernametext(Utente.getUsername());
+        sez_Aview.setPasswordtext(Utente.getPassword());
 
         sez_Aview.Abilita_Disabilita_Campi(false);
+
+
+        sez_Bview.Abilita_Disabilita_Campi(false);
+
+        sez_Cview.setDenominazioneDatoreDiLavorotext(Utente.getDenominazione_Datore_di_Lavoro());
+        sez_Cview.setTelDatoreDiLavorotext(Utente.getTelefono_Datore_Lavoro());
+        sez_Cview.setFaxDatoreDiLavorotext(Utente.getFax_Datore_di_Lavoro());
+        sez_Cview.setEmailDatoreDiLavorotext(Utente.getEmail_Datore_di_Lavoro());
+        sez_Cview.setNumeroCodicePostaletext(Utente.getNumero_Civico_Postale());
+        sez_Cview.setIbantext(Utente.getIBAN());
+
+        sez_Cview.Abilita_Disabilita_Campi(false);
 
 
     }

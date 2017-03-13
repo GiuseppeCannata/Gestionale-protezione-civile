@@ -60,4 +60,54 @@ public class Sez_CView {
 
         return ibantext.getText();
     }
+
+    public void setDenominazioneDatoreDiLavorotext(String DenominazioneDatoreDiLavorotext) {
+
+        denominazioneDatoreDiLavorotext.setText(DenominazioneDatoreDiLavorotext);
+
+    }
+
+    public void setTelDatoreDiLavorotext(String telDatoreDiLavorotext) {
+
+        TelDatoreDiLavorotext.setText(telDatoreDiLavorotext);
+
+    }
+
+    public void setFaxDatoreDiLavorotext(String FaxDatoreDiLavorotext) {
+
+        faxDatoreDiLavorotext.setText(FaxDatoreDiLavorotext);
+
+    }
+
+    public void setEmailDatoreDiLavorotext(String EmailDatoreDiLavorotext) {
+
+       emailDatoreDiLavorotext.setText(EmailDatoreDiLavorotext);
+
+    }
+
+    public void setNumeroCodicePostaletext(String NumeroCodicePostaletext) {
+
+        numeroCodicePostaletext.setText(NumeroCodicePostaletext);
+
+    }
+
+    public void setIbantext(String Ibantext) {
+
+        ibantext.setText(Ibantext);
+
+    }
+
+
+
+    public void Abilita_Disabilita_Campi(boolean editabile){
+
+        denominazioneDatoreDiLavorotext.setEditable(editabile);
+        TelDatoreDiLavorotext.setEditable(editabile);
+        faxDatoreDiLavorotext.setEditable(editabile);
+        emailDatoreDiLavorotext.setEditable(editabile);
+        numeroCodicePostaletext.setEditable(editabile);
+        ibantext.setEditable(editabile);
+
+    }
+
 }
