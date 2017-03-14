@@ -68,7 +68,7 @@ public class CFVerificaModel extends Model {
     }
 
     @Override
-    public boolean UpdateSQL() {
+    public boolean UpdateSQL(String[] Appoggio) {
 
         return false;
 

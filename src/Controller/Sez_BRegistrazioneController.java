@@ -29,6 +29,7 @@ public class Sez_BRegistrazioneController {
         listaPATENTE = new ArrayList<>(25);
 
         aggiorna = 1;
+
         Listener();
 
     }
@@ -44,6 +45,7 @@ public class Sez_BRegistrazioneController {
             public void actionPerformed(ActionEvent e) {
 
                 Controllo();
+
             }
 
         });
@@ -54,8 +56,15 @@ public class Sez_BRegistrazioneController {
             @Override
             public void itemStateChanged(ItemEvent e) {
 
+
+
                 if(e.getSource() ==  sez_Bview.getCertif_Box()) {
-                    if (boxcertificazioni.getSelectedItem().equals("ABILITAZIONE")) {
+                    if (boxcertificazioni.getSelectedItem().equals("- CERTIFICAZIONI -")){
+
+                        boxlist.removeAllItems();
+
+                    }
+                    else if (boxcertificazioni.getSelectedItem().equals("ABILITAZIONE")) {
 
                         boxlist.removeAllItems();
                         boxlist.addItem("utilizzo piatt elev");
@@ -83,9 +92,6 @@ public class Sez_BRegistrazioneController {
                         boxlist.addItem("istruttore guida");
                         boxlist.addItem("vigli fuoco");
 
-
-
-
                     }
                     else if (boxcertificazioni.getSelectedItem().equals("PATENTE")){
 
@@ -101,7 +107,6 @@ public class Sez_BRegistrazioneController {
                         boxlist.addItem("guida adr");
                         boxlist.addItem("guida mezzi pubblici");
 
-
                     }
                 }
 
@@ -113,19 +118,23 @@ public class Sez_BRegistrazioneController {
 
     private void Controllo() {
 
-        if(aggiorna == 5)
-            basicframe.ErrorMessage("stop");
-        if(sez_Bview.getEnte_r_Text().length() == 0 || sez_Bview.getnDoc_Text().length() == 0)
-            basicframe.ErrorMessage("Errore! nessun ente e numero documento inserirti");
+        String Item = (String)sez_Bview.getBoxlist().getSelectedItem();
 
+        try {
+            if (aggiorna == 5)
+                throw new Exception("stop inserimento");
+            if (Item == null)
+                throw  new Exception("Errore! nessuna certificazione scelta");
+            if (sez_Bview.getEnte_r_Text().length() == 0 || sez_Bview.getnDoc_Text().length() == 0)
+                throw new Exception("Errore! nessun ente e numero documento inserirti");
 
-        else {
 
             aggiorna += 1;
 
+
             if (sez_Bview.getCertif_Box().getSelectedItem().equals("ABILITAZIONE")) {
 
-                listaABILITAZIONE.add(sez_Bview.NomeCertificazione());
+                listaABILITAZIONE.add(sez_Bview.getNomeCertificazione());
                 listaABILITAZIONE.add(sez_Bview.getDataScadenza());
                 listaABILITAZIONE.add(sez_Bview.getDataAcquisizone());
                 listaABILITAZIONE.add(sez_Bview.getEnte_r_Text());
@@ -134,10 +143,9 @@ public class Sez_BRegistrazioneController {
                 System.out.println(listaABILITAZIONE.get(0));
 
             }
+            else if (sez_Bview.getCertif_Box().getSelectedItem().equals("CORSO")) {
 
-            if (sez_Bview.getCertif_Box().getSelectedItem().equals("CORSO")) {
-
-                listaCORSO.add(sez_Bview.NomeCertificazione());
+                listaCORSO.add(sez_Bview.getNomeCertificazione());
                 listaCORSO.add(sez_Bview.getDataScadenza());
                 listaCORSO.add(sez_Bview.getDataAcquisizone());
                 listaCORSO.add(sez_Bview.getEnte_r_Text());
@@ -147,9 +155,9 @@ public class Sez_BRegistrazioneController {
 
             }
 
-            if (sez_Bview.getCertif_Box().getSelectedItem().equals("PATENTE")) {
+            else if (sez_Bview.getCertif_Box().getSelectedItem().equals("PATENTE")) {
 
-                listaPATENTE.add(sez_Bview.NomeCertificazione());
+                listaPATENTE.add(sez_Bview.getNomeCertificazione());
                 listaPATENTE.add(sez_Bview.getDataScadenza());
                 listaPATENTE.add(sez_Bview.getDataAcquisizone());
                 listaPATENTE.add(sez_Bview.getEnte_r_Text());
@@ -162,6 +170,11 @@ public class Sez_BRegistrazioneController {
             //RESET
             sez_Bview.Reset();
         }
+        catch(Exception e){
+
+            basicframe.ErrorMessage(e.getMessage());
+
+            }
     }
 
     public ArrayList<String> getListaCORSO() {

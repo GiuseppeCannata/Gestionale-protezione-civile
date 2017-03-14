@@ -53,7 +53,7 @@ public class Candidato extends Persona {
     }
 
     @Override
-    public boolean UpdateSQL() {
+    public boolean UpdateSQL(String[] Appoggio) {
         return false;
     }
 

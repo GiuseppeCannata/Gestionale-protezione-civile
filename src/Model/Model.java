@@ -88,6 +88,6 @@ public abstract class Model {
 
     public abstract boolean InsertSQL();
     public abstract boolean SearchSQL();
-    public abstract boolean UpdateSQL();
+    public abstract boolean UpdateSQL(String[] Appoggio);
 
 }

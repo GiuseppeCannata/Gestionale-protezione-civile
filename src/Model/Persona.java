@@ -33,7 +33,7 @@ public abstract class Persona extends Model{
     private String Telefono_Datore_Lavoro;
     private String Fax_Datore_di_Lavoro;
     private String email_Datore_di_Lavoro;
-    private String Numero_Civico_Postale;
+    private String numerocodicepostale;
     private String IBAN;
 
 
@@ -195,7 +195,7 @@ public abstract class Persona extends Model{
                   Telefono_Datore_Lavoro = query.getString("telefono");
                   Fax_Datore_di_Lavoro = query.getString("faxdatore");
                   email_Datore_di_Lavoro = query.getString("email");
-                  Numero_Civico_Postale = query.getString("numero_codice_postale");
+                  numerocodicepostale = query.getString("numero_codice_postale");
                   IBAN = query.getString("iban");
 
             }
@@ -247,6 +247,8 @@ public abstract class Persona extends Model{
     }
 
     public String getData_di_Nascita() {
+
+        System.out.println(Data_di_Nascita);
 
         return Data_di_Nascita;
 
@@ -403,15 +405,15 @@ public abstract class Persona extends Model{
 
     }
 
-    public String getNumero_Civico_Postale() {
+    public String getNumerocodicepostale() {
 
-        return Numero_Civico_Postale;
+        return numerocodicepostale;
 
     }
 
-    public void setNumero_Civico_Postale(String numero_Civico_Postale) {
+    public void setNumerocodicepostale(String numerocodicepostale) {
 
-        Numero_Civico_Postale = numero_Civico_Postale;
+        this.numerocodicepostale = numerocodicepostale;
 
     }
 

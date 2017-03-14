@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Candidato;
 import Model.RegistrazioneModel;
+import Model.UtenteModel;
 import View.*;
 
 import javax.swing.*;
@@ -173,7 +174,7 @@ public class AnagraficaController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Salvataggio();
+                SalvataggioRegistrazione();
 
             }
         });
@@ -184,14 +185,28 @@ public class AnagraficaController {
     private void CandidatoListner(){
 
 
-
-        /*Salva*/
+        /*Modifica*/
         JButton Modificabutton = sez_managerview.getModificaButton();
         Modificabutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 sez_Aview.Abilita_Disabilita_Campi(true);
+                sez_Bview.Abilita_Disabilita_Campi(true);
+                sez_Cview.Abilita_Disabilita_Campi(true);
+
+            }
+        });
+
+
+
+        /*Salva*/
+        JButton Salvabutton = sez_managerview.getSalvaButton();
+        Salvabutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+               UpdateCandidato();
 
             }
         });
@@ -205,7 +220,7 @@ public class AnagraficaController {
      * come obbligatori, (per fare questo ricorre all utilizzo di un metodo privato VerificaCompletamentoCampiObbligatori().
      * Una volta accertata la compilazione avvia l inserimento nel DB
      */
-    private void Salvataggio(){
+    private void SalvataggioRegistrazione(){
 
            if(basicframe.OpotionalMessage("Una volta effettuato il salvataggio verrai\nrindirizzato" +
                    "alla pagina login.Salvare?") == 0 && VerificaCompletamentoCampiObbligatori()){
@@ -278,6 +293,7 @@ public class AnagraficaController {
         sez_Aview.setTelefonofissotext(Utente.getTelefono_Fisso());
         sez_Aview.setTelefonocellularetext(Utente.getTelefono_Cellulare());
         sez_Aview.setCombobox(Utente.getData_di_Nascita().substring(0,4),Utente.getData_di_Nascita().substring(5,7),Utente.getData_di_Nascita().substring(8,10));
+        sez_Aview.setIndirizzodiresidenzatext(Utente.getIndirizzo_di_residenza());
         sez_Aview.setEmailtext(Utente.getEmail());
         sez_Aview.setProfessionetext(Utente.getProfessione());
         sez_Aview.setSpecializzazionetext(Utente.getEventuale_Specializzazione());
@@ -286,17 +302,168 @@ public class AnagraficaController {
 
         sez_Aview.Abilita_Disabilita_Campi(false);
 
-
+        //ovviamente per la sezione B c è anche il controller invocato nel costruttore
         sez_Bview.Abilita_Disabilita_Campi(false);
 
         sez_Cview.setDenominazioneDatoreDiLavorotext(Utente.getDenominazione_Datore_di_Lavoro());
         sez_Cview.setTelDatoreDiLavorotext(Utente.getTelefono_Datore_Lavoro());
         sez_Cview.setFaxDatoreDiLavorotext(Utente.getFax_Datore_di_Lavoro());
         sez_Cview.setEmailDatoreDiLavorotext(Utente.getEmail_Datore_di_Lavoro());
-        sez_Cview.setNumeroCodicePostaletext(Utente.getNumero_Civico_Postale());
+        sez_Cview.setNumeroCodicePostaletext(Utente.getNumerocodicepostale());
         sez_Cview.setIbantext(Utente.getIBAN());
 
         sez_Cview.Abilita_Disabilita_Campi(false);
+
+
+    }
+
+    private void UpdateCandidato(){
+
+        UtenteModel Update = new UtenteModel();
+        String[] appoggio =  new String[4];
+
+        appoggio[0] = "a";
+
+        //A
+        if(!sez_Aview.getNometext().equals(Utente.getNome())) {
+
+            appoggio[2] = "nome";
+            appoggio[3] = sez_Aview.getNometext();
+            appoggio[1] = Utente.getCodice_Fiscale();
+            Update.UpdateSQL(appoggio);
+        }
+
+       if(!sez_Aview.getCognometext().equals(Utente.getCognome())){
+
+            appoggio[2] = "cognome";
+            appoggio[3] = sez_Aview.getCognometext();
+            Update.UpdateSQL(appoggio);
+        }
+
+
+        if(!sez_Aview.getLuogodinascitatext().equals(Utente.getLuogo_di_Nascita())){
+
+            appoggio[2] = "luogodinascita";
+            appoggio[3] = sez_Aview.getLuogodinascitatext();
+            Update.UpdateSQL(appoggio);
+
+        }
+
+        if(!sez_Aview.getDatadinascitatext().equals(Utente.getData_di_Nascita())){
+
+            appoggio[2] ="datadinascita";
+            appoggio[3] = sez_Aview.getDatadinascitatext();
+            Update.UpdateSQL(appoggio);
+
+        }
+
+
+        if(!sez_Aview.getIndirizzodiresidenzatext().equals(Utente.getIndirizzo_di_residenza())){
+
+            appoggio[2] = "indirizzodiresidenza";
+            appoggio[3]=sez_Aview.getIndirizzodiresidenzatext();
+            Update.UpdateSQL(appoggio);
+
+        }
+
+
+        if(!sez_Aview.getTelefonofissotext().equals(Utente.getTelefono_Fisso())){
+
+            appoggio[2] = "telefonofisso";
+            appoggio[3]=sez_Aview.getTelefonofissotext();
+            Update.UpdateSQL(appoggio);
+        }
+
+
+        if(!sez_Aview.getTelefonocellularetext().equals(Utente.getTelefono_Cellulare())){
+
+            appoggio[2] = "telefonomobile";
+            appoggio[3]=sez_Aview.getTelefonocellularetext();
+            Update.UpdateSQL(appoggio);
+
+        }
+
+
+        if(!sez_Aview.getEmailtext().equals(Utente.getEmail())){
+
+            appoggio[2] = "email";
+            appoggio[3]=sez_Aview.getEmailtext();
+            Update.UpdateSQL(appoggio);
+
+        }
+
+
+        if(!sez_Aview.getProfessionetext().equals(Utente.getProfessione())){
+
+            appoggio[2] = "professione";
+            appoggio[3]=sez_Aview.getProfessionetext();
+            Update.UpdateSQL(appoggio);
+
+        }
+
+        if(!sez_Aview.getSpecializzazionetext().equals(Utente.getEventuale_Specializzazione())){
+
+            appoggio[2] = "eventualespecializzazione";
+            appoggio[3] = sez_Aview.getSpecializzazionetext();
+            Update.UpdateSQL(appoggio);
+
+        }
+
+
+        //C
+
+        if(!sez_Cview.getDenominazioneDatoreDiLavorotext().equals(Utente.getDenominazione_Datore_di_Lavoro())){
+
+            appoggio[2] = "nomedatore";
+            appoggio[3] = sez_Cview.getDenominazioneDatoreDiLavorotext();
+            Update.UpdateSQL(appoggio);
+
+        }
+
+        if(!sez_Cview.getTelDatoreDiLavorotext().equals(Utente.getTelefono_Datore_Lavoro())){
+
+            appoggio[2] = "telefono";
+            appoggio[3] = sez_Cview.getTelDatoreDiLavorotext();
+            Update.UpdateSQL(appoggio);
+
+        }
+
+        if(!sez_Cview.getFaxDatoreDiLavorotext().equals(Utente.getFax_Datore_di_Lavoro())){
+
+            appoggio[2] = "eventualespecializzazione";
+            appoggio[3] = sez_Cview.getFaxDatoreDiLavorotext() ;
+            Update.UpdateSQL(appoggio);
+
+        }
+
+        if(!sez_Cview.getEmailDatoreDiLavorotext().equals(Utente.getEmail_Datore_di_Lavoro())){
+
+            appoggio[2] = "email";
+            appoggio[3] = sez_Cview.getEmailDatoreDiLavorotext();
+            Update.UpdateSQL(appoggio);
+
+        }
+
+        if(!sez_Cview.getNumeroCodicePostaletext().equals(Utente.getNumerocodicepostale())){
+
+            appoggio[2] = "numero_codice_postale";
+            appoggio[3] = sez_Cview.getNumeroCodicePostaletext();
+            Update.UpdateSQL(appoggio);
+
+        }
+
+        if(!sez_Cview.getIbantext().equals(Utente.getIBAN())){
+
+            appoggio[2] = "iban";
+            appoggio[3] = sez_Cview.getIbantext();
+            Update.UpdateSQL(appoggio);
+
+        }
+
+
+
+
+
 
 
     }

@@ -8,15 +8,16 @@ public class Sez_BView {
     private JComboBox certif_Box;
     private JComboBox anno_scad_Box;
     private JComboBox mese_scad_Box;
-    private JTextField ente_r_Text;
-    private JTextField nDoc_Text;
     private JComboBox giorno_scad_Box;
     private JComboBox anno_acq_Box;
     private JComboBox mese_acq_Box;
     private JComboBox giorno_acq_Box;
+    private JComboBox boxlist;
+    private JTextField ente_r_Text;
+    private JTextField nDoc_Text;
     private JPanel Intermedio0;
     private JButton aggiornaButton;
-    private JComboBox boxlist;
+
 
     public Sez_BView() {
 
@@ -24,12 +25,13 @@ public class Sez_BView {
 
     }
 
+    //GETTER
     public JComboBox getBoxlist() {
 
         return boxlist;
 
     }
-    public String NomeCertificazione(){
+    public String getNomeCertificazione(){
 
         return (String) boxlist.getSelectedItem();
 
@@ -66,12 +68,12 @@ public class Sez_BView {
 
         return Intermedio0;
     }
-
     public JButton getAggiornaButton() {
 
         return aggiornaButton;
     }
 
+    //SETTER
     public void setEnte_r_Text(String Ente_r_Text) {
 
         ente_r_Text.setText(Ente_r_Text);
@@ -108,7 +110,6 @@ public class Sez_BView {
         mese_scad_Box.setSelectedItem(mese);
         giorno_scad_Box.setSelectedItem(giorno);
 
-
     }
 
     public void  Abilita_Disabilita_Campi(boolean editabile){
@@ -122,12 +123,11 @@ public class Sez_BView {
         mese_scad_Box.setEnabled(editabile);
         giorno_scad_Box.setEnabled(editabile);
 
-
-
     }
 
-
-
+    /**
+     * Reset resetta,per l appunto, la pagina, cancellando i vari campi ogni volta che è stato eseguito un aggiorna
+     */
     public void Reset(){
 
         certif_Box.setSelectedIndex(0);
@@ -140,8 +140,8 @@ public class Sez_BView {
         giorno_scad_Box.setSelectedIndex(0);
         nDoc_Text.setText("");
         ente_r_Text.setText("");
-    }
 
+    }
 }
 
 

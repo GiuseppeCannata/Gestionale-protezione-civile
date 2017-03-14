@@ -7,7 +7,7 @@ public class DBConnessione{
 
     // Costanti per la connessione al DB
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://localhost/dbogg";
+    private static final String DB_URL = "jdbc:mysql://localhost/dbogg?autoReconnect=false&useSSL=false";
     private static final String DB_NAME = "dbogg";
 
     private String user;

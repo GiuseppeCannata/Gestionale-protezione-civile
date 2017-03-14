@@ -17,8 +17,6 @@ public class Sez_AView{
     private JTextField specializzazionetext;
     private JTextField passwordtext;
     private JTextField usernametext;
-
-
     private JLabel nomeLabel;
     private JLabel cognomeLabel;
     private JLabel luogoDiNascitaLabel;
@@ -31,7 +29,6 @@ public class Sez_AView{
     private JLabel emailLabel;
     private JLabel usernameLabel;
     private JLabel passwordLabel;
-
     private JComboBox comboBox1;
     private JComboBox comboBox2;
     private JComboBox comboBox3;
@@ -45,7 +42,7 @@ public class Sez_AView{
     }
 
 
-    /*GETTER*/
+    //GETTER
     public JPanel getIntermedio0() {
 
         return Intermedio0;
@@ -71,7 +68,9 @@ public class Sez_AView{
 
     public String getDatadinascitatext() {
 
-        return (String)comboBox1.getSelectedItem()+"-"+ (String)comboBox2.getSelectedItem()+"-"+(String)comboBox3.getSelectedItem();
+        System.out.println((String)comboBox1.getSelectedItem()+"-"+(String)comboBox2.getSelectedItem()+"-"+(String)comboBox3.getSelectedItem());
+
+        return (String)comboBox1.getSelectedItem()+"-"+(String)comboBox2.getSelectedItem()+"-"+(String)comboBox3.getSelectedItem();
 
     }
 
@@ -103,9 +102,8 @@ public class Sez_AView{
     public String getSpecializzazionetext() {
 
         return specializzazionetext.getText();
+
     }
-
-
 
     public String getPasswordtext() {
 

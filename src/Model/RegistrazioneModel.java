@@ -85,7 +85,7 @@ public class RegistrazioneModel extends Model {
     }
 
     @Override
-    public boolean UpdateSQL(){
+    public boolean UpdateSQL(String[] Appoggio){
 
         return false;
 
