@@ -15,7 +15,7 @@ public class RegistrazioneModel extends Model {
     private Sez_AView sez_Aview;
     private Sez_BView sez_Bview;
     private Sez_CView sez_Cview;
-    private String ElementoCercato;
+    private String UsernameInserito;
     private Sez_BRegistrazioneController sez_bRegistrazioneController;
 
 
@@ -29,7 +29,7 @@ public class RegistrazioneModel extends Model {
           sez_bRegistrazioneController = controller;
           sez_Cview = view3;
 
-          ElementoCercato = sez_Aview.getUsernametext();
+          UsernameInserito = sez_Aview.getUsernametext();
 
     }
 
@@ -42,12 +42,12 @@ public class RegistrazioneModel extends Model {
     public boolean InsertSQL(){
 
         Boolean controllo = true;
-        openConnection();
+
 
         if(!insertASQL() || !insertBSQL() || !insertCSQL() || !InsertPASS() )
         controllo = false;  //c'è stato qualche problema in fase di inserimento
 
-        closeConnection();
+
 
         return controllo;
 
@@ -60,7 +60,7 @@ public class RegistrazioneModel extends Model {
 
         Boolean controllo = false;
 
-        String sql ="SELECT* FROM pass ";
+        String sql ="SELECT user FROM pass ";
         ResultSet query = selectQuery(sql);
         String user;
 
@@ -69,8 +69,8 @@ public class RegistrazioneModel extends Model {
             while (!controllo && query.next()) {
 
                 user = query.getString("user");
-                // System.out.println(user);
-                if (user.equals(ElementoCercato)) {
+                 System.out.println(user);
+                if (user.equals(UsernameInserito)) {
                     controllo = true;
                 }
 
@@ -105,7 +105,7 @@ public class RegistrazioneModel extends Model {
 
         Boolean controllo = false;
 
-
+         openConnection();
         String sql = "Insert into a(cf,nome,cognome,luogodinascita,telefonofisso,indirizzodiresidenza,telefonomobile,email," +
                     "dataprimaiscrizione,professione,eventualespecializzazione,datadinascita) values('" +
                     codicefiscale                           + "','" +
@@ -127,7 +127,7 @@ public class RegistrazioneModel extends Model {
                 System.out.print("tutto bene");
             }
 
-
+        closeConnection();
         return controllo;
 
 
@@ -137,60 +137,40 @@ public class RegistrazioneModel extends Model {
 
        System.out.println("\nB");
        boolean controllo = false;
-       ArrayList<String> listaABILITAZIONE = sez_bRegistrazioneController.getListaABILITAZIONE();
-       ArrayList<String> listaPATENTE = sez_bRegistrazioneController.getListaPATENTE();
-       ArrayList<String> listaCORSO= sez_bRegistrazioneController.getListaCORSO();
+
+
+       ArrayList<Abilitazione> listaABILITAZIONE = sez_bRegistrazioneController.getListaABILITAZIONE();
+       ArrayList<Corso> listaCORSO= sez_bRegistrazioneController.getListaCORSO();
+       ArrayList<Patente> listaPATENTE = sez_bRegistrazioneController.getListaPATENTE();
+
 
        int i = 0;
 
-       while (i < listaABILITAZIONE.size()) {
-           String sql = "Insert into abilitazioni(cf,nome,datascadenza,dataacquisizione,entedirilascio,n_documento) values('" +
-                   codicefiscale     + "','" +
-                   listaABILITAZIONE.get(i)      + "','" +
-                   listaABILITAZIONE.get(i += 1) + "','" +
-                   listaABILITAZIONE.get(i += 1) + "','" +
-                   listaABILITAZIONE.get(i += 1) + "','" +
-                   listaABILITAZIONE.get(i += 1) + "')";
-                   i+=1;
+       while(i<listaABILITAZIONE.size()) {
 
-
-           if (updateQuery(sql)) {
-               controllo = true;
-               System.out.print("tutto bene");
-           }
+           if(listaABILITAZIONE.get(i).InsertSQL());
+           controllo = true;
+           System.out.println("tutto bene,per inserimento ABILITAZIONI");
+           i++;
        }
 
        i=0;
        while (i < listaCORSO.size()) {
-           String sql = "Insert into corsi(cf,nome,datascadenza,dataacquisizione,entedirilascio,n_documento) values('" +
-                   codicefiscale     + "','" +
-                   listaCORSO.get(i)      + "','" +
-                   listaCORSO.get(i += 1) + "','" +
-                   listaCORSO.get(i += 1) + "','" +
-                   listaCORSO.get(i += 1) + "','" +
-                   listaCORSO.get(i += 1) + "')";
-           i+=1;
 
-
-           if (updateQuery(sql))
-               controllo = true;
+           if(listaCORSO.get(i).InsertSQL());
+           controllo = true;
+           System.out.println("tutto bene,per insermimento PATENTI");
+           i++;
        }
 
-       i=0;
-       while (i < listaPATENTE.size()) {
-           String sql = "Insert into patenti(cf,nome,datascadenza,dataacquisizione,entedirilascio,n_documento) values('" +
-                   codicefiscale     + "','" +
-                   listaPATENTE.get(i)      + "','" +
-                   listaPATENTE.get(i += 1) + "','" +
-                   listaPATENTE.get(i += 1) + "','" +
-                   listaPATENTE.get(i += 1) + "','" +
-                   listaPATENTE.get(i += 1) + "')";
-           i+=1;
+        i=0;
+        while (i < listaPATENTE.size()) {
 
-
-           if (updateQuery(sql))
-               controllo = true;
-       }
+            if(listaPATENTE.get(i).InsertSQL());
+            controllo = true;
+            System.out.println("tutto bene,per insermimento CORSI");
+            i++;
+         }
 
 
 
@@ -212,6 +192,8 @@ public class RegistrazioneModel extends Model {
        System.out.println("C");
        Boolean controllo = false;
 
+       openConnection();
+
        String sql = "Insert into c(cf,nomedatore,telefono,faxdatore,email,numero_codice_postale,iban) values('" +
                     codicefiscale                                    + "','" +
                     sez_Cview.getDenominazioneDatoreDiLavorotext()   + "','" +
@@ -227,14 +209,14 @@ public class RegistrazioneModel extends Model {
             controllo = true;   //operazione eseguita con successo
             System.out.print("tutto bene");
         }
-
+       closeConnection();
         return controllo;
    }
 
    private boolean InsertPASS(){
 
        Boolean controllo = false;
-
+       openConnection();
        String sql = "Insert into pass(cf,pass,user,vol_o_cand) values('" +
                codicefiscale                                    + "','" +
                sez_Aview.getPasswordtext()                      + "','" +
@@ -246,7 +228,7 @@ public class RegistrazioneModel extends Model {
            controllo = true;   //operazione eseguita con successo
            System.out.print("tutto bene");
        }
-
+       closeConnection();
        return controllo;
 
 

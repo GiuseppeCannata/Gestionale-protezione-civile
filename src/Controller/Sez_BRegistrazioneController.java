@@ -1,5 +1,8 @@
 package Controller;
 
+import Model.Abilitazione;
+import Model.Patente;
+import Model.Corso;
 import View.BasicFrameView;
 import View.Sez_BView;
 
@@ -13,20 +16,27 @@ import java.util.ArrayList;
 
 public class Sez_BRegistrazioneController {
 
+    private String codicefiscale;
+
     private Sez_BView sez_Bview;
     private BasicFrameView basicframe;
     private int aggiorna;
-    private ArrayList<String> listaCORSO;
-    private ArrayList<String> listaABILITAZIONE;
-    private ArrayList<String> listaPATENTE;
+    private ArrayList<Corso> listaCORSO;
+    private ArrayList<Abilitazione> listaABILITAZIONE;
+    private ArrayList<Patente> listaPATENTE;
 
-    public Sez_BRegistrazioneController(Sez_BView view2, BasicFrameView frame) {
+    public Sez_BRegistrazioneController(Sez_BView view2, BasicFrameView frame, String CodiceFiscale) {
+
+        codicefiscale = CodiceFiscale;
 
         sez_Bview = view2;
         basicframe = frame;
         listaCORSO = new ArrayList<>(25);
         listaABILITAZIONE = new ArrayList<>(25);
         listaPATENTE = new ArrayList<>(25);
+
+        sez_Bview.VisibilitàEliminaButton(false);
+        sez_Bview.VisibilitàAggiornaButton(false);
 
         aggiorna = 1;
 
@@ -38,9 +48,8 @@ public class Sez_BRegistrazioneController {
 
 
         /*Aggiorna*/
-        JButton Aggiorna = sez_Bview.getAggiornaButton();
-
-        Aggiorna.addActionListener(new ActionListener() {
+        JButton Aggiungi = sez_Bview.getAggiungiButton();
+        Aggiungi.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -66,6 +75,7 @@ public class Sez_BRegistrazioneController {
                     }
                     else if (boxcertificazioni.getSelectedItem().equals("ABILITAZIONE")) {
 
+                        System.out.println("aaa");
                         boxlist.removeAllItems();
                         boxlist.addItem("utilizzo piatt elev");
                         boxlist.addItem("anti incendio");
@@ -134,41 +144,38 @@ public class Sez_BRegistrazioneController {
 
             if (sez_Bview.getCertif_Box().getSelectedItem().equals("ABILITAZIONE")) {
 
-                listaABILITAZIONE.add(sez_Bview.getNomeCertificazione());
-                listaABILITAZIONE.add(sez_Bview.getDataScadenza());
-                listaABILITAZIONE.add(sez_Bview.getDataAcquisizone());
-                listaABILITAZIONE.add(sez_Bview.getEnte_r_Text());
-                listaABILITAZIONE.add(sez_Bview.getnDoc_Text());
+                Abilitazione abilitazione = new Abilitazione(codicefiscale, sez_Bview.getNomeCertificazione(),
+                        sez_Bview.getDataAcquisizone(), sez_Bview.getDataScadenza(), sez_Bview.getEnte_r_Text(),
+                        sez_Bview.getnDoc_Text());
 
-                System.out.println(listaABILITAZIONE.get(0));
 
+                listaABILITAZIONE.add(abilitazione);
             }
             else if (sez_Bview.getCertif_Box().getSelectedItem().equals("CORSO")) {
 
-                listaCORSO.add(sez_Bview.getNomeCertificazione());
-                listaCORSO.add(sez_Bview.getDataScadenza());
-                listaCORSO.add(sez_Bview.getDataAcquisizone());
-                listaCORSO.add(sez_Bview.getEnte_r_Text());
-                listaCORSO.add(sez_Bview.getnDoc_Text());
+                Corso corso = new Corso(codicefiscale, sez_Bview.getNomeCertificazione(),
+                        sez_Bview.getDataAcquisizone(), sez_Bview.getDataScadenza(), sez_Bview.getEnte_r_Text(),
+                        sez_Bview.getnDoc_Text());
 
-                System.out.println(listaCORSO.get(0));
+                listaCORSO.add(corso);
+
+
+
 
             }
 
             else if (sez_Bview.getCertif_Box().getSelectedItem().equals("PATENTE")) {
 
-                listaPATENTE.add(sez_Bview.getNomeCertificazione());
-                listaPATENTE.add(sez_Bview.getDataScadenza());
-                listaPATENTE.add(sez_Bview.getDataAcquisizone());
-                listaPATENTE.add(sez_Bview.getEnte_r_Text());
-                listaPATENTE.add(sez_Bview.getnDoc_Text());
+                Patente patente = new Patente(codicefiscale, sez_Bview.getNomeCertificazione(),
+                        sez_Bview.getDataAcquisizone(), sez_Bview.getDataScadenza(), sez_Bview.getEnte_r_Text(),
+                        sez_Bview.getnDoc_Text());
 
-                System.out.println(listaPATENTE.get(0));
+                listaPATENTE.add(patente);
 
             }
 
             //RESET
-            sez_Bview.Reset();
+            sez_Bview.HardReset();
         }
         catch(Exception e){
 
@@ -177,19 +184,19 @@ public class Sez_BRegistrazioneController {
             }
     }
 
-    public ArrayList<String> getListaCORSO() {
+    public ArrayList<Corso> getListaCORSO() {
 
         return listaCORSO;
 
     }
 
-    public ArrayList<String> getListaABILITAZIONE() {
+    public ArrayList<Abilitazione> getListaABILITAZIONE() {
 
         return listaABILITAZIONE;
 
     }
 
-    public ArrayList<String> getListaPATENTE() {
+    public ArrayList<Patente> getListaPATENTE() {
 
         return listaPATENTE;
 

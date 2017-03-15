@@ -119,6 +119,7 @@ public abstract class Persona extends Model{
 
                 Abilitazione temporaneo = new Abilitazione();
 
+                temporaneo.setCodicefiscale(Codice_Fiscale);
                 temporaneo.setNome(query.getString("nome"));
                 temporaneo.setDatascadenza(query.getString("datascadenza"));
                 temporaneo.setDataacquisizione(query.getString("dataacquisizione"));
@@ -137,6 +138,7 @@ public abstract class Persona extends Model{
             while(query.next()){
                 Patente temporaneo = new Patente();
 
+                temporaneo.setCodicefiscale(Codice_Fiscale);
                 temporaneo.setNome(query.getString("nome"));
                 temporaneo.setDatascadenza(query.getString("datascadenza"));
                 temporaneo.setDataacquisizione(query.getString("dataacquisizione"));
@@ -157,6 +159,7 @@ public abstract class Persona extends Model{
 
                 Corso temporaneo = new Corso();
 
+                temporaneo.setCodicefiscale(Codice_Fiscale);
                 temporaneo.setNome(query.getString("nome"));
                 temporaneo.setDatascadenza(query.getString("datascadenza"));
                 temporaneo.setDataacquisizione(query.getString("dataacquisizione"));

@@ -1,7 +1,9 @@
 package Model;
 
 
-public class Corso {
+public class Corso extends Model {
+
+    private String codicefiscale;
 
     private String nome;
     private String datascadenza;
@@ -15,6 +17,72 @@ public class Corso {
         return;
 
     }
+    public Corso(String CodiceFiscale, String NomeCertificazione, String DataAcquisizione,String DataScadenza,
+                        String EnteRilascio,String NDocumento) {
+
+        codicefiscale = CodiceFiscale;
+        nome = NomeCertificazione;
+        dataacquisizione = DataAcquisizione;
+        datascadenza = DataScadenza;
+        entedirilascio = EnteRilascio;
+        n_documento = NDocumento;
+
+    }
+
+    public boolean InsertSQL(){
+
+        boolean controllo=false;
+
+        openConnection();
+        String sql = "Insert into corsi(cf,nome,datascadenza,dataacquisizione,entedirilascio,n_documento) values('" +
+                codicefiscale       + "','" +
+                nome                + "','" +
+                datascadenza        + "','" +
+                dataacquisizione    + "','" +
+                entedirilascio      + "','" +
+                n_documento         + "')";
+
+        if (updateQuery(sql))
+            controllo = true;
+
+
+        closeConnection();
+        return controllo;
+
+
+
+    }
+
+    @Override
+    public boolean SearchSQL() {
+        return false;
+    }
+
+    @Override
+    public boolean UpdateSQL(String[] Appoggio) {
+        return false;
+    }
+
+    public boolean DeleteSQL(){
+
+        boolean controllo=false;
+
+        openConnection();
+
+        System.out.println(nome);
+        System.out.println(codicefiscale);
+
+
+        String sql = "delete from corsi where cf='"+codicefiscale+"' and nome='"+nome+"'";
+
+        if (updateQuery(sql))
+            controllo = true;
+
+        closeConnection();
+
+        return controllo;
+    }
+
 
     public String getNome() {
         return nome;
@@ -54,5 +122,9 @@ public class Corso {
 
     public void setN_documento(String n_documento) {
         this.n_documento = n_documento;
+    }
+
+    public void setCodicefiscale(String codicefiscale) {
+        this.codicefiscale = codicefiscale;
     }
 }

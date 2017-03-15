@@ -3,6 +3,7 @@ package Controller;
 import Model.Abilitazione;
 import Model.Corso;
 import Model.Patente;
+import View.BasicFrameView;
 import View.Sez_BView;
 
 import javax.swing.*;
@@ -15,28 +16,34 @@ import java.util.ArrayList;
 
 public class Sez_BCandidatoController {
 
+    private BasicFrameView basicframe;
+    private String codicefiscale;
+
     private Sez_BView sez_Bview;
     private ArrayList<Abilitazione> ABILITAZIONI;
     private ArrayList<Corso> CORSI;
     private ArrayList<Patente> PATENTI;
 
-    public Sez_BCandidatoController(Sez_BView view2, ArrayList<Abilitazione> Abilitazioni, ArrayList<Corso> Corsi, ArrayList<Patente> Patenti) {
+    public Sez_BCandidatoController(Sez_BView view2, ArrayList<Abilitazione> Abilitazioni, ArrayList<Corso> Corsi,
+                                    ArrayList<Patente> Patenti,BasicFrameView frame,String CodiceFiscale) {
 
 
         sez_Bview = view2;
         ABILITAZIONI = Abilitazioni;
         CORSI = Corsi;
         PATENTI = Patenti;
+        basicframe = frame;
+        codicefiscale = CodiceFiscale;
+        sez_Bview.VisibilitàAggiungiButton(false);
+        sez_Bview.VisibilitàEliminaButton(false);
+        sez_Bview.VisibilitàAggiornaButton(false);
+
         Listner();
 
 
     }
 
     private void  Listner(){
-
-        /*Aggiorna*/
-        JButton Aggiorna = sez_Bview.getAggiornaButton();
-
 
         JComboBox boxcertificazioni = sez_Bview.getCertif_Box();
         JComboBox boxlist = sez_Bview.getBoxlist();
@@ -48,10 +55,16 @@ public class Sez_BCandidatoController {
                     if (boxcertificazioni.getSelectedItem().equals("ABILITAZIONE")) {
 
                         boxlist.removeAllItems();
+                        sez_Bview.Reset();
+
                         int i=0;
-                         while(i<ABILITAZIONI.size()) {
+                         while(i < ABILITAZIONI.size()) {
+
+
                              boxlist.addItem(ABILITAZIONI.get(i).getNome());
+
                              System.out.println(ABILITAZIONI.get(i).getDataacquisizione());
+
                              sez_Bview.setComboboxDataAcquisizione(ABILITAZIONI.get(i).getDataacquisizione());
                              sez_Bview.setComboboxDataScadenza(ABILITAZIONI.get(i).getDatascadenza());
 
@@ -65,8 +78,11 @@ public class Sez_BCandidatoController {
                     else if(boxcertificazioni.getSelectedItem().equals("CORSO")){
 
                         boxlist.removeAllItems();
+                        sez_Bview.Reset();
+
+
                         int i=0;
-                        while(i<CORSI.size()){
+                        while(i < CORSI.size()){
 
                             boxlist.addItem(CORSI.get(i).getNome());
                             sez_Bview.setComboboxDataAcquisizione(CORSI.get(i).getDataacquisizione());
@@ -76,13 +92,11 @@ public class Sez_BCandidatoController {
                             i++;
                         }
 
-
-
-
                     }
                     else if (boxcertificazioni.getSelectedItem().equals("PATENTE")){
 
                         boxlist.removeAllItems();
+                        sez_Bview.Reset();
                         int i=0;
                         while(i<PATENTI.size()){
 
@@ -93,8 +107,6 @@ public class Sez_BCandidatoController {
                             sez_Bview.setEnte_r_Text(PATENTI.get(i).getN_documento());
                             i++;
                         }
-
-
                     }
                 }
 
@@ -102,5 +114,78 @@ public class Sez_BCandidatoController {
         });
 
 
+        JButton EliminaButton = sez_Bview.getEliminaButton();
+        EliminaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if(sez_Bview.getBoxlist().getSelectedItem()!= null) {
+
+                    DeleteSQL();
+
+                }
+
+            }
+
+        });
+
+
+
+    }
+
+
+    private void DeleteSQL() {
+
+
+        boolean controllo = false;
+        int i = 0;
+        String DaEliminare = (String) sez_Bview.getBoxlist().getSelectedItem();
+        if(basicframe.OpotionalMessage("Si sicuro di voler eliminare "+DaEliminare+"?") == 0)
+        if (sez_Bview.getCertif_Box().getSelectedItem().equals("ABILITAZIONE")) {
+
+            while (i < ABILITAZIONI.size() && !controllo) {
+
+                if (ABILITAZIONI.get(i).getNome().equals(DaEliminare)) {
+
+                    ABILITAZIONI.get(i).DeleteSQL();
+                    ABILITAZIONI.remove(i);
+                    controllo = true;
+                   // System.out.println("vero");
+                }
+                i++;
+            }
+        } else if (sez_Bview.getCertif_Box().getSelectedItem().equals("CORSO")) {
+
+
+            while (i < CORSI.size() && !controllo) {
+
+                if (CORSI.get(i).getNome().equals(DaEliminare)) {
+
+                    CORSI.get(i).DeleteSQL();
+                    CORSI.remove(i);
+                    controllo = true;
+                    //System.out.println("vero");
+
+                }
+                i++;
+            }
+        } else if (sez_Bview.getCertif_Box().getSelectedItem().equals("PATENTE")) {
+
+            while (i < PATENTI.size() && !controllo) {
+
+                if (PATENTI.get(i).getNome().equals(DaEliminare)) {
+
+                    System.out.println(PATENTI.get(i).getNome());
+
+                    PATENTI.get(i).DeleteSQL();
+                    PATENTI.remove(i);
+                    controllo = true;
+                    System.out.println("vero");
+
+                }
+                i++;
+            }
+
+        }
     }
 }

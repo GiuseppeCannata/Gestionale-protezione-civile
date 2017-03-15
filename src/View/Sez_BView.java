@@ -16,7 +16,9 @@ public class Sez_BView {
     private JTextField ente_r_Text;
     private JTextField nDoc_Text;
     private JPanel Intermedio0;
+    private JButton aggiungiButton;
     private JButton aggiornaButton;
+    private JButton eliminaButton;
 
 
     public Sez_BView() {
@@ -68,9 +70,17 @@ public class Sez_BView {
 
         return Intermedio0;
     }
-    public JButton getAggiornaButton() {
+    public JButton getAggiungiButton() {
 
+        return aggiungiButton;
+    }
+
+    public JButton getAggiornaButton() {
         return aggiornaButton;
+    }
+
+    public JButton getEliminaButton() {
+        return eliminaButton;
     }
 
     //SETTER
@@ -85,6 +95,24 @@ public class Sez_BView {
         nDoc_Text.setText(NDoc_Text);
 
     }
+
+    public void VisibilitàAggiungiButton(boolean visibilita){
+
+        aggiungiButton.setVisible(visibilita);
+
+    }
+    public void VisibilitàEliminaButton(boolean visibilita){
+
+        eliminaButton.setVisible(visibilita);
+
+    }
+    public void VisibilitàAggiornaButton(boolean visibilita){
+
+        aggiornaButton.setVisible(visibilita);
+
+    }
+
+
 
     public void setComboboxDataAcquisizione(String Data){
 
@@ -129,6 +157,21 @@ public class Sez_BView {
      * Reset resetta,per l appunto, la pagina, cancellando i vari campi ogni volta che è stato eseguito un aggiorna
      */
     public void Reset(){
+
+       //certif_Box.setSelectedIndex(0);
+       // boxlist.removeAllItems();
+        anno_scad_Box.setSelectedIndex(0);
+        mese_scad_Box.setSelectedIndex(0);
+        giorno_scad_Box.setSelectedIndex(0);
+        anno_acq_Box.setSelectedIndex(0);
+        mese_scad_Box.setSelectedIndex(0);
+        giorno_scad_Box.setSelectedIndex(0);
+        nDoc_Text.setText("");
+        ente_r_Text.setText("");
+
+    }
+
+    public void HardReset(){
 
         certif_Box.setSelectedIndex(0);
         boxlist.removeAllItems();

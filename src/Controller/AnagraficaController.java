@@ -21,8 +21,8 @@ public class AnagraficaController {
    private Sez_ManagerView sez_managerview;
    private LoginView loginview;
    private String codicefiscale;
-   private CandidatoDestraView candidatoview;
    private Candidato Utente;
+   private CandidatoDestraView Dview;
 
    private Sez_AView sez_Aview;
    private Sez_BView sez_Bview;
@@ -40,14 +40,14 @@ public class AnagraficaController {
         sez_managerview = new Sez_ManagerView();
         loginview = view;
         codicefiscale = CodiceFiscale ;
-        candidatoview = null;
+
         Utente = null;
+        Dview = null;
 
         sez_Aview = new Sez_AView();
         sez_Bview = new Sez_BView();
-        sez_bRegistrazioneController = new Sez_BRegistrazioneController(sez_Bview, basicframe);
+        sez_bRegistrazioneController = new Sez_BRegistrazioneController(sez_Bview, basicframe, codicefiscale);
         sez_Cview = new Sez_CView();
-
 
         sez_managerview.setPaginaLoginButton(true);
         sez_managerview.setModificaButton(false);
@@ -58,8 +58,8 @@ public class AnagraficaController {
         basicframe.setdestra(sez_managerview.getIntermedio0());
         sez_managerview.MessaggioBenvenuto(basicframe);
 
-       Listener();
-       RegistrazioneListner();
+        Listener();
+        RegistrazioneListner();
 
     }
 
@@ -67,8 +67,9 @@ public class AnagraficaController {
     public AnagraficaController(BasicFrameView frame, CandidatoDestraView view,Candidato utente ,String utilizzatore) {
 
         basicframe = frame;
-        candidatoview = view;
         codicefiscale = null ;
+        loginview = null;
+        Dview = view;
         Utente = utente;
 
         sez_managerview = new Sez_ManagerView();
@@ -76,7 +77,8 @@ public class AnagraficaController {
         sez_Aview = new Sez_AView();
         sez_Bview = new Sez_BView();
         sez_Cview = new Sez_CView();
-        sez_bUtenteController = new Sez_BCandidatoController(sez_Bview,Utente.getABILITAZIONI(),Utente.getCORSI(),Utente.getPATENTI());
+        sez_bUtenteController = new Sez_BCandidatoController(sez_Bview,Utente.getABILITAZIONI(),Utente.getCORSI(),
+                Utente.getPATENTI(),basicframe,codicefiscale);
 
 
 
@@ -193,7 +195,20 @@ public class AnagraficaController {
 
                 sez_Aview.Abilita_Disabilita_Campi(true);
                 sez_Bview.Abilita_Disabilita_Campi(true);
+                sez_Bview.VisibilitàEliminaButton(true);
+                sez_Bview.VisibilitàAggiornaButton(true);
                 sez_Cview.Abilita_Disabilita_Campi(true);
+
+            }
+        });
+
+        /*Home*/
+        JButton Homebutton = sez_managerview.getHomeButton();
+        Homebutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                basicframe.setdestra(Dview.getIntermedio0());
 
             }
         });
@@ -217,13 +232,13 @@ public class AnagraficaController {
     /**
      * Metodo Privato.
      * Salvataggio si preoccupa di verificare la compilazione,da parte dell utente di tutti i campi contrassegnati
-     * come obbligatori, (per fare questo ricorre all utilizzo di un metodo privato VerificaCompletamentoCampiObbligatori().
+     * come obbligatori, (per fare questo ricorre all utilizzo di un metodo privato VerificaCampi().
      * Una volta accertata la compilazione avvia l inserimento nel DB
      */
     private void SalvataggioRegistrazione(){
 
            if(basicframe.OpotionalMessage("Una volta effettuato il salvataggio verrai\nrindirizzato" +
-                   "alla pagina login.Salvare?") == 0 && VerificaCompletamentoCampiObbligatori()){
+                   "alla pagina login.Salvare?") == 0 && VerificaCampi()){
 
                        RegistrazioneModel Gestione;
                        Gestione = new RegistrazioneModel(codicefiscale, sez_Aview, sez_Bview, sez_Cview, sez_bRegistrazioneController);
@@ -231,8 +246,8 @@ public class AnagraficaController {
                            basicframe.ErrorMessage("Username già utilizzato!Cambialo!");
                        else if (!Gestione.InsertSQL())
                                basicframe.ErrorMessage("Errore nell'inserimento!\nRicontrollare!");
-                       else
-                           basicframe.setdestra(loginview.getIntermedio0());
+                            else
+                               basicframe.setdestra(loginview.getIntermedio0());
 
 
 
@@ -242,13 +257,13 @@ public class AnagraficaController {
 
     /**
      * Metodo di servizio.
-     * VerificaCompletamentoCampiObbligatori si preoccupa di controllare se l utente per sbaglio o volutamente abbia mancato
+     * VerificaCampi si preoccupa di controllare se l utente per sbaglio o volutamente abbia mancato
      * l inserimento dei campi necessari alla sua scheda anagrafica
      *
      * @return false --> non tutti i campi obbligatori sono completi
      * @return true  --> tutti i campi obbligatori sono completi
      */
-     private Boolean VerificaCompletamentoCampiObbligatori(){
+     private Boolean VerificaCampi(){
 
         boolean controllo = false;
 
@@ -264,7 +279,11 @@ public class AnagraficaController {
                     )
               throw new Exception("Completare tutti i campi obbligatori");
 
+            if(sez_Aview.getUsernametext().length() > 20)
+                throw new Exception ("Username troppo lunga!\nMassimo 20 caratteri");
 
+            if(sez_Aview.getPasswordtext().length() > 20)
+                throw new Exception ("Password troppo lunga!\nMassimo 20 caratteri");
 
             controllo= true;
 

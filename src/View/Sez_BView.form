@@ -287,12 +287,12 @@
           </model>
         </properties>
       </component>
-      <component id="86fac" class="javax.swing.JButton" binding="aggiornaButton" default-binding="true">
+      <component id="86fac" class="javax.swing.JButton" binding="aggiungiButton">
         <constraints>
           <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Aggiorna"/>
+          <text value="Aggiungi"/>
         </properties>
       </component>
       <component id="ac8fe" class="javax.swing.JComboBox" binding="boxlist">
@@ -356,6 +356,22 @@
         </constraints>
         <properties>
           <text value="N°Documento"/>
+        </properties>
+      </component>
+      <component id="90821" class="javax.swing.JButton" binding="aggiornaButton">
+        <constraints>
+          <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Aggiorna"/>
+        </properties>
+      </component>
+      <component id="94776" class="javax.swing.JButton" binding="eliminaButton" default-binding="true">
+        <constraints>
+          <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Elimina"/>
         </properties>
       </component>
     </children>
