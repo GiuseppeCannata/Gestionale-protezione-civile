@@ -196,7 +196,7 @@ public class AnagraficaController {
                 sez_Aview.Abilita_Disabilita_Campi(true);
                 sez_Bview.Abilita_Disabilita_Campi(true);
                 sez_Bview.VisibilitàEliminaButton(true);
-                sez_Bview.VisibilitàAggiornaButton(true);
+                sez_Bview.VisibilitàAggiungiButton(true);
                 sez_Cview.Abilita_Disabilita_Campi(true);
 
             }

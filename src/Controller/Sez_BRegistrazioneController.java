@@ -36,7 +36,6 @@ public class Sez_BRegistrazioneController {
         listaPATENTE = new ArrayList<>(25);
 
         sez_Bview.VisibilitàEliminaButton(false);
-        sez_Bview.VisibilitàAggiornaButton(false);
 
         aggiorna = 1;
 
@@ -47,7 +46,7 @@ public class Sez_BRegistrazioneController {
     private void Listener(){
 
 
-        /*Aggiorna*/
+        /*Aggiungi*/
         JButton Aggiungi = sez_Bview.getAggiungiButton();
         Aggiungi.addActionListener(new ActionListener() {
             @Override
@@ -75,7 +74,7 @@ public class Sez_BRegistrazioneController {
                     }
                     else if (boxcertificazioni.getSelectedItem().equals("ABILITAZIONE")) {
 
-                        System.out.println("aaa");
+                       // System.out.println("aaa");
                         boxlist.removeAllItems();
                         boxlist.addItem("utilizzo piatt elev");
                         boxlist.addItem("anti incendio");

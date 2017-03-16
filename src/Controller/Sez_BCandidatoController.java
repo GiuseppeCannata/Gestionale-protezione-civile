@@ -36,7 +36,6 @@ public class Sez_BCandidatoController {
         codicefiscale = CodiceFiscale;
         sez_Bview.VisibilitàAggiungiButton(false);
         sez_Bview.VisibilitàEliminaButton(false);
-        sez_Bview.VisibilitàAggiornaButton(false);
 
         Listner();
 
@@ -54,7 +53,6 @@ public class Sez_BCandidatoController {
                 if(e.getSource() ==  sez_Bview.getCertif_Box()) {
                     if (boxcertificazioni.getSelectedItem().equals("ABILITAZIONE")) {
 
-                        boxlist.removeAllItems();
                         sez_Bview.Reset();
 
                         int i=0;
@@ -62,14 +60,6 @@ public class Sez_BCandidatoController {
 
 
                              boxlist.addItem(ABILITAZIONI.get(i).getNome());
-
-                             System.out.println(ABILITAZIONI.get(i).getDataacquisizione());
-
-                             sez_Bview.setComboboxDataAcquisizione(ABILITAZIONI.get(i).getDataacquisizione());
-                             sez_Bview.setComboboxDataScadenza(ABILITAZIONI.get(i).getDatascadenza());
-
-                             sez_Bview.setnDoc_Text(ABILITAZIONI.get(i).getEntedirilascio());
-                             sez_Bview.setEnte_r_Text(ABILITAZIONI.get(i).getN_documento());
                              i++;
                          }
 
@@ -77,7 +67,6 @@ public class Sez_BCandidatoController {
                     }
                     else if(boxcertificazioni.getSelectedItem().equals("CORSO")){
 
-                        boxlist.removeAllItems();
                         sez_Bview.Reset();
 
 
@@ -85,26 +74,18 @@ public class Sez_BCandidatoController {
                         while(i < CORSI.size()){
 
                             boxlist.addItem(CORSI.get(i).getNome());
-                            sez_Bview.setComboboxDataAcquisizione(CORSI.get(i).getDataacquisizione());
-                            sez_Bview.setComboboxDataScadenza(CORSI.get(i).getDatascadenza());
-                            sez_Bview.setnDoc_Text(CORSI.get(i).getEntedirilascio());
-                            sez_Bview.setEnte_r_Text(CORSI.get(i).getN_documento());
                             i++;
                         }
 
                     }
                     else if (boxcertificazioni.getSelectedItem().equals("PATENTE")){
 
-                        boxlist.removeAllItems();
                         sez_Bview.Reset();
                         int i=0;
                         while(i<PATENTI.size()){
 
                             boxlist.addItem(PATENTI.get(i).getNome());
-                            sez_Bview.setComboboxDataAcquisizione(PATENTI.get(i).getDataacquisizione());
-                            sez_Bview.setComboboxDataScadenza(PATENTI.get(i).getDatascadenza());
-                            sez_Bview.setnDoc_Text(PATENTI.get(i).getEntedirilascio());
-                            sez_Bview.setEnte_r_Text(PATENTI.get(i).getN_documento());
+
                             i++;
                         }
                     }
@@ -113,6 +94,81 @@ public class Sez_BCandidatoController {
             }
         });
 
+       boxlist.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+
+                if(e.getSource() ==  sez_Bview.getBoxlist() && sez_Bview.getBoxlist().getSelectedItem() !=null ) {
+
+                    int i= 0;
+
+                    while(i < ABILITAZIONI.size()){
+
+                       if (boxlist.getSelectedItem().equals(ABILITAZIONI.get(i).getNome())) {
+
+                            sez_Bview.setComboboxDataAcquisizione(ABILITAZIONI.get(i).getDataacquisizione());
+                            sez_Bview.setComboboxDataScadenza(ABILITAZIONI.get(i).getDatascadenza());
+
+                            sez_Bview.setnDoc_Text(ABILITAZIONI.get(i).getEntedirilascio());
+                            sez_Bview.setEnte_r_Text(ABILITAZIONI.get(i).getN_documento());
+                        }
+                        i++;
+                    }
+
+
+                    i= 0;
+
+                    while(i < CORSI.size()){
+
+                        if (boxlist.getSelectedItem().equals(CORSI.get(i).getNome())){
+
+                            sez_Bview.setComboboxDataAcquisizione(CORSI.get(i).getDataacquisizione());
+                            sez_Bview.setComboboxDataScadenza(CORSI.get(i).getDatascadenza());
+                            sez_Bview.setnDoc_Text(CORSI.get(i).getEntedirilascio());
+                            sez_Bview.setEnte_r_Text(CORSI.get(i).getN_documento());
+
+
+                        }
+                        i++;
+                    }
+
+                    i= 0;
+
+                    while(i < PATENTI.size()){
+
+                        if (boxlist.getSelectedItem().equals(PATENTI.get(i).getNome())){
+
+                            sez_Bview.setComboboxDataAcquisizione(PATENTI.get(i).getDataacquisizione());
+                            sez_Bview.setComboboxDataScadenza(PATENTI.get(i).getDatascadenza());
+                            sez_Bview.setnDoc_Text(PATENTI.get(i).getEntedirilascio());
+                            sez_Bview.setEnte_r_Text(PATENTI.get(i).getN_documento());
+
+
+                        }
+                        i++;
+                    }
+
+
+                }
+
+
+
+
+            }
+        });
+
+
+
+
+       JButton AggiungiButton = sez_Bview.getAggiungiButton();
+       AggiungiButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+            }
+
+       });
 
         JButton EliminaButton = sez_Bview.getEliminaButton();
         EliminaButton.addActionListener(new ActionListener() {
@@ -140,6 +196,8 @@ public class Sez_BCandidatoController {
         boolean controllo = false;
         int i = 0;
         String DaEliminare = (String) sez_Bview.getBoxlist().getSelectedItem();
+
+
         if(basicframe.OpotionalMessage("Si sicuro di voler eliminare "+DaEliminare+"?") == 0)
         if (sez_Bview.getCertif_Box().getSelectedItem().equals("ABILITAZIONE")) {
 

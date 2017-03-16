@@ -17,7 +17,6 @@ public class Sez_BView {
     private JTextField nDoc_Text;
     private JPanel Intermedio0;
     private JButton aggiungiButton;
-    private JButton aggiornaButton;
     private JButton eliminaButton;
 
 
@@ -75,9 +74,6 @@ public class Sez_BView {
         return aggiungiButton;
     }
 
-    public JButton getAggiornaButton() {
-        return aggiornaButton;
-    }
 
     public JButton getEliminaButton() {
         return eliminaButton;
@@ -106,12 +102,6 @@ public class Sez_BView {
         eliminaButton.setVisible(visibilita);
 
     }
-    public void VisibilitàAggiornaButton(boolean visibilita){
-
-        aggiornaButton.setVisible(visibilita);
-
-    }
-
 
 
     public void setComboboxDataAcquisizione(String Data){
@@ -159,7 +149,7 @@ public class Sez_BView {
     public void Reset(){
 
        //certif_Box.setSelectedIndex(0);
-       // boxlist.removeAllItems();
+        boxlist.removeAllItems();
         anno_scad_Box.setSelectedIndex(0);
         mese_scad_Box.setSelectedIndex(0);
         giorno_scad_Box.setSelectedIndex(0);
