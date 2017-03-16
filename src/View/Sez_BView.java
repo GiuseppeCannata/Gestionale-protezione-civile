@@ -18,6 +18,7 @@ public class Sez_BView {
     private JPanel Intermedio0;
     private JButton aggiungiButton;
     private JButton eliminaButton;
+    private JButton updateButton;
 
 
     public Sez_BView() {
@@ -74,6 +75,9 @@ public class Sez_BView {
         return aggiungiButton;
     }
 
+    public JButton getUpdateButton() {
+        return updateButton;
+    }
 
     public JButton getEliminaButton() {
         return eliminaButton;

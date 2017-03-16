@@ -18,6 +18,7 @@ public class Sez_BCandidatoController {
 
     private BasicFrameView basicframe;
     private String codicefiscale;
+    private int Indice;
 
     private Sez_BView sez_Bview;
     private ArrayList<Abilitazione> ABILITAZIONI;
@@ -160,10 +161,12 @@ public class Sez_BCandidatoController {
 
 
 
-       JButton AggiungiButton = sez_Bview.getAggiungiButton();
-       AggiungiButton.addActionListener(new ActionListener() {
+       JButton UpdateButton = sez_Bview.getUpdateButton();
+       UpdateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                if(Ricerca());
 
 
             }
@@ -175,11 +178,12 @@ public class Sez_BCandidatoController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if(sez_Bview.getBoxlist().getSelectedItem()!= null) {
-
+                if(sez_Bview.getBoxlist().getSelectedItem() == null)
+                    basicframe.ErrorMessage("Nessuna certificazione selezionate");
+                else
                     DeleteSQL();
 
-                }
+
 
             }
 
@@ -191,7 +195,6 @@ public class Sez_BCandidatoController {
 
 
     private void DeleteSQL() {
-
 
         boolean controllo = false;
         int i = 0;
@@ -243,6 +246,171 @@ public class Sez_BCandidatoController {
                 }
                 i++;
             }
+
+        }
+    }
+
+    private boolean Ricerca(){
+
+        String DaUpdate = (String)sez_Bview.getBoxlist().getSelectedItem();
+        String[] appoggio = new String[4];
+        boolean controllo = false;
+        int i=0;
+
+        if (sez_Bview.getBoxlist().getSelectedItem().equals("ABILITAZIONE")) {
+
+            while (i < ABILITAZIONI.size() && !controllo) {
+
+                if (ABILITAZIONI.get(i).getNome().equals(DaUpdate)) {
+                    controllo = true;
+                    Indice= i;
+                    ModificaAbilitazione();
+
+                }
+                i++;
+            }
+        } else if (sez_Bview.getCertif_Box().getSelectedItem().equals("CORSO")) {
+
+
+            while (i < CORSI.size() && !controllo) {
+
+                if (CORSI.get(i).getNome().equals(DaUpdate)){
+                    controllo = true;
+                    Indice= i;
+                    ModificaCorso();
+                    //System.out.println("vero");
+                }
+
+                i++;
+            }
+        } else if (sez_Bview.getCertif_Box().getSelectedItem().equals("PATENTE")) {
+
+            while (i < PATENTI.size() && !controllo) {
+
+                if (PATENTI.get(i).getNome().equals(DaUpdate)) {
+                    controllo = true;
+                    Indice = i;
+                    ModificaPatente();
+                }
+
+
+
+                i++;
+            }
+
+        }
+
+        return controllo;
+
+    }
+
+    private void ModificaAbilitazione(){
+
+        Abilitazione abilitazione = ABILITAZIONI.get(Indice);
+        String[] appoggio = new String[2];
+
+
+        if(!sez_Bview.getDataAcquisizone().equals(abilitazione.getDataacquisizione())){
+            appoggio[0] = "dataaquisizione";
+            appoggio[1] =  sez_Bview.getDataScadenza();
+            abilitazione.UpdateSQL(appoggio);
+
+        }
+
+
+        if(!sez_Bview.getDataScadenza().equals(abilitazione.getDatascadenza())){
+            appoggio[0] = "datascadenza";
+            appoggio[1] =  sez_Bview.getDataScadenza();
+            abilitazione.UpdateSQL(appoggio);
+
+        }
+
+
+        if(!sez_Bview.getEnte_r_Text().equals(abilitazione.getEntedirilascio())){
+            appoggio[0] = "entedirilascio";
+            appoggio[1] =  sez_Bview.getDataScadenza();
+            abilitazione.UpdateSQL(appoggio);
+
+        }
+
+        if(!sez_Bview.getnDoc_Text().equals(abilitazione.getN_documento())){
+            appoggio[0] = "n_documento";
+            appoggio[1] =  sez_Bview.getDataScadenza();
+            abilitazione.UpdateSQL(appoggio);
+
+        }
+    }
+
+    private void ModificaPatente(){
+
+        Patente patente = PATENTI.get(Indice);
+        String[] appoggio = new String[2];
+
+
+        if(!sez_Bview.getDataAcquisizone().equals(patente.getDataacquisizione())){
+            appoggio[0] = "dataaquisizione";
+            appoggio[1] =  sez_Bview.getDataScadenza();
+            patente.UpdateSQL(appoggio);
+
+        }
+
+
+        if(!sez_Bview.getDataScadenza().equals(patente.getDatascadenza())){
+            appoggio[0] = "datascadenza";
+            appoggio[1] =  sez_Bview.getDataScadenza();
+            patente.UpdateSQL(appoggio);
+
+        }
+
+
+        if(!sez_Bview.getEnte_r_Text().equals(patente.getEntedirilascio())){
+            appoggio[0] = "entedirilascio";
+            appoggio[1] =  sez_Bview.getDataScadenza();
+            patente.UpdateSQL(appoggio);
+
+        }
+
+        if(!sez_Bview.getnDoc_Text().equals(patente.getN_documento())){
+            appoggio[0] = "n_documento";
+            appoggio[1] =  sez_Bview.getDataScadenza();
+            patente.UpdateSQL(appoggio);
+
+        }
+    }
+
+    private void ModificaCorso(){
+
+        Abilitazione abilitazione = ABILITAZIONI.get(Indice);
+        String[] appoggio = new String[2];
+
+
+        if(!sez_Bview.getDataAcquisizone().equals(abilitazione.getDataacquisizione())){
+            appoggio[0] = "dataaquisizione";
+            appoggio[1] =  sez_Bview.getDataScadenza();
+            abilitazione.UpdateSQL(appoggio);
+
+        }
+
+
+        if(!sez_Bview.getDataScadenza().equals(abilitazione.getDatascadenza())){
+            appoggio[0] = "datascadenza";
+            appoggio[1] =  sez_Bview.getDataScadenza();
+            abilitazione.UpdateSQL(appoggio);
+
+        }
+
+
+        if(!sez_Bview.getEnte_r_Text().equals(abilitazione.getEntedirilascio())){
+            appoggio[0] = "entedirilascio";
+            appoggio[1] =  sez_Bview.getDataScadenza();
+            abilitazione.UpdateSQL(appoggio);
+
+        }
+
+        if(!sez_Bview.getnDoc_Text().equals(abilitazione.getN_documento())){
+            appoggio[0] = "n_documento";
+            appoggio[1] =  sez_Bview.getDataScadenza();
+            abilitazione.UpdateSQL(appoggio);
 
         }
     }

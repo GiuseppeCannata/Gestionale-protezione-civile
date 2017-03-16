@@ -58,7 +58,19 @@ public class Abilitazione extends Model{
 
     @Override
     public boolean UpdateSQL(String[] Appoggio) {
-        return false;
+
+        boolean controllo = false;
+
+        openConnection();
+
+        String sql = "update abilitazioni set "+Appoggio[0]+"='"+Appoggio[1]+"' where cf='"+codicefiscale+"'";
+
+
+        if(updateQuery(sql)){
+            controllo = true;
+        }
+        closeConnection();
+        return controllo;
     }
 
     public boolean DeleteSQL(){
