@@ -24,9 +24,8 @@ public abstract class Persona extends Model{
     private String Eventuale_Specializzazione;
 
     /*SEZIONE (B) */
-    private ArrayList<Patente> PATENTI;
-    private ArrayList<Abilitazione> ABILITAZIONI;
-    private ArrayList<Corso> CORSI;
+    private ArrayList<Certificazione> CERTIFICAZIONI;
+
 
     /*SEZIONE (C) */
     private String Denominazione_Datore_di_Lavoro;
@@ -104,9 +103,8 @@ public abstract class Persona extends Model{
 
     private void popolaB(){
 
-        CORSI = new ArrayList<>(25);
-        ABILITAZIONI = new ArrayList<>(25);
-        PATENTI = new ArrayList<>(25);
+        CERTIFICAZIONI = new ArrayList<>(25);
+
 
         openConnection();
 
@@ -117,7 +115,9 @@ public abstract class Persona extends Model{
 
             while(query.next()){
 
-                Abilitazione temporaneo = new Abilitazione();
+                Certificazione temporaneo = new Certificazione();
+
+                temporaneo.setTipo("abilitazioni");
 
                 temporaneo.setCodicefiscale(Codice_Fiscale);
                 temporaneo.setNome(query.getString("nome"));
@@ -126,7 +126,12 @@ public abstract class Persona extends Model{
                 temporaneo.setEntedirilascio(query.getString("entedirilascio"));
                 temporaneo.setN_documento(query.getString("n_documento"));
 
-                ABILITAZIONI.add(temporaneo);
+
+                System.out.println(temporaneo.getNome());
+                System.out.println(temporaneo.getTipo());
+
+
+                CERTIFICAZIONI.add(temporaneo);
             }
 
 
@@ -136,7 +141,11 @@ public abstract class Persona extends Model{
 
 
             while(query.next()){
-                Patente temporaneo = new Patente();
+
+                Certificazione temporaneo = new Certificazione();
+
+
+                temporaneo.setTipo("patenti");
 
                 temporaneo.setCodicefiscale(Codice_Fiscale);
                 temporaneo.setNome(query.getString("nome"));
@@ -145,7 +154,10 @@ public abstract class Persona extends Model{
                 temporaneo.setEntedirilascio(query.getString("entedirilascio"));
                 temporaneo.setN_documento(query.getString("n_documento"));
 
-                PATENTI.add(temporaneo);
+                System.out.println(temporaneo.getTipo());
+                System.out.println(temporaneo.getNome());
+
+                CERTIFICAZIONI.add(temporaneo);
 
             }
 
@@ -153,11 +165,10 @@ public abstract class Persona extends Model{
         sql = "select* from corsi where cf ='"+ Codice_Fiscale +"'";
         query = selectQuery(sql);
 
-
-
             while(query.next()){
 
-                Corso temporaneo = new Corso();
+                Certificazione temporaneo = new Certificazione();
+                temporaneo.setTipo("corsi");
 
                 temporaneo.setCodicefiscale(Codice_Fiscale);
                 temporaneo.setNome(query.getString("nome"));
@@ -166,9 +177,10 @@ public abstract class Persona extends Model{
                 temporaneo.setEntedirilascio(query.getString("entedirilascio"));
                 temporaneo.setN_documento(query.getString("n_documento"));
 
-                CORSI.add(temporaneo);
+                System.out.println(temporaneo.getTipo());
+                System.out.println(temporaneo.getNome());
 
-
+                CERTIFICAZIONI.add(temporaneo);
 
             }
         }catch(SQLException se){
@@ -176,6 +188,13 @@ public abstract class Persona extends Model{
         }finally{
             closeConnection();
             System.out.println("B tutto bene");
+        }
+        int i=0;
+
+        while(i<CERTIFICAZIONI.size()){
+            System.out.println(CERTIFICAZIONI.get(i).getTipo());
+            System.out.println(CERTIFICAZIONI.get(i).getNome());
+            i++;
         }
 
 
@@ -456,21 +475,13 @@ public abstract class Persona extends Model{
 
     }
 
-    public ArrayList<Patente> getPATENTI() {
 
-        return PATENTI;
 
-    }
+    public ArrayList<Certificazione> getCERTIFICAZIONI() {
 
-    public ArrayList<Abilitazione> getABILITAZIONI() {
-
-        return ABILITAZIONI;
+        return CERTIFICAZIONI;
 
     }
 
-    public ArrayList<Corso> getCORSI() {
 
-        return CORSI;
-
-    }
 }

@@ -1,8 +1,6 @@
 package Controller;
 
-import Model.Abilitazione;
-import Model.Corso;
-import Model.Patente;
+import Model.Certificazione;
 import View.BasicFrameView;
 import View.Sez_BView;
 
@@ -21,18 +19,16 @@ public class Sez_BCandidatoController {
     private int Indice;
 
     private Sez_BView sez_Bview;
-    private ArrayList<Abilitazione> ABILITAZIONI;
-    private ArrayList<Corso> CORSI;
-    private ArrayList<Patente> PATENTI;
+    private ArrayList<Certificazione> CERTIFICAZIONI;
 
-    public Sez_BCandidatoController(Sez_BView view2, ArrayList<Abilitazione> Abilitazioni, ArrayList<Corso> Corsi,
-                                    ArrayList<Patente> Patenti,BasicFrameView frame,String CodiceFiscale) {
+
+    public Sez_BCandidatoController(Sez_BView view2, ArrayList<Certificazione>  Certificazioni ,BasicFrameView frame,
+                                    String CodiceFiscale) {
 
 
         sez_Bview = view2;
-        ABILITAZIONI = Abilitazioni;
-        CORSI = Corsi;
-        PATENTI = Patenti;
+        CERTIFICAZIONI = Certificazioni;
+
         basicframe = frame;
         codicefiscale = CodiceFiscale;
         sez_Bview.VisibilitàAggiungiButton(false);
@@ -51,44 +47,17 @@ public class Sez_BCandidatoController {
             @Override
             public void itemStateChanged(ItemEvent e) {
 
-                if(e.getSource() ==  sez_Bview.getCertif_Box()) {
-                    if (boxcertificazioni.getSelectedItem().equals("ABILITAZIONE")) {
+                if(e.getSource() ==  sez_Bview.getCertif_Box() ) {
 
-                        sez_Bview.Reset();
+                    sez_Bview.Reset();
+                    int i=0;
 
-                        int i=0;
-                         while(i < ABILITAZIONI.size()) {
+                    while(i < CERTIFICAZIONI.size()) {
 
+                        if(boxcertificazioni.getSelectedItem().equals(CERTIFICAZIONI.get(i).getTipo()))
+                        boxlist.addItem(CERTIFICAZIONI.get(i).getNome());
 
-                             boxlist.addItem(ABILITAZIONI.get(i).getNome());
-                             i++;
-                         }
-
-
-                    }
-                    else if(boxcertificazioni.getSelectedItem().equals("CORSO")){
-
-                        sez_Bview.Reset();
-
-
-                        int i=0;
-                        while(i < CORSI.size()){
-
-                            boxlist.addItem(CORSI.get(i).getNome());
-                            i++;
-                        }
-
-                    }
-                    else if (boxcertificazioni.getSelectedItem().equals("PATENTE")){
-
-                        sez_Bview.Reset();
-                        int i=0;
-                        while(i<PATENTI.size()){
-
-                            boxlist.addItem(PATENTI.get(i).getNome());
-
-                            i++;
-                        }
+                        i++;
                     }
                 }
 
@@ -99,62 +68,23 @@ public class Sez_BCandidatoController {
             @Override
             public void itemStateChanged(ItemEvent e) {
 
-                if(e.getSource() ==  sez_Bview.getBoxlist() && sez_Bview.getBoxlist().getSelectedItem() !=null ) {
+                if (e.getSource() == sez_Bview.getBoxlist() && sez_Bview.getBoxlist().getSelectedItem() != null) {
 
-                    int i= 0;
+                    int i = 0;
 
-                    while(i < ABILITAZIONI.size()){
+                    while (i < CERTIFICAZIONI.size()) {
 
-                       if (boxlist.getSelectedItem().equals(ABILITAZIONI.get(i).getNome())) {
+                        if (boxlist.getSelectedItem().equals(CERTIFICAZIONI.get(i).getNome())) {
 
-                            sez_Bview.setComboboxDataAcquisizione(ABILITAZIONI.get(i).getDataacquisizione());
-                            sez_Bview.setComboboxDataScadenza(ABILITAZIONI.get(i).getDatascadenza());
+                            sez_Bview.setComboboxDataAcquisizione(CERTIFICAZIONI.get(i).getDataacquisizione());
+                            sez_Bview.setComboboxDataScadenza(CERTIFICAZIONI.get(i).getDatascadenza());
 
-                            sez_Bview.setnDoc_Text(ABILITAZIONI.get(i).getEntedirilascio());
-                            sez_Bview.setEnte_r_Text(ABILITAZIONI.get(i).getN_documento());
+                            sez_Bview.setnDoc_Text(CERTIFICAZIONI.get(i).getEntedirilascio());
+                            sez_Bview.setEnte_r_Text(CERTIFICAZIONI.get(i).getN_documento());
                         }
                         i++;
                     }
-
-
-                    i= 0;
-
-                    while(i < CORSI.size()){
-
-                        if (boxlist.getSelectedItem().equals(CORSI.get(i).getNome())){
-
-                            sez_Bview.setComboboxDataAcquisizione(CORSI.get(i).getDataacquisizione());
-                            sez_Bview.setComboboxDataScadenza(CORSI.get(i).getDatascadenza());
-                            sez_Bview.setnDoc_Text(CORSI.get(i).getEntedirilascio());
-                            sez_Bview.setEnte_r_Text(CORSI.get(i).getN_documento());
-
-
-                        }
-                        i++;
-                    }
-
-                    i= 0;
-
-                    while(i < PATENTI.size()){
-
-                        if (boxlist.getSelectedItem().equals(PATENTI.get(i).getNome())){
-
-                            sez_Bview.setComboboxDataAcquisizione(PATENTI.get(i).getDataacquisizione());
-                            sez_Bview.setComboboxDataScadenza(PATENTI.get(i).getDatascadenza());
-                            sez_Bview.setnDoc_Text(PATENTI.get(i).getEntedirilascio());
-                            sez_Bview.setEnte_r_Text(PATENTI.get(i).getN_documento());
-
-
-                        }
-                        i++;
-                    }
-
-
                 }
-
-
-
-
             }
         });
 
@@ -166,7 +96,7 @@ public class Sez_BCandidatoController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if(Ricerca());
+               /** if(Ricerca());**/
 
 
             }
@@ -201,56 +131,24 @@ public class Sez_BCandidatoController {
         String DaEliminare = (String) sez_Bview.getBoxlist().getSelectedItem();
 
 
-        if(basicframe.OpotionalMessage("Si sicuro di voler eliminare "+DaEliminare+"?") == 0)
-        if (sez_Bview.getCertif_Box().getSelectedItem().equals("ABILITAZIONE")) {
+        if(basicframe.OpotionalMessage("Sei sicuro di voler eliminare "+DaEliminare+"?") == 0){
 
-            while (i < ABILITAZIONI.size() && !controllo) {
 
-                if (ABILITAZIONI.get(i).getNome().equals(DaEliminare)) {
+            while (i < CERTIFICAZIONI.size() && !controllo) {
 
-                    ABILITAZIONI.get(i).DeleteSQL();
-                    ABILITAZIONI.remove(i);
+                if (CERTIFICAZIONI.get(i).getNome().equals(DaEliminare)) {
+
+                    CERTIFICAZIONI.get(i).DeleteSQL();
+                    CERTIFICAZIONI.remove(i);
                     controllo = true;
                    // System.out.println("vero");
                 }
                 i++;
             }
-        } else if (sez_Bview.getCertif_Box().getSelectedItem().equals("CORSO")) {
-
-
-            while (i < CORSI.size() && !controllo) {
-
-                if (CORSI.get(i).getNome().equals(DaEliminare)) {
-
-                    CORSI.get(i).DeleteSQL();
-                    CORSI.remove(i);
-                    controllo = true;
-                    //System.out.println("vero");
-
-                }
-                i++;
-            }
-        } else if (sez_Bview.getCertif_Box().getSelectedItem().equals("PATENTE")) {
-
-            while (i < PATENTI.size() && !controllo) {
-
-                if (PATENTI.get(i).getNome().equals(DaEliminare)) {
-
-                    System.out.println(PATENTI.get(i).getNome());
-
-                    PATENTI.get(i).DeleteSQL();
-                    PATENTI.remove(i);
-                    controllo = true;
-                    System.out.println("vero");
-
-                }
-                i++;
-            }
-
         }
     }
 
-    private boolean Ricerca(){
+   /** private boolean Ricerca(){
 
         String DaUpdate = (String)sez_Bview.getBoxlist().getSelectedItem();
         String[] appoggio = new String[4];
@@ -259,9 +157,9 @@ public class Sez_BCandidatoController {
 
         if (sez_Bview.getBoxlist().getSelectedItem().equals("ABILITAZIONE")) {
 
-            while (i < ABILITAZIONI.size() && !controllo) {
+            while (i < CERTIFICAZIONI.size() && !controllo) {
 
-                if (ABILITAZIONI.get(i).getNome().equals(DaUpdate)) {
+                if (CERTIFICAZIONI.get(i).getNome().equals(DaUpdate)) {
                     controllo = true;
                     Indice= i;
                     ModificaAbilitazione();
@@ -306,7 +204,7 @@ public class Sez_BCandidatoController {
 
     private void ModificaAbilitazione(){
 
-        Abilitazione abilitazione = ABILITAZIONI.get(Indice);
+        Certificazione abilitazione = CERTIFICAZIONI.get(Indice);
         String[] appoggio = new String[2];
 
 
@@ -380,7 +278,7 @@ public class Sez_BCandidatoController {
 
     private void ModificaCorso(){
 
-        Abilitazione abilitazione = ABILITAZIONI.get(Indice);
+        Certificazione abilitazione = CERTIFICAZIONI.get(Indice);
         String[] appoggio = new String[2];
 
 
@@ -413,5 +311,5 @@ public class Sez_BCandidatoController {
             abilitazione.UpdateSQL(appoggio);
 
         }
-    }
+    }**/
 }

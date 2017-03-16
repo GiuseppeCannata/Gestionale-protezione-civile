@@ -1,8 +1,6 @@
 package Controller;
 
-import Model.Abilitazione;
-import Model.Patente;
-import Model.Corso;
+import Model.Certificazione;
 import View.BasicFrameView;
 import View.Sez_BView;
 
@@ -21,9 +19,9 @@ public class Sez_BRegistrazioneController {
     private Sez_BView sez_Bview;
     private BasicFrameView basicframe;
     private int aggiorna;
-    private ArrayList<Corso> listaCORSO;
-    private ArrayList<Abilitazione> listaABILITAZIONE;
-    private ArrayList<Patente> listaPATENTE;
+
+    private ArrayList<Certificazione> listaCERTIFICAZIONI;
+
 
     public Sez_BRegistrazioneController(Sez_BView view2, BasicFrameView frame, String CodiceFiscale) {
 
@@ -31,9 +29,9 @@ public class Sez_BRegistrazioneController {
 
         sez_Bview = view2;
         basicframe = frame;
-        listaCORSO = new ArrayList<>(25);
-        listaABILITAZIONE = new ArrayList<>(25);
-        listaPATENTE = new ArrayList<>(25);
+
+        listaCERTIFICAZIONI = new ArrayList<>(25);
+
 
         sez_Bview.VisibilitàEliminaButton(false);
 
@@ -72,7 +70,7 @@ public class Sez_BRegistrazioneController {
                         boxlist.removeAllItems();
 
                     }
-                    else if (boxcertificazioni.getSelectedItem().equals("ABILITAZIONE")) {
+                    else if (boxcertificazioni.getSelectedItem().equals("abilitazioni")) {
 
                        // System.out.println("aaa");
                         boxlist.removeAllItems();
@@ -86,7 +84,7 @@ public class Sez_BRegistrazioneController {
                         boxlist.addItem("cinofilo");
 
                     }
-                    else if(boxcertificazioni.getSelectedItem().equals("CORSO")){
+                    else if(boxcertificazioni.getSelectedItem().equals("corsi")){
 
                         boxlist.removeAllItems();
                         boxlist.addItem("corso base di radiocomunicazione");
@@ -102,7 +100,7 @@ public class Sez_BRegistrazioneController {
                         boxlist.addItem("vigli fuoco");
 
                     }
-                    else if (boxcertificazioni.getSelectedItem().equals("PATENTE")){
+                    else if (boxcertificazioni.getSelectedItem().equals("patenti")){
 
                         boxlist.removeAllItems();
                         boxlist.addItem("ecdl");
@@ -141,35 +139,34 @@ public class Sez_BRegistrazioneController {
             aggiorna += 1;
 
 
-            if (sez_Bview.getCertif_Box().getSelectedItem().equals("ABILITAZIONE")) {
+            if (sez_Bview.getCertif_Box().getSelectedItem().equals("abilitazioni")) {
 
-                Abilitazione abilitazione = new Abilitazione(codicefiscale, sez_Bview.getNomeCertificazione(),
+                Certificazione Certificazione = new Certificazione("abilitazioni",codicefiscale, sez_Bview.getNomeCertificazione(),
                         sez_Bview.getDataAcquisizone(), sez_Bview.getDataScadenza(), sez_Bview.getEnte_r_Text(),
                         sez_Bview.getnDoc_Text());
 
 
-                listaABILITAZIONE.add(abilitazione);
+                listaCERTIFICAZIONI.add(Certificazione);
             }
-            else if (sez_Bview.getCertif_Box().getSelectedItem().equals("CORSO")) {
+            else if (sez_Bview.getCertif_Box().getSelectedItem().equals("corsi")) {
 
-                Corso corso = new Corso(codicefiscale, sez_Bview.getNomeCertificazione(),
+                Certificazione Certificazione = new Certificazione("corsi",codicefiscale, sez_Bview.getNomeCertificazione(),
                         sez_Bview.getDataAcquisizone(), sez_Bview.getDataScadenza(), sez_Bview.getEnte_r_Text(),
                         sez_Bview.getnDoc_Text());
 
-                listaCORSO.add(corso);
 
-
-
+                listaCERTIFICAZIONI.add(Certificazione);
 
             }
 
-            else if (sez_Bview.getCertif_Box().getSelectedItem().equals("PATENTE")) {
+            else if (sez_Bview.getCertif_Box().getSelectedItem().equals("patenti")) {
 
-                Patente patente = new Patente(codicefiscale, sez_Bview.getNomeCertificazione(),
+                Certificazione Certificazione = new Certificazione("patenti",codicefiscale, sez_Bview.getNomeCertificazione(),
                         sez_Bview.getDataAcquisizone(), sez_Bview.getDataScadenza(), sez_Bview.getEnte_r_Text(),
                         sez_Bview.getnDoc_Text());
 
-                listaPATENTE.add(patente);
+
+                listaCERTIFICAZIONI.add(Certificazione);
 
             }
 
@@ -183,21 +180,12 @@ public class Sez_BRegistrazioneController {
             }
     }
 
-    public ArrayList<Corso> getListaCORSO() {
 
-        return listaCORSO;
 
-    }
+    public ArrayList<Certificazione> getListaCERTIFICAZIONI() {
 
-    public ArrayList<Abilitazione> getListaABILITAZIONE() {
-
-        return listaABILITAZIONE;
+        return listaCERTIFICAZIONI;
 
     }
 
-    public ArrayList<Patente> getListaPATENTE() {
-
-        return listaPATENTE;
-
-    }
 }

@@ -304,9 +304,9 @@
         <properties>
           <model>
             <item value="- CERTIFICAZIONI -"/>
-            <item value="ABILITAZIONE"/>
-            <item value="CORSO"/>
-            <item value="PATENTE"/>
+            <item value="abilitazioni"/>
+            <item value="corsi"/>
+            <item value="patenti"/>
           </model>
         </properties>
       </component>

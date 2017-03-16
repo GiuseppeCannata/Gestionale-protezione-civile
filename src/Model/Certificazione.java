@@ -1,10 +1,11 @@
 package Model;
 
 
-public class Patente extends Model{
+public class Certificazione extends Model{
 
     private String codicefiscale;
 
+    private String tipo;
     private String nome;
     private String datascadenza;
     private String dataacquisizione;
@@ -12,15 +13,15 @@ public class Patente extends Model{
     private String n_documento;
 
 
-    public Patente() {
+    public Certificazione(){
 
         return;
-
     }
 
-    public Patente(String CodiceFiscale, String NomeCertificazione, String DataAcquisizione,String DataScadenza,
-                        String EnteRilascio,String NDocumento) {
+    public Certificazione(String Tipo,String CodiceFiscale, String NomeCertificazione, String DataAcquisizione, String DataScadenza,
+                          String EnteRilascio, String NDocumento) {
 
+        tipo = Tipo;
         codicefiscale = CodiceFiscale;
         nome = NomeCertificazione;
         dataacquisizione = DataAcquisizione;
@@ -35,7 +36,7 @@ public class Patente extends Model{
         boolean controllo=false;
 
         openConnection();
-        String sql = "Insert into patenti(cf,nome,datascadenza,dataacquisizione,entedirilascio,n_documento) values('" +
+        String sql = "Insert into "+tipo+"(cf,nome,datascadenza,dataacquisizione,entedirilascio,n_documento) values('" +
                 codicefiscale       + "','" +
                 nome                + "','" +
                 datascadenza        + "','" +
@@ -46,8 +47,8 @@ public class Patente extends Model{
         if (updateQuery(sql))
             controllo = true;
 
-        closeConnection();
 
+        closeConnection();
         return controllo;
 
     }
@@ -59,7 +60,19 @@ public class Patente extends Model{
 
     @Override
     public boolean UpdateSQL(String[] Appoggio) {
-        return false;
+
+        boolean controllo = false;
+
+        openConnection();
+
+        String sql = "update"+tipo+" set "+Appoggio[0]+"='"+Appoggio[1]+"' where cf='"+codicefiscale+"'";
+
+
+        if(updateQuery(sql)){
+            controllo = true;
+        }
+        closeConnection();
+        return controllo;
     }
 
     public boolean DeleteSQL(){
@@ -72,7 +85,7 @@ public class Patente extends Model{
         System.out.println(codicefiscale);
 
 
-        String sql = "delete from patenti where cf='"+codicefiscale+"' and nome='"+nome+"'";
+        String sql = "delete from "+tipo+" where cf='"+codicefiscale+"' and nome='"+nome+"'";
 
         if (updateQuery(sql))
             controllo = true;
@@ -125,5 +138,13 @@ public class Patente extends Model{
 
     public void setCodicefiscale(String codicefiscale) {
         this.codicefiscale = codicefiscale;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

@@ -77,8 +77,7 @@ public class AnagraficaController {
         sez_Aview = new Sez_AView();
         sez_Bview = new Sez_BView();
         sez_Cview = new Sez_CView();
-        sez_bUtenteController = new Sez_BCandidatoController(sez_Bview,Utente.getABILITAZIONI(),Utente.getCORSI(),
-                Utente.getPATENTI(),basicframe,codicefiscale);
+        sez_bUtenteController = new Sez_BCandidatoController(sez_Bview,Utente.getCERTIFICAZIONI(),basicframe,codicefiscale);
 
 
 

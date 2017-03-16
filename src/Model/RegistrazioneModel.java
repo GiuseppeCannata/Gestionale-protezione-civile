@@ -139,40 +139,17 @@ public class RegistrazioneModel extends Model {
        boolean controllo = false;
 
 
-       ArrayList<Abilitazione> listaABILITAZIONE = sez_bRegistrazioneController.getListaABILITAZIONE();
-       ArrayList<Corso> listaCORSO= sez_bRegistrazioneController.getListaCORSO();
-       ArrayList<Patente> listaPATENTE = sez_bRegistrazioneController.getListaPATENTE();
-
+       ArrayList<Certificazione> listaCERTIFICAZIONI = sez_bRegistrazioneController.getListaCERTIFICAZIONI();
 
        int i = 0;
 
-       while(i<listaABILITAZIONE.size()) {
+       while(i < listaCERTIFICAZIONI.size()) {
 
-           if(listaABILITAZIONE.get(i).InsertSQL());
+           if(listaCERTIFICAZIONI.get(i).InsertSQL());
            controllo = true;
-           System.out.println("tutto bene,per inserimento ABILITAZIONI");
+           System.out.println("tutto bene,per inserimento della b");
            i++;
        }
-
-       i=0;
-       while (i < listaCORSO.size()) {
-
-           if(listaCORSO.get(i).InsertSQL());
-           controllo = true;
-           System.out.println("tutto bene,per insermimento PATENTI");
-           i++;
-       }
-
-        i=0;
-        while (i < listaPATENTE.size()) {
-
-            if(listaPATENTE.get(i).InsertSQL());
-            controllo = true;
-            System.out.println("tutto bene,per insermimento CORSI");
-            i++;
-         }
-
-
 
        return controllo;
 
