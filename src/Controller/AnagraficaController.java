@@ -27,8 +27,10 @@ public class AnagraficaController {
    private Sez_AView sez_Aview;
    private Sez_BView sez_Bview;
    private Sez_BRegistrazioneController sez_bRegistrazioneController;
-   private Sez_BCandidatoController sez_bUtenteController;
+   private Sez_BUtenteController sez_bUtenteController;
    private Sez_CView sez_Cview;
+
+   private JButton Salvabutton;
 
 
     /*COSTRUTTORI*/
@@ -43,6 +45,8 @@ public class AnagraficaController {
 
         Utente = null;
         Dview = null;
+        Salvabutton = sez_managerview.getSalvaButton();
+        Salvabutton.setContentAreaFilled(false);
 
         sez_Aview = new Sez_AView();
         sez_Bview = new Sez_BView();
@@ -73,11 +77,13 @@ public class AnagraficaController {
         Utente = utente;
 
         sez_managerview = new Sez_ManagerView();
+        Salvabutton = sez_managerview.getSalvaButton();
+        Salvabutton.setContentAreaFilled(false);
 
         sez_Aview = new Sez_AView();
         sez_Bview = new Sez_BView();
         sez_Cview = new Sez_CView();
-        sez_bUtenteController = new Sez_BCandidatoController(sez_Bview,Utente.getCERTIFICAZIONI(),basicframe,codicefiscale);
+        sez_bUtenteController = new Sez_BUtenteController(sez_Bview,Utente.getCERTIFICAZIONI(),basicframe,codicefiscale);
 
 
 
@@ -113,10 +119,15 @@ public class AnagraficaController {
      */
     private void Listener(){
 
+
         CardLayout CL=(CardLayout) sez_managerview.getIntermedio1().getLayout();
 
-        /*Avanti*/
         JButton sez_managerviewAvanti = sez_managerview.getAvantiButton();
+        JButton sez_managerviewIndietro= sez_managerview.getIndietroButton();
+
+        sez_managerviewIndietro.setContentAreaFilled(false);
+
+        /*Avanti*/
         sez_managerviewAvanti.addActionListener(new ActionListener() {
                 @Override
                     public void actionPerformed(ActionEvent e) {
@@ -127,14 +138,23 @@ public class AnagraficaController {
                             Pagine_Manager.addPagina_Corrente();
 
                         }
-
+                    if (Pagine_Manager.getPagina_Corrente() == 3) {
+                        sez_managerviewAvanti.setContentAreaFilled(false);
+                        Salvabutton.setContentAreaFilled(true);
                     }
+
+                    if (Pagine_Manager.getPagina_Corrente() > 1)
+                        sez_managerviewIndietro.setContentAreaFilled(true);
+                }
+
+
+
 
         });
 
 
         /*Indietro*/
-        JButton sez_managerviewIndietro= sez_managerview.getIndietroButton();
+
         sez_managerviewIndietro.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -144,6 +164,16 @@ public class AnagraficaController {
                         CL.previous(sez_managerview.getIntermedio1());
                         Pagine_Manager.subctractPagina_Corrente();
                     }
+
+
+				/*significa che mi trovo alla prima pagina, e non potendo andare più indietro "opacizzo" indietro*/
+                        if (Pagine_Manager.getPagina_Corrente() == 1)
+                            sez_managerviewIndietro.setContentAreaFilled(false);
+
+				/*significa che */
+                        if (Pagine_Manager.getPagina_Corrente() >= 1)
+                            sez_managerviewAvanti.setContentAreaFilled(true);
+
 
                 }
         });
@@ -169,16 +199,18 @@ public class AnagraficaController {
 
 
         /*Salva*/
-
-        JButton Salvabutton = sez_managerview.getSalvaButton();
         Salvabutton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                @Override
+                public void actionPerformed(ActionEvent e) {
 
-                SalvataggioRegistrazione();
+                    if(Pagine_Manager.getFine_Pagina()==3)
+                    SalvataggioRegistrazione();
+                    else
+                        basicframe.ErrorMessage("Ancora non è possibile salvare!");
 
-            }
-        });
+                }
+            });
+
 
 
     }
@@ -196,7 +228,9 @@ public class AnagraficaController {
                 sez_Bview.Abilita_Disabilita_Campi(true);
                 sez_Bview.VisibilitàEliminaButton(true);
                 sez_Bview.VisibilitàAggiungiButton(true);
+                sez_Bview.VisibilitàUpdateButton(true);
                 sez_Cview.Abilita_Disabilita_Campi(true);
+                sez_managerview.setModificaButton(false);
 
             }
         });
@@ -215,12 +249,15 @@ public class AnagraficaController {
 
 
         /*Salva*/
-        JButton Salvabutton = sez_managerview.getSalvaButton();
         Salvabutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-               UpdateCandidato();
+                if(Pagine_Manager.getFine_Pagina()==3)
+                   if(!UpdateCandidato())
+                       basicframe.ErrorMessage("Nessun cambiamento");
+                else
+                    basicframe.ErrorMessage("Ancora non è possibile salvare!");
 
             }
         });
@@ -321,7 +358,6 @@ public class AnagraficaController {
         sez_Aview.Abilita_Disabilita_Campi(false);
 
         //ovviamente per la sezione B c è anche il controller invocato nel costruttore
-        sez_Bview.Abilita_Disabilita_Campi(false);
 
         sez_Cview.setDenominazioneDatoreDiLavorotext(Utente.getDenominazione_Datore_di_Lavoro());
         sez_Cview.setTelDatoreDiLavorotext(Utente.getTelefono_Datore_Lavoro());
@@ -335,42 +371,51 @@ public class AnagraficaController {
 
     }
 
-    private void UpdateCandidato(){
+    private boolean UpdateCandidato(){
 
+        boolean controllo = false;
         UtenteModel Update = new UtenteModel();
         String[] appoggio =  new String[4];
 
         appoggio[0] = "a";
+        appoggio[1] = Utente.getCodice_Fiscale();
 
         //A
         if(!sez_Aview.getNometext().equals(Utente.getNome())) {
 
+            controllo= true;
             appoggio[2] = "nome";
             appoggio[3] = sez_Aview.getNometext();
-            appoggio[1] = Utente.getCodice_Fiscale();
+            Utente.setNome(sez_Aview.getNometext());
             Update.UpdateSQL(appoggio);
         }
 
        if(!sez_Aview.getCognometext().equals(Utente.getCognome())){
 
+           controllo= true;
             appoggio[2] = "cognome";
             appoggio[3] = sez_Aview.getCognometext();
+            Utente.setCognome(sez_Aview.getCognometext());
             Update.UpdateSQL(appoggio);
         }
 
 
         if(!sez_Aview.getLuogodinascitatext().equals(Utente.getLuogo_di_Nascita())){
 
+            controllo= true;
             appoggio[2] = "luogodinascita";
             appoggio[3] = sez_Aview.getLuogodinascitatext();
+            Utente.setLuogo_di_Nascita(sez_Aview.getLuogodinascitatext());
             Update.UpdateSQL(appoggio);
 
         }
 
         if(!sez_Aview.getDatadinascitatext().equals(Utente.getData_di_Nascita())){
 
+            controllo= true;
             appoggio[2] ="datadinascita";
             appoggio[3] = sez_Aview.getDatadinascitatext();
+            Utente.setData_di_Nascita(sez_Aview.getDatadinascitatext());
             Update.UpdateSQL(appoggio);
 
         }
@@ -378,8 +423,10 @@ public class AnagraficaController {
 
         if(!sez_Aview.getIndirizzodiresidenzatext().equals(Utente.getIndirizzo_di_residenza())){
 
+            controllo= true;
             appoggio[2] = "indirizzodiresidenza";
-            appoggio[3]=sez_Aview.getIndirizzodiresidenzatext();
+            appoggio[3] = sez_Aview.getIndirizzodiresidenzatext();
+            Utente.setIndirizzo_di_residenza(sez_Aview.getIndirizzodiresidenzatext());
             Update.UpdateSQL(appoggio);
 
         }
@@ -387,8 +434,10 @@ public class AnagraficaController {
 
         if(!sez_Aview.getTelefonofissotext().equals(Utente.getTelefono_Fisso())){
 
+            controllo= true;
             appoggio[2] = "telefonofisso";
             appoggio[3]=sez_Aview.getTelefonofissotext();
+            Utente.setTelefono_Fisso(sez_Aview.getTelefonofissotext());
             Update.UpdateSQL(appoggio);
         }
 
@@ -397,6 +446,7 @@ public class AnagraficaController {
 
             appoggio[2] = "telefonomobile";
             appoggio[3]=sez_Aview.getTelefonocellularetext();
+            Utente.setTelefono_Cellulare(sez_Aview.getTelefonocellularetext());
             Update.UpdateSQL(appoggio);
 
         }
@@ -404,8 +454,10 @@ public class AnagraficaController {
 
         if(!sez_Aview.getEmailtext().equals(Utente.getEmail())){
 
+            controllo= true;
             appoggio[2] = "email";
             appoggio[3]=sez_Aview.getEmailtext();
+            Utente.setEmail(sez_Aview.getEmailtext());
             Update.UpdateSQL(appoggio);
 
         }
@@ -413,67 +465,84 @@ public class AnagraficaController {
 
         if(!sez_Aview.getProfessionetext().equals(Utente.getProfessione())){
 
+            controllo= true;
             appoggio[2] = "professione";
-            appoggio[3]=sez_Aview.getProfessionetext();
+            appoggio[3] = sez_Aview.getProfessionetext();
+            Utente.setProfessione(sez_Aview.getProfessionetext());
             Update.UpdateSQL(appoggio);
 
         }
 
         if(!sez_Aview.getSpecializzazionetext().equals(Utente.getEventuale_Specializzazione())){
 
+            controllo= true;
             appoggio[2] = "eventualespecializzazione";
             appoggio[3] = sez_Aview.getSpecializzazionetext();
+            Utente.setEventuale_Specializzazione(sez_Aview.getSpecializzazionetext());
             Update.UpdateSQL(appoggio);
 
         }
 
 
         //C
+        appoggio[0]="c";
 
         if(!sez_Cview.getDenominazioneDatoreDiLavorotext().equals(Utente.getDenominazione_Datore_di_Lavoro())){
 
+            controllo= true;
             appoggio[2] = "nomedatore";
             appoggio[3] = sez_Cview.getDenominazioneDatoreDiLavorotext();
+            Utente.setDenominazione_Datore_di_Lavoro(sez_Cview.getDenominazioneDatoreDiLavorotext());
             Update.UpdateSQL(appoggio);
 
         }
 
         if(!sez_Cview.getTelDatoreDiLavorotext().equals(Utente.getTelefono_Datore_Lavoro())){
 
+            controllo= true;
             appoggio[2] = "telefono";
             appoggio[3] = sez_Cview.getTelDatoreDiLavorotext();
+            Utente.setTelefono_Datore_Lavoro(sez_Cview.getTelDatoreDiLavorotext());
             Update.UpdateSQL(appoggio);
 
         }
 
         if(!sez_Cview.getFaxDatoreDiLavorotext().equals(Utente.getFax_Datore_di_Lavoro())){
 
+            controllo= true;
             appoggio[2] = "eventualespecializzazione";
             appoggio[3] = sez_Cview.getFaxDatoreDiLavorotext() ;
+            Utente.setFax_Datore_di_Lavoro(sez_Cview.getFaxDatoreDiLavorotext());
             Update.UpdateSQL(appoggio);
 
         }
 
         if(!sez_Cview.getEmailDatoreDiLavorotext().equals(Utente.getEmail_Datore_di_Lavoro())){
 
+            controllo= true;
             appoggio[2] = "email";
             appoggio[3] = sez_Cview.getEmailDatoreDiLavorotext();
+            Utente.setEmail_Datore_di_Lavoro(sez_Cview.getEmailDatoreDiLavorotext());
             Update.UpdateSQL(appoggio);
 
         }
 
         if(!sez_Cview.getNumeroCodicePostaletext().equals(Utente.getNumerocodicepostale())){
 
+            controllo= true;
             appoggio[2] = "numero_codice_postale";
             appoggio[3] = sez_Cview.getNumeroCodicePostaletext();
+            Utente.setNumerocodicepostale(sez_Cview.getNumeroCodicePostaletext());
             Update.UpdateSQL(appoggio);
 
         }
 
         if(!sez_Cview.getIbantext().equals(Utente.getIBAN())){
 
+            controllo= true;
             appoggio[2] = "iban";
             appoggio[3] = sez_Cview.getIbantext();
+            Utente.setIBAN(sez_Cview.getIbantext());
             Update.UpdateSQL(appoggio);
 
         }
@@ -481,7 +550,7 @@ public class AnagraficaController {
 
 
 
-
+      return controllo;
 
 
     }

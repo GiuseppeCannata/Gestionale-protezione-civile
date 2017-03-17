@@ -143,12 +143,18 @@ public class RegistrazioneModel extends Model {
 
        int i = 0;
 
-       while(i < listaCERTIFICAZIONI.size()) {
-
-           if(listaCERTIFICAZIONI.get(i).InsertSQL());
+       if(listaCERTIFICAZIONI.size() == 0 )
            controllo = true;
-           System.out.println("tutto bene,per inserimento della b");
-           i++;
+       else{
+
+           while (i < listaCERTIFICAZIONI.size()) {
+
+               if (listaCERTIFICAZIONI.get(i).InsertSQL()) ;
+               controllo = true;
+               System.out.println("tutto bene,per inserimento della b");
+               i++;
+           }
+
        }
 
        return controllo;

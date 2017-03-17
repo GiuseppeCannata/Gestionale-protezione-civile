@@ -107,6 +107,12 @@ public class Sez_BView {
 
     }
 
+    public void VisibilitàUpdateButton(boolean visibilita){
+
+        updateButton.setVisible(visibilita);
+
+    }
+
 
     public void setComboboxDataAcquisizione(String Data){
 
@@ -145,7 +151,10 @@ public class Sez_BView {
         mese_scad_Box.setEnabled(editabile);
         giorno_scad_Box.setEnabled(editabile);
 
+
     }
+
+
 
     /**
      * Reset resetta,per l appunto, la pagina, cancellando i vari campi ogni volta che è stato eseguito un aggiorna

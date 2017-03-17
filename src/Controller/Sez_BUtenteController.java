@@ -12,7 +12,7 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 
-public class Sez_BCandidatoController {
+public class Sez_BUtenteController {
 
     private BasicFrameView basicframe;
     private String codicefiscale;
@@ -22,8 +22,8 @@ public class Sez_BCandidatoController {
     private ArrayList<Certificazione> CERTIFICAZIONI;
 
 
-    public Sez_BCandidatoController(Sez_BView view2, ArrayList<Certificazione> Certificazioni, BasicFrameView frame,
-                                    String CodiceFiscale) {
+    public Sez_BUtenteController(Sez_BView view2, ArrayList<Certificazione> Certificazioni, BasicFrameView frame,
+                                 String CodiceFiscale) {
 
 
         sez_Bview = view2;
@@ -31,7 +31,9 @@ public class Sez_BCandidatoController {
 
         basicframe = frame;
         codicefiscale = CodiceFiscale;
+        sez_Bview.Abilita_Disabilita_Campi(false);
         sez_Bview.VisibilitàAggiungiButton(false);
+        sez_Bview.VisibilitàUpdateButton(false);
         sez_Bview.VisibilitàEliminaButton(false);
 
         Listner();

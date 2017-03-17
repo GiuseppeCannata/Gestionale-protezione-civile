@@ -1,19 +1,17 @@
 package Model;
 
 
-import Controller.Sez_BCandidatoController;
+import Controller.Sez_BUtenteController;
 import View.Sez_AView;
 import View.Sez_BView;
 import View.Sez_CView;
-
-import java.sql.ResultSet;
 
 public class UtenteModel extends Model {
 
     private Sez_AView sez_Aview;
     private Sez_BView sez_Bview;
     private Sez_CView sez_Cview;
-    private Sez_BCandidatoController sez_bCandidatoController;
+    private Sez_BUtenteController sez_bUtenteController;
 
     public UtenteModel(){
 
