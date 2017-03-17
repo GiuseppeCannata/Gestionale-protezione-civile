@@ -44,6 +44,11 @@ public class BasicFrameView extends JFrame{
 
     }
 
+    public void Message(String nomeMessage){
+        JOptionPane.showMessageDialog(BasicFrameView.this, nomeMessage, "Warning!",JOptionPane.INFORMATION_MESSAGE);
+    }
+
+
 
 
     public JPanel getIntermedio0() {

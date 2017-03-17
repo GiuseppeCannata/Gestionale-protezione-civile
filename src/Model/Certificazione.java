@@ -65,7 +65,7 @@ public class Certificazione extends Model{
 
         openConnection();
 
-        String sql = "update"+tipo+" set "+Appoggio[0]+"='"+Appoggio[1]+"' where cf='"+codicefiscale+"'";
+        String sql = "update "+tipo+" set "+Appoggio[0]+"='"+Appoggio[1]+"' where cf='"+codicefiscale+"'";
 
 
         if(updateQuery(sql)){
