@@ -90,7 +90,7 @@ public class Sez_BRegistrazioneController {
                         boxlist.addItem("corso base di radiocomunicazione");
                         boxlist.addItem("base protezione civil");
                         boxlist.addItem("fuoristrada");
-                        boxlist.addItem("lingua ingles");
+                        boxlist.addItem("lingua inglese");
                         boxlist.addItem("logistica da campo");
                         boxlist.addItem("obbligatrion sic.vol. 81.08");
                         boxlist.addItem("rischio sanitari");
@@ -139,6 +139,8 @@ public class Sez_BRegistrazioneController {
             aggiorna += 1;
 
 
+
+
             if (sez_Bview.getCertif_Box().getSelectedItem().equals("abilitazioni")) {
 
                 Certificazione Certificazione = new Certificazione("abilitazioni",codicefiscale, sez_Bview.getNomeCertificazione(),
@@ -147,6 +149,7 @@ public class Sez_BRegistrazioneController {
 
 
                 listaCERTIFICAZIONI.add(Certificazione);
+                sez_Bview.getBoxlist().removeItem(sez_Bview.getNomeCertificazione());
             }
             else if (sez_Bview.getCertif_Box().getSelectedItem().equals("corsi")) {
 

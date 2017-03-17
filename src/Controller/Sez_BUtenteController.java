@@ -20,6 +20,7 @@ public class Sez_BUtenteController {
 
     private Sez_BView sez_Bview;
     private ArrayList<Certificazione> CERTIFICAZIONI;
+   private  JComboBox boxlist;
 
 
     public Sez_BUtenteController(Sez_BView view2, ArrayList<Certificazione> Certificazioni, BasicFrameView frame,
@@ -28,7 +29,7 @@ public class Sez_BUtenteController {
 
         sez_Bview = view2;
         CERTIFICAZIONI = Certificazioni;
-
+        boxlist = sez_Bview.getBoxlist();
         basicframe = frame;
         codicefiscale = CodiceFiscale;
         sez_Bview.Abilita_Disabilita_Campi(false);
@@ -56,8 +57,10 @@ public class Sez_BUtenteController {
 
                     while (i < CERTIFICAZIONI.size()) {
 
-                        if (boxcertificazioni.getSelectedItem().equals(CERTIFICAZIONI.get(i).getTipo()))
+                        if (boxcertificazioni.getSelectedItem().equals(CERTIFICAZIONI.get(i).getTipo())
+                                && !CERTIFICAZIONI.get(i).getFlag().equals("elimina")) {
                             boxlist.addItem(CERTIFICAZIONI.get(i).getNome());
+                        }
 
                         i++;
                     }
@@ -140,10 +143,11 @@ public class Sez_BUtenteController {
 
                 if (CERTIFICAZIONI.get(i).getNome().equals(DaEliminare)) {
 
-                    CERTIFICAZIONI.get(i).DeleteSQL();
-                    CERTIFICAZIONI.remove(i);
+                    CERTIFICAZIONI.get(i).setFlag("elimina");
+
                     controllo = true;
-                    // System.out.println("vero");
+                    boxlist.removeItem(DaEliminare);
+
                 }
                 i++;
             }
@@ -157,8 +161,6 @@ public class Sez_BUtenteController {
     private boolean Ricerca(){
 
         String DaUpdate = (String)sez_Bview.getBoxlist().getSelectedItem();
-        String[] appoggio = new String[4];
-
         boolean controllo = false;
 
         int i=0;
@@ -182,44 +184,15 @@ public class Sez_BUtenteController {
 
         Certificazione certificazione = CERTIFICAZIONI.get(Indice);
 
-        String[] appoggio = new String[2];
+        if(!sez_Bview.getDataAcquisizone().equals(certificazione.getDataacquisizione())
+                || !sez_Bview.getDataScadenza().equals(certificazione.getDatascadenza())
+                || !sez_Bview.getEnte_r_Text().equals(certificazione.getEntedirilascio())
+                || !sez_Bview.getnDoc_Text().equals(certificazione.getN_documento()))
 
-
-        if(!sez_Bview.getDataAcquisizone().equals(certificazione.getDataacquisizione())){
-            appoggio[0] = "dataacquisizione";
-            appoggio[1] =  sez_Bview.getDataAcquisizone();
-            certificazione.setDataacquisizione(sez_Bview.getDataAcquisizone());
-            certificazione.UpdateSQL(appoggio);
-
-        }
-
-
-        if(!sez_Bview.getDataScadenza().equals(certificazione.getDatascadenza())){
-            appoggio[0] = "datascadenza";
-            appoggio[1] =  sez_Bview.getDataScadenza();
-            certificazione.setDatascadenza(sez_Bview.getDataScadenza());
-            certificazione.UpdateSQL(appoggio);
-
-        }
-
-
-        if(!sez_Bview.getEnte_r_Text().equals(certificazione.getEntedirilascio())){
-            appoggio[0] = "entedirilascio";
-            appoggio[1] =  sez_Bview.getEnte_r_Text();
-            certificazione.setEntedirilascio(sez_Bview.getEnte_r_Text());
-            certificazione.UpdateSQL(appoggio);
-
-        }
-
-        if(!sez_Bview.getnDoc_Text().equals(certificazione.getN_documento())){
-            appoggio[0] = "n_documento";
-            appoggio[1] =  sez_Bview.getnDoc_Text();
-            certificazione.setN_documento(sez_Bview.getnDoc_Text());
-            certificazione.UpdateSQL(appoggio);
-
-        }
-
+            certificazione.setFlag("update");
     }
 
-
+    public ArrayList<Certificazione> getCERTIFICAZIONI() {
+        return CERTIFICAZIONI;
+    }
 }

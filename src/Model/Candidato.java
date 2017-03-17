@@ -52,10 +52,25 @@ public class Candidato extends Persona {
 
     }
 
+
     @Override
     public boolean UpdateSQL(String[] Appoggio) {
-        return false;
+
+            boolean controllo = false;
+
+            openConnection();
+
+            String sql = "update "+Appoggio[0]+" set "+Appoggio[2]+"='"+Appoggio[3]+"' where cf='"+Appoggio[1]+"'";
+
+
+            if(updateQuery(sql)){
+                controllo = true;
+            }
+            closeConnection();
+            return controllo;
+
     }
+
 
     @Override
     public boolean SearchSQL() {

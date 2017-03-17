@@ -12,6 +12,8 @@ public class Certificazione extends Model{
     private String entedirilascio;
     private String n_documento;
 
+    private String flag;
+
 
     public Certificazione(){
 
@@ -28,6 +30,11 @@ public class Certificazione extends Model{
         datascadenza = DataScadenza;
         entedirilascio = EnteRilascio;
         n_documento = NDocumento;
+
+        flag = "nessuna";
+
+
+
 
     }
 
@@ -146,5 +153,14 @@ public class Certificazione extends Model{
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
     }
 }

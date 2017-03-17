@@ -115,21 +115,10 @@ public abstract class Persona extends Model{
 
             while(query.next()){
 
-                Certificazione temporaneo = new Certificazione();
-
-                temporaneo.setTipo("abilitazioni");
-
-                temporaneo.setCodicefiscale(Codice_Fiscale);
-                temporaneo.setNome(query.getString("nome"));
-                temporaneo.setDatascadenza(query.getString("datascadenza"));
-                temporaneo.setDataacquisizione(query.getString("dataacquisizione"));
-                temporaneo.setEntedirilascio(query.getString("entedirilascio"));
-                temporaneo.setN_documento(query.getString("n_documento"));
-
-
-                System.out.println(temporaneo.getNome());
-                System.out.println(temporaneo.getTipo());
-
+                Certificazione temporaneo = new Certificazione("abilitazioni",Codice_Fiscale,
+                        query.getString("nome"),query.getString("dataacquisizione"),
+                        query.getString("datascadenza"),query.getString("entedirilascio"),
+                        query.getString("n_documento"));
 
                 CERTIFICAZIONI.add(temporaneo);
             }
@@ -142,20 +131,10 @@ public abstract class Persona extends Model{
 
             while(query.next()){
 
-                Certificazione temporaneo = new Certificazione();
-
-
-                temporaneo.setTipo("patenti");
-
-                temporaneo.setCodicefiscale(Codice_Fiscale);
-                temporaneo.setNome(query.getString("nome"));
-                temporaneo.setDatascadenza(query.getString("datascadenza"));
-                temporaneo.setDataacquisizione(query.getString("dataacquisizione"));
-                temporaneo.setEntedirilascio(query.getString("entedirilascio"));
-                temporaneo.setN_documento(query.getString("n_documento"));
-
-                System.out.println(temporaneo.getTipo());
-                System.out.println(temporaneo.getNome());
+                Certificazione temporaneo = new Certificazione("abilitazioni",Codice_Fiscale,
+                        query.getString("nome"),query.getString("dataacquisizione"),
+                        query.getString("datascadenza"),query.getString("entedirilascio"),
+                        query.getString("n_documento"));
 
                 CERTIFICAZIONI.add(temporaneo);
 
@@ -167,18 +146,10 @@ public abstract class Persona extends Model{
 
             while(query.next()){
 
-                Certificazione temporaneo = new Certificazione();
-                temporaneo.setTipo("corsi");
-
-                temporaneo.setCodicefiscale(Codice_Fiscale);
-                temporaneo.setNome(query.getString("nome"));
-                temporaneo.setDatascadenza(query.getString("datascadenza"));
-                temporaneo.setDataacquisizione(query.getString("dataacquisizione"));
-                temporaneo.setEntedirilascio(query.getString("entedirilascio"));
-                temporaneo.setN_documento(query.getString("n_documento"));
-
-                System.out.println(temporaneo.getTipo());
-                System.out.println(temporaneo.getNome());
+                Certificazione temporaneo = new Certificazione("abilitazioni",Codice_Fiscale,
+                        query.getString("nome"),query.getString("dataacquisizione"),
+                        query.getString("datascadenza"),query.getString("entedirilascio"),
+                        query.getString("n_documento"));
 
                 CERTIFICAZIONI.add(temporaneo);
 
