@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 /**
  * Sez_ManagerController --> Controller per la Sez_ManagerView
- * Classe pubblica
+ * Classe pubblic
  *
  */
 public class AnagraficaController {
