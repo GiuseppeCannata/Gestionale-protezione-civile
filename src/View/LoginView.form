@@ -4,7 +4,9 @@
     <constraints>
       <xy x="71" y="133" width="677" height="691"/>
     </constraints>
-    <properties/>
+    <properties>
+      <autoscrolls value="false"/>
+    </properties>
     <border type="none"/>
     <children>
       <grid id="ec5f4" binding="Intermedio1" layout-manager="GridLayoutManager" row-count="5" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="20" vgap="10">

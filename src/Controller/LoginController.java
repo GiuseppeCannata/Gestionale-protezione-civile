@@ -102,7 +102,12 @@ public class LoginController {
                 Candidato utente = new Candidato(userInserito);
                 UController = new CandidatoController(basicframe, utente);
 
-            } //altrimenti è un volontario
+            }else{
+                VolontarioController UController;
+
+                UController = new VolontarioController(basicframe);
+
+            }
 
         }
         catch (Exception e ){

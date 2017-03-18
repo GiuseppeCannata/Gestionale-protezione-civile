@@ -3,7 +3,7 @@ package Controller;
 import Model.Candidato;
 import View.BasicFrameView;
 import View.CandidatoDestraView;
-import View.CandidatoSinistraView;
+import View.UtenteSinistraView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -17,19 +17,24 @@ public class CandidatoController {
    private BasicFrameView basicframe;
    private Candidato Utente;
    private CandidatoDestraView Dview;
-   private CandidatoSinistraView Sview;
+   private UtenteSinistraView Sview;
    private int DatiPersonali;
-   private int  ConfermaEvolvi;
 
 
     /*COSTRUTTORI*/
+
+    public CandidatoController() {
+
+        return;
+
+    }
+
     public CandidatoController(BasicFrameView frame, Candidato utente) {
 
         basicframe = frame;
         Utente = utente;
         Dview = new CandidatoDestraView();
-        Sview = new CandidatoSinistraView();
-        System.out.println(Utente.getConf_Giunta());
+        Sview = new UtenteSinistraView();
         if(Utente.getConf_Giunta() == 1)
             Dview.MessaggioSchermo("Puoi finalmente evolvere in Volontario.\nFai click su evolvi per dare la tua conferma!");
 
@@ -45,7 +50,7 @@ public class CandidatoController {
     /**
      * Ascolto azioni dell utente --> DatiPersonali, Evolvi
      */
-    private void  CandidatoControllerListener(){
+      private void  CandidatoControllerListener(){
 
         /*DatiPersonali*/
         JButton DatiPersonaliButton = Sview.getDatiPersonaliButton();
@@ -130,6 +135,13 @@ public class CandidatoController {
 
     }
 
+    public void setBasicframe(BasicFrameView basicframe) {
+        this.basicframe = basicframe;
+    }
+
+    public void setSview(UtenteSinistraView sview) {
+        Sview = sview;
+    }
 
     @Override
     public String toString() {

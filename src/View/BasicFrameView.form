@@ -24,6 +24,7 @@
         <properties>
           <horizontalScrollBarPolicy value="31"/>
           <verticalScrollBarPolicy value="21"/>
+          <wheelScrollingEnabled value="true"/>
         </properties>
         <border type="etched"/>
         <children/>

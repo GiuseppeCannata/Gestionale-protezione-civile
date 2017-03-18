@@ -3,11 +3,11 @@ package View;
 import javax.swing.*;
 
 /**
- * CandidatoSinistraView
+ * UtenteSinistraView
  * View mostrata alla sinastra della basicframe al Login del candidato
  */
 
-public class CandidatoSinistraView extends JPanel{
+public class UtenteSinistraView extends JPanel{
 
     private JPanel Intermedio0;
     private JButton logoutButton;
@@ -17,12 +17,13 @@ public class CandidatoSinistraView extends JPanel{
     private JPanel Logopannel;
 
 
-    public CandidatoSinistraView() {
+    public UtenteSinistraView() {
 
         setVisible(true);
 
     }
 
+    //GETTER  e SETTER
     public JPanel getIntermedio0() {
 
         return Intermedio0;
@@ -44,6 +45,12 @@ public class CandidatoSinistraView extends JPanel{
     public JButton getEvolviButton() {
 
         return evolviButton;
+
+    }
+
+    public void setEvolviButton(boolean visibilita) {
+
+        evolviButton.setVisible(visibilita);
 
     }
 }
