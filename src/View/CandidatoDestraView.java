@@ -9,7 +9,7 @@ import javax.swing.*;
 public class CandidatoDestraView extends JPanel {
 
     private JPanel Intermedio0;
-    private JLabel benvenutoAttendiLaConfermaLabel;
+    private JLabel MessaggioaSchermo;
 
     public CandidatoDestraView() {
 
@@ -23,9 +23,22 @@ public class CandidatoDestraView extends JPanel {
 
     }
 
-    public void setBenvenutoAttendiLaConfermaLabel(String nuovoText) {
+    public void setMessaggioaSchermo(String nuovoText) {
 
-        benvenutoAttendiLaConfermaLabel.setText(nuovoText);
+        MessaggioaSchermo.setText(nuovoText);
+
+    }
+
+    public void MessaggioSchermo(String testo){
+
+        MessaggioaSchermo.setText(testo);
+
+    }
+
+    @Override
+    public String toString() {
+
+        return "CandidatoDestraView";
 
     }
 }

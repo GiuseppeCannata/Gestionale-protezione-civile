@@ -35,7 +35,7 @@ public class Candidato extends Persona {
       try {
 
             if(query.next())
-                Conf_Giunta = query.getInt("vol_o_cand");
+                Conf_Giunta = query.getInt("conf_giunta");
 
 
         }catch(SQLException se){
@@ -77,16 +77,22 @@ public class Candidato extends Persona {
 
     @Override
     public boolean SearchSQL() {
+
         return false;
+
     }
 
     @Override
     public boolean InsertSQL() {
+
         return false;
+
     }
 
     @Override
     public String toString() {
+
         return "Candidato";
+
     }
 }

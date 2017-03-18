@@ -19,6 +19,7 @@ public class CandidatoController {
    private CandidatoDestraView Dview;
    private CandidatoSinistraView Sview;
    private int DatiPersonali;
+   private int  ConfermaEvolvi;
 
 
     /*COSTRUTTORI*/
@@ -28,6 +29,10 @@ public class CandidatoController {
         Utente = utente;
         Dview = new CandidatoDestraView();
         Sview = new CandidatoSinistraView();
+        System.out.println(Utente.getConf_Giunta());
+        if(Utente.getConf_Giunta() == 1)
+            Dview.MessaggioSchermo("Puoi finalmente evolvere in Volontario.\nFai click su evolvi per dare la tua conferma!");
+
         DatiPersonali = 0;
         //Settaggio della basicframe con inserimento dei due pannelli a destra e sinistra
         basicframe.setdestra(Dview.getIntermedio0());
@@ -66,6 +71,8 @@ public class CandidatoController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                EvolviAction();
+
             }
 
         });
@@ -80,6 +87,30 @@ public class CandidatoController {
             }
 
         });
+
+
+    }
+
+
+    private void EvolviAction(){
+
+        if(Utente.getConf_Giunta() != 1){
+
+            basicframe.ErrorMessage("Attenti la conferma dei nostri collaboratori!");
+        }else if(basicframe.OpotionalMessage("Confermi a diventare Volontario?") == 0 ) {
+
+            String[] appoggio = new String[4];
+
+            appoggio[0] = "pass";
+            appoggio[1] = Utente.getCodice_Fiscale();
+            appoggio[2] = "vol_o_cand";
+            appoggio[3] = "1";
+
+            if( Utente.UpdateSQL(appoggio)) {
+                LoginController login;
+                new LoginController(basicframe);
+            }
+        }
 
 
     }

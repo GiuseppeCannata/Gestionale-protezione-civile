@@ -47,7 +47,7 @@ public class LoginModel extends Model {
 
         openConnection();
 
-        String sql ="select user,pass,vol_o_cand from pass ";
+        String sql ="select user,pass,vol_o_cand,conf_giunta from pass ";
         ResultSet query = selectQuery(sql);
 
         if(TrovaUser(query) && TrovaPass(query))
