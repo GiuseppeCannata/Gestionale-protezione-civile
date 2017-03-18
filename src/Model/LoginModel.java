@@ -4,31 +4,38 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * LoginModel extends Model
+ * LoginModel
  * Si preoccupa di stabilire la connessione col DB, e di controllare la presenza o meno dell username e password nel DB
  */
 public class LoginModel extends Model {
 
-    private String UserInserito;
-    private String PassInserita;
+    private String userInserito;
+    private String passInserita;
     private String volocand;
 
 
     /*COSTRUTTORE*/
-    public LoginModel(String userInserito, String passInserita){
+
+    //costruttore vuoto
+    public LoginModel(){
+
+        return;
+
+    }
+    public LoginModel(String UserInserito, String PassInserita){
 
         super();
-        UserInserito = userInserito;
-        PassInserita = passInserita;
+        userInserito = UserInserito;
+        passInserita = PassInserita;
         volocand = null;  //oggetto non valido o no creato--> non noto
 
     }
 
     /**
-     * SearchSQL controlla l' esatezza dell username e password inseriti dall'utente.
+     * SearchSQL controlla l' esatezza dell username e password inseriti dall'utente, cercandoli all interno del DB.
      * Fa uso di due metodi di servizio. --> TrovaUser, TrovaPass
      *
-     * @return true --> ok
+     * @return true --> ok, user e pass corretti
      * @return false --> username e password errati
      *
      **/
@@ -40,7 +47,7 @@ public class LoginModel extends Model {
 
         openConnection();
 
-        String sql ="SELECT user,pass,vol_o_cand FROM pass ";
+        String sql ="select user,pass,vol_o_cand from pass ";
         ResultSet query = selectQuery(sql);
 
         if(TrovaUser(query) && TrovaPass(query))
@@ -89,7 +96,7 @@ public class LoginModel extends Model {
             while (!trovatoUser && query.next()) {
 
                 user = query.getString("user");
-                    if (user.equals(UserInserito)) {
+                    if (user.equals(userInserito)) {
                       trovatoUser = true;
                       volocand = query.getString("vol_o_cand");
                       //System.out.println(trovato);
@@ -112,7 +119,7 @@ public class LoginModel extends Model {
      * @param query
      * @return true   --> La password è corretta     (presente nel DB)
      * @return false  --> La password non è corretto (non presente nel DB)
-
+     *
      */
     private boolean TrovaPass(ResultSet query){
 
@@ -121,7 +128,7 @@ public class LoginModel extends Model {
         try {
                            //se questa colonna non esiste mi genera una eccezione
             String pass = query.getString("pass");
-            if(pass.equals(PassInserita))
+            if(pass.equals(passInserita))
                     trovatoPass = true;
 
 
@@ -138,6 +145,16 @@ public class LoginModel extends Model {
 
         return volocand;
     }
+
+
+
+    @Override
+    public String toString() {
+
+        return "Sono LoginModel";
+
+    }
+
 }
 
 

@@ -2,8 +2,12 @@ package View;
 
 import javax.swing.*;
 
+/**
+ * Sez_AView
+ * Form per la sezione A
+ */
 
-public class Sez_AView{
+public class Sez_AView extends JPanel{
 
     private JPanel Intermedio0;
     private JTextField nometext;
@@ -37,12 +41,12 @@ public class Sez_AView{
     //Costruttore vuoto
     public Sez_AView() {
 
-        return;
+        setVisible(true);
 
     }
 
 
-    //GETTER
+    //GETTER e SETTER
     public JPanel getIntermedio0() {
 
         return Intermedio0;
@@ -68,7 +72,7 @@ public class Sez_AView{
 
     public String getDatadinascitatext() {
 
-        System.out.println((String)comboBox1.getSelectedItem()+"-"+(String)comboBox2.getSelectedItem()+"-"+(String)comboBox3.getSelectedItem());
+        //System.out.println((String)comboBox1.getSelectedItem()+"-"+(String)comboBox2.getSelectedItem()+"-"+(String)comboBox3.getSelectedItem());
 
         return (String)comboBox1.getSelectedItem()+"-"+(String)comboBox2.getSelectedItem()+"-"+(String)comboBox3.getSelectedItem();
 
@@ -117,7 +121,7 @@ public class Sez_AView{
     }
 
 
-    //setter
+
 
     public void setNometext(String Nometext) {
 
@@ -190,15 +194,15 @@ public class Sez_AView{
 
 
 
-    public void setCombobox(String anno, String mese, String giorno){
+    public void setDataDiNascitaComboBox(String anno, String mese, String giorno){
 
         comboBox1.setSelectedItem(anno);
         comboBox2.setSelectedItem(mese);
         comboBox3.setSelectedItem(giorno);
 
-
     }
 
+    //Abilita o disabilita l editabilita dei campi di questa sezione
     public void Abilita_Disabilita_Campi(boolean editabile){
 
          nometext.setEditable(editabile);
@@ -219,5 +223,10 @@ public class Sez_AView{
 
     }
 
+    @Override
+    public String toString() {
 
+        return "Sez_AView";
+
+    }
 }

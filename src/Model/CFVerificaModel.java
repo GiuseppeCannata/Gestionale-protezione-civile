@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * CFVerificaModel extends Model.
+ * CFVerificaModel
  * Si preoccupa di stabilire la connessione col DB(per la CFVerificaController),
  * e di controllare la presenza o meno ,del codicefiscale passato, nel DB
  */
@@ -12,6 +12,14 @@ public class CFVerificaModel extends Model {
 
     private String CodiceFiscaleInserito;
 
+
+    /*COSTRUTTORI*/
+
+    public CFVerificaModel() {
+
+        return;
+
+    }
 
     public CFVerificaModel(String codicefiscaleinserito){
 
@@ -35,16 +43,14 @@ public class CFVerificaModel extends Model {
 
         openConnection();
 
-        String sql ="SELECT cf FROM pass ";
+        String sql ="select cf from pass ";
         ResultSet query = selectQuery(sql);
 
         try {
 
-            String cf;
-
             while (!controllo && query.next()) {
 
-                cf = query.getString("cf");
+                String cf = query.getString("cf");
                 if (cf.equals(CodiceFiscaleInserito))
                    controllo = true;
 
@@ -74,6 +80,9 @@ public class CFVerificaModel extends Model {
 
     }
 
-
+    @Override
+    public String toString() {
+        return "CFVerificaModel";
+    }
 }
 

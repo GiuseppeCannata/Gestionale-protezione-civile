@@ -3,7 +3,7 @@ import View.BasicFrameView;
 
 
 /**
- * Gestione dell'avvio dell applicazione ProtezioneCivileGestionale
+ * Applicazione per la gestione dei dati personali dei volontari della Protezione Civile di Falconara Marittima
  */
 
 public class MainApplicazione {

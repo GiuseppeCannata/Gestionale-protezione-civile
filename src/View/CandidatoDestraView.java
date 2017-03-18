@@ -2,15 +2,18 @@ package View;
 
 import javax.swing.*;
 
-
-public class CandidatoDestraView {
+/**
+ * CandidatoDestraView
+ * View della parte destra della basicframe mostrata al login del Candidato
+ */
+public class CandidatoDestraView extends JPanel {
 
     private JPanel Intermedio0;
     private JLabel benvenutoAttendiLaConfermaLabel;
 
     public CandidatoDestraView() {
 
-        return;
+        setVisible(true);
 
     }
 

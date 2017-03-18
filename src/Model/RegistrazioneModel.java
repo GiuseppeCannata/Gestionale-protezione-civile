@@ -9,6 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * RegistrazioneModel
+ * Classe che si occupa dell inserimento e verifica validita username in fase di registrazione
+ *
+ */
+
 public class RegistrazioneModel extends Model {
 
     private String codicefiscale;
@@ -19,8 +25,16 @@ public class RegistrazioneModel extends Model {
     private Sez_BRegistrazioneController sez_bRegistrazioneController;
 
 
-    /*COSTRUTTORE*/
-    public RegistrazioneModel(String CodiceFiscale, Sez_AView view1, Sez_BView view2, Sez_CView view3, Sez_BRegistrazioneController controller) {
+    /*COSTRUTTORI*/
+
+    public RegistrazioneModel() {
+
+        return;
+
+    }
+
+    public RegistrazioneModel(String CodiceFiscale, Sez_AView view1, Sez_BView view2, Sez_CView view3,
+                              Sez_BRegistrazioneController controller) {
 
           super();
           codicefiscale = CodiceFiscale;
@@ -35,7 +49,7 @@ public class RegistrazioneModel extends Model {
 
     /**
      * Inserimeto,in fase di registrazione delle sez A,B,C
-     * Fa uso di 3 metodi privati:--> insertAIntoSQL, insertBIntoSQL , InsertCIntoSQL
+     * Fa uso di 4 metodi privati:--> insertAIntoSQL, insertBIntoSQL , InsertCIntoSQL, InsertPASS
      *
      */
 
@@ -47,20 +61,24 @@ public class RegistrazioneModel extends Model {
         if(!insertASQL() || !insertBSQL() || !insertCSQL() || !InsertPASS() )
         controllo = false;  //c'è stato qualche problema in fase di inserimento
 
-
-
         return controllo;
 
     }
 
 
+    /**
+     * Ricerca del username.
+     * Verifica se l username scelto dall utente è gia stato utilizzato
+     *
+     * @return
+     */
     public boolean SearchSQL() {
 
         openConnection();
 
         Boolean controllo = false;
 
-        String sql ="SELECT user FROM pass ";
+        String sql ="select user from pass ";
         ResultSet query = selectQuery(sql);
         String user;
 
@@ -69,7 +87,8 @@ public class RegistrazioneModel extends Model {
             while (!controllo && query.next()) {
 
                 user = query.getString("user");
-                 System.out.println(user);
+                 //System.out.println(user);
+
                 if (user.equals(UsernameInserito)) {
                     controllo = true;
                 }
@@ -77,10 +96,11 @@ public class RegistrazioneModel extends Model {
             }
         }catch(SQLException se){
             se.printStackTrace();
+        }finally{
+            closeConnection();
         }
 
         return controllo;
-
 
     }
 
@@ -96,7 +116,6 @@ public class RegistrazioneModel extends Model {
      * Metodo di servizio.
      * insertAIntoSQL inserisce i dati inerenti alla sezione A nel DB
      *
-     *
      * @return true --> inserimento andato a buon fine
      * @return false --> problema in fase di inserimento
      *
@@ -106,7 +125,8 @@ public class RegistrazioneModel extends Model {
         Boolean controllo = false;
 
          openConnection();
-        String sql = "Insert into a(cf,nome,cognome,luogodinascita,telefonofisso,indirizzodiresidenza,telefonomobile,email," +
+
+         String sql = "Insert into a(cf,nome,cognome,luogodinascita,telefonofisso,indirizzodiresidenza,telefonomobile,email," +
                     "dataprimaiscrizione,professione,eventualespecializzazione,datadinascita) values('" +
                     codicefiscale                           + "','" +
                     sez_Aview.getNometext()                 + "','" +
@@ -124,7 +144,7 @@ public class RegistrazioneModel extends Model {
         //gestisco le eventuali eccezioni
             if (updateQuery(sql)) {
                 controllo = true;                //operazinoe eseguita con successo
-                System.out.print("tutto bene");
+               // System.out.print("tutto bene");
             }
 
         closeConnection();
@@ -133,13 +153,21 @@ public class RegistrazioneModel extends Model {
 
     }
 
-   private boolean insertBSQL() {
+    /**
+     * Metodo di servizio.
+     * insertBIntoSQL inserisce i dati inerenti alla sezione B nel DB
+     *
+     *
+     * @return true --> inserimento andato a buon fine
+     * @return false --> problema in fase di inserimento
+     *
+     */
+    private boolean insertBSQL() {
 
-       System.out.println("\nB");
+       //System.out.println("\nB");
        boolean controllo = false;
 
-
-       ArrayList<Certificazione> listaCERTIFICAZIONI = sez_bRegistrazioneController.getListaCERTIFICAZIONI();
+       ArrayList<Certificazione> listaCERTIFICAZIONI = sez_bRegistrazioneController.getCERTIFICAZIONI();
 
        int i = 0;
 
@@ -151,7 +179,7 @@ public class RegistrazioneModel extends Model {
 
                if (listaCERTIFICAZIONI.get(i).InsertSQL()) ;
                controllo = true;
-               System.out.println("tutto bene,per inserimento della b");
+              // System.out.println("tutto bene,per inserimento della b");
                i++;
            }
 
@@ -163,7 +191,7 @@ public class RegistrazioneModel extends Model {
 
     /**
      * Metodo di servizio.
-     * insertAIntoSQL inserisce i dati inerenti alla sezione A nel DB
+     * insertCIntoSQL inserisce i dati inerenti alla sezione C nel DB
      *
      *
      * @return true --> inserimento andato a buon fine
@@ -190,13 +218,22 @@ public class RegistrazioneModel extends Model {
 
         if(updateQuery(sql)) {
             controllo = true;   //operazione eseguita con successo
-            System.out.print("tutto bene");
+            //System.out.print("tutto bene");
         }
        closeConnection();
         return controllo;
    }
 
-   private boolean InsertPASS(){
+    /**
+     * Metodo di servizio.
+     * insertPASS inserisce i dati inerenti alla sezione C nel DB
+     *
+     *
+     * @return true --> inserimento andato a buon fine
+     * @return false --> problema in fase di inserimento
+     *
+     */
+    private boolean InsertPASS(){
 
        Boolean controllo = false;
        openConnection();
@@ -209,12 +246,11 @@ public class RegistrazioneModel extends Model {
 
        if(updateQuery(sql)) {
            controllo = true;   //operazione eseguita con successo
-           System.out.print("tutto bene");
+           //System.out.print("tutto bene");
        }
+
        closeConnection();
        return controllo;
-
-
    }
 
 }

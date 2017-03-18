@@ -1,9 +1,9 @@
 package Controller;
 
 import Model.LoginModel;
+import Model.Candidato;
 import View.BasicFrameView;
 import View.LoginView;
-import Model.Candidato;
 
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 
 /**
  * LoginController --> Controller per la LoginView
- * Classe pubblica
  */
 
 public class LoginController {
@@ -20,13 +19,22 @@ public class LoginController {
     public LoginView loginview;
 
 
-    /*COSTRUTTORE*/
+    /*COSTRUTTORI*/
+
+    //Costruttore vuoto
+    public LoginController(){
+
+        return;
+
+    }
+
     public LoginController(BasicFrameView frame) {
 
         basicframe = frame;
         loginview = new LoginView();
         //Il pannello di login va messo nella parte destra della basicframe
         basicframe.setdestra(loginview.getIntermedio0());
+        basicframe.setsinistra(null);
 
         loginListener();
 
@@ -35,6 +43,8 @@ public class LoginController {
     /**
      * Metodo di servizio.
      * loginListener gestisce gli eventi scatenati dall utente interagendo con la LoginView
+     *
+     *  Ascolto azioni dell' utente --> Registrazione,Accesso
      */
     private void loginListener(){
 
@@ -44,8 +54,8 @@ public class LoginController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                CFVerificaController verificaframe;
-                verificaframe = new CFVerificaController(basicframe, loginview);
+                CFVerificaController verifica;
+                verifica = new CFVerificaController(basicframe, loginview);
 
             }
         });
@@ -67,6 +77,7 @@ public class LoginController {
      * AccediAction controlla se:
      *      1)L'utente non ha completato uno dei due campi(Userame, Password) nella pagina Login
      *      2)Segnala all'utente,grazie ad una finestra di errore, se l username e la password inseriti sono non corretti
+     *
      */
     private void AccediAction(){
 
@@ -91,7 +102,7 @@ public class LoginController {
                 Candidato utente = new Candidato(userInserito);
                 UController = new CandidatoController(basicframe, utente);
 
-            }
+            } //altrimenti è un volontario
 
         }
         catch (Exception e ){
@@ -102,7 +113,7 @@ public class LoginController {
     @Override
     public String toString() {
 
-        return "Sono LoginController e mi occupo della gestione delle azioni scatenate dall utente interagendo con"
-                +"la LoginView";
+        return "Sono LoginController";
     }
+
 }

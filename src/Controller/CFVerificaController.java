@@ -11,15 +11,14 @@ import java.awt.event.ActionListener;
 
 /**
  * CFVerificaController --> controller per la CFVerificaView
- * Classe pubblica
  */
 
 public class CFVerificaController {
 
-   public BasicFrameView basicframe;
-   public LoginView loginview;
-   public CFVerificaView verificaview;
-   public String codicefiscale;
+   private BasicFrameView basicframe;
+   private LoginView loginview;
+   private CFVerificaView verificaview;
+   private String codicefiscale;
 
 
    /*COSTRUTTORE*/
@@ -37,9 +36,8 @@ public class CFVerificaController {
    }
 
     /**
-     * Ascolto operazioni dell'utente
+     * Ascolto operazioni dell'utente --> OK,paginaLogin
      */
-
     private void CFVerificaListener(){
 
         /*OK*/
@@ -80,7 +78,8 @@ public class CFVerificaController {
             if(codicefiscale.length() == 0)
                 throw new Exception("Inserire Codice fiscale!");
             else
-            if((codicefiscale.length() > 16) || (codicefiscale.length() < 16)) //la lunghezza del codice fiscale puo essere massimo 16
+                //la lunghezza del codice fiscale puo essere massimo 16
+            if((codicefiscale.length() > 16) || (codicefiscale.length() < 16))
                 throw new Exception("Lunghezza Codice fiscale errata!");
 
 
@@ -92,7 +91,7 @@ public class CFVerificaController {
 
             /*Apro la finestra di registrazione*/
             AnagraficaController anagraficaController;
-            anagraficaController = new AnagraficaController(basicframe, loginview, codicefiscale);
+            anagraficaController = new AnagraficaController(basicframe, loginview,codicefiscale);
 
 
 
@@ -106,8 +105,7 @@ public class CFVerificaController {
     @Override
     public String toString() {
 
-        return " Sono CFVerificaController e mi occupo e mi occupo della gestione delle azioni scatenate dall utente " +
-                "interagendo con la CFVerificaView";
+        return "Sono CFVerificaController";
 
     }
 }

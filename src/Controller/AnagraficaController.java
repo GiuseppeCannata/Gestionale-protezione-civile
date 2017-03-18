@@ -12,18 +12,17 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
- * Sez_ManagerController --> Controller per la Sez_ManagerView
- * Classe pubblica
- *
+ * AnagraficaController --> Controller per la AnagraficaView
  */
 public class AnagraficaController {
 
    private BasicFrameView basicframe;
-   private Sez_ManagerView sez_managerview;
+   private AnagraficaView Anagraficaview;
    private LoginView loginview;
    private String codicefiscale;
    private Candidato Utente;
    private CandidatoDestraView Dview;
+   private CandidatoController ccontroller;
 
    private Sez_AView sez_Aview;
    private Sez_BView sez_Bview;
@@ -41,28 +40,31 @@ public class AnagraficaController {
     public AnagraficaController(BasicFrameView frame, LoginView view, String CodiceFiscale) {
 
         basicframe = frame;
-        sez_managerview = new Sez_ManagerView();
+        Anagraficaview = new AnagraficaView();
         loginview = view;
         codicefiscale = CodiceFiscale ;
 
         Utente = null;
         Dview = null;
-        Salvabutton = sez_managerview.getSalvaButton();
+        Modifica = 0;
+        ccontroller = null;
+
+        Salvabutton = Anagraficaview.getSalvaButton();
         Salvabutton.setContentAreaFilled(false);
 
         sez_Aview = new Sez_AView();
         sez_Bview = new Sez_BView();
-        sez_bRegistrazioneController = new Sez_BRegistrazioneController(sez_Bview, basicframe, codicefiscale);
+        sez_bRegistrazioneController = new Sez_BRegistrazioneController(basicframe, sez_Bview, codicefiscale);
         sez_Cview = new Sez_CView();
 
-        sez_managerview.setPaginaLoginButton(true);
-        sez_managerview.setModificaButton(false);
-        sez_managerview.setHomeButton(false);
+        Anagraficaview.VisibilitaPaginaLoginButton(true);
+        Anagraficaview.VisibilitaModificaButton(false);
+        Anagraficaview.VisibilitaHomeButton(false);
         sceltapannelli();
         //Setto il mio manager di pagine
         Pagine_Manager.setPagina_Corrente();
-        basicframe.setdestra(sez_managerview.getIntermedio0());
-        sez_managerview.MessaggioBenvenuto(basicframe);
+        basicframe.setdestra(Anagraficaview.getIntermedio0());
+        Anagraficaview.MessaggioBenvenuto(basicframe);
 
         Listener();
         RegistrazioneListner();
@@ -70,17 +72,18 @@ public class AnagraficaController {
     }
 
     //CANDIDATO
-    public AnagraficaController(BasicFrameView frame, CandidatoDestraView view,Candidato utente ,String utilizzatore) {
+    public AnagraficaController(BasicFrameView frame, CandidatoDestraView view,Candidato utente ,String CodiceFiscale,
+                                CandidatoController CController) {
 
         basicframe = frame;
-        codicefiscale = null ;
+        Anagraficaview = new AnagraficaView();
         loginview = null;
-        Dview = view;
+        codicefiscale = CodiceFiscale;
         Utente = utente;
-
-        sez_managerview = new Sez_ManagerView();
-        Salvabutton = sez_managerview.getSalvaButton();
-       // Salvabutton.setContentAreaFilled(false);
+        Dview = view;
+        Modifica = 0;
+        ccontroller = CController;
+        Salvabutton = Anagraficaview.getSalvaButton();
 
         sez_Aview = new Sez_AView();
         sez_Bview = new Sez_BView();
@@ -89,16 +92,15 @@ public class AnagraficaController {
 
 
 
-        sez_managerview.setPaginaLoginButton(false);
-        sez_managerview.setModificaButton(true);
-        sez_managerview.setHomeButton(true);
-        //sez_managerview.setSalvaButton(true);
+        Anagraficaview.VisibilitaPaginaLoginButton(false);
+        Anagraficaview.VisibilitaModificaButton(true);
+        Anagraficaview.VisibilitaHomeButton(true);
         sceltapannelli();
 
         //Setto il mio manager di pagine
         Pagine_Manager.setPagina_Corrente();
         AcquisizioneCampi();
-        basicframe.setdestra(sez_managerview.getIntermedio0());
+        basicframe.setdestra(Anagraficaview.getIntermedio0());
 
         Listener();
         CandidatoListner();
@@ -110,22 +112,22 @@ public class AnagraficaController {
      */
     private void sceltapannelli(){
 
-            sez_managerview.setSezA(sez_Aview.getIntermedio0());
-            sez_managerview.setSezB(sez_Bview.getIntermedio0());
-            sez_managerview.setSezC(sez_Cview.getIntermedio0());
+            Anagraficaview.setSezA(sez_Aview.getIntermedio0());
+            Anagraficaview.setSezB(sez_Bview.getIntermedio0());
+            Anagraficaview.setSezC(sez_Cview.getIntermedio0());
 
     }
 
     /**
-     * Ascolto operazioni dell'utente
+     * Ascolto operazioni dell'utente   --> avanti, indietro
+     * Listener generale alla base della AnagraficaView
      */
     private void Listener(){
 
+        CardLayout CL=(CardLayout) Anagraficaview.getIntermedio1().getLayout();
 
-        CardLayout CL=(CardLayout) sez_managerview.getIntermedio1().getLayout();
-
-        JButton sez_managerviewAvanti = sez_managerview.getAvantiButton();
-        JButton sez_managerviewIndietro= sez_managerview.getIndietroButton();
+        JButton sez_managerviewAvanti = Anagraficaview.getAvantiButton();
+        JButton sez_managerviewIndietro= Anagraficaview.getIndietroButton();
 
         sez_managerviewIndietro.setContentAreaFilled(false);
 
@@ -136,66 +138,63 @@ public class AnagraficaController {
 
                         if (Pagine_Manager.getPagina_Corrente() < 3) {
 
-                            CL.next(sez_managerview.getIntermedio1());
+                            CL.next(Anagraficaview.getIntermedio1());
                             Pagine_Manager.addPagina_Corrente();
 
                         }
-                    if (Pagine_Manager.getPagina_Corrente() == 3) {
-                        sez_managerviewAvanti.setContentAreaFilled(false);
-                        Salvabutton.setContentAreaFilled(true);
-                    }
+                        if (Pagine_Manager.getPagina_Corrente() == 3) {
+                             sez_managerviewAvanti.setContentAreaFilled(false);
+                             Salvabutton.setContentAreaFilled(true);
+                        }
 
-                    if (Pagine_Manager.getPagina_Corrente() > 1)
-                        sez_managerviewIndietro.setContentAreaFilled(true);
+                        if (Pagine_Manager.getPagina_Corrente() > 1)
+                             sez_managerviewIndietro.setContentAreaFilled(true);
                 }
-
-
-
-
         });
 
 
         /*Indietro*/
-
         sez_managerviewIndietro.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
                     if (Pagine_Manager.getPagina_Corrente() > 1) {
 
-                        CL.previous(sez_managerview.getIntermedio1());
+                        CL.previous(Anagraficaview.getIntermedio1());
                         Pagine_Manager.subctractPagina_Corrente();
                     }
 
 
-				/*significa che mi trovo alla prima pagina, e non potendo andare più indietro "opacizzo" indietro*/
-                        if (Pagine_Manager.getPagina_Corrente() == 1)
+				    /*significa che mi trovo alla prima pagina, e non potendo andare più indietro "opacizzo" indietro*/
+                    if (Pagine_Manager.getPagina_Corrente() == 1)
                             sez_managerviewIndietro.setContentAreaFilled(false);
 
-				/*significa che */
-                        if (Pagine_Manager.getPagina_Corrente() >= 1)
+
+                    if (Pagine_Manager.getPagina_Corrente() >= 1)
                             sez_managerviewAvanti.setContentAreaFilled(true);
 
 
                 }
         });
-
-
-
-
-
     }
 
+    /**
+     * Listener utilizzato escusivamente nella fase di resgistrazione
+     * -->PaginaLogin, Salva
+     */
     private void RegistrazioneListner(){
 
         /*PaginaLogin*/
-        JButton paginaLoginbutton = sez_managerview.getPaginaLoginButton();
+        JButton paginaLoginbutton = Anagraficaview.getPaginaLoginButton();
         paginaLoginbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if(basicframe.OpotionalMessage("I dati,se non salvati, verranno persi.\nSei sicuro di tornare al login?") == 0)
-                    basicframe.setdestra(loginview.getIntermedio0());
+                if(basicframe.OpotionalMessage("I dati,se non salvati, verranno persi.\nSei sicuro di tornare al login?") == 0){
+                    LoginController LController;
+                    LController = new LoginController(basicframe);
+                }
+
             }
         });
 
@@ -205,7 +204,7 @@ public class AnagraficaController {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-                    if(Pagine_Manager.getFine_Pagina()==3)
+                    if(Pagine_Manager.getFine_Pagina() == 3)
                     SalvataggioRegistrazione();
                     else
                         basicframe.ErrorMessage("Ancora non è possibile salvare!");
@@ -217,11 +216,15 @@ public class AnagraficaController {
 
     }
 
+    /**
+     * Listener utilizzato esclusivamete dal Candidato
+     * --> Modifica, Home, salva
+     */
     private void CandidatoListner(){
 
 
         /*Modifica*/
-        JButton Modificabutton = sez_managerview.getModificaButton();
+        JButton Modificabutton = Anagraficaview.getModificaButton();
         Modificabutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -229,23 +232,27 @@ public class AnagraficaController {
                 Modifica = 1;
 
                 sez_Aview.Abilita_Disabilita_Campi(true);
+
                 sez_Bview.Abilita_Disabilita_Campi(true);
                 sez_Bview.VisibilitàEliminaButton(true);
                 sez_Bview.VisibilitàAggiungiButton(true);
                 sez_Bview.VisibilitàUpdateButton(true);
+
                 sez_Cview.Abilita_Disabilita_Campi(true);
-                sez_managerview.setModificaButton(false);
+
+                Anagraficaview.VisibilitaModificaButton(false);
 
             }
         });
 
         /*Home*/
-        JButton Homebutton = sez_managerview.getHomeButton();
+        JButton Homebutton = Anagraficaview.getHomeButton();
         Homebutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 basicframe.setdestra(Dview.getIntermedio0());
+                ccontroller.setDatiPersonali(0);
 
             }
         });
@@ -257,11 +264,18 @@ public class AnagraficaController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                 System.out.println("ok");
-                  UpdateCandidato();
-                  /**     basicframe.ErrorMessage("Nessun cambiamento");
-                else
-                    basicframe.ErrorMessage("Ancora non è possibile salvare!");**/
+              try {
+
+                  if (!UpdateCandidato())
+                      throw new Exception("Nessun cambiamento");
+
+                  if (!VerificaCampi())
+                      throw new Exception("Completa campi obbligatori");
+
+              }catch (Exception es){
+                  basicframe.ErrorMessage(es.getMessage());
+              }
+
 
             }
         });
@@ -288,9 +302,6 @@ public class AnagraficaController {
                                basicframe.ErrorMessage("Errore nell'inserimento!\nRicontrollare!");
                             else
                                basicframe.setdestra(loginview.getIntermedio0());
-
-
-
            }
 
     }
@@ -325,7 +336,7 @@ public class AnagraficaController {
             if(sez_Aview.getPasswordtext().length() > 20)
                 throw new Exception ("Password troppo lunga!\nMassimo 20 caratteri");
 
-            controllo= true;
+            controllo = true;
 
         }catch(Exception e){
             basicframe.ErrorMessage(e.getMessage());
@@ -335,14 +346,10 @@ public class AnagraficaController {
 
      }
 
-    @Override
-    public String toString() {
-
-         return "Sez_ManagerController{}";
-
-    }
-
-
+    /**
+     * Metodo privato
+     * Inizializza i vari campi testo delle 3 sezioni
+     */
 
     private void AcquisizioneCampi(){
 
@@ -351,7 +358,7 @@ public class AnagraficaController {
         sez_Aview.setLuogodinascitatext(Utente.getLuogo_di_Nascita());
         sez_Aview.setTelefonofissotext(Utente.getTelefono_Fisso());
         sez_Aview.setTelefonocellularetext(Utente.getTelefono_Cellulare());
-        sez_Aview.setCombobox(Utente.getData_di_Nascita().substring(0,4),Utente.getData_di_Nascita().substring(5,7),Utente.getData_di_Nascita().substring(8,10));
+        sez_Aview.setDataDiNascitaComboBox(Utente.getData_di_Nascita().substring(0,4),Utente.getData_di_Nascita().substring(5,7),Utente.getData_di_Nascita().substring(8,10));
         sez_Aview.setIndirizzodiresidenzatext(Utente.getIndirizzo_di_residenza());
         sez_Aview.setEmailtext(Utente.getEmail());
         sez_Aview.setProfessionetext(Utente.getProfessione());
@@ -375,6 +382,12 @@ public class AnagraficaController {
 
     }
 
+    /**
+     * Controllo eventuali aggiornamenti fatti dall utente  ai suoi dati
+     *
+     * @return true  --> c è stato qualche cambiamento
+     * @return false --> non c è stato nessun cambiamento
+     */
     private boolean UpdateCandidato(){
 
         boolean controllo = false;
@@ -382,7 +395,7 @@ public class AnagraficaController {
         String[] appoggio =  new String[4];
 
         appoggio[0] = "a";
-        appoggio[1] = this.Utente.getCodice_Fiscale();
+        appoggio[1] = Utente.getCodice_Fiscale();
 
         //A
         if(!sez_Aview.getNometext().equals(this.Utente.getNome())) {
@@ -488,7 +501,7 @@ public class AnagraficaController {
         }
 
         //B
-        ArrayList<Certificazione> CERTIFICAZIONI = sez_bUtenteController.getCERTIFICAZIONI();
+        ArrayList<Certificazione> CERTIFICAZIONI = Utente.getCERTIFICAZIONI();
 
         while(i<CERTIFICAZIONI.size()) {
 
@@ -499,42 +512,9 @@ public class AnagraficaController {
 
             }else if(CERTIFICAZIONI.get(i).getFlag().equals("update")){
 
-                controllo = true;
                 Certificazione certificazione = CERTIFICAZIONI.get(i);
+                certificazione.updatesql();
 
-                if(!sez_Bview.getDataAcquisizone().equals(certificazione.getDataacquisizione())){
-                    appoggio[0] = "dataacquisizione";
-                    appoggio[1] =  sez_Bview.getDataAcquisizone();
-                    certificazione.setDataacquisizione(sez_Bview.getDataAcquisizone());
-                    certificazione.UpdateSQL(appoggio);
-
-                }
-
-
-                if(!sez_Bview.getDataScadenza().equals(certificazione.getDatascadenza())){
-                    appoggio[0] = "datascadenza";
-                    appoggio[1] =  sez_Bview.getDataScadenza();
-                    certificazione.setDatascadenza(sez_Bview.getDataScadenza());
-                    certificazione.UpdateSQL(appoggio);
-
-                }
-
-
-                if(!sez_Bview.getEnte_r_Text().equals(certificazione.getEntedirilascio())){
-                    appoggio[0] = "entedirilascio";
-                    appoggio[1] =  sez_Bview.getEnte_r_Text();
-                    certificazione.setEntedirilascio(sez_Bview.getEnte_r_Text());
-                    certificazione.UpdateSQL(appoggio);
-
-                }
-
-                if(!sez_Bview.getnDoc_Text().equals(certificazione.getN_documento())){
-                    appoggio[0] = "n_documento";
-                    appoggio[1] =  sez_Bview.getnDoc_Text();
-                    certificazione.setN_documento(sez_Bview.getnDoc_Text());
-                    certificazione.UpdateSQL(appoggio);
-
-                }
             }
             i++;
         }
@@ -603,11 +583,14 @@ public class AnagraficaController {
 
         }
 
+        return controllo;
+    }
 
 
+    @Override
+    public String toString() {
 
-      return controllo;
-
+        return "Sez_ManagerController{}";
 
     }
 

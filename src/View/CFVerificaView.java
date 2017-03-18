@@ -2,7 +2,12 @@ package View;
 
 import javax.swing.*;
 
-public class CFVerificaView {
+/**
+ * CFVerificaView estende JPanel.
+ * E' il pannello di verifica dell codice fiscale
+ */
+
+public class CFVerificaView extends JPanel {
 
     private JPanel Intermedio0;
     private JButton paginaLoginButton;
@@ -11,14 +16,11 @@ public class CFVerificaView {
 
     public CFVerificaView() {
 
-        return;
+        setVisible(true);
 
     }
 
-    public void ErrorMessage(BasicFrameView frame,String nomeErrore){
-        JOptionPane.showMessageDialog(frame, nomeErrore, "Warning!", JOptionPane.ERROR_MESSAGE);
-    }
-
+    //GETTER
     public JPanel getIntermedio0() {
 
         return Intermedio0;

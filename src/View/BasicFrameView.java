@@ -3,6 +3,12 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * BasicFrameView
+ * Estende JFrame.
+ * E' la finestra principale dell applicazione
+ */
+
 public class BasicFrameView extends JFrame{
 
     private JPanel Intermedio0;
@@ -49,7 +55,7 @@ public class BasicFrameView extends JFrame{
     }
 
 
-
+    //GETTER
 
     public JPanel getIntermedio0() {
 
@@ -69,4 +75,10 @@ public class BasicFrameView extends JFrame{
         sinistra.setViewportView(SINISTRA);
 
     }
+
+    @Override
+    public String toString() {
+        return "BasicFrameView";
+    }
+
 }

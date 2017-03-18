@@ -2,32 +2,28 @@ package View;
 
 import javax.swing.*;
 
-
-public class LoginView {
+/**
+ * LoginView
+ * estende JPanel.
+ * E' il pannello di login
+ */
+public class LoginView extends JPanel{
 
     private JPanel Intermedio0;
     private JPanel Bottonbar;
-    private JButton registratiButton;
     private JPanel Intermedio1;
     private JTextField Usernametext;
     private JPasswordField passwordField1;
+    private JButton registratiButton;
     private JButton accediButton;
     private JLabel usernameLabel;
     private JLabel passwordLabel;
 
     public LoginView() {
 
-        return;
+        setVisible(true);
 
     }
-
-
-
-
-    public void ErrorMessage(BasicFrameView frame,String nomeErrore){
-        JOptionPane.showMessageDialog(frame, nomeErrore, "Warning!", JOptionPane.ERROR_MESSAGE);
-    }
-
 
 
     /*GETTER*/
@@ -50,11 +46,20 @@ public class LoginView {
     }
 
     public String getUsernametext() {
+
         return Usernametext.getText();
+
     }
 
     public char[] getPasswordField1() {
 
         return passwordField1.getPassword();
+    }
+
+    @Override
+    public String toString() {
+
+        return "LoginView";
+
     }
 }

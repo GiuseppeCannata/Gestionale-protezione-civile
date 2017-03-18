@@ -11,6 +11,9 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
+/**
+ * Sez_BUtenteController --> Controller per la sezione B --> l utilizzatore è un utente gia registrato
+ */
 
 public class Sez_BUtenteController {
 
@@ -20,8 +23,9 @@ public class Sez_BUtenteController {
 
     private Sez_BView sez_Bview;
     private ArrayList<Certificazione> CERTIFICAZIONI;
-   private  JComboBox boxlist;
+    private JComboBox boxlist;
 
+    /*COSTRUTTORE*/
 
     public Sez_BUtenteController(Sez_BView view2, ArrayList<Certificazione> Certificazioni, BasicFrameView frame,
                                  String CodiceFiscale) {
@@ -42,8 +46,14 @@ public class Sez_BUtenteController {
 
     }
 
+    /**
+     * Ascolto azioni dell' utente --> boxcertificazioni,boxlist, Update,Elimina
+     *
+     */
+
     private void Listner() {
 
+        /*Boxcertificazioni*/
         JComboBox boxcertificazioni = sez_Bview.getCertif_Box();
         JComboBox boxlist = sez_Bview.getBoxlist();
         boxcertificazioni.addItemListener(new ItemListener() {
@@ -69,6 +79,7 @@ public class Sez_BUtenteController {
             }
         });
 
+        /*boxlist*/
         boxlist.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -94,6 +105,7 @@ public class Sez_BUtenteController {
         });
 
 
+        /*Update*/
         JButton UpdateButton = sez_Bview.getUpdateButton();
         UpdateButton.addActionListener(new ActionListener() {
             @Override
@@ -109,6 +121,7 @@ public class Sez_BUtenteController {
 
         });
 
+        /*Elimina*/
         JButton EliminaButton = sez_Bview.getEliminaButton();
         EliminaButton.addActionListener(new ActionListener() {
             @Override
@@ -117,22 +130,27 @@ public class Sez_BUtenteController {
                 if (sez_Bview.getBoxlist().getSelectedItem() == null)
                     basicframe.ErrorMessage("Nessuna certificazione selezionate");
                 else
-                   if(EliminaCertificazione()) {
-                       basicframe.Message("Eliminazione eseguita con successo");
+                   EliminaCertificazione();
+                      // sez_Bview.HardReset();
 
-                       sez_Bview.HardReset();
-                   }
 
             }
 
         });
     }
 
+    /**
+     * Elimina la certificazione in locale;
+     * Con "in locale" si intende che questo metodo tagga la gertificazione come "elimina"
+     * ma verra veramente eliminata (nel DB) quando l utente cliccherà su salva
+     *
+     */
 
-    private boolean EliminaCertificazione() {
+    private void EliminaCertificazione() {
 
         boolean controllo = false;
         int i = 0;
+
         String DaEliminare = (String) sez_Bview.getBoxlist().getSelectedItem();
 
 
@@ -152,11 +170,14 @@ public class Sez_BUtenteController {
                 i++;
             }
         }
-
-        return controllo;
     }
 
-
+    /**
+     * Certca all interno dell ArrayList l indice della certificazione selezionata
+     *
+     * @return true --> trovata
+     * @return false --> non trovata
+     */
 
     private boolean Ricerca(){
 
@@ -180,19 +201,28 @@ public class Sez_BUtenteController {
 
     }
 
+    /**
+     * Fa l update della certificazione in locale
+     * Con "in locale" si intende che questo metodo tagga la gertificazione come "update"
+     * ma verra veramente aggiornata ( nel DB) quando l utente cliccherà su salva
+     */
+
     private void ModificaCertificazione(){
 
         Certificazione certificazione = CERTIFICAZIONI.get(Indice);
 
+        System.out.println(certificazione.getNome());
         if(!sez_Bview.getDataAcquisizone().equals(certificazione.getDataacquisizione())
                 || !sez_Bview.getDataScadenza().equals(certificazione.getDatascadenza())
                 || !sez_Bview.getEnte_r_Text().equals(certificazione.getEntedirilascio())
-                || !sez_Bview.getnDoc_Text().equals(certificazione.getN_documento()))
+                || !sez_Bview.getnDoc_Text().equals(certificazione.getN_documento())){
 
             certificazione.setFlag("update");
+            certificazione.setDataacquisizione(sez_Bview.getDataAcquisizone());
+            certificazione.setDatascadenza(sez_Bview.getDataScadenza());
+            certificazione.setEntedirilascio(sez_Bview.getEnte_r_Text());
+            certificazione.setN_documento(sez_Bview.getnDoc_Text());
+        }
     }
 
-    public ArrayList<Certificazione> getCERTIFICAZIONI() {
-        return CERTIFICAZIONI;
-    }
 }

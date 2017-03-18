@@ -3,6 +3,7 @@ package Model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 public class Candidato extends Persona {
 
 	/*VARIABILI D'ISTANZA DI PERSONA*/
@@ -13,6 +14,12 @@ public class Candidato extends Persona {
     private int Conf_Giunta;
 
     /*COSTRUTTORI*/
+
+    public Candidato() {
+
+        return;
+
+    }
 
     public Candidato(String userInserito){
 
@@ -42,10 +49,6 @@ public class Candidato extends Persona {
 
 
     /*OPERAZIONI*/
-
-    //--> Oltre alle sue quelle ereditate da Persona
-
-
     public int getConf_Giunta() {
 
         return Conf_Giunta;
@@ -80,5 +83,10 @@ public class Candidato extends Persona {
     @Override
     public boolean InsertSQL() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Candidato";
     }
 }

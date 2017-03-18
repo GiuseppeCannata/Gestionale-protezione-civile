@@ -11,38 +11,40 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Sez_BRegistrazioneController --> controller per la sezione B in fase di registrazione
+ */
 
 public class Sez_BRegistrazioneController {
 
-    private String codicefiscale;
-
-    private Sez_BView sez_Bview;
     private BasicFrameView basicframe;
-    private int aggiorna;
+    private String codicefiscale;
+    private Sez_BView sez_Bview;
+    private ArrayList<Certificazione> CERTIFICAZIONI;
+    private int aggiungi;
 
-    private ArrayList<Certificazione> listaCERTIFICAZIONI;
 
+    public Sez_BRegistrazioneController(BasicFrameView frame, Sez_BView view2, String CodiceFiscale) {
 
-    public Sez_BRegistrazioneController(Sez_BView view2, BasicFrameView frame, String CodiceFiscale) {
-
-        codicefiscale = CodiceFiscale;
-
-        sez_Bview = view2;
         basicframe = frame;
-
-        listaCERTIFICAZIONI = new ArrayList<>(25);
-
-
+        codicefiscale = CodiceFiscale;
+        sez_Bview = view2;
         sez_Bview.VisibilitàEliminaButton(false);
+        sez_Bview.VisibilitàUpdateButton(false);
 
-        aggiorna = 1;
+        CERTIFICAZIONI = new ArrayList<>(25);
+
+        aggiungi = 0;
 
         Listener();
 
     }
 
+    /**
+     * Ascolto azioni dell' utente --> Aggiungi,boxcertificazioni
+     *
+     */
     private void Listener(){
-
 
         /*Aggiungi*/
         JButton Aggiungi = sez_Bview.getAggiungiButton();
@@ -50,19 +52,18 @@ public class Sez_BRegistrazioneController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Controllo();
+                ControlloInserimento();
 
             }
 
         });
 
+        /*Boxcertificazioni*/
         JComboBox boxcertificazioni = sez_Bview.getCertif_Box();
         JComboBox boxlist = sez_Bview.getBoxlist();
         boxcertificazioni.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-
-
 
                 if(e.getSource() ==  sez_Bview.getCertif_Box()) {
                     if (boxcertificazioni.getSelectedItem().equals("- CERTIFICAZIONI -")){
@@ -72,7 +73,6 @@ public class Sez_BRegistrazioneController {
                     }
                     else if (boxcertificazioni.getSelectedItem().equals("abilitazioni")) {
 
-                       // System.out.println("aaa");
                         boxlist.removeAllItems();
                         boxlist.addItem("utilizzo piatt elev");
                         boxlist.addItem("anti incendio");
@@ -83,24 +83,20 @@ public class Sez_BRegistrazioneController {
                         boxlist.addItem("blsd");
                         boxlist.addItem("cinofilo");
 
-                    }
-                    else if(boxcertificazioni.getSelectedItem().equals("corsi")){
+                    } else if(boxcertificazioni.getSelectedItem().equals("corsi")){
 
                         boxlist.removeAllItems();
-                        boxlist.addItem("corso base di radiocomunicazione");
                         boxlist.addItem("base protezione civil");
                         boxlist.addItem("fuoristrada");
                         boxlist.addItem("lingua inglese");
                         boxlist.addItem("logistica da campo");
-                        boxlist.addItem("obbligatrion sic.vol. 81.08");
                         boxlist.addItem("rischio sanitari");
                         boxlist.addItem("sub");
                         boxlist.addItem("procedure amministrative");
                         boxlist.addItem("istruttore guida");
                         boxlist.addItem("vigli fuoco");
 
-                    }
-                    else if (boxcertificazioni.getSelectedItem().equals("patenti")){
+                    }else if (boxcertificazioni.getSelectedItem().equals("patenti")){
 
                         boxlist.removeAllItems();
                         boxlist.addItem("ecdl");
@@ -108,7 +104,7 @@ public class Sez_BRegistrazioneController {
                         boxlist.addItem("guida c");
                         boxlist.addItem("guida ce");
                         boxlist.addItem("guida d");
-                        boxlist.addItem("guida k");
+                        boxlist.addItem("guida b");
                         boxlist.addItem("guida kd");
                         boxlist.addItem("guida nautica");
                         boxlist.addItem("guida adr");
@@ -119,27 +115,30 @@ public class Sez_BRegistrazioneController {
 
             }
         });
-
-
     }
 
-    private void Controllo() {
+    /**
+     * Metodo di servizio.
+     * Si occupa di controllare se l utente clicca erroneamente sul Button Aggiungi senza aver selezionato una
+     * certificazion oppure senza aver inserito un Ente di rilascio o N Documento.
+     * In seguito alle dovute verifice può procedere con la memorizzazione degli inserimenti
+     *
+     */
+    private void ControlloInserimento() {
 
-        String Item = (String)sez_Bview.getBoxlist().getSelectedItem();
+        String ItemSelezionato = (String)sez_Bview.getBoxlist().getSelectedItem();
 
         try {
-            if (aggiorna == 5)
+
+            if (aggiungi == 10)
                 throw new Exception("stop inserimento");
-            if (Item == null)
+            if (ItemSelezionato == null)
                 throw  new Exception("Errore! nessuna certificazione scelta");
             if (sez_Bview.getEnte_r_Text().length() == 0 || sez_Bview.getnDoc_Text().length() == 0)
                 throw new Exception("Errore! nessun ente e numero documento inserirti");
 
 
-            aggiorna += 1;
-
-
-
+            aggiungi += 1;
 
             if (sez_Bview.getCertif_Box().getSelectedItem().equals("abilitazioni")) {
 
@@ -147,29 +146,25 @@ public class Sez_BRegistrazioneController {
                         sez_Bview.getDataAcquisizone(), sez_Bview.getDataScadenza(), sez_Bview.getEnte_r_Text(),
                         sez_Bview.getnDoc_Text());
 
+                CERTIFICAZIONI.add(Certificazione);
 
-                listaCERTIFICAZIONI.add(Certificazione);
-                sez_Bview.getBoxlist().removeItem(sez_Bview.getNomeCertificazione());
-            }
-            else if (sez_Bview.getCertif_Box().getSelectedItem().equals("corsi")) {
+            } else if (sez_Bview.getCertif_Box().getSelectedItem().equals("corsi")) {
 
                 Certificazione Certificazione = new Certificazione("corsi",codicefiscale, sez_Bview.getNomeCertificazione(),
                         sez_Bview.getDataAcquisizone(), sez_Bview.getDataScadenza(), sez_Bview.getEnte_r_Text(),
                         sez_Bview.getnDoc_Text());
 
 
-                listaCERTIFICAZIONI.add(Certificazione);
+                CERTIFICAZIONI.add(Certificazione);
 
-            }
-
-            else if (sez_Bview.getCertif_Box().getSelectedItem().equals("patenti")) {
+            } else if (sez_Bview.getCertif_Box().getSelectedItem().equals("patenti")) {
 
                 Certificazione Certificazione = new Certificazione("patenti",codicefiscale, sez_Bview.getNomeCertificazione(),
                         sez_Bview.getDataAcquisizone(), sez_Bview.getDataScadenza(), sez_Bview.getEnte_r_Text(),
                         sez_Bview.getnDoc_Text());
 
 
-                listaCERTIFICAZIONI.add(Certificazione);
+                CERTIFICAZIONI.add(Certificazione);
 
             }
 
@@ -185,10 +180,16 @@ public class Sez_BRegistrazioneController {
 
 
 
-    public ArrayList<Certificazione> getListaCERTIFICAZIONI() {
+    public ArrayList<Certificazione> getCERTIFICAZIONI() {
 
-        return listaCERTIFICAZIONI;
+        return CERTIFICAZIONI;
 
     }
 
+    @Override
+    public String toString() {
+
+        return "Sez_BRegistrazioneController";
+
+    }
 }

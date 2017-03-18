@@ -2,8 +2,12 @@ package View;
 
 import javax.swing.*;
 
+/**
+ * Sez_CView
+ * Form per la sezione C
+ */
 
-public class Sez_CView {
+public class Sez_CView extends JPanel{
 
     private JPanel Intermedio0;
     private JTextField denominazioneDatoreDiLavorotext;
@@ -22,10 +26,11 @@ public class Sez_CView {
     //Costruttore vuoto
     public Sez_CView() {
 
-        return;
+        setVisible(true);
     }
 
-    //GETTER
+
+    //GETTER e SETTER
     public JPanel getIntermedio0() {
 
         return Intermedio0;
@@ -110,4 +115,10 @@ public class Sez_CView {
 
     }
 
+    @Override
+    public String toString() {
+
+        return "Sez_CView";
+
+    }
 }

@@ -2,8 +2,12 @@ package View;
 
 import javax.swing.*;
 
+/**
+ * AnagraficaView
+ * "Contenitore" per le varie sezioni
+ */
 
-public class Sez_ManagerView{
+public class AnagraficaView extends JPanel{
 
     private JPanel Intermedio0;
     private JPanel Bottonbar;
@@ -19,9 +23,9 @@ public class Sez_ManagerView{
     private JButton homeButton;
 
 
-    public Sez_ManagerView() {
+    public AnagraficaView() {
 
-        return;
+       setVisible(true);
 
     }
 
@@ -32,12 +36,8 @@ public class Sez_ManagerView{
                          JOptionPane.INFORMATION_MESSAGE);
     }
 
-    //GETTER
 
-    public JButton getHomeButton() {
-        return homeButton;
-    }
-
+    //GETTER E SETTER
     public JPanel getIntermedio0() {
 
         return Intermedio0;
@@ -45,10 +45,16 @@ public class Sez_ManagerView{
 
     public JPanel getIntermedio1() {
 
-        //PERCHE E QUI CHE HO IL CARD LAYOUT
+        //QUI HO IL CARD LAYOUT
         return Intermedio1;
+
     }
 
+    public JButton getHomeButton() {
+
+        return homeButton;
+
+    }
 
     public JButton getPaginaLoginButton() {
 
@@ -75,13 +81,6 @@ public class Sez_ManagerView{
         return modificaButton;
     }
 
-    //SETTERS
-
-    public void setSalvaButton(boolean visibilita) {
-        salvaButton.setContentAreaFilled(visibilita);
-
-    }
-
     public void setSezA(JPanel sezA) {
 
         SezA.add(sezA);
@@ -100,17 +99,30 @@ public class Sez_ManagerView{
 
     }
 
-    public void setPaginaLoginButton(boolean visibilita) {
+
+
+    public void VisibilitaPaginaLoginButton(boolean visibilita) {
 
         paginaLoginButton.setVisible(visibilita);
 
     }
 
-    public void setModificaButton(boolean visibilità) {
-        modificaButton.setVisible(visibilità);
+    public void VisibilitaModificaButton(boolean visibilita) {
+
+        modificaButton.setVisible(visibilita);
+
     }
 
-    public void setHomeButton(boolean visibilita) {
+    public void VisibilitaHomeButton(boolean visibilita) {
+
         homeButton.setVisible(visibilita);
+
+    }
+
+    @Override
+    public String toString() {
+
+        return "AnagraficaView";
+
     }
 }

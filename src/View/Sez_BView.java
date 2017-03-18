@@ -2,8 +2,12 @@ package View;
 
 import javax.swing.*;
 
+/**
+ * Sez_BView
+ * Form per la sezione B
+ */
 
-public class Sez_BView {
+public class Sez_BView extends JPanel{
 
     private JComboBox certif_Box;
     private JComboBox anno_scad_Box;
@@ -23,16 +27,23 @@ public class Sez_BView {
 
     public Sez_BView() {
 
-        return;
+        setVisible(true);
 
     }
 
-    //GETTER
+    //GETTER e SETTER
+    public JPanel getIntermedio0() {
+
+        return Intermedio0;
+
+    }
+
     public JComboBox getBoxlist() {
 
         return boxlist;
 
     }
+
     public String getNomeCertificazione(){
 
         return (String) boxlist.getSelectedItem();
@@ -45,45 +56,50 @@ public class Sez_BView {
     }
 
 
-
     public String getDataScadenza(){
 
         return (String)anno_scad_Box.getSelectedItem()+"-"+(String)mese_scad_Box.getSelectedItem()+"-"+
                 (String)giorno_scad_Box.getSelectedItem();
+
     }
 
     public String getDataAcquisizone() {
-        return (String)anno_acq_Box.getSelectedItem()+"-"+(String)mese_acq_Box.getSelectedItem()+"-"+(String)giorno_acq_Box.getSelectedItem();
+
+        return (String)anno_acq_Box.getSelectedItem()+"-"+(String)mese_acq_Box.getSelectedItem()+"-"+
+                (String)giorno_acq_Box.getSelectedItem();
+
     }
 
     public String getEnte_r_Text() {
 
         return ente_r_Text.getText();
+
     }
 
     public String getnDoc_Text() {
 
         return nDoc_Text.getText();
+
     }
 
-    public JPanel getIntermedio0() {
-
-        return Intermedio0;
-    }
     public JButton getAggiungiButton() {
 
         return aggiungiButton;
+
     }
 
     public JButton getUpdateButton() {
+
         return updateButton;
+
     }
 
     public JButton getEliminaButton() {
+
         return eliminaButton;
+
     }
 
-    //SETTER
     public void setEnte_r_Text(String Ente_r_Text) {
 
         ente_r_Text.setText(Ente_r_Text);
@@ -120,11 +136,10 @@ public class Sez_BView {
         anno = Data.substring(0,4);
         mese = Data.substring(5,7);
         giorno = Data.substring(8,10);
-        System.out.println(giorno);
+        //System.out.println(giorno);
         anno_acq_Box.setSelectedItem(anno);
         mese_acq_Box.setSelectedItem(mese);
         giorno_acq_Box.setSelectedItem(giorno);
-
 
     }
 
@@ -150,7 +165,6 @@ public class Sez_BView {
         anno_scad_Box.setEnabled(editabile);
         mese_scad_Box.setEnabled(editabile);
         giorno_scad_Box.setEnabled(editabile);
-
 
     }
 
@@ -186,6 +200,13 @@ public class Sez_BView {
         giorno_scad_Box.setSelectedIndex(0);
         nDoc_Text.setText("");
         ente_r_Text.setText("");
+
+    }
+
+    @Override
+    public String toString() {
+
+        return "Sez_BView";
 
     }
 }

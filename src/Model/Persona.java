@@ -4,7 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
+/**
+ * Persona
+ * Rappresenta la struttura fondamentale(sez A,B,C) di ogni candidato o volontario
+ * Estende Model ma non implementa i suoi metodi astratti
+ */
 public abstract class Persona extends Model{
 
     /*VARIABILI D'ISTANZA DI PERSONA*/
@@ -35,11 +39,12 @@ public abstract class Persona extends Model{
     private String numerocodicepostale;
     private String IBAN;
 
-
+    /*Sez_Pass*/
     private String Username;
     private String Password;
 
 
+    /*COSTRUTTORI*/
 
     /* Costruttore vuoto*/
     public Persona(){
@@ -56,7 +61,10 @@ public abstract class Persona extends Model{
 
     }
 
-
+    /**
+     * Metodo di servizio
+     * Popola con l ausilio del DB le variabili di istanza, della sez A
+     */
     private void popolaA(){
 
         openConnection();
@@ -70,7 +78,7 @@ public abstract class Persona extends Model{
                 Password = query.getString("pass");
             }
 
-            System.out.println(Codice_Fiscale);
+           // System.out.println(Codice_Fiscale);
 
 
             sql = "select* from a where cf ='"+Codice_Fiscale+"'";
@@ -97,10 +105,14 @@ public abstract class Persona extends Model{
             se.printStackTrace();
         }finally{
             closeConnection();
-            System.out.println("A tutto bene");
+            //System.out.println("A tutto bene");
         }
     }
 
+    /**
+     * Metodo di servizio
+     * Popola con l ausilio del DB le variabili di istanza, della sez A
+     */
     private void popolaB(){
 
         CERTIFICAZIONI = new ArrayList<>(25);
@@ -127,11 +139,9 @@ public abstract class Persona extends Model{
         sql = "select* from patenti where cf ='"+ Codice_Fiscale +"'";
         query = selectQuery(sql);
 
-
-
             while(query.next()){
 
-                Certificazione temporaneo = new Certificazione("abilitazioni",Codice_Fiscale,
+                Certificazione temporaneo = new Certificazione("patenti",Codice_Fiscale,
                         query.getString("nome"),query.getString("dataacquisizione"),
                         query.getString("datascadenza"),query.getString("entedirilascio"),
                         query.getString("n_documento"));
@@ -146,7 +156,7 @@ public abstract class Persona extends Model{
 
             while(query.next()){
 
-                Certificazione temporaneo = new Certificazione("abilitazioni",Codice_Fiscale,
+                Certificazione temporaneo = new Certificazione("corsi",Codice_Fiscale,
                         query.getString("nome"),query.getString("dataacquisizione"),
                         query.getString("datascadenza"),query.getString("entedirilascio"),
                         query.getString("n_documento"));
@@ -158,20 +168,15 @@ public abstract class Persona extends Model{
             se.printStackTrace();
         }finally{
             closeConnection();
-            System.out.println("B tutto bene");
+           // System.out.println("B tutto bene");
         }
-        int i=0;
-
-        while(i<CERTIFICAZIONI.size()){
-            System.out.println(CERTIFICAZIONI.get(i).getTipo());
-            System.out.println(CERTIFICAZIONI.get(i).getNome());
-            i++;
-        }
-
-
 
     }
 
+    /**
+     * Metodo di servizio
+     * Popola con l ausilio del DB le variabili di istanza, della sez A
+     */
     private void popolaC(){
 
         openConnection();
@@ -307,24 +312,6 @@ public abstract class Persona extends Model{
 
     }
 
-    public void setCodice_Fiscale(String codice_Fiscale) {
-
-        Codice_Fiscale = codice_Fiscale;
-
-    }
-
-    public String getData_Prima_Iscrizione() {
-
-        return Data_Prima_Iscrizione;
-
-    }
-
-    public void setData_Prima_Iscrizione(String data_Prima_Iscrizione) {
-
-        Data_Prima_Iscrizione = data_Prima_Iscrizione;
-
-    }
-
     public String getProfessione() {
 
         return Professione;
@@ -446,13 +433,9 @@ public abstract class Persona extends Model{
 
     }
 
-
-
     public ArrayList<Certificazione> getCERTIFICAZIONI() {
 
         return CERTIFICAZIONI;
 
     }
-
-
 }

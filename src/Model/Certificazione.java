@@ -1,6 +1,10 @@
 package Model;
 
 
+/**
+ * Certificazione
+ * Raffigura la struttura(presente nel DB) dei corsi, patenti, abilitazioni dell utente
+ */
 public class Certificazione extends Model{
 
     private String codicefiscale;
@@ -67,12 +71,22 @@ public class Certificazione extends Model{
 
     @Override
     public boolean UpdateSQL(String[] Appoggio) {
+        return false;
+    }
+
+    /**
+     * Esegue l update della certificazione nel DB
+     **/
+    public boolean updatesql(){
 
         boolean controllo = false;
-
+        System.out.println("ci sono");
         openConnection();
 
-        String sql = "update "+tipo+" set "+Appoggio[0]+"='"+Appoggio[1]+"' where cf='"+codicefiscale+"'";
+        System.out.print(codicefiscale);
+        String sql = "update "+tipo+" set datascadenza='"+datascadenza+"'" +
+                ",dataacquisizione='"+dataacquisizione+"' ,entedirilascio='"+entedirilascio+
+                "' ,n_documento='"+n_documento+"' where cf='"+codicefiscale+"'";
 
 
         if(updateQuery(sql)){
@@ -80,8 +94,15 @@ public class Certificazione extends Model{
         }
         closeConnection();
         return controllo;
+
+
     }
 
+    /**
+     * Elimina la certificazinoe dal DB
+     *
+     * @return
+     */
     public boolean DeleteSQL(){
 
         boolean controllo=false;
@@ -103,64 +124,97 @@ public class Certificazione extends Model{
 
     }
 
+    @Override
+    public String toString() {
+
+        return "Certificazione";
+
+    }
+
+    //GETTER e SETTER
     public String getNome() {
+
         return nome;
+
     }
 
     public String getDatascadenza() {
+
         return datascadenza;
+
     }
 
     public String getDataacquisizione() {
+
         return dataacquisizione;
+
     }
 
     public String getEntedirilascio() {
+
         return entedirilascio;
+
     }
 
     public String getN_documento() {
+
         return n_documento;
+
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String Nome) {
+
+        nome = Nome;
+
     }
 
-    public void setDatascadenza(String datascadenza) {
-        this.datascadenza = datascadenza;
+    public void setDatascadenza(String Datascadenza) {
+
+       datascadenza = Datascadenza;
+
     }
 
-    public void setDataacquisizione(String dataacquisizione) {
-        this.dataacquisizione = dataacquisizione;
+    public void setDataacquisizione(String Dataacquisizione) {
+
+        dataacquisizione = Dataacquisizione;
+
     }
 
-    public void setEntedirilascio(String entedirilascio) {
-        this.entedirilascio = entedirilascio;
+    public void setEntedirilascio(String Entedirilascio) {
+
+       entedirilascio = Entedirilascio;
+
     }
 
-    public void setN_documento(String n_documento) {
-        this.n_documento = n_documento;
+    public void setN_documento(String N_documento) {
+
+        n_documento = N_documento;
+
     }
 
-    public void setCodicefiscale(String codicefiscale) {
-        this.codicefiscale = codicefiscale;
-    }
 
     public String getTipo() {
+
         return tipo;
+
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setTipo(String Tipo) {
+
+        tipo = Tipo;
+
     }
 
 
     public String getFlag() {
+
         return flag;
+
     }
 
-    public void setFlag(String flag) {
-        this.flag = flag;
+    public void setFlag(String Flag) {
+
+        flag = Flag;
+
     }
 }
