@@ -1,8 +1,6 @@
 package Controller;
 
-import Model.Candidato;
-import Model.Certificazione;
-import Model.RegistrazioneModel;
+import Model.*;
 import View.*;
 
 import javax.swing.*;
@@ -20,9 +18,11 @@ public class AnagraficaController {
    private AnagraficaView Anagraficaview;
    private LoginView loginview;
    private String codicefiscale;
-   private Candidato Utente;
+   private Persona Utente;
    private CandidatoDestraView Dview;
-   private CandidatoController ccontroller;
+   private CandidatoController cController;
+
+   private VolontarioDView vDview;
 
    private Sez_AView sez_Aview;
    private Sez_BView sez_Bview;
@@ -32,6 +32,8 @@ public class AnagraficaController {
 
    private JButton Salvabutton;
    private int Modifica;
+
+   private String utilizzatore;
 
 
     /*COSTRUTTORI*/
@@ -47,7 +49,7 @@ public class AnagraficaController {
         Utente = null;
         Dview = null;
         Modifica = 0;
-        ccontroller = null;
+        cController = null;
 
         Salvabutton = Anagraficaview.getSalvaButton();
         Salvabutton.setContentAreaFilled(false);
@@ -82,7 +84,7 @@ public class AnagraficaController {
         Utente = utente;
         Dview = view;
         Modifica = 0;
-        ccontroller = CController;
+        cController = CController;
         Salvabutton = Anagraficaview.getSalvaButton();
 
         sez_Aview = new Sez_AView();
@@ -99,13 +101,55 @@ public class AnagraficaController {
 
         //Setto il mio manager di pagine
         Pagine_Manager.setPagina_Corrente();
-        AcquisizioneCampi();
+        SettaggioCampi_ABC();
         basicframe.setdestra(Anagraficaview.getIntermedio0());
 
         Listener();
         CandidatoListner();
 
     }
+
+
+
+    //VOLONTARIO
+    public AnagraficaController(BasicFrameView frame, VolontarioDView view, Volontario VUtente) {
+
+        basicframe = frame;
+        Anagraficaview = new AnagraficaView();
+        loginview = null;
+        Utente = VUtente;
+
+        codicefiscale = Utente.getCodice_Fiscale() ;
+
+        vDview = view;
+        Modifica = 0;
+        Salvabutton = Anagraficaview.getSalvaButton();
+        utilizzatore = "volontario";
+
+
+        sez_Aview = new Sez_AView();
+        sez_Bview = new Sez_BView();
+        sez_bUtenteController = new Sez_BUtenteController(sez_Bview, Utente.getCERTIFICAZIONI(),basicframe,codicefiscale);
+        sez_Cview = new Sez_CView();
+        //sez_Dview = new Sez_DView();
+
+
+        Anagraficaview.VisibilitaPaginaLoginButton(false);
+        Anagraficaview.VisibilitaModificaButton(true);
+        Anagraficaview.VisibilitaHomeButton(true);
+        sceltapannelli();
+
+        //Setto il mio manager di pagine
+        Pagine_Manager.setPagina_Corrente();
+        SettaggioCampi_ABC();
+       // SettaggioCampi_D();
+        basicframe.setdestra(Anagraficaview.getIntermedio0());
+
+        //VolontarioListner();
+        CandidatoListner();
+
+    }
+
     /**
      * sceltapannelli gestisce i pannelli da inserire nella Sez_managerView.
      *
@@ -252,7 +296,7 @@ public class AnagraficaController {
             public void actionPerformed(ActionEvent e) {
 
                 basicframe.setdestra(Dview.getIntermedio0());
-                ccontroller.setDatiPersonali(0);
+                cController.setDatiPersonali(0);
 
             }
         });
@@ -351,7 +395,7 @@ public class AnagraficaController {
      * Inizializza i vari campi testo delle 3 sezioni
      */
 
-    private void AcquisizioneCampi(){
+    private void SettaggioCampi_ABC(){
 
         sez_Aview.setNometext(Utente.getNome());
         sez_Aview.setCognometext(Utente.getCognome());

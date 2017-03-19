@@ -2,6 +2,7 @@ package Controller;
 
 import Model.LoginModel;
 import Model.Candidato;
+import Model.Volontario;
 import View.BasicFrameView;
 import View.LoginView;
 
@@ -104,8 +105,8 @@ public class LoginController {
 
             }else{
                 VolontarioController UController;
-
-                UController = new VolontarioController(basicframe);
+                Volontario utente = new Volontario(userInserito);
+                UController = new VolontarioController(basicframe, utente);
 
             }
 
