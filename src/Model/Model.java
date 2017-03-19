@@ -70,7 +70,7 @@ public abstract class Model {
      * updateQuery  esegue una query sql per l'update dei dati (nel dattaglio: inserimento, modifica e eliminazione)
      *
      * @param sql stringa sql
-     * @return true se andata a buon fine altrimenti false
+     * @return true se andata a buon fine altrim
      */
     protected boolean updateQuery(String sql) {
 
