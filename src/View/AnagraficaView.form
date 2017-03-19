@@ -86,6 +86,14 @@
             <border type="none"/>
             <children/>
           </grid>
+          <grid id="1772f" binding="SezD" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <card name="quattro"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </grid>
         </children>
       </grid>
     </children>

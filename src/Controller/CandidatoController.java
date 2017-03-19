@@ -111,9 +111,15 @@ public class CandidatoController {
             appoggio[2] = "vol_o_cand";
             appoggio[3] = "1";
 
-            if( Utente.UpdateSQL(appoggio)) {
-                LoginController login;
-                new LoginController(basicframe);
+            if(Utente.UpdateSQL(appoggio)) {
+
+                appoggio[2] ="primoaccesso";
+                appoggio[3] = "si";
+
+                if(Utente.UpdateSQL(appoggio)) {
+                    LoginController login;
+                    login = new LoginController(basicframe);
+                }
             }
         }
 

@@ -237,12 +237,13 @@ public class RegistrazioneModel extends Model {
 
        Boolean controllo = false;
        openConnection();
-       String sql = "Insert into pass(cf,pass,user,vol_o_cand,conf_giunta) values('" +
+       String sql = "Insert into pass(cf,pass,user,vol_o_cand,conf_giunta,primoaccesso) values('" +
                codicefiscale                                    + "','" +
                sez_Aview.getPasswordtext()                      + "','" +
                sez_Aview.getUsernametext()                      + "','" +
                "0"                                              + "','" +
-               "0"                                              + "')";
+               "0"                                              + "','" +
+               "no"                                             + "')";
 
 
        if(updateQuery(sql)) {

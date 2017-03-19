@@ -21,6 +21,7 @@ public class AnagraficaView extends JPanel{
     private JButton avantiButton;
     private JButton modificaButton;
     private JButton homeButton;
+    private JPanel SezD;
 
 
     public AnagraficaView() {
@@ -99,7 +100,11 @@ public class AnagraficaView extends JPanel{
 
     }
 
+    public void setSezD(JPanel sezD) {
 
+        SezD.add(sezD);
+
+    }
 
     public void VisibilitaPaginaLoginButton(boolean visibilita) {
 

@@ -19,6 +19,8 @@ public class Volontario extends Persona {
     private String tagliapantaloni;
     private String tagliascarpe;
 
+    private String primoaccesso;
+
    /* private String ruolo;
     private int stato;*/
 
@@ -38,6 +40,7 @@ public class Volontario extends Persona {
 
         popolaD();
         popolacompiti();
+        popolaprimoaccesso();
 
     }
 
@@ -49,7 +52,7 @@ public class Volontario extends Persona {
         try {
 
 
-            String sql = "select grupposang,tagliatesta,tagliabusto,tagliagiacca,tagliapantaloni,tagliascarpe" +
+            String sql = "select grupposang,tagliatesta,tagliabusto,tagliapantaloni,tagliascarpe" +
                     " from d where cf ='"+getCodice_Fiscale()+"'";
 
 
@@ -59,7 +62,6 @@ public class Volontario extends Persona {
                 grupposanguigno = query.getString("grupposang");
                 tagliatesta = query.getString("tagliatesta");
                 tagliabusto = query.getString("tagliabusto");
-                tagliagiacca = query.getString("tagliagiacca");
                 tagliamano = query.getString("tagliamano");
                 tagliapantaloni = query.getString("tagliapantaloni");
                 tagliascarpe = query.getString("tagliascarpe");
@@ -118,6 +120,28 @@ public class Volontario extends Persona {
 
     }
 
+    private void popolaprimoaccesso(){
+
+        openConnection();
+
+        try {
+
+
+            String sql = "select primoaccesso from pass where cf ='"+getCodice_Fiscale()+"'";
+
+
+            ResultSet query = selectQuery(sql);
+            if(query.next())
+
+               primoaccesso = query.getString("primoaccesso");
+
+        }catch(SQLException se){
+            se.printStackTrace();
+        }finally{
+            closeConnection();
+        }
+    }
+
 
     @Override
     public boolean UpdateSQL(String[] Appoggio) {
@@ -132,5 +156,40 @@ public class Volontario extends Persona {
     @Override
     public boolean InsertSQL() {
         return false;
+    }
+
+
+    //GETTER
+    public String getGrupposanguigno() {
+        return grupposanguigno;
+    }
+
+    public String getTagliatesta() {
+        return tagliatesta;
+    }
+
+    public String getTagliabusto() {
+        return tagliabusto;
+    }
+
+
+    public String getTagliamano() {
+        return tagliamano;
+    }
+
+    public String getTagliapantaloni() {
+        return tagliapantaloni;
+    }
+
+    public String getTagliascarpe() {
+        return tagliascarpe;
+    }
+
+    public ArrayList<Compito> getCOMPITI() {
+        return COMPITI;
+    }
+
+    public String getPrimoaccesso() {
+        return primoaccesso;
     }
 }

@@ -19,16 +19,18 @@ public class AnagraficaController {
    private LoginView loginview;
    private String codicefiscale;
    private Persona Utente;
-   private CandidatoDestraView Dview;
+   private CandidatoDestraView cDview;
    private CandidatoController cController;
 
    private VolontarioDView vDview;
+   private VolontarioController vController;
 
    private Sez_AView sez_Aview;
    private Sez_BView sez_Bview;
    private Sez_BRegistrazioneController sez_bRegistrazioneController;
    private Sez_BUtenteController sez_bUtenteController;
    private Sez_CView sez_Cview;
+   private Sez_DView sez_Dview;
 
    private JButton Salvabutton;
    private int Modifica;
@@ -37,6 +39,10 @@ public class AnagraficaController {
 
 
     /*COSTRUTTORI*/
+
+    //PRIMOACCESSO
+
+
 
     //REGISTRAZIONE
     public AnagraficaController(BasicFrameView frame, LoginView view, String CodiceFiscale) {
@@ -47,9 +53,10 @@ public class AnagraficaController {
         codicefiscale = CodiceFiscale ;
 
         Utente = null;
-        Dview = null;
+        cDview = null;
         Modifica = 0;
         cController = null;
+        utilizzatore = "registrazione";
 
         Salvabutton = Anagraficaview.getSalvaButton();
         Salvabutton.setContentAreaFilled(false);
@@ -82,10 +89,11 @@ public class AnagraficaController {
         loginview = null;
         codicefiscale = CodiceFiscale;
         Utente = utente;
-        Dview = view;
+        cDview = view;
         Modifica = 0;
         cController = CController;
         Salvabutton = Anagraficaview.getSalvaButton();
+        utilizzatore = "candidato";
 
         sez_Aview = new Sez_AView();
         sez_Bview = new Sez_BView();
@@ -101,24 +109,26 @@ public class AnagraficaController {
 
         //Setto il mio manager di pagine
         Pagine_Manager.setPagina_Corrente();
-        SettaggioCampi_ABC();
+        SettaggioCampi_A();
+        SettaggioCampi_C();
         basicframe.setdestra(Anagraficaview.getIntermedio0());
 
         Listener();
-        CandidatoListner();
+        UtenteListner();
 
     }
 
     //VOLONTARIO
-    public AnagraficaController(BasicFrameView frame, VolontarioDView view, Volontario VUtente) {
+    public AnagraficaController(BasicFrameView frame, VolontarioDView view, Volontario VUtente, VolontarioController VController) {
 
         basicframe = frame;
         Anagraficaview = new AnagraficaView();
         loginview = null;
         Utente = VUtente;
 
-        codicefiscale = Utente.getCodice_Fiscale() ;
+       //codicefiscale = Utente.getCodice_Fiscale() ;
 
+        vController = VController;
         vDview = view;
         Modifica = 0;
         Salvabutton = Anagraficaview.getSalvaButton();
@@ -129,22 +139,26 @@ public class AnagraficaController {
         sez_Bview = new Sez_BView();
         sez_bUtenteController = new Sez_BUtenteController(sez_Bview, Utente.getCERTIFICAZIONI(),basicframe,codicefiscale);
         sez_Cview = new Sez_CView();
-        //sez_Dview = new Sez_DView();
+        sez_Dview = new Sez_DView();
+
 
 
         Anagraficaview.VisibilitaPaginaLoginButton(false);
         Anagraficaview.VisibilitaModificaButton(true);
         Anagraficaview.VisibilitaHomeButton(true);
+        System.out.println("ok");
         sceltapannelli();
+        //System.out.println("ok");
 
         //Setto il mio manager di pagine
         Pagine_Manager.setPagina_Corrente();
-        SettaggioCampi_ABC();
-       // SettaggioCampi_D();
+        SettaggioCampi_A();
+        SettaggioCampi_C();
+        SettaggioCampi_D();
         basicframe.setdestra(Anagraficaview.getIntermedio0());
 
-       // VolontarioListner();
-       // CandidatoListner();
+       VolontarioListner();
+       UtenteListner();
 
     }
 
@@ -157,6 +171,8 @@ public class AnagraficaController {
             Anagraficaview.setSezA(sez_Aview.getIntermedio0());
             Anagraficaview.setSezB(sez_Bview.getIntermedio0());
             Anagraficaview.setSezC(sez_Cview.getIntermedio0());
+            if(utilizzatore.equals("volontario"))
+               Anagraficaview.setSezD(sez_Dview.getIntermedio0());
 
     }
 
@@ -262,7 +278,7 @@ public class AnagraficaController {
      * Listener utilizzato esclusivamete dal Candidato
      * --> Modifica, Home, salva
      */
-    private void CandidatoListner(){
+    private void UtenteListner(){
 
 
         /*Modifica*/
@@ -282,7 +298,12 @@ public class AnagraficaController {
 
                 sez_Cview.Abilita_Disabilita_Campi(true);
 
+                if(utilizzatore.equals("volontario"))
+                    sez_Dview.Abilita_Disabilita_Campi(true);
+
                 Anagraficaview.VisibilitaModificaButton(false);
+
+
 
             }
         });
@@ -293,8 +314,16 @@ public class AnagraficaController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                basicframe.setdestra(Dview.getIntermedio0());
-                cController.setDatiPersonali(0);
+
+                if(utilizzatore.equals("candidato")) {
+                    basicframe.setdestra(cDview.getIntermedio0());
+                    cController.setDatiPersonali(0);
+                }
+                else if(utilizzatore.equals("volontario")) {
+                    basicframe.setdestra(vDview.getIntermedio0());
+                    vController.setDatiPersonali(0);
+                }
+
 
             }
         });
@@ -323,6 +352,66 @@ public class AnagraficaController {
         });
 
 
+    }
+
+    /**
+     * Listener utilizzato esclusivamete dal Candidato
+     * -->  Avanti, Indietro, Modifica, Home, salva
+     */
+    private void VolontarioListner(){
+
+        CardLayout CL=(CardLayout) Anagraficaview.getIntermedio1().getLayout();
+
+        JButton sez_managerviewAvanti = Anagraficaview.getAvantiButton();
+        JButton sez_managerviewIndietro= Anagraficaview.getIndietroButton();
+
+        sez_managerviewIndietro.setContentAreaFilled(false);
+
+        /*Avanti*/
+        sez_managerviewAvanti.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (Pagine_Manager.getPagina_Corrente() < 4) {
+
+                    CL.next(Anagraficaview.getIntermedio1());
+                    Pagine_Manager.addPagina_Corrente();
+
+                }
+                if (Pagine_Manager.getPagina_Corrente() == 4) {
+                    sez_managerviewAvanti.setContentAreaFilled(false);
+                    Salvabutton.setContentAreaFilled(true);
+                }
+
+                if (Pagine_Manager.getPagina_Corrente() > 1)
+                    sez_managerviewIndietro.setContentAreaFilled(true);
+            }
+        });
+
+
+        /*Indietro*/
+        sez_managerviewIndietro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (Pagine_Manager.getPagina_Corrente() > 1) {
+
+                    CL.previous(Anagraficaview.getIntermedio1());
+                    Pagine_Manager.subctractPagina_Corrente();
+                }
+
+
+				    /*significa che mi trovo alla prima pagina, e non potendo andare più indietro "opacizzo" indietro*/
+                if (Pagine_Manager.getPagina_Corrente() == 1)
+                    sez_managerviewIndietro.setContentAreaFilled(false);
+
+
+                if (Pagine_Manager.getPagina_Corrente() >= 1)
+                    sez_managerviewAvanti.setContentAreaFilled(true);
+
+
+            }
+        });
     }
 
     /**
@@ -390,17 +479,17 @@ public class AnagraficaController {
 
     /**
      * Metodo privato
-     * Inizializza i vari campi testo delle 3 sezioni
+     * Inizializza i vari campi testo delle sezioni A
+     * Pone i vari campi delle sezioni A  non editabili
      */
-
-    private void SettaggioCampi_ABC(){
+    private void SettaggioCampi_A() {
 
         sez_Aview.setNometext(Utente.getNome());
         sez_Aview.setCognometext(Utente.getCognome());
         sez_Aview.setLuogodinascitatext(Utente.getLuogo_di_Nascita());
         sez_Aview.setTelefonofissotext(Utente.getTelefono_Fisso());
         sez_Aview.setTelefonocellularetext(Utente.getTelefono_Cellulare());
-        sez_Aview.setDataDiNascitaComboBox(Utente.getData_di_Nascita().substring(0,4),Utente.getData_di_Nascita().substring(5,7),Utente.getData_di_Nascita().substring(8,10));
+        sez_Aview.setDataDiNascitaComboBox(Utente.getData_di_Nascita().substring(0, 4), Utente.getData_di_Nascita().substring(5, 7), Utente.getData_di_Nascita().substring(8, 10));
         sez_Aview.setIndirizzodiresidenzatext(Utente.getIndirizzo_di_residenza());
         sez_Aview.setEmailtext(Utente.getEmail());
         sez_Aview.setProfessionetext(Utente.getProfessione());
@@ -409,8 +498,14 @@ public class AnagraficaController {
         sez_Aview.setPasswordtext(Utente.getPassword());
 
         sez_Aview.Abilita_Disabilita_Campi(false);
+    }
+    /**
+     * Metodo privato
+     * Inizializza i vari campi testo delle sezioni C
+     * Pone i vari campi delle sezioni C non editabili
+     */
 
-        //ovviamente per la sezione B c è anche il controller invocato nel costruttore
+    private void SettaggioCampi_C(){
 
         sez_Cview.setDenominazioneDatoreDiLavorotext(Utente.getDenominazione_Datore_di_Lavoro());
         sez_Cview.setTelDatoreDiLavorotext(Utente.getTelefono_Datore_Lavoro());
@@ -420,6 +515,28 @@ public class AnagraficaController {
         sez_Cview.setIbantext(Utente.getIBAN());
 
         sez_Cview.Abilita_Disabilita_Campi(false);
+
+    }
+
+    /**
+     * Metodo privato
+     * Inizializza i vari campi testo delle sezioni D
+     * Pone i vari campi delle sezioni D  non editabili
+     */
+
+    private void SettaggioCampi_D(){
+
+        //conversione esplicita
+        Volontario UTENTE = (Volontario) Utente;
+
+        sez_Dview.setGStext(UTENTE.getGrupposanguigno());
+        sez_Dview.setTagliaTestatext(UTENTE.getTagliatesta());
+        sez_Dview.setTagliaBustotext(UTENTE.getTagliabusto());
+        sez_Dview.setTagliaManotext(UTENTE.getTagliamano());
+        sez_Dview.setTagliaPantalonitext(UTENTE.getTagliapantaloni());
+        sez_Dview.setTagliaScarpetext(UTENTE.getTagliascarpe());
+
+        sez_Dview.Abilita_Disabilita_Campi(false);
 
 
     }
@@ -629,6 +746,9 @@ public class AnagraficaController {
 
         return controllo;
     }
+
+
+
 
 
     @Override

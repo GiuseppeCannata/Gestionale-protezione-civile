@@ -31,6 +31,12 @@ public class VolontarioController{
         basicframe.setdestra(Dview.getIntermedio0());
         basicframe.setsinistra(Sview.getIntermedio0());
 
+        if(Utente.getPrimoaccesso().equals("si")) {
+           // basicframe.setdestra();
+            basicframe.Message("Ciao sei appena diventato un Volontario!\nPer completa la tua iscrizione " +
+                    "completa la sezione D di seguito riportata");
+        }
+
         VolontarioControllerListener();
 
     }
@@ -48,7 +54,7 @@ public class VolontarioController{
                     DatiPersonali = 1;
 
                     AnagraficaController datipersonali;
-                    datipersonali = new AnagraficaController(basicframe,Dview,Utente );
+                    datipersonali = new AnagraficaController(basicframe, Dview, Utente, VolontarioController.this);
                 }
 
             }
@@ -76,5 +82,9 @@ public class VolontarioController{
             LoginController loginController = new LoginController(basicframe);
         }
 
+    }
+
+    public void setDatiPersonali(int datiPersonali) {
+        DatiPersonali = datiPersonali;
     }
 }
