@@ -165,6 +165,7 @@ public class Sez_BUtenteController {
 
                     controllo = true;
                     boxlist.removeItem(DaEliminare);
+                    sez_Bview.HardReset();
 
                 }
                 i++;

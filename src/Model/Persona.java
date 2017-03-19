@@ -132,7 +132,7 @@ public abstract class Persona extends Model{
                         query.getString("datascadenza"),query.getString("entedirilascio"),
                         query.getString("n_documento"));
 
-                CERTIFICAZIONI.add(temporaneo);
+                CERTIFICAZIONI.add(CERTIFICAZIONI.size(), temporaneo);
             }
 
 
@@ -146,7 +146,7 @@ public abstract class Persona extends Model{
                         query.getString("datascadenza"),query.getString("entedirilascio"),
                         query.getString("n_documento"));
 
-                CERTIFICAZIONI.add(temporaneo);
+                CERTIFICAZIONI.add(CERTIFICAZIONI.size(), temporaneo);
 
             }
 
@@ -161,7 +161,7 @@ public abstract class Persona extends Model{
                         query.getString("datascadenza"),query.getString("entedirilascio"),
                         query.getString("n_documento"));
 
-                CERTIFICAZIONI.add(temporaneo);
+                CERTIFICAZIONI.add(CERTIFICAZIONI.size(), temporaneo);
 
             }
         }catch(SQLException se){
