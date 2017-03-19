@@ -13,6 +13,7 @@ public class Sez_DView extends JPanel {
     private JTextField TagliaPantalonitext;
     private JTextField TagliaScarpetext;
     private JButton salvaButton;
+    private JTextField Abilitatext;
 
 
     public Sez_DView() {
@@ -27,7 +28,11 @@ public class Sez_DView extends JPanel {
 
     }
 
+    public String getAbilitatext() {
 
+        return Abilitatext.getText();
+
+    }
 
     public String getGStext() {
 
@@ -76,7 +81,11 @@ public class Sez_DView extends JPanel {
 
     }
 
+    public void setAbilitatext(String abilitatext) {
 
+        Abilitatext.setText(abilitatext);
+
+    }
 
     public void setTagliaTestatext(String tagliaTestatext) {
 
@@ -116,6 +125,7 @@ public class Sez_DView extends JPanel {
         TagliaManotext.setEditable(editabile);
         TagliaPantalonitext.setEditable(editabile);
         TagliaScarpetext.setEditable(editabile);
+        Abilitatext.setEditable(editabile);
 
     }
 

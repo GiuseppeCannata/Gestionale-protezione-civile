@@ -17,6 +17,7 @@ public class Volontario extends Persona {
     private String tagliamano;
     private String tagliapantaloni;
     private String tagliascarpe;
+    private String abilita;
 
     private String primoaccesso;
 
@@ -51,7 +52,7 @@ public class Volontario extends Persona {
         try {
 
 
-            String sql = "select grupposang,tagliatesta,tagliabusto,tagliamano,tagliapantaloni,tagliascarpe" +
+            String sql = "select grupposang,tagliatesta,tagliabusto,tagliamano,tagliapantaloni,tagliascarpe,abilita" +
                     " from d where cf ='"+getCodice_Fiscale()+"'";
 
 
@@ -64,6 +65,7 @@ public class Volontario extends Persona {
                 tagliamano = query.getString("tagliamano");
                 tagliapantaloni = query.getString("tagliapantaloni");
                 tagliascarpe = query.getString("tagliascarpe");
+                abilita = query.getString("abilita");
 
 
             }
@@ -177,14 +179,15 @@ public class Volontario extends Persona {
         boolean controllo = false;
         openConnection();
 
-        String sql = "Insert into d(cf,grupposang,tagliatesta,tagliabusto,tagliamano,tagliapantaloni,tagliascarpe) values('" +
+        String sql = "Insert into d(cf,grupposang,tagliatesta,tagliabusto,tagliamano,tagliapantaloni,tagliascarpe,abilita) values('" +
                 getCodice_Fiscale()                         + "','" +
                 grupposanguigno                             + "','" +
                 tagliatesta                                 + "','" +
                 tagliabusto                                 + "','" +
                 tagliamano                                  + "','" +
                 tagliapantaloni                             + "','" +
-                tagliascarpe                                + "')" ;
+                tagliascarpe                                 + "','" +
+                abilita                                      + "')";
 
 
 
@@ -260,5 +263,7 @@ public class Volontario extends Persona {
         this.tagliascarpe = tagliascarpe;
     }
 
-
+    public void setAbilita(String abilita) {
+        this.abilita = abilita;
+    }
 }

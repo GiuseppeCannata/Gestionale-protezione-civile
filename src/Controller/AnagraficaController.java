@@ -812,6 +812,7 @@ public class AnagraficaController {
         VOLONTARIO.setTagliamano(sez_Dview.getTagliaManotext());
         VOLONTARIO.setTagliapantaloni(sez_Dview.getTagliaPantalonitext());
         VOLONTARIO.setTagliascarpe(sez_Dview.getTagliaScarpetext());
+        VOLONTARIO.setAbilita(sez_Dview.getAbilitatext());
 
         appoggio[0]= "pass";
         appoggio[1]= "primoaccesso";
