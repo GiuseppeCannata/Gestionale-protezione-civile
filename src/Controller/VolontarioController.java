@@ -1,7 +1,10 @@
 package Controller;
 
 
+<<<<<<< HEAD
 import Model.Volontario;
+=======
+>>>>>>> origin/master
 import View.BasicFrameView;
 import View.UtenteSinistraView;
 import View.VolontarioDView;
@@ -11,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
+<<<<<<< HEAD
 public class VolontarioController{
 
     private BasicFrameView basicframe;
@@ -25,6 +29,22 @@ public class VolontarioController{
         basicframe = frame;
         DatiPersonali = 0;
         Utente = utente;
+=======
+public class VolontarioController extends CandidatoController{
+
+    private BasicFrameView basicframe;
+    private VolontarioDView Dview;
+    private Volontario Utente;
+
+    private UtenteSinistraView Sview;
+    private int DatiPersonali;
+
+    public VolontarioController(BasicFrameView frame){
+
+        super();
+        basicframe = frame;
+        DatiPersonali = 0;
+>>>>>>> origin/master
         Dview = new VolontarioDView();
         Sview = new UtenteSinistraView();
         Sview.setEvolviButton(false);
@@ -46,9 +66,15 @@ public class VolontarioController{
                 if (DatiPersonali == 0){
 
                     DatiPersonali = 1;
+<<<<<<< HEAD
 
                     AnagraficaController datipersonali;
                     //datipersonali = new AnagraficaController(basicframe, Dview, Utente);
+=======
+                    AnagraficaController datipersonali;
+                   /** datipersonali = new AnagraficaController(basicframe, Dview, Utente, Utente.getCodice_Fiscale(),
+                            );**/
+>>>>>>> origin/master
                 }
 
             }

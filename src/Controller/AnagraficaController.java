@@ -556,6 +556,7 @@ public class AnagraficaController {
 
             }else if(CERTIFICAZIONI.get(i).getFlag().equals("update")){
 
+                controllo = true;
                 Certificazione certificazione = CERTIFICAZIONI.get(i);
                 certificazione.updatesql();
 
