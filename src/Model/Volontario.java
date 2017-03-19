@@ -14,7 +14,6 @@ public class Volontario extends Persona {
     private String grupposanguigno;
     private String tagliatesta;
     private String tagliabusto;
-    private String tagliagiacca;
     private String tagliamano;
     private String tagliapantaloni;
     private String tagliascarpe;
@@ -52,7 +51,7 @@ public class Volontario extends Persona {
         try {
 
 
-            String sql = "select grupposang,tagliatesta,tagliabusto,tagliapantaloni,tagliascarpe" +
+            String sql = "select grupposang,tagliatesta,tagliabusto,tagliamano,tagliapantaloni,tagliascarpe" +
                     " from d where cf ='"+getCodice_Fiscale()+"'";
 
 
@@ -145,7 +144,20 @@ public class Volontario extends Persona {
 
     @Override
     public boolean UpdateSQL(String[] Appoggio) {
-        return false;
+
+        boolean controllo = false;
+
+        openConnection();
+
+        String sql = "update "+Appoggio[0]+" set "+Appoggio[1]+"='"+Appoggio[2]+"' where cf='"+getCodice_Fiscale()+"'";
+
+
+        if(updateQuery(sql)){
+            controllo = true;
+        }
+        closeConnection();
+        return controllo;
+
     }
 
     @Override
@@ -155,7 +167,37 @@ public class Volontario extends Persona {
 
     @Override
     public boolean InsertSQL() {
+
         return false;
+
+    }
+
+    public boolean InsertD(){
+
+        boolean controllo = false;
+        openConnection();
+
+        String sql = "Insert into d(cf,grupposang,tagliatesta,tagliabusto,tagliamano,tagliapantaloni,tagliascarpe) values('" +
+                getCodice_Fiscale()                         + "','" +
+                grupposanguigno                             + "','" +
+                tagliatesta                                 + "','" +
+                tagliabusto                                 + "','" +
+                tagliamano                                  + "','" +
+                tagliapantaloni                             + "','" +
+                tagliascarpe                                + "')" ;
+
+
+
+
+        if(updateQuery(sql)) {
+            controllo=true;
+            System.out.print("tutto bene");
+        }
+
+
+        closeConnection();
+        return controllo;
+
     }
 
 
@@ -192,4 +234,31 @@ public class Volontario extends Persona {
     public String getPrimoaccesso() {
         return primoaccesso;
     }
+
+    public void setGrupposanguigno(String grupposanguigno) {
+        this.grupposanguigno = grupposanguigno;
+    }
+
+    public void setTagliatesta(String tagliatesta) {
+        this.tagliatesta = tagliatesta;
+    }
+
+    public void setTagliabusto(String tagliabusto) {
+        this.tagliabusto = tagliabusto;
+    }
+
+
+    public void setTagliamano(String tagliamano) {
+        this.tagliamano = tagliamano;
+    }
+
+    public void setTagliapantaloni(String tagliapantaloni) {
+        this.tagliapantaloni = tagliapantaloni;
+    }
+
+    public void setTagliascarpe(String tagliascarpe) {
+        this.tagliascarpe = tagliascarpe;
+    }
+
+
 }
