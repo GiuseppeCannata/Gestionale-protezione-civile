@@ -109,8 +109,6 @@ public class AnagraficaController {
 
     }
 
-
-
     //VOLONTARIO
     public AnagraficaController(BasicFrameView frame, VolontarioDView view, Volontario VUtente) {
 
@@ -145,8 +143,8 @@ public class AnagraficaController {
        // SettaggioCampi_D();
         basicframe.setdestra(Anagraficaview.getIntermedio0());
 
-        //VolontarioListner();
-        CandidatoListner();
+       // VolontarioListner();
+       // CandidatoListner();
 
     }
 
@@ -558,6 +556,7 @@ public class AnagraficaController {
 
                 controllo = true;
                 Certificazione certificazione = CERTIFICAZIONI.get(i);
+                System.out.println(certificazione.getNome());
                 certificazione.updatesql();
 
             }

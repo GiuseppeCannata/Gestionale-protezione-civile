@@ -86,7 +86,7 @@ public class Certificazione extends Model{
         System.out.print(codicefiscale);
         String sql = "update "+tipo+" set datascadenza='"+datascadenza+"'" +
                 ",dataacquisizione='"+dataacquisizione+"' ,entedirilascio='"+entedirilascio+
-                "' ,n_documento='"+n_documento+"' where cf='"+codicefiscale+"'";
+                "' ,n_documento='"+n_documento+"' where cf='"+codicefiscale+"' and nome='"+nome+"'";
 
 
         if(updateQuery(sql)){
