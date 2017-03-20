@@ -73,7 +73,7 @@ public abstract class Persona extends Model{
 
             String sql = "select cf,pass from pass where user='"+Username+"'";
             ResultSet query = selectQuery(sql);
-            if(query.next()) {
+            while(query.next()) {
                 Codice_Fiscale = query.getString("cf");
                 Password = query.getString("pass");
             }

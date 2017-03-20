@@ -43,12 +43,12 @@ public class CFVerificaModel extends Model {
 
         openConnection();
 
-        String sql ="select cf from pass ";
+        String sql ="select cf from pass where cf='"+CodiceFiscaleInserito+"'";
         ResultSet query = selectQuery(sql);
 
         try {
 
-            while (!controllo && query.next()) {
+            if(query.next()) {
 
                 String cf = query.getString("cf");
                 if (cf.equals(CodiceFiscaleInserito))

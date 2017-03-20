@@ -230,6 +230,10 @@ public class Volontario extends Persona {
         return tagliascarpe;
     }
 
+    public String getAbilita() {
+        return abilita;
+    }
+
     public ArrayList<Compito> getCOMPITI() {
         return COMPITI;
     }

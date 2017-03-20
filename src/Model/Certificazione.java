@@ -109,9 +109,6 @@ public class Certificazione extends Model{
 
         openConnection();
 
-        System.out.println(nome);
-        System.out.println(codicefiscale);
-
 
         String sql = "delete from "+tipo+" where cf='"+codicefiscale+"' and nome='"+nome+"'";
 

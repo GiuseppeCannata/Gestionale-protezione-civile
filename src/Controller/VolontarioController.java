@@ -36,7 +36,12 @@ public class VolontarioController{
             DatiPersonali = 1; //senno si puo aprire questa sezione
             basicframe.Message("Ciao sei appena diventato un Volontario!\nPer completa la tua iscrizione " +
                     "completa la sezione D di seguito riportata");
+
+            DatiPersonali= 0;
         }
+
+        Dview.setNOMEVOLabel(Utente.getNome());
+        Dview.setCOGNOMEVOLabel(Utente.getCognome());
 
         VolontarioControllerListener();
 

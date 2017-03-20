@@ -1,21 +1,24 @@
 package View;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-/**
- * Created by asus on 16/03/2017.
- */
+
+
 public class VolontarioDView {
 
 
     private JPanel Intermedio0;
     private JButton addGiuntaComunaleButton;
     private JButton button2;
-    private JTable table1;
+    private JLabel RUOLOVOLabel;
+    private JLabel COGNOMEVOLabel;
+    private JLabel NOMEVOLabel;
+    private JTabbedPane tabbedPane1;
+    private JList list1;
+
 
     public VolontarioDView() {
+
 
         return;
 
@@ -25,19 +28,37 @@ public class VolontarioDView {
     public JPanel getIntermedio0() {
 
         return Intermedio0;
+       // list1.setListData(porca);
 
     }
 
     public JButton getAddGiuntaComunaleButton() {
+
         return addGiuntaComunaleButton;
+
     }
 
     public JButton getButton2() {
+
         return button2;
+
     }
 
-    public JTable getTable1() {
-        return table1;
+    public void setRUOLOVOLabel(String testo) {
+
+        RUOLOVOLabel.setText(testo);
+
     }
 
+    public void setCOGNOMEVOLabel(String testo) {
+
+        COGNOMEVOLabel.setText(testo);
+
+    }
+
+    public void setNOMEVOLabel(String testo){
+
+       NOMEVOLabel.setText(testo);
+
+    }
 }

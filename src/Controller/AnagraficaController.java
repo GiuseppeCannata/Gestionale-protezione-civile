@@ -362,13 +362,27 @@ public class AnagraficaController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+
                 try {
 
-                    if (!UpdateA() && !UpdateB() && !UpdateC())
-                        throw new Exception("Nessun cambiamento");
+                    if(utilizzatore.equals("candidato")) {
 
-                    if (!VerificaCampi())
-                        throw new Exception("Completa campi obbligatori");
+                        if (!VerificaCampiObbligatoriA())
+                            throw new Exception("Completa campi obbligatori");
+
+                        if (!UpdateA() && !UpdateB() && !UpdateC())
+                            throw new Exception("Nessun cambiamento");
+
+                    }else if(utilizzatore.equals("volontario")){
+
+                        if (!VerificaCampiObbligatoriA() && !VerificaCampiObbligatoriD())
+                            throw new Exception("Completa campi obbligatori");
+
+                        if (!UpdateA() && !UpdateB() && !UpdateC() && !UpdateD())
+                            throw new Exception("Nessun cambiamento");
+
+                    }
+
 
                 } catch (Exception es) {
                     basicframe.ErrorMessage(es.getMessage());
@@ -383,7 +397,7 @@ public class AnagraficaController {
 
     /**
      * Listener utilizzato esclusivamete dal Candidato
-     * -->  Avanti, Indietro, Modifica, Home, salva
+     * -->  Avanti, Indietro
      */
     private void VolontarioListner() {
 
@@ -444,13 +458,13 @@ public class AnagraficaController {
     /**
      * Metodo Privato.
      * Salvataggio si preoccupa di verificare la compilazione,da parte dell utente di tutti i campi contrassegnati
-     * come obbligatori, (per fare questo ricorre all utilizzo di un metodo privato VerificaCampi().
+     * come obbligatori, (per fare questo ricorre all utilizzo di un metodo privato VerificaCampiObbligatoriA().
      * Una volta accertata la compilazione avvia l inserimento nel DB
      */
     private void SalvataggioRegistrazione() {
 
         if (basicframe.OpotionalMessage("Una volta effettuato il salvataggio verrai\nrindirizzato" +
-                "alla pagina login.Salvare?") == 0 && VerificaCampi()) {
+                "alla pagina login.Salvare?") == 0 && VerificaCampiObbligatoriA()) {
 
             RegistrazioneModel Gestione;
             Gestione = new RegistrazioneModel(codicefiscale, sez_Aview, sez_Bview, sez_Cview, sez_bRegistrazioneController);
@@ -466,12 +480,12 @@ public class AnagraficaController {
 
     /**
      * Metodo di servizio.
-     * VerificaCampi si preoccupa di controllare se l utente per sbaglio o volutamente abbia mancato
+     * VerificaCampiObbligatoriA si preoccupa di controllare se l utente per sbaglio o volutamente abbia mancato
      * l inserimento dei campi necessari alla sua scheda anagrafica
      *
      * @return true  --> tutti i campi obbligatori sono completi
      */
-    private Boolean VerificaCampi() {
+    private boolean VerificaCampiObbligatoriA() {
 
         boolean controllo = false;
 
@@ -498,6 +512,20 @@ public class AnagraficaController {
         } catch (Exception e) {
             basicframe.ErrorMessage(e.getMessage());
         }
+
+        return controllo;
+
+    }
+
+
+    private boolean VerificaCampiObbligatoriD(){
+
+        boolean controllo = false;
+
+        if(sez_Dview.getGStext().length() == 0)
+            basicframe.ErrorMessage("Manca il gruppo sanguigno");
+        else
+            controllo = true;
 
         return controllo;
 
@@ -571,6 +599,7 @@ public class AnagraficaController {
     /**
      * Controllo eventuali aggiornamenti fatti dall utente  ai suoi dati riguardo la sezione A
      *
+     * @return true  --> l utente ha effettuato delle modifiche che sono state saalvate con successo
      * @return false --> non c è stato nessun cambiamento
      */
     private boolean UpdateA() {
@@ -688,6 +717,7 @@ public class AnagraficaController {
     /**
      * Controllo eventuali aggiornamenti fatti dall utente  ai suoi dati riguardo la sezione B
      *
+     * @return true  --> l utente ha effettuato delle modifiche che sono state saalvate con successo
      * @return false --> non c è stato nessun cambiamento
      */
 
@@ -722,6 +752,7 @@ public class AnagraficaController {
     /**
      * Controllo eventuali aggiornamenti fatti dall utente  ai suoi dati riguardo la sezione C
      *
+     * @return true  --> l utente ha effettuato delle modifiche che sono state saalvate con successo
      * @return false --> non c è stato nessun cambiamento
      */
 
@@ -796,6 +827,96 @@ public class AnagraficaController {
 
         return controllo;
     }
+    /**
+     * Controllo eventuali aggiornamenti fatti dall utente  ai suoi dati riguardo la sezione d
+     *
+     * @return true  --> l utente ha effettuato delle modifiche che sono state saalvate con successo
+     * @return false --> non c è stato nessun cambiamento
+     */
+
+    private boolean UpdateD(){
+
+        Volontario VOLONTARIO = (Volontario) Utente;
+        boolean controllo = false;
+        String[] appoggio =  new String[3];
+
+        appoggio[0] = "d";
+        //D
+
+        if (!sez_Dview.getGStext().equals(VOLONTARIO.getGrupposanguigno())) {
+
+            controllo = true;
+            appoggio[1] = "grupposanguigno";
+            appoggio[2] = sez_Dview.getGStext();
+            VOLONTARIO.setGrupposanguigno(sez_Dview.getGStext());
+            Utente.UpdateSQL(appoggio);
+
+        }
+
+        if (!sez_Dview.getTagliaTestatext().equals(VOLONTARIO.getTagliatesta())) {
+
+            controllo = true;
+            appoggio[1] = "tagliatesta";
+            appoggio[2] = sez_Dview.getTagliaTestatext();
+            VOLONTARIO.setTagliatesta(sez_Dview.getTagliaTestatext());
+            Utente.UpdateSQL(appoggio);
+
+        }
+
+        if (!sez_Dview.getTagliaBustotext().equals(VOLONTARIO.getTagliabusto())) {
+
+            controllo = true;
+            appoggio[1] = "tagliabusto";
+            appoggio[2] = sez_Dview.getTagliaBustotext();
+            VOLONTARIO.setTagliabusto(sez_Dview.getTagliaBustotext());
+            Utente.UpdateSQL(appoggio);
+
+        }
+
+        if (!sez_Dview.getTagliaManotext().equals(VOLONTARIO.getTagliamano())) {
+
+            controllo = true;
+            appoggio[1] = "tagliamano";
+            appoggio[2] = sez_Dview.getTagliaManotext();
+            VOLONTARIO.setTagliamano(sez_Dview.getTagliaManotext());
+            Utente.UpdateSQL(appoggio);
+
+        }
+
+        if (!sez_Dview.getTagliaPantalonitext().equals(VOLONTARIO.getTagliapantaloni())) {
+
+            controllo = true;
+            appoggio[1] = "tagliapantaloni";
+            appoggio[2] = sez_Dview.getTagliaPantalonitext();
+            VOLONTARIO.setTagliapantaloni(sez_Dview.getTagliaPantalonitext());
+            Utente.UpdateSQL(appoggio);
+
+        }
+
+        if (!sez_Dview.getTagliaScarpetext().equals(VOLONTARIO.getTagliascarpe())) {
+
+            controllo = true;
+            appoggio[1] = "tagliascarpe";
+            appoggio[2] = sez_Dview.getTagliaScarpetext();
+            VOLONTARIO.setTagliascarpe(sez_Dview.getTagliaScarpetext());
+            Utente.UpdateSQL(appoggio);
+
+        }
+
+        if (!sez_Dview.getAbilitatext().equals(VOLONTARIO.getAbilita())) {
+
+            controllo = true;
+            appoggio[1] = "abilita";
+            appoggio[2] = sez_Dview.getAbilitatext();
+            VOLONTARIO.setAbilita(sez_Dview.getAbilitatext());
+            Utente.UpdateSQL(appoggio);
+
+        }
+
+        return controllo;
+    }
+
+
 
 
 
