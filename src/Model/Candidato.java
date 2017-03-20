@@ -63,7 +63,7 @@ public class Candidato extends Persona {
 
             openConnection();
 
-            String sql = "update "+Appoggio[0]+" set "+Appoggio[2]+"='"+Appoggio[3]+"' where cf='"+Appoggio[1]+"'";
+            String sql = "update "+Appoggio[0]+" set "+Appoggio[1]+"='"+Appoggio[2]+"' where cf='"+getCodice_Fiscale()+"'";
 
 
             if(updateQuery(sql)){

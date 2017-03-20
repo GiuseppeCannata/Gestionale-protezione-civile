@@ -370,16 +370,34 @@ public class AnagraficaController {
                         if (!VerificaCampiObbligatoriA())
                             throw new Exception("Completa campi obbligatori");
 
-                        if (!UpdateA() && !UpdateB() && !UpdateC())
-                            throw new Exception("Nessun cambiamento");
+
+                        boolean a,b,c,d;
+                        a = UpdateA();
+                        b = UpdateB();
+                        c = UpdateC();
+
+                       if(!a && !b && !c)
+                        throw new Exception("Nessun cambiamento");
 
                     }else if(utilizzatore.equals("volontario")){
 
                         if (!VerificaCampiObbligatoriA() && !VerificaCampiObbligatoriD())
                             throw new Exception("Completa campi obbligatori");
 
-                        if (!UpdateA() && !UpdateB() && !UpdateC() && !UpdateD())
+                        boolean a,b,c,d;
+                        a = UpdateA();
+                        b = UpdateB();
+                        c = UpdateC();
+                        d = UpdateD();
+
+                        UpdateA();
+                        UpdateB();
+                        UpdateC();
+                        UpdateD();
+
+                        if(!a && !b && !c && !d)
                             throw new Exception("Nessun cambiamento");
+
 
                     }
 
@@ -605,17 +623,16 @@ public class AnagraficaController {
     private boolean UpdateA() {
 
         boolean controllo = false;
-        String[] appoggio = new String[4];
+        String[] appoggio = new String[3];
 
         appoggio[0] = "a";
-        appoggio[1] = Utente.getCodice_Fiscale();
 
         //A
         if (!sez_Aview.getNometext().equals(Utente.getNome())) {
 
             controllo = true;
-            appoggio[2] = "nome";
-            appoggio[3] = sez_Aview.getNometext();
+            appoggio[1] = "nome";
+            appoggio[2] = sez_Aview.getNometext();
             Utente.setNome(sez_Aview.getNometext());
             Utente.UpdateSQL(appoggio);
         }
@@ -623,8 +640,8 @@ public class AnagraficaController {
         if (!sez_Aview.getCognometext().equals(Utente.getCognome())) {
 
             controllo = true;
-            appoggio[2] = "cognome";
-            appoggio[3] = sez_Aview.getCognometext();
+            appoggio[1] = "cognome";
+            appoggio[2] = sez_Aview.getCognometext();
             Utente.setCognome(sez_Aview.getCognometext());
             Utente.UpdateSQL(appoggio);
         }
@@ -633,8 +650,8 @@ public class AnagraficaController {
         if (!sez_Aview.getLuogodinascitatext().equals(Utente.getLuogo_di_Nascita())) {
 
             controllo = true;
-            appoggio[2] = "luogodinascita";
-            appoggio[3] = sez_Aview.getLuogodinascitatext();
+            appoggio[1] = "luogodinascita";
+            appoggio[2] = sez_Aview.getLuogodinascitatext();
             Utente.setLuogo_di_Nascita(sez_Aview.getLuogodinascitatext());
             Utente.UpdateSQL(appoggio);
 
@@ -643,8 +660,8 @@ public class AnagraficaController {
         if (!sez_Aview.getDatadinascitatext().equals(Utente.getData_di_Nascita())) {
 
             controllo = true;
-            appoggio[2] = "datadinascita";
-            appoggio[3] = sez_Aview.getDatadinascitatext();
+            appoggio[1] = "datadinascita";
+            appoggio[2] = sez_Aview.getDatadinascitatext();
             Utente.setData_di_Nascita(sez_Aview.getDatadinascitatext());
             Utente.UpdateSQL(appoggio);
 
@@ -654,8 +671,8 @@ public class AnagraficaController {
         if (!sez_Aview.getIndirizzodiresidenzatext().equals(Utente.getIndirizzo_di_residenza())) {
 
             controllo = true;
-            appoggio[2] = "indirizzodiresidenza";
-            appoggio[3] = sez_Aview.getIndirizzodiresidenzatext();
+            appoggio[1] = "indirizzodiresidenza";
+            appoggio[2] = sez_Aview.getIndirizzodiresidenzatext();
             Utente.setIndirizzo_di_residenza(sez_Aview.getIndirizzodiresidenzatext());
             Utente.UpdateSQL(appoggio);
 
@@ -665,8 +682,8 @@ public class AnagraficaController {
         if (!sez_Aview.getTelefonofissotext().equals(Utente.getTelefono_Fisso())) {
 
             controllo = true;
-            appoggio[2] = "telefonofisso";
-            appoggio[3] = sez_Aview.getTelefonofissotext();
+            appoggio[1] = "telefonofisso";
+            appoggio[2] = sez_Aview.getTelefonofissotext();
             Utente.setTelefono_Fisso(sez_Aview.getTelefonofissotext());
             Utente.UpdateSQL(appoggio);
         }
@@ -674,8 +691,8 @@ public class AnagraficaController {
 
         if (!sez_Aview.getTelefonocellularetext().equals(Utente.getTelefono_Cellulare())) {
 
-            appoggio[2] = "telefonomobile";
-            appoggio[3] = sez_Aview.getTelefonocellularetext();
+            appoggio[1] = "telefonomobile";
+            appoggio[2] = sez_Aview.getTelefonocellularetext();
             Utente.setTelefono_Cellulare(sez_Aview.getTelefonocellularetext());
             Utente.UpdateSQL(appoggio);
 
@@ -685,8 +702,8 @@ public class AnagraficaController {
         if (!sez_Aview.getEmailtext().equals(Utente.getEmail())) {
 
             controllo = true;
-            appoggio[2] = "email";
-            appoggio[3] = sez_Aview.getEmailtext();
+            appoggio[1] = "email";
+            appoggio[2] = sez_Aview.getEmailtext();
             Utente.setEmail(sez_Aview.getEmailtext());
             Utente.UpdateSQL(appoggio);
 
@@ -696,8 +713,8 @@ public class AnagraficaController {
         if (!sez_Aview.getProfessionetext().equals(Utente.getProfessione())) {
 
             controllo = true;
-            appoggio[2] = "professione";
-            appoggio[3] = sez_Aview.getProfessionetext();
+            appoggio[1] = "professione";
+            appoggio[2] = sez_Aview.getProfessionetext();
             Utente.setProfessione(sez_Aview.getProfessionetext());
             Utente.UpdateSQL(appoggio);
 
@@ -706,8 +723,8 @@ public class AnagraficaController {
         if (!sez_Aview.getSpecializzazionetext().equals(Utente.getEventuale_Specializzazione())) {
 
             controllo = true;
-            appoggio[2] = "eventualespecializzazione";
-            appoggio[3] = sez_Aview.getSpecializzazionetext();
+            appoggio[1] = "eventualespecializzazione";
+            appoggio[2] = sez_Aview.getSpecializzazionetext();
             Utente.setEventuale_Specializzazione(sez_Aview.getSpecializzazionetext());
             Utente.UpdateSQL(appoggio);
 
@@ -759,17 +776,16 @@ public class AnagraficaController {
     private boolean UpdateC() {
 
         boolean controllo = false;
-        String[] appoggio =  new String[4];
+        String[] appoggio =  new String[3];
 
         appoggio[0] = "c";
-        appoggio[1] = Utente.getCodice_Fiscale();
         //C
 
         if (!sez_Cview.getDenominazioneDatoreDiLavorotext().equals(Utente.getDenominazione_Datore_di_Lavoro())) {
 
             controllo = true;
-            appoggio[2] = "nomedatore";
-            appoggio[3] = sez_Cview.getDenominazioneDatoreDiLavorotext();
+            appoggio[1] = "nomedatore";
+            appoggio[2] = sez_Cview.getDenominazioneDatoreDiLavorotext();
             Utente.setDenominazione_Datore_di_Lavoro(sez_Cview.getDenominazioneDatoreDiLavorotext());
             Utente.UpdateSQL(appoggio);
 
@@ -778,8 +794,8 @@ public class AnagraficaController {
         if (!sez_Cview.getTelDatoreDiLavorotext().equals(Utente.getTelefono_Datore_Lavoro())) {
 
             controllo = true;
-            appoggio[2] = "telefono";
-            appoggio[3] = sez_Cview.getTelDatoreDiLavorotext();
+            appoggio[1] = "telefono";
+            appoggio[2] = sez_Cview.getTelDatoreDiLavorotext();
             Utente.setTelefono_Datore_Lavoro(sez_Cview.getTelDatoreDiLavorotext());
             Utente.UpdateSQL(appoggio);
 
@@ -788,8 +804,8 @@ public class AnagraficaController {
         if (!sez_Cview.getFaxDatoreDiLavorotext().equals(Utente.getFax_Datore_di_Lavoro())) {
 
             controllo = true;
-            appoggio[2] = "eventualespecializzazione";
-            appoggio[3] = sez_Cview.getFaxDatoreDiLavorotext();
+            appoggio[1] = "eventualespecializzazione";
+            appoggio[2] = sez_Cview.getFaxDatoreDiLavorotext();
             Utente.setFax_Datore_di_Lavoro(sez_Cview.getFaxDatoreDiLavorotext());
             Utente.UpdateSQL(appoggio);
 
@@ -798,8 +814,8 @@ public class AnagraficaController {
         if (!sez_Cview.getEmailDatoreDiLavorotext().equals(Utente.getEmail_Datore_di_Lavoro())) {
 
             controllo = true;
-            appoggio[2] = "email";
-            appoggio[3] = sez_Cview.getEmailDatoreDiLavorotext();
+            appoggio[1] = "email";
+            appoggio[2] = sez_Cview.getEmailDatoreDiLavorotext();
             Utente.setEmail_Datore_di_Lavoro(sez_Cview.getEmailDatoreDiLavorotext());
             Utente.UpdateSQL(appoggio);
 
@@ -808,8 +824,8 @@ public class AnagraficaController {
         if (!sez_Cview.getNumeroCodicePostaletext().equals(Utente.getNumerocodicepostale())) {
 
             controllo = true;
-            appoggio[2] = "numero_codice_postale";
-            appoggio[3] = sez_Cview.getNumeroCodicePostaletext();
+            appoggio[1] = "numero_codice_postale";
+            appoggio[2] = sez_Cview.getNumeroCodicePostaletext();
             Utente.setNumerocodicepostale(sez_Cview.getNumeroCodicePostaletext());
             Utente.UpdateSQL(appoggio);
 
@@ -818,8 +834,8 @@ public class AnagraficaController {
         if (!sez_Cview.getIbantext().equals(Utente.getIBAN())) {
 
             controllo = true;
-            appoggio[2] = "iban";
-            appoggio[3] = sez_Cview.getIbantext();
+            appoggio[1] = "iban";
+            appoggio[2] = sez_Cview.getIbantext();
             Utente.setIBAN(sez_Cview.getIbantext());
             Utente.UpdateSQL(appoggio);
 
@@ -915,9 +931,6 @@ public class AnagraficaController {
 
         return controllo;
     }
-
-
-
 
 
     private boolean SalvataggioPrimoAccesso(){
