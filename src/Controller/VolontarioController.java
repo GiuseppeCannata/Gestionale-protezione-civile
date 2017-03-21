@@ -45,6 +45,8 @@ public class VolontarioController{
 
         VolontarioControllerListener();
 
+        ArchivistaListner();
+
     }
 
     private void VolontarioControllerListener(){
@@ -81,6 +83,21 @@ public class VolontarioController{
         });
     }
 
+    private void ArchivistaListner(){
+
+        JButton Archivista = Dview.getArchivistaButton();
+        Archivista.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                ArchivistaController controller;
+                controller = new ArchivistaController(basicframe);
+
+            }
+
+        });
+    }
+
 
     private void LogoutAction(){
 
@@ -89,6 +106,8 @@ public class VolontarioController{
         }
 
     }
+
+
 
     public void setDatiPersonali(int datiPersonali) {
 

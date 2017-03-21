@@ -243,7 +243,7 @@ public class RegistrazioneModel extends Model {
                sez_Aview.getUsernametext()                      + "','" +
                "0"                                              + "','" +
                "0"                                              + "','" +
-               "no"                                             + "')";
+               "si"                                             + "')";
 
 
        if(updateQuery(sql)) {

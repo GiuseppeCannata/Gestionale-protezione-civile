@@ -36,9 +36,46 @@ public class AnagraficaController {
     private int Modifica;
 
     private String utilizzatore;
+    private ListaCandidatiView listacandidatiview;
 
 
     /*COSTRUTTORI*/
+
+    //ARCHIVISTA
+    public AnagraficaController(BasicFrameView frame, Candidato utente,ListaCandidatiView view ){
+
+        basicframe = frame;
+        Anagraficaview = new AnagraficaView();
+        utilizzatore = "archivista";
+        Utente = utente;
+        listacandidatiview = view;
+
+        codicefiscale = Utente.getCodice_Fiscale();
+
+        sez_Aview = new Sez_AView();
+        sez_Bview = new Sez_BView();
+        sez_Cview = new Sez_CView();
+        sez_Aview.VisibilitaPasswordLT(false);
+        sez_Aview.VisibilitaUserLT(false);
+        sez_bUtenteController = new Sez_BUtenteController(sez_Bview, Utente.getCERTIFICAZIONI(), basicframe, codicefiscale);
+        Anagraficaview.VisibilitaModificaButton(false);
+        Anagraficaview.VisibilitaPaginaLoginButton(false);
+        Anagraficaview.VisibilitaHomeButton(false);
+        Anagraficaview.VisibilitaSalvaButton(false);
+        Anagraficaview.VisibilitaArchivistaButton(true);
+
+        sceltapannelli();
+        Pagine_Manager.setPagina_Corrente();
+        SettaggioCampi_A();
+        SettaggioCampi_C();
+        basicframe.setdestra(Anagraficaview.getIntermedio0());
+
+
+        Listener();
+        ArchivistaListner();
+
+    }
+
 
     //PRIMOACCESSO
     public AnagraficaController(BasicFrameView frame, VolontarioDView view, Volontario utente) {
@@ -172,6 +209,8 @@ public class AnagraficaController {
 
     }
 
+
+    /*METODI*/
     /**
      * sceltapannelli gestisce i pannelli da inserire nella Sez_managerView.
      */
@@ -180,6 +219,7 @@ public class AnagraficaController {
         Anagraficaview.setSezA(sez_Aview.getIntermedio0());
         Anagraficaview.setSezB(sez_Bview.getIntermedio0());
         Anagraficaview.setSezC(sez_Cview.getIntermedio0());
+
         if (utilizzatore.equals("volontario"))
             Anagraficaview.setSezD(sez_Dview.getIntermedio0());
 
@@ -232,6 +272,7 @@ public class AnagraficaController {
                 }
                 if (Pagine_Manager.getPagina_Corrente() == 3) {
                     sez_managerviewAvanti.setContentAreaFilled(false);
+                    if(utilizzatore.equals("registrazione"))
                     Salvabutton.setContentAreaFilled(true);
                 }
 
@@ -371,7 +412,7 @@ public class AnagraficaController {
                             throw new Exception("Completa campi obbligatori");
 
 
-                        boolean a,b,c,d;
+                        boolean a,b,c;
                         a = UpdateA();
                         b = UpdateB();
                         c = UpdateC();
@@ -386,7 +427,7 @@ public class AnagraficaController {
 
                         boolean a,b,c,d;
                         a = UpdateA();
-                        b = UpdateB();
+                        b = UpdateB();   //deve eseguirle le funzioni
                         c = UpdateC();
                         d = UpdateD();
 
@@ -471,6 +512,20 @@ public class AnagraficaController {
 
             }
         });
+    }
+
+    private  void ArchivistaListner(){
+
+        JButton ArchivistaButton = Anagraficaview.getListaCanddiatiButton();
+        ArchivistaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                basicframe.setdestra(listacandidatiview.getIntermedio0());
+            }
+        });
+
+
     }
 
     /**
@@ -579,6 +634,7 @@ public class AnagraficaController {
      */
 
     private void SettaggioCampi_C() {
+
 
         sez_Cview.setDenominazioneDatoreDiLavorotext(Utente.getDenominazione_Datore_di_Lavoro());
         sez_Cview.setTelDatoreDiLavorotext(Utente.getTelefono_Datore_Lavoro());
@@ -958,9 +1014,6 @@ public class AnagraficaController {
         return controllo;
 
     }
-
-
-
 
 
     @Override

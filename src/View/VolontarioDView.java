@@ -10,11 +10,13 @@ public class VolontarioDView {
     private JPanel Intermedio0;
     private JButton addGiuntaComunaleButton;
     private JButton button2;
+    private JButton archivistaButton;
     private JLabel RUOLOVOLabel;
     private JLabel COGNOMEVOLabel;
     private JLabel NOMEVOLabel;
     private JTabbedPane tabbedPane1;
     private JList list1;
+
 
 
     public VolontarioDView() {
@@ -41,6 +43,12 @@ public class VolontarioDView {
     public JButton getButton2() {
 
         return button2;
+
+    }
+
+    public JButton getArchivistaButton() {
+
+        return archivistaButton;
 
     }
 

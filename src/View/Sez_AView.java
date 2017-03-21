@@ -202,6 +202,22 @@ public class Sez_AView extends JPanel{
 
     }
 
+    public void VisibilitaPasswordLT(boolean visibile){
+
+        passwordLabel.setVisible(visibile);
+        passwordtext.setVisible(visibile);
+
+    }
+
+    //L-->label
+    //T-->text
+    public void VisibilitaUserLT(boolean visibile){
+
+        usernameLabel.setVisible(visibile);
+        usernametext.setVisible(visibile);
+
+    }
+
     //Abilita o disabilita l editabilita dei campi di questa sezione
     public void Abilita_Disabilita_Campi(boolean editabile){
 

@@ -113,7 +113,7 @@ public abstract class Persona extends Model{
      * Metodo di servizio
      * Popola con l ausilio del DB le variabili di istanza, della sez A
      */
-    private void popolaB(){
+    protected void popolaB(){
 
         CERTIFICAZIONI = new ArrayList<>(25);
 
@@ -177,7 +177,7 @@ public abstract class Persona extends Model{
      * Metodo di servizio
      * Popola con l ausilio del DB le variabili di istanza, della sez A
      */
-    private void popolaC(){
+    protected void popolaC(){
 
         openConnection();
 
@@ -430,6 +430,12 @@ public abstract class Persona extends Model{
     public void setPassword(String password) {
 
         Password = password;
+
+    }
+
+    public void setCodice_Fiscale(String codice_Fiscale) {
+
+        Codice_Fiscale = codice_Fiscale;
 
     }
 

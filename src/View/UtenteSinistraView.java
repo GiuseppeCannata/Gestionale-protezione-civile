@@ -15,6 +15,7 @@ public class UtenteSinistraView extends JPanel{
     private JButton evolviButton;
     private JPanel Bottonbar;
     private JPanel Logopannel;
+    private JButton homeButton;
 
 
     public UtenteSinistraView() {
