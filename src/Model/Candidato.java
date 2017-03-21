@@ -58,7 +58,7 @@ public class Candidato extends Persona {
 
     }
 
-    public int getConf_Archivista() {
+    public int getConf_Archivista(){
         return Conf_Archivista;
     }
 
