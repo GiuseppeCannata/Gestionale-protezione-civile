@@ -35,9 +35,17 @@ public class CandidatoController {
         Utente = utente;
         Dview = new CandidatoDestraView();
         Sview = new UtenteSinistraView();
-        if(Utente.getConf_Giunta() == 1)
-            Dview.MessaggioSchermo("Puoi finalmente evolvere in Volontario.\nFai click su evolvi per dare la tua conferma!");
+        Sview.VisibilitaHomeButton(false);
 
+        if(Utente.getConf_Giunta() == 1 && Utente.getConf_Archivista() == 1)
+            Dview.MessaggioSchermo("Puoi finalmente evolvere in Volontario.\nFai click su evolvi per dare la tua conferma!");
+        else {
+            if (Utente.getConf_Archivista() == 1)
+              Dview.setConf_Archivista(true);
+
+            if (Utente.getConf_Giunta() == 1)
+                Dview.setConf_giunta(true);
+        }
         DatiPersonali = 0;
         //Settaggio della basicframe con inserimento dei due pannelli a destra e sinistra
         basicframe.setdestra(Dview.getIntermedio0());
@@ -99,7 +107,7 @@ public class CandidatoController {
 
     private void EvolviAction(){
 
-        if(Utente.getConf_Giunta() != 1){
+        if(Utente.getConf_Giunta() != 1 || Utente.getConf_Archivista() != 1){
 
             basicframe.ErrorMessage("Attenti la conferma dei nostri collaboratori!");
         }else if(basicframe.OpotionalMessage("Confermi a diventare Volontario?") == 0 ) {
@@ -117,8 +125,10 @@ public class CandidatoController {
                 appoggio[3] = "si";
 
                 if(Utente.UpdateSQL(appoggio)) {
+
                     LoginController login;
                     login = new LoginController(basicframe);
+
                 }
             }
         }

@@ -52,6 +52,10 @@ public class UtenteSinistraView extends JPanel{
     public void setEvolviButton(boolean visibilita) {
 
         evolviButton.setVisible(visibilita);
+    }
 
+    public void VisibilitaHomeButton(boolean visibilita){
+
+        homeButton.setVisible(visibilita);
     }
 }

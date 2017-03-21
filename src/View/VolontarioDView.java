@@ -4,25 +4,20 @@ import javax.swing.*;
 
 
 
-public class VolontarioDView {
+public class VolontarioDView extends JPanel{
 
 
     private JPanel Intermedio0;
     private JButton addGiuntaComunaleButton;
-    private JButton button2;
     private JButton archivistaButton;
     private JLabel RUOLOVOLabel;
     private JLabel COGNOMEVOLabel;
     private JLabel NOMEVOLabel;
-    private JTabbedPane tabbedPane1;
-    private JList list1;
-
 
 
     public VolontarioDView() {
 
-
-        return;
+        setVisible(true);
 
     }
 
@@ -30,7 +25,6 @@ public class VolontarioDView {
     public JPanel getIntermedio0() {
 
         return Intermedio0;
-       // list1.setListData(porca);
 
     }
 
@@ -40,11 +34,6 @@ public class VolontarioDView {
 
     }
 
-    public JButton getButton2() {
-
-        return button2;
-
-    }
 
     public JButton getArchivistaButton() {
 

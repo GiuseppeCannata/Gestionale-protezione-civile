@@ -22,7 +22,7 @@ public class AnagraficaView extends JPanel{
     private JButton modificaButton;
     private JButton homeButton;
     private JPanel SezD;
-    private JButton listaCanddiatiButton;
+    private JButton listaButton;
 
 
     public AnagraficaView() {
@@ -83,9 +83,9 @@ public class AnagraficaView extends JPanel{
         return modificaButton;
     }
 
-    public JButton getListaCanddiatiButton() {
+    public JButton getListaButton() {
 
-        return listaCanddiatiButton;
+        return listaButton;
 
     }
 
@@ -137,10 +137,12 @@ public class AnagraficaView extends JPanel{
 
     }
 
-    public void VisibilitaArchivistaButton(boolean visibilita){
+    public void VisibilitaListaButton(boolean visibilita){
 
-        listaCanddiatiButton.setVisible(visibilita);
+        listaButton.setVisible(visibilita);
     }
+
+
 
     @Override
     public String toString() {

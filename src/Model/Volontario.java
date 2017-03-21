@@ -45,7 +45,7 @@ public class Volontario extends Persona {
     }
 
 
-    private void popolaD(){
+    protected void popolaD(){
 
         openConnection();
 

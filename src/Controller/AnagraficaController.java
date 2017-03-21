@@ -36,13 +36,13 @@ public class AnagraficaController {
     private int Modifica;
 
     private String utilizzatore;
-    private ListaCandidatiView listacandidatiview;
+    private ListaggiArchivistaView listacandidatiview;
 
 
     /*COSTRUTTORI*/
 
     //ARCHIVISTA
-    public AnagraficaController(BasicFrameView frame, Candidato utente,ListaCandidatiView view ){
+    public AnagraficaController(BasicFrameView frame, Candidato utente, ListaggiArchivistaView view ){
 
         basicframe = frame;
         Anagraficaview = new AnagraficaView();
@@ -62,7 +62,7 @@ public class AnagraficaController {
         Anagraficaview.VisibilitaPaginaLoginButton(false);
         Anagraficaview.VisibilitaHomeButton(false);
         Anagraficaview.VisibilitaSalvaButton(false);
-        Anagraficaview.VisibilitaArchivistaButton(true);
+        Anagraficaview.VisibilitaListaButton(true);
 
         sceltapannelli();
         Pagine_Manager.setPagina_Corrente();
@@ -73,6 +73,44 @@ public class AnagraficaController {
 
         Listener();
         ArchivistaListner();
+
+    }
+
+    public AnagraficaController(BasicFrameView frame, Volontario utente, ListaggiArchivistaView view){
+
+        basicframe = frame;
+        Anagraficaview = new AnagraficaView();
+        utilizzatore = "archivistavolontario";
+        Utente = utente;
+        listacandidatiview = view;
+
+        codicefiscale = Utente.getCodice_Fiscale();
+
+        sez_Aview = new Sez_AView();
+        sez_Bview = new Sez_BView();
+        sez_Cview = new Sez_CView();
+        sez_Dview = new Sez_DView();
+        sez_Dview.VisibilitaSalvaButton(false);
+        sez_Aview.VisibilitaPasswordLT(false);
+        sez_Aview.VisibilitaUserLT(false);
+        sez_bUtenteController = new Sez_BUtenteController(sez_Bview, Utente.getCERTIFICAZIONI(), basicframe, codicefiscale);
+
+        Anagraficaview.VisibilitaModificaButton(false);
+        Anagraficaview.VisibilitaPaginaLoginButton(false);
+        Anagraficaview.VisibilitaHomeButton(false);
+        Anagraficaview.VisibilitaSalvaButton(false);
+        Anagraficaview.VisibilitaListaButton(true);
+
+        sceltapannelli();
+        Pagine_Manager.setPagina_Corrente();
+        SettaggioCampi_A();
+        SettaggioCampi_C();
+        SettaggioCampi_D();
+        basicframe.setdestra(Anagraficaview.getIntermedio0());
+
+
+        VolontarioListner();
+       ArchivistaListner();
 
     }
 
@@ -117,6 +155,7 @@ public class AnagraficaController {
         Anagraficaview.VisibilitaPaginaLoginButton(true);
         Anagraficaview.VisibilitaModificaButton(false);
         Anagraficaview.VisibilitaHomeButton(false);
+        Anagraficaview.VisibilitaListaButton(false);
         sceltapannelli();
         //Setto il mio manager di pagine
         Pagine_Manager.setPagina_Corrente();
@@ -152,6 +191,7 @@ public class AnagraficaController {
         Anagraficaview.VisibilitaPaginaLoginButton(false);
         Anagraficaview.VisibilitaModificaButton(true);
         Anagraficaview.VisibilitaHomeButton(true);
+        Anagraficaview.VisibilitaListaButton(false);
         sceltapannelli();
 
         //Setto il mio manager di pagine
@@ -193,6 +233,7 @@ public class AnagraficaController {
         Anagraficaview.VisibilitaPaginaLoginButton(false);
         Anagraficaview.VisibilitaModificaButton(true);
         Anagraficaview.VisibilitaHomeButton(true);
+        Anagraficaview.VisibilitaListaButton(false);
         System.out.println("ok");
         sceltapannelli();
         //System.out.println("ok");
@@ -220,7 +261,7 @@ public class AnagraficaController {
         Anagraficaview.setSezB(sez_Bview.getIntermedio0());
         Anagraficaview.setSezC(sez_Cview.getIntermedio0());
 
-        if (utilizzatore.equals("volontario"))
+        if (utilizzatore.equals("volontario") || utilizzatore.equals("archivistavolontario"))
             Anagraficaview.setSezD(sez_Dview.getIntermedio0());
 
     }
@@ -478,10 +519,9 @@ public class AnagraficaController {
                     Pagine_Manager.addPagina_Corrente();
 
                 }
-                if (Pagine_Manager.getPagina_Corrente() == 4) {
+                if (Pagine_Manager.getPagina_Corrente() == 4)
                     sez_managerviewAvanti.setContentAreaFilled(false);
-                    Salvabutton.setContentAreaFilled(true);
-                }
+
 
                 if (Pagine_Manager.getPagina_Corrente() > 1)
                     sez_managerviewIndietro.setContentAreaFilled(true);
@@ -516,7 +556,7 @@ public class AnagraficaController {
 
     private  void ArchivistaListner(){
 
-        JButton ArchivistaButton = Anagraficaview.getListaCanddiatiButton();
+        JButton ArchivistaButton = Anagraficaview.getListaButton();
         ArchivistaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

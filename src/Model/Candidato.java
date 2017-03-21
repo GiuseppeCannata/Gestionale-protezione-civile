@@ -12,6 +12,7 @@ public class Candidato extends Persona {
 
 
     private int Conf_Giunta;
+    private int Conf_Archivista;
 
     /*COSTRUTTORI*/
 
@@ -34,8 +35,10 @@ public class Candidato extends Persona {
 
       try {
 
-            if(query.next())
+            if(query.next()) {
                 Conf_Giunta = query.getInt("conf_giunta");
+                Conf_Archivista = query.getInt("Conf_Archivista");
+            }
 
 
         }catch(SQLException se){
@@ -55,6 +58,9 @@ public class Candidato extends Persona {
 
     }
 
+    public int getConf_Archivista() {
+        return Conf_Archivista;
+    }
 
     @Override
     public boolean UpdateSQL(String[] Appoggio) {

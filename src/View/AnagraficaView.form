@@ -48,10 +48,10 @@
               <text value="Home"/>
             </properties>
           </component>
-          <component id="902e7" class="javax.swing.JButton" binding="listaCanddiatiButton">
+          <component id="902e7" class="javax.swing.JButton" binding="listaButton">
             <constraints/>
             <properties>
-              <text value="Lista canddiati"/>
+              <text value="Lista "/>
             </properties>
           </component>
         </children>
