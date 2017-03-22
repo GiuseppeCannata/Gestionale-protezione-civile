@@ -36,13 +36,13 @@ public class AnagraficaController {
     private int Modifica;
 
     private String utilizzatore;
-    private ListaggiArchivistaView listacandidatiview;
+    private ListaggiView listacandidatiview;
 
 
     /*COSTRUTTORI*/
 
     //ARCHIVISTA
-    public AnagraficaController(BasicFrameView frame, Candidato utente, ListaggiArchivistaView view ){
+    public AnagraficaController(BasicFrameView frame, Candidato utente, ListaggiView view ){
 
         basicframe = frame;
         Anagraficaview = new AnagraficaView();
@@ -76,7 +76,7 @@ public class AnagraficaController {
 
     }
 
-    public AnagraficaController(BasicFrameView frame, Volontario utente, ListaggiArchivistaView view){
+    public AnagraficaController(BasicFrameView frame, Volontario utente, ListaggiView view){
 
         basicframe = frame;
         Anagraficaview = new AnagraficaView();
@@ -1048,7 +1048,7 @@ public class AnagraficaController {
         appoggio[1]= "primoaccesso";
         appoggio[2]= "no";
 
-        if(VOLONTARIO.InsertD() && VOLONTARIO.UpdateSQL(appoggio))
+        if(VOLONTARIO.InsertSQL() && VOLONTARIO.UpdateSQL(appoggio))
             controllo = true;
 
         return controllo;

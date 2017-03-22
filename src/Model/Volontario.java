@@ -170,11 +170,11 @@ public class Volontario extends Persona {
     @Override
     public boolean InsertSQL() {
 
-        return false;
+        return InsertD();
 
     }
 
-    public boolean InsertD(){
+    private boolean InsertD(){
 
         boolean controllo = false;
         openConnection();

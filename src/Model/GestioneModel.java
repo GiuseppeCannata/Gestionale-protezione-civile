@@ -5,30 +5,41 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ArchivistaModel extends Model{
+public class GestioneModel extends Model{
 
     private ArrayList<Candidato> listcandidati;
     private ArrayList<Volontario> listvolontari;
     private String utilizzatore;
-    private int appoggio;
+    private String appoggio;
 
 
     /* Costruttore*/
-    public ArchivistaModel(String Utilizzatore){
+
+    public GestioneModel(String Utilizzatore){
 
         super();
         utilizzatore = Utilizzatore;
 
+
         if(utilizzatore.equals("candidato")) {
 
             listcandidati = new ArrayList<Candidato>(20);
-            appoggio = 0;
+            listvolontari = null;
+            appoggio = "and Conf_Archivista=0";
             popolacomboC();
 
         }else if(utilizzatore.equals("volontario")){
 
+            listcandidati = null;
             listvolontari = new ArrayList<Volontario>(20);
-            appoggio = 1;
+            popolacomboV();
+
+        }else if(utilizzatore.equals("referenteinformatico")){
+
+            listcandidati = new ArrayList<Candidato>(20);
+            listvolontari = new ArrayList<Volontario>(20);
+            appoggio= " ";
+            popolacomboC();
             popolacomboV();
 
         }
@@ -36,26 +47,6 @@ public class ArchivistaModel extends Model{
 
     }
 
-
-    @Override
-    public  boolean InsertSQL(){
-
-        return false;
-
-    };
-
-    @Override
-    public  boolean SearchSQL(){
-
-        return false;
-
-    };
-
-    @Override
-    public boolean UpdateSQL(String[] Appoggio){
-        return false;
-
-    };
 
     private void popolacomboC() {
 
@@ -65,8 +56,8 @@ public class ArchivistaModel extends Model{
             openConnection();
 
             String sql = "select a.cf,nome,cognome,luogodinascita,indirizzodiresidenza,telefonofisso,telefonomobile,email," +
-                    "dataprimaiscrizione,professione,eventualespecializzazione,datadinascita from a,pass where vol_o_cand="
-                    +appoggio+" and Conf_Archivista=0 and a.cf=pass.cf order by cognome,nome";
+                    "dataprimaiscrizione,professione,eventualespecializzazione,datadinascita from a,pass where vol_o_cand=0 " +
+                    appoggio+" and a.cf=pass.cf order by cognome,nome";
 
             ResultSet query = selectQuery(sql);
 
@@ -110,8 +101,8 @@ public class ArchivistaModel extends Model{
             openConnection();
 
             String sql = "select a.cf,nome,cognome,luogodinascita,indirizzodiresidenza,telefonofisso,telefonomobile,email," +
-                    "dataprimaiscrizione,professione,eventualespecializzazione,datadinascita from a,pass where vol_o_cand="
-                    +appoggio+" and a.cf=pass.cf order by cognome,nome";
+                    "dataprimaiscrizione,professione,eventualespecializzazione,datadinascita from a,pass where vol_o_cand=1" +
+                    " and a.cf=pass.cf order by cognome,nome";
 
             ResultSet query = selectQuery(sql);
 
@@ -148,9 +139,29 @@ public class ArchivistaModel extends Model{
 
     }
 
+    @Override
+    public  boolean InsertSQL(){
+
+        return false;
+
+    };
+
+    @Override
+    public  boolean SearchSQL(){
+
+        return false;
+
+    };
+
+    @Override
+    public boolean UpdateSQL(String[] Appoggio){
+        return false;
+
+    };
+
 
     /*GETTER*/
-    public ArrayList getListcandidati(){
+    public ArrayList<Candidato> getListcandidati(){
 
         return listcandidati;
 

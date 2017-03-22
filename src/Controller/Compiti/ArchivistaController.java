@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Compiti;
 
 
 import View.BasicFrameView;
@@ -45,6 +45,7 @@ public class ArchivistaController {
             }
         });
 
+        /*TUTTI I VOLONTARI*/
         JButton tuttiIvolonari = archivistaView.gettuttiIVolontariButton();
         tuttiIvolonari.addActionListener(new ActionListener() {
             @Override

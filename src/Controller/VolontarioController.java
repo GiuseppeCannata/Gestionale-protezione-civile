@@ -1,6 +1,8 @@
 package Controller;
 
 
+import Controller.Compiti.ArchivistaController;
+import Controller.Compiti.ReferenteinformaticoController;
 import Model.Volontario;
 import View.BasicFrameView;
 import View.UtenteSinistraView;
@@ -46,6 +48,7 @@ public class VolontarioController{
         VolontarioControllerListener();
 
         ArchivistaListner();
+        ReferenteInformaticoListner();
 
     }
 
@@ -92,6 +95,21 @@ public class VolontarioController{
 
                 ArchivistaController controller;
                 controller = new ArchivistaController(basicframe);
+
+            }
+
+        });
+    }
+
+    private void ReferenteInformaticoListner() {
+
+        JButton ReferenteInformatico = Dview.getReferenteInformaticoButton();
+        ReferenteInformatico.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                ReferenteinformaticoController controller;
+                controller = new ReferenteinformaticoController(basicframe);
 
             }
 

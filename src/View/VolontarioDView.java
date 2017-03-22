@@ -13,6 +13,7 @@ public class VolontarioDView extends JPanel{
     private JLabel RUOLOVOLabel;
     private JLabel COGNOMEVOLabel;
     private JLabel NOMEVOLabel;
+    private JButton referenteInformaticoButton;
 
 
     public VolontarioDView() {
@@ -38,6 +39,12 @@ public class VolontarioDView extends JPanel{
     public JButton getArchivistaButton() {
 
         return archivistaButton;
+
+    }
+
+    public JButton getReferenteInformaticoButton() {
+
+        return referenteInformaticoButton;
 
     }
 

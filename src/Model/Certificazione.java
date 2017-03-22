@@ -80,7 +80,6 @@ public class Certificazione extends Model{
     public boolean updatesql(){
 
         boolean controllo = false;
-        System.out.println("ci sono");
         openConnection();
 
         System.out.print(codicefiscale);

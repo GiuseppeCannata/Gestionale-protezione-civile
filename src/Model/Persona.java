@@ -65,7 +65,7 @@ public abstract class Persona extends Model{
      * Metodo di servizio
      * Popola con l ausilio del DB le variabili di istanza, della sez A
      */
-    private void popolaA(){
+    protected void popolaA(){
 
         openConnection();
 

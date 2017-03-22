@@ -1,9 +1,11 @@
-package Controller;
+package Controller.Compiti;
 
 
-import Model.ArchivistaModel;
+import Controller.AnagraficaController;
+import Controller.Compiti.ArchivistaController;
+import Model.GestioneModel;
 import Model.Volontario;
-import View.ListaggiArchivistaView;
+import View.ListaggiView;
 import Model.Candidato;
 import View.BasicFrameView;
 
@@ -18,8 +20,8 @@ public class ListaggiArchivistaController {
 
 
     private BasicFrameView basicframe;
-    private ListaggiArchivistaView listaggiArchivistaView;
-    private ArchivistaModel Archivistamodel;
+    private ListaggiView listaggiView;
+    private GestioneModel archivistamodel;
     private JComboBox Box;
     private String utilizzatore;
 
@@ -32,27 +34,30 @@ public class ListaggiArchivistaController {
     public ListaggiArchivistaController(BasicFrameView frame, String Utilizzatore) {
 
         basicframe = frame;
-        listaggiArchivistaView = new ListaggiArchivistaView();
-        Box = listaggiArchivistaView.getComboBox1();
+
+        listaggiView = new ListaggiView();
+        listaggiView.VisibilitaResettaPasswordButton(false);
+
+        Box = listaggiView.getComboBox1();
         utilizzatore = Utilizzatore;
 
         if(utilizzatore.equals("candidato")) {
 
-            Archivistamodel = new ArchivistaModel("candidato");
-            listaggiArchivistaView.setLabel("Lista candidati");
-            CANDIDATI = Archivistamodel.getListcandidati();
+            archivistamodel = new GestioneModel("candidato");
+            listaggiView.setLabel("Lista candidati");
+            CANDIDATI = archivistamodel.getListcandidati();
 
         }else if(utilizzatore.equals("volontario")){
 
-            Archivistamodel = new ArchivistaModel("volontario");
-            VOLONTARIO = Archivistamodel.getListvolontari();
-            listaggiArchivistaView.setLabel("Lista volontarii");
-            listaggiArchivistaView.VisibilitaAccettaButton(false);
+            archivistamodel = new GestioneModel("volontario");
+            VOLONTARIO = archivistamodel.getListvolontari();
+            listaggiView.setLabel("Lista volontarii");
+            listaggiView.VisibilitaAccettaButton(false);
 
 
         }
 
-        basicframe.setdestra(listaggiArchivistaView.getIntermedio0());
+        basicframe.setdestra(listaggiView.getIntermedio0());
         stampalista();
         Listener();
 
@@ -77,7 +82,7 @@ public class ListaggiArchivistaController {
     private void Listener(){
 
         /*Ritorna ai compiti*/
-        JButton ritornaAiCompitiDaArchivista = listaggiArchivistaView.getRitornaAiCompitiDaButton();
+        JButton ritornaAiCompitiDaArchivista = listaggiView.getRitornaButton();
         ritornaAiCompitiDaArchivista.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -88,7 +93,7 @@ public class ListaggiArchivistaController {
             }
         });
 
-        JButton visionaSchedaButton = listaggiArchivistaView.getVisionaSchedaButton();
+        JButton visionaSchedaButton = listaggiView.getVisionaSchedaButton();
         visionaSchedaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -98,7 +103,7 @@ public class ListaggiArchivistaController {
             }
         });
 
-        JButton AccettaButton = listaggiArchivistaView.getAccettaButton();
+        JButton AccettaButton = listaggiView.getAccettaButton();
         AccettaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -119,12 +124,12 @@ public class ListaggiArchivistaController {
         if(utilizzatore.equals("candidato")) {
 
             AnagraficaController controller;
-            controller = new AnagraficaController(basicframe, CANDIDATI.get(Indice), listaggiArchivistaView);
+            controller = new AnagraficaController(basicframe, CANDIDATI.get(Indice), listaggiView);
 
         }else if(utilizzatore.equals("volontario")){
 
             AnagraficaController controller;
-            controller = new AnagraficaController(basicframe, VOLONTARIO.get(Indice), listaggiArchivistaView);
+            controller = new AnagraficaController(basicframe, VOLONTARIO.get(Indice), listaggiView);
 
         }
 

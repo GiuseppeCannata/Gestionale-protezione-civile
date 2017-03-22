@@ -3,17 +3,18 @@ package View;
 import javax.swing.*;
 
 
-public class ListaggiArchivistaView extends JPanel{
+public class ListaggiView extends JPanel{
 
     private JButton visionaSchedaButton;
-    private JButton ritornaAiCompitiDaButton;
+    private JButton ritornaButton;
     private JComboBox comboBox1;
     private JPanel Intermedio0;
     private JButton accettaButton;
     private JLabel Label;
+    private JButton resettaPasswordButton;
 
 
-    public ListaggiArchivistaView(){
+    public ListaggiView(){
 
         setVisible(true);
 
@@ -21,9 +22,9 @@ public class ListaggiArchivistaView extends JPanel{
 
 
 
-    public JButton getRitornaAiCompitiDaButton() {
+    public JButton getRitornaButton() {
 
-        return ritornaAiCompitiDaButton;
+        return ritornaButton;
 
     }
 
@@ -46,9 +47,16 @@ public class ListaggiArchivistaView extends JPanel{
         return accettaButton;
 
     }
+
     public JPanel getIntermedio0() {
 
         return Intermedio0;
+
+    }
+
+    public JButton getResettaPasswordButton() {
+
+        return resettaPasswordButton;
 
     }
 
@@ -61,6 +69,25 @@ public class ListaggiArchivistaView extends JPanel{
     public void VisibilitaAccettaButton(boolean visibilita){
 
         accettaButton.setVisible(visibilita);
+
+    }
+
+    public void VisibilitaResettaPasswordButton(boolean visibilita){
+
+        resettaPasswordButton.setVisible(visibilita);
+
+    }
+
+    public void VisibilitaVisionaSchedaButton(boolean visibilita){
+
+            visionaSchedaButton.setVisible(visibilita);
+
+    }
+
+    public void VisibilitaRitornaButton (boolean visibilita){
+
+        ritornaButton.setVisible(visibilita);
+
 
     }
 
