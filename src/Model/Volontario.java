@@ -21,10 +21,13 @@ public class Volontario extends Persona {
 
     private String primoaccesso;
 
-   /* private String ruolo;
-    private int stato;*/
+   /* private String ruolo;*/
+    private String stato;
 
-    private ArrayList<Compito> COMPITI;
+    private String archivista;
+    private String magazzinodivise;
+    private String add_giunta;
+    private String referenteinformatico;
 
 
 
@@ -40,6 +43,7 @@ public class Volontario extends Persona {
 
         popolaD();
         popolacompiti();
+        popolastato();
         popolaprimoaccesso();
 
     }
@@ -77,7 +81,7 @@ public class Volontario extends Persona {
 
     }
 
-    private void popolacompiti(){
+    protected void popolacompiti(){
 
         openConnection();
 
@@ -89,27 +93,10 @@ public class Volontario extends Persona {
 
             if(query.next()) {
 
-                if (query.getInt("archivista") == 1){
-
-                    Compito compito = new Compito("archivista");
-                    COMPITI.add(COMPITI.size(), compito);
-                }
-
-               /* if (query.getInt("magazzino") == 1){
-
-                    Compito compito = new Compito("magazzino");
-                    COMPITI.add(COMPITI.size(), compito);
-                }*/
-
-
-                if (query.getInt("comunicazionigiunta") == 1){
-
-                    Compito compito = new Compito("comunicazionigiunta");
-                    COMPITI.add(COMPITI.size(), compito);
-
-                }
-
-
+                archivista = query.getString("archivista");
+                magazzinodivise = query.getString("magazzino");
+                add_giunta = query.getString("comunicazionigiunta");
+                referenteinformatico = query.getString("refinformatico");
 
             }
 
@@ -142,6 +129,32 @@ public class Volontario extends Persona {
             closeConnection();
         }
     }
+
+    private void popolastato(){
+
+        openConnection();
+
+        try {
+
+
+            String sql = "select stato from flagvolontario where cf ='"+getCodice_Fiscale()+"'";
+
+
+            ResultSet query = selectQuery(sql);
+            if(query.next())
+
+               stato = query.getString("stato");
+
+        }catch(SQLException se){
+            se.printStackTrace();
+        }finally{
+            closeConnection();
+        }
+
+
+    }
+
+
 
 
     @Override
@@ -194,7 +207,7 @@ public class Volontario extends Persona {
 
         if(updateQuery(sql)) {
             controllo=true;
-            System.out.print("tutto bene");
+           // System.out.print("tutto bene");
         }
 
 
@@ -234,8 +247,24 @@ public class Volontario extends Persona {
         return abilita;
     }
 
-    public ArrayList<Compito> getCOMPITI() {
-        return COMPITI;
+    public String getStato() {
+        return stato;
+    }
+
+    public String getArchivista() {
+        return archivista;
+    }
+
+    public String getMagazzinodivise() {
+        return magazzinodivise;
+    }
+
+    public String getAdd_giunta() {
+        return add_giunta;
+    }
+
+    public String getReferenteinformatico() {
+        return referenteinformatico;
     }
 
     public String getPrimoaccesso() {
@@ -254,7 +283,6 @@ public class Volontario extends Persona {
         this.tagliabusto = tagliabusto;
     }
 
-
     public void setTagliamano(String tagliamano) {
         this.tagliamano = tagliamano;
     }
@@ -269,5 +297,9 @@ public class Volontario extends Persona {
 
     public void setAbilita(String abilita) {
         this.abilita = abilita;
+    }
+
+    public void setStato(String stato) {
+        this.stato = stato;
     }
 }

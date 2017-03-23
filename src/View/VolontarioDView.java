@@ -14,6 +14,9 @@ public class VolontarioDView extends JPanel{
     private JLabel COGNOMEVOLabel;
     private JLabel NOMEVOLabel;
     private JButton referenteInformaticoButton;
+    private JButton cambiaButton;
+    private JLabel STATOLabel;
+    private JButton master_ChiefButton;
 
 
     public VolontarioDView() {
@@ -48,9 +51,27 @@ public class VolontarioDView extends JPanel{
 
     }
 
+    public JButton getCambiaButton() {
+
+        return cambiaButton;
+
+    }
+
+    public JButton getMaster_ChiefButton() {
+
+        return master_ChiefButton;
+
+    }
+
     public void setRUOLOVOLabel(String testo) {
 
         RUOLOVOLabel.setText(testo);
+
+    }
+
+    public void setSTATOLabel(String testo) {
+
+        STATOLabel.setText(testo);
 
     }
 

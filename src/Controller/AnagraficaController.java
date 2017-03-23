@@ -42,11 +42,11 @@ public class AnagraficaController {
     /*COSTRUTTORI*/
 
     //ARCHIVISTA
-    public AnagraficaController(BasicFrameView frame, Candidato utente, ListaggiView view ){
+    public AnagraficaController(BasicFrameView frame, Persona utente, ListaggiView view, String Utilizzatore ){
 
         basicframe = frame;
         Anagraficaview = new AnagraficaView();
-        utilizzatore = "archivista";
+        utilizzatore = Utilizzatore;
         Utente = utente;
         listacandidatiview = view;
 
@@ -57,7 +57,9 @@ public class AnagraficaController {
         sez_Cview = new Sez_CView();
         sez_Aview.VisibilitaPasswordLT(false);
         sez_Aview.VisibilitaUserLT(false);
+
         sez_bUtenteController = new Sez_BUtenteController(sez_Bview, Utente.getCERTIFICAZIONI(), basicframe, codicefiscale);
+
         Anagraficaview.VisibilitaModificaButton(false);
         Anagraficaview.VisibilitaPaginaLoginButton(false);
         Anagraficaview.VisibilitaHomeButton(false);
@@ -68,49 +70,18 @@ public class AnagraficaController {
         Pagine_Manager.setPagina_Corrente();
         SettaggioCampi_A();
         SettaggioCampi_C();
+
+        if(utilizzatore.equals("volontario")) {
+
+            SettaggioCampi_D();
+            VolontarioListner();
+
+        }else
+            Listener();
+
+
         basicframe.setdestra(Anagraficaview.getIntermedio0());
-
-
-        Listener();
         ArchivistaListner();
-
-    }
-
-    public AnagraficaController(BasicFrameView frame, Volontario utente, ListaggiView view){
-
-        basicframe = frame;
-        Anagraficaview = new AnagraficaView();
-        utilizzatore = "archivistavolontario";
-        Utente = utente;
-        listacandidatiview = view;
-
-        codicefiscale = Utente.getCodice_Fiscale();
-
-        sez_Aview = new Sez_AView();
-        sez_Bview = new Sez_BView();
-        sez_Cview = new Sez_CView();
-        sez_Dview = new Sez_DView();
-        sez_Dview.VisibilitaSalvaButton(false);
-        sez_Aview.VisibilitaPasswordLT(false);
-        sez_Aview.VisibilitaUserLT(false);
-        sez_bUtenteController = new Sez_BUtenteController(sez_Bview, Utente.getCERTIFICAZIONI(), basicframe, codicefiscale);
-
-        Anagraficaview.VisibilitaModificaButton(false);
-        Anagraficaview.VisibilitaPaginaLoginButton(false);
-        Anagraficaview.VisibilitaHomeButton(false);
-        Anagraficaview.VisibilitaSalvaButton(false);
-        Anagraficaview.VisibilitaListaButton(true);
-
-        sceltapannelli();
-        Pagine_Manager.setPagina_Corrente();
-        SettaggioCampi_A();
-        SettaggioCampi_C();
-        SettaggioCampi_D();
-        basicframe.setdestra(Anagraficaview.getIntermedio0());
-
-
-        VolontarioListner();
-       ArchivistaListner();
 
     }
 
@@ -226,8 +197,6 @@ public class AnagraficaController {
         sez_Bview = new Sez_BView();
         sez_bUtenteController = new Sez_BUtenteController(sez_Bview, Utente.getCERTIFICAZIONI(), basicframe, codicefiscale);
         sez_Cview = new Sez_CView();
-        sez_Dview = new Sez_DView();
-        sez_Dview.VisibilitaSalvaButton(false);
 
 
         Anagraficaview.VisibilitaPaginaLoginButton(false);
@@ -261,8 +230,13 @@ public class AnagraficaController {
         Anagraficaview.setSezB(sez_Bview.getIntermedio0());
         Anagraficaview.setSezC(sez_Cview.getIntermedio0());
 
-        if (utilizzatore.equals("volontario") || utilizzatore.equals("archivistavolontario"))
+        if (utilizzatore.equals("volontario")) {
+
+            sez_Dview = new Sez_DView();
             Anagraficaview.setSezD(sez_Dview.getIntermedio0());
+            sez_Dview.VisibilitaSalvaButton(false);
+
+        }
 
     }
 

@@ -1,8 +1,9 @@
 package Controller.Compiti;
 
 
+import Controller.ListaggiController;
 import View.BasicFrameView;
-import View.ArchivistaView;
+import View.ArchivistaHomeView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,15 +13,15 @@ import java.awt.event.ActionListener;
 public class ArchivistaController {
 
     private BasicFrameView basicframe;
-    private ArchivistaView archivistaView;
+    private ArchivistaHomeView archivistaHomeView;
 
 /*costruttore*/
 
     public ArchivistaController(BasicFrameView frame) {
 
         basicframe = frame;
-        archivistaView = new ArchivistaView();
-        basicframe.setdestra(archivistaView.getIntermedio0());
+        archivistaHomeView = new ArchivistaHomeView();
+        basicframe.setdestra(archivistaHomeView.getIntermedio0());
 
         ArchivistaContriollerListener();
 
@@ -34,25 +35,25 @@ public class ArchivistaController {
 
 
         /*listacandidatibutton*/
-        JButton listaCandidatiButton = archivistaView.getCandidatiButtonButton();
+        JButton listaCandidatiButton = archivistaHomeView.getCandidatiButtonButton();
         listaCandidatiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                ListaggiArchivistaController controller;
-                controller = new ListaggiArchivistaController(basicframe, "candidato");
+                ListaggiController controller;
+                controller = new ListaggiController(basicframe, "candidato");
 
             }
         });
 
         /*TUTTI I VOLONTARI*/
-        JButton tuttiIvolonari = archivistaView.gettuttiIVolontariButton();
+        JButton tuttiIvolonari = archivistaHomeView.gettuttiIVolontariButton();
         tuttiIvolonari.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                ListaggiArchivistaController controller;
-                controller = new ListaggiArchivistaController(basicframe, "volontario");
+                ListaggiController controller;
+                controller = new ListaggiController(basicframe, "volontario");
 
             }
         });

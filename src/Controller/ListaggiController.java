@@ -1,12 +1,10 @@
-package Controller.Compiti;
+package Controller;
 
 
-import Controller.AnagraficaController;
 import Controller.Compiti.ArchivistaController;
 import Model.GestioneModel;
-import Model.Volontario;
+import Model.Persona;
 import View.ListaggiView;
-import Model.Candidato;
 import View.BasicFrameView;
 
 
@@ -16,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-public class ListaggiArchivistaController {
+public class ListaggiController {
 
 
     private BasicFrameView basicframe;
@@ -25,37 +23,28 @@ public class ListaggiArchivistaController {
     private JComboBox Box;
     private String utilizzatore;
 
-    private ArrayList<Candidato> CANDIDATI;
-    private ArrayList<Volontario> VOLONTARIO;
-
+    private ArrayList<Persona> UTENTI;
 
 
     /*COSTRUTTORE*/
-    public ListaggiArchivistaController(BasicFrameView frame, String Utilizzatore) {
+    public ListaggiController(BasicFrameView frame, String Utilizzatore) {
 
         basicframe = frame;
 
         listaggiView = new ListaggiView();
         listaggiView.VisibilitaResettaPasswordButton(false);
 
-        Box = listaggiView.getComboBox1();
+        Box = listaggiView.getBox1();
         utilizzatore = Utilizzatore;
 
-        if(utilizzatore.equals("candidato")) {
+        archivistamodel = new GestioneModel(utilizzatore);
+        listaggiView.setLabel("Lista "+utilizzatore);
 
-            archivistamodel = new GestioneModel("candidato");
-            listaggiView.setLabel("Lista candidati");
-            CANDIDATI = archivistamodel.getListcandidati();
+        UTENTI = archivistamodel.getListutenti();
 
-        }else if(utilizzatore.equals("volontario")){
+        if(utilizzatore.equals("volontario"))
+        listaggiView.VisibilitaAccettaButton(false);
 
-            archivistamodel = new GestioneModel("volontario");
-            VOLONTARIO = archivistamodel.getListvolontari();
-            listaggiView.setLabel("Lista volontarii");
-            listaggiView.VisibilitaAccettaButton(false);
-
-
-        }
 
         basicframe.setdestra(listaggiView.getIntermedio0());
         stampalista();
@@ -64,22 +53,17 @@ public class ListaggiArchivistaController {
     }
 
 
-    public void stampalista () {
+    public void stampalista() {
 
-        if(utilizzatore.equals("candidato"))
-        for(Candidato candidato : CANDIDATI)
-            Box.addItem(candidato.getCognome() + "    -    " +candidato.getNome());
-
-        else if(utilizzatore.equals("volontario"))
-            for(Volontario volontario : VOLONTARIO)
-                Box.addItem(volontario.getCognome() + "    -    " +volontario.getNome());
+            for (Persona candidato : UTENTI)
+                Box.addItem(candidato.getCognome() + "    -    " + candidato.getNome());
 
     }
 
     /**
      * Ascolto azioni dell utente
      */
-    private void Listener(){
+    private void Listener() {
 
         /*Ritorna ai compiti*/
         JButton ritornaAiCompitiDaArchivista = listaggiView.getRitornaButton();
@@ -98,7 +82,7 @@ public class ListaggiArchivistaController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-              VisionaSchedaAction();
+                VisionaSchedaAction();
 
             }
         });
@@ -116,42 +100,35 @@ public class ListaggiArchivistaController {
     }
 
 
-    private void VisionaSchedaAction(){
+    private void VisionaSchedaAction() {
 
         int Indice;
         Indice = Box.getSelectedIndex();
 
-        if(utilizzatore.equals("candidato")) {
-
             AnagraficaController controller;
-            controller = new AnagraficaController(basicframe, CANDIDATI.get(Indice), listaggiView);
+            controller = new AnagraficaController(basicframe, UTENTI.get(Indice), listaggiView, utilizzatore);
 
-        }else if(utilizzatore.equals("volontario")){
 
-            AnagraficaController controller;
-            controller = new AnagraficaController(basicframe, VOLONTARIO.get(Indice), listaggiView);
-
-        }
 
     }
 
-    private void  AccettaAction(){
+    private void AccettaAction() {
 
         int Indice;
         Indice = Box.getSelectedIndex();
         String[] appoggio = new String[3];
 
 
-        if(basicframe.OpotionalMessage("Confermare scheda per "+CANDIDATI.get(Indice).getNome()+" ?") == 0) {
+        if (basicframe.OpotionalMessage("Confermare scheda per " + UTENTI.get(Indice).getNome() + " ?") == 0) {
 
             appoggio[0] = "pass";
             appoggio[1] = "Conf_Archivista";
             appoggio[2] = "1";
 
-            if(CANDIDATI.get(Indice).UpdateSQL(appoggio)){
+            if (UTENTI.get(Indice).UpdateSQL(appoggio)) {
 
                 basicframe.Message("Conferma effettuata con successo!");
-                CANDIDATI.remove(Indice);
+                UTENTI.remove(Indice);
                 Box.removeItemAt(Indice);
 
             }

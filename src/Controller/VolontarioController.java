@@ -2,6 +2,7 @@ package Controller;
 
 
 import Controller.Compiti.ArchivistaController;
+import Controller.Compiti.MCController;
 import Controller.Compiti.ReferenteinformaticoController;
 import Model.Volontario;
 import View.BasicFrameView;
@@ -31,7 +32,7 @@ public class VolontarioController{
         Sview = new UtenteSinistraView();
         Sview.setEvolviButton(false);
         basicframe.setdestra(Dview.getIntermedio0());
-        basicframe.setsinistra(Sview.getIntermedio0());
+
 
         if(Utente.getPrimoaccesso().equals("si")) {
             new AnagraficaController(basicframe, Dview, utente);
@@ -42,13 +43,16 @@ public class VolontarioController{
             DatiPersonali= 0;
         }
 
+        basicframe.setsinistra(Sview.getIntermedio0());
         Dview.setNOMEVOLabel(Utente.getNome());
         Dview.setCOGNOMEVOLabel(Utente.getCognome());
+        Dview.setSTATOLabel(Utente.getStato());
 
         VolontarioControllerListener();
 
         ArchivistaListner();
         ReferenteInformaticoListner();
+        MasterChiefListner();
 
     }
 
@@ -84,6 +88,19 @@ public class VolontarioController{
             }
 
         });
+
+        JButton cambiastato = Dview.getCambiaButton();
+        cambiastato.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                CambiaStatoController controller;
+                controller = new CambiaStatoController(basicframe , Utente, Dview);
+
+            }
+
+        });
+
     }
 
     private void ArchivistaListner(){
@@ -116,6 +133,20 @@ public class VolontarioController{
         });
     }
 
+    private void MasterChiefListner(){
+
+        JButton MasterChief = Dview.getMaster_ChiefButton();
+        MasterChief.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                MCController controller;
+                controller = new MCController(basicframe);
+
+            }
+
+        });
+    }
 
     private void LogoutAction(){
 
@@ -124,8 +155,6 @@ public class VolontarioController{
         }
 
     }
-
-
 
     public void setDatiPersonali(int datiPersonali) {
 

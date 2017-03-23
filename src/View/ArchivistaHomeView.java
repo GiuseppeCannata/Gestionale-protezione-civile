@@ -2,7 +2,7 @@ package View;
 
 import javax.swing.*;
 
-public class ArchivistaView extends JPanel {
+public class ArchivistaHomeView extends JPanel {
 
     private JPanel Intermedio0;
 
@@ -11,7 +11,7 @@ public class ArchivistaView extends JPanel {
     private JButton tuttiIVolontariButton;
 
 
-    public ArchivistaView(){
+    public ArchivistaHomeView(){
 
         setVisible(true);
 

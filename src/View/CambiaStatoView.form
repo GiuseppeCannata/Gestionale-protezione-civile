@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="View.CambiaStatoView">
+  <grid id="27dc6" binding="Intermedio0" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="10" left="10" bottom="10" right="10"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="e14e6" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="           Cambia lo stato attuale"/>
+        </properties>
+      </component>
+      <component id="3ae2b" class="javax.swing.JComboBox" binding="Box">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="9" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <model>
+            <item value="Attivo"/>
+            <item value="Rinunciatario"/>
+            <item value="In Licenza"/>
+            <item value="Assente"/>
+            <item value="Malattia"/>
+          </model>
+        </properties>
+      </component>
+      <component id="e5b2c" class="javax.swing.JButton" binding="cambiaStatoButton" default-binding="true">
+        <constraints>
+          <grid row="1" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Cambia Stato"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

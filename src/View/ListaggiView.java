@@ -3,15 +3,19 @@ package View;
 import javax.swing.*;
 
 
+
 public class ListaggiView extends JPanel{
 
     private JButton visionaSchedaButton;
     private JButton ritornaButton;
-    private JComboBox comboBox1;
     private JPanel Intermedio0;
     private JButton accettaButton;
     private JLabel Label;
     private JButton resettaPasswordButton;
+    private JComboBox Box1;
+    private JList list;
+    private JButton assegnaCompitoButton;
+    private JComboBox BoxAcomparsa;
 
 
     public ListaggiView(){
@@ -20,7 +24,9 @@ public class ListaggiView extends JPanel{
 
     }
 
-
+    public JList getList() {
+        return list;
+    }
 
     public JButton getRitornaButton() {
 
@@ -29,11 +35,6 @@ public class ListaggiView extends JPanel{
     }
 
 
-    public JComboBox getComboBox1() {
-
-        return comboBox1;
-
-    }
 
     public JButton getVisionaSchedaButton() {
 
@@ -66,6 +67,12 @@ public class ListaggiView extends JPanel{
 
     }
 
+    public JComboBox getBox1() {
+
+        return Box1;
+
+    }
+
     public void VisibilitaAccettaButton(boolean visibilita){
 
         accettaButton.setVisible(visibilita);
@@ -91,4 +98,21 @@ public class ListaggiView extends JPanel{
 
     }
 
+    public void VisibilitaJList(boolean visibilita){
+
+        list.setVisible(visibilita);
+    }
+
+    public JComboBox getBoxAcomparsa() {
+        return BoxAcomparsa;
+    }
+
+    public JButton getAssegnaCompitoButton() {
+        return assegnaCompitoButton;
+    }
+
+    public void  VisibilitaBoxAComparsa(boolean visibilita){
+
+        BoxAcomparsa.setVisible(visibilita);
+    }
 }
