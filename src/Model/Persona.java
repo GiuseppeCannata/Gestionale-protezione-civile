@@ -55,10 +55,32 @@ public abstract class Persona extends Model{
     public Persona(String username){
 
         Username = username;
+
+        User();
         popolaA();
         popolaB();
         popolaC();
 
+    }
+
+    private void User(){
+
+        try {
+
+            openConnection();
+        String sql = "select cf,pass from pass where user='"+Username+"'";
+        ResultSet query = selectQuery(sql);
+        while(query.next()) {
+            Codice_Fiscale = query.getString("cf");
+            Password = query.getString("pass");
+
+        }
+        }catch(SQLException se){
+            se.printStackTrace();
+        }finally{
+            closeConnection();
+
+        }
     }
 
     /**
@@ -71,24 +93,13 @@ public abstract class Persona extends Model{
 
         try {
 
-            String sql = "select cf,pass from pass where user='"+Username+"'";
+            String sql = "select* from a where cf ='"+Codice_Fiscale+"'";
+
             ResultSet query = selectQuery(sql);
-            while(query.next()) {
-                Codice_Fiscale = query.getString("cf");
-                Password = query.getString("pass");
-            }
-
-           // System.out.println(Codice_Fiscale);
-
-
-            sql = "select* from a where cf ='"+Codice_Fiscale+"'";
-
-            query = selectQuery(sql);
             if(query.next()){
 
                 Codice_Fiscale = query.getString("cf");
                Nome = query.getString("nome");
-                //System.out.println(Nome);
                Cognome = query.getString("cognome");
                Luogo_di_Nascita = query.getString("luogodinascita");
                Indirizzo_di_residenza = query.getString("indirizzodiresidenza");

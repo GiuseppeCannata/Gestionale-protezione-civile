@@ -46,7 +46,7 @@ public class ArchivistaController {
             }
         });
 
-        /*TUTTI I VOLONTARI*/
+        /*TUTTIIVOLONTARI*/
         JButton tuttiIvolonari = archivistaHomeView.gettuttiIVolontariButton();
         tuttiIvolonari.addActionListener(new ActionListener() {
             @Override

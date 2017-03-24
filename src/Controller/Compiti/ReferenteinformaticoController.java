@@ -15,9 +15,10 @@ import java.util.ArrayList;
 public class ReferenteinformaticoController {
 
     private BasicFrameView basicframe;
-    private ListaggiView referenteinformaticoview;
-    private GestioneModel referenteinformaticoModel;
+    private ListaggiView view;
+    private GestioneModel model;
     private JComboBox Box;
+    private String appoggio;
 
     private ArrayList<Persona> UTENTI;
 
@@ -27,23 +28,23 @@ public class ReferenteinformaticoController {
 
         basicframe = frame;
 
-        referenteinformaticoview = new ListaggiView();
-        referenteinformaticoview.VisibilitaAccettaButton(false);
-        referenteinformaticoview.VisibilitaVisionaSchedaButton(false);
-        referenteinformaticoview.VisibilitaRitornaButton(false);
-        referenteinformaticoview.setLabel("Lista utenti");
+        view = new ListaggiView();
+        view.VisibilitaResettaPasswordButton(true);
+        view.setLabel("Lista utenti");
 
 
-        Box = referenteinformaticoview.getBox1();
-        referenteinformaticoModel = new GestioneModel("referente informatico");
-        UTENTI = referenteinformaticoModel.getListutenti();
+        Box = view.getBox1();
+        appoggio = "vol_o_cand=1 or vol_o_cand=0";
+        model = new GestioneModel(appoggio);
 
+        if(model.SearchSQL())
+            UTENTI = model.getListutenti();
 
         stampalista();
 
-        basicframe.setdestra(referenteinformaticoview.getIntermedio0());
+        basicframe.setdestra(view.getIntermedio0());
 
-        ReferenteInfControllerListener();
+        Listener();
 
     }
 
@@ -59,9 +60,9 @@ public class ReferenteinformaticoController {
 
 
 
-    private void ReferenteInfControllerListener() {
+    private void Listener() {
 
-        JButton resettaPasswordButton =  referenteinformaticoview.getResettaPasswordButton();
+        JButton resettaPasswordButton =  view.getResettaPasswordButton();
         resettaPasswordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

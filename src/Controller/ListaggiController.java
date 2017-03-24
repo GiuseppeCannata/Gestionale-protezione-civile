@@ -18,10 +18,11 @@ public class ListaggiController {
 
 
     private BasicFrameView basicframe;
-    private ListaggiView listaggiView;
-    private GestioneModel archivistamodel;
+    private ListaggiView view;
+    private GestioneModel gestione;
     private JComboBox Box;
     private String utilizzatore;
+    private String appoggio;
 
     private ArrayList<Persona> UTENTI;
 
@@ -31,22 +32,28 @@ public class ListaggiController {
 
         basicframe = frame;
 
-        listaggiView = new ListaggiView();
-        listaggiView.VisibilitaResettaPasswordButton(false);
+        view = new ListaggiView();
 
-        Box = listaggiView.getBox1();
         utilizzatore = Utilizzatore;
 
-        archivistamodel = new GestioneModel(utilizzatore);
-        listaggiView.setLabel("Lista "+utilizzatore);
+        view.VisibilitaVisionaSchedaButton(true);
+        view.VisibilitaRitornaButton(true);
 
-        UTENTI = archivistamodel.getListutenti();
+        if(utilizzatore.equals("candidato")){
 
-        if(utilizzatore.equals("volontario"))
-        listaggiView.VisibilitaAccettaButton(false);
+           view.VisibilitaAccettaButton(true);
+           appoggio = "vol_o_cand=0 and Conf_Archivista=0";
 
 
-        basicframe.setdestra(listaggiView.getIntermedio0());
+        }else if(utilizzatore.equals("volontario"))
+            appoggio = "vol_o_cand=1";
+
+        view.setLabel("Lista "+utilizzatore);
+
+        gestione = new GestioneModel(appoggio);
+        UTENTI = gestione.Schede(Utilizzatore);
+
+        basicframe.setdestra(view.getIntermedio0());
         stampalista();
         Listener();
 
@@ -54,6 +61,8 @@ public class ListaggiController {
 
 
     public void stampalista() {
+
+        Box = view.getBox1();
 
             for (Persona candidato : UTENTI)
                 Box.addItem(candidato.getCognome() + "    -    " + candidato.getNome());
@@ -66,7 +75,7 @@ public class ListaggiController {
     private void Listener() {
 
         /*Ritorna ai compiti*/
-        JButton ritornaAiCompitiDaArchivista = listaggiView.getRitornaButton();
+        JButton ritornaAiCompitiDaArchivista = view.getRitornaButton();
         ritornaAiCompitiDaArchivista.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -77,7 +86,7 @@ public class ListaggiController {
             }
         });
 
-        JButton visionaSchedaButton = listaggiView.getVisionaSchedaButton();
+        JButton visionaSchedaButton = view.getVisionaSchedaButton();
         visionaSchedaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -87,7 +96,7 @@ public class ListaggiController {
             }
         });
 
-        JButton AccettaButton = listaggiView.getAccettaButton();
+        JButton AccettaButton = view.getAccettaButton();
         AccettaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -106,7 +115,7 @@ public class ListaggiController {
         Indice = Box.getSelectedIndex();
 
             AnagraficaController controller;
-            controller = new AnagraficaController(basicframe, UTENTI.get(Indice), listaggiView, utilizzatore);
+            controller = new AnagraficaController(basicframe, UTENTI.get(Indice), view, utilizzatore);
 
 
 

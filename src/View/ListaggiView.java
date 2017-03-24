@@ -20,6 +20,10 @@ public class ListaggiView extends JPanel{
 
     public ListaggiView(){
 
+        accettaButton.setVisible(false);
+        resettaPasswordButton.setVisible(false);
+        visionaSchedaButton.setVisible(false);
+        ritornaButton.setVisible(false);
         setVisible(true);
 
     }

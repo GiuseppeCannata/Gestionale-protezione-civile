@@ -2,20 +2,19 @@ package View;
 
 import javax.swing.*;
 
-/**
- * Created by Giuseppe on 23/03/2017.
- */
+
 public class MCcompitiView extends JPanel {
 
     private JPanel Intermedio0;
     private JComboBox Box1;
     private JButton assegnaCompitoButton;
-    private JList list1;
+    private JList lista;
     private JComboBox Box2;
 
     public MCcompitiView() {
 
-        this.setVisible(true);
+        lista.setEnabled(false);
+        setVisible(true);
 
     }
 
@@ -31,8 +30,8 @@ public class MCcompitiView extends JPanel {
         return assegnaCompitoButton;
     }
 
-    public JList getList1() {
-        return list1;
+    public JList getLista() {
+        return lista;
     }
 
     public JComboBox getBox2() {

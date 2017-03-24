@@ -1,10 +1,9 @@
 package Model;
 
-import Model.Persona;
+
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 
 public class Volontario extends Persona {
@@ -93,10 +92,10 @@ public class Volontario extends Persona {
 
             if(query.next()) {
 
-                archivista = query.getString("archivista");
-                magazzinodivise = query.getString("magazzino");
-                add_giunta = query.getString("comunicazionigiunta");
-                referenteinformatico = query.getString("refinformatico");
+                archivista = query.getString("Archivista");
+                magazzinodivise = query.getString("Magazzino_Divise");
+                add_giunta = query.getString("Add_Giunta");
+                referenteinformatico = query.getString("Referente_Informatico");
 
             }
 
@@ -199,8 +198,8 @@ public class Volontario extends Persona {
                 tagliabusto                                 + "','" +
                 tagliamano                                  + "','" +
                 tagliapantaloni                             + "','" +
-                tagliascarpe                                 + "','" +
-                abilita                                      + "')";
+                tagliascarpe                                + "','" +
+                abilita                                     + "')";
 
 
 
@@ -271,35 +270,35 @@ public class Volontario extends Persona {
         return primoaccesso;
     }
 
-    public void setGrupposanguigno(String grupposanguigno) {
-        this.grupposanguigno = grupposanguigno;
+    public void setGrupposanguigno(String Grupposanguigno) {
+        grupposanguigno = Grupposanguigno;
     }
 
-    public void setTagliatesta(String tagliatesta) {
-        this.tagliatesta = tagliatesta;
+    public void setTagliatesta(String Tagliatesta) {
+        tagliatesta = Tagliatesta;
     }
 
-    public void setTagliabusto(String tagliabusto) {
-        this.tagliabusto = tagliabusto;
+    public void setTagliabusto(String Tagliabusto) {
+        tagliabusto = Tagliabusto;
     }
 
-    public void setTagliamano(String tagliamano) {
-        this.tagliamano = tagliamano;
+    public void setTagliamano(String Tagliamano) {
+        tagliamano = Tagliamano;
     }
 
-    public void setTagliapantaloni(String tagliapantaloni) {
-        this.tagliapantaloni = tagliapantaloni;
+    public void setTagliapantaloni(String Tagliapantaloni) {
+        tagliapantaloni = Tagliapantaloni;
     }
 
-    public void setTagliascarpe(String tagliascarpe) {
-        this.tagliascarpe = tagliascarpe;
+    public void setTagliascarpe(String Tagliascarpe) {
+        tagliascarpe = Tagliascarpe;
     }
 
-    public void setAbilita(String abilita) {
-        this.abilita = abilita;
+    public void setAbilita(String Abilita) {
+        abilita = Abilita;
     }
 
-    public void setStato(String stato) {
-        this.stato = stato;
+    public void setStato(String Stato) {
+        stato = Stato;
     }
 }
