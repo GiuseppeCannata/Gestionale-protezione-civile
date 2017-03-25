@@ -41,7 +41,7 @@ public class GestioneModel extends Model{
                 utente.popolaB();
                 utente.popolaC();
 
-                if(utilizzatore.equals("volontario")) {
+                if(utilizzatore.equals("listavolontari")) {
 
                     Volontario VOLONTARIO = (Volontario) utente;
                     VOLONTARIO.popolaD();

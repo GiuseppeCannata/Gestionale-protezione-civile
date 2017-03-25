@@ -71,7 +71,7 @@ public class AnagraficaController {
         SettaggioCampi_A();
         SettaggioCampi_C();
 
-        if(utilizzatore.equals("volontario")) {
+        if(utilizzatore.equals("listavolontari")) {
 
             SettaggioCampi_D();
             VolontarioListner();
@@ -205,7 +205,7 @@ public class AnagraficaController {
         Anagraficaview.VisibilitaListaButton(false);
         System.out.println("ok");
         sceltapannelli();
-        //System.out.println("ok");
+
 
         //Setto il mio manager di pagine
         Pagine_Manager.setPagina_Corrente();
@@ -230,7 +230,7 @@ public class AnagraficaController {
         Anagraficaview.setSezB(sez_Bview.getIntermedio0());
         Anagraficaview.setSezC(sez_Cview.getIntermedio0());
 
-        if (utilizzatore.equals("volontario")) {
+        if (utilizzatore.equals("volontario") || utilizzatore.equals("listavolontari")) {
 
             sez_Dview = new Sez_DView();
             Anagraficaview.setSezD(sez_Dview.getIntermedio0());

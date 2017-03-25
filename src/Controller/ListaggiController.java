@@ -1,7 +1,8 @@
 package Controller;
 
 
-import Controller.Compiti.ArchivistaController;
+import Controller.AnagraficaController;
+import Controller.Compiti.ArchivistaHome;
 import Model.GestioneModel;
 import Model.Persona;
 import View.ListaggiView;
@@ -36,28 +37,50 @@ public class ListaggiController {
 
         utilizzatore = Utilizzatore;
 
-        view.VisibilitaVisionaSchedaButton(true);
-        view.VisibilitaRitornaButton(true);
+        SettaggioView();
 
-        if(utilizzatore.equals("candidato")){
-
-           view.VisibilitaAccettaButton(true);
-           appoggio = "vol_o_cand=0 and Conf_Archivista=0";
-
-
-        }else if(utilizzatore.equals("volontario"))
-            appoggio = "vol_o_cand=1";
-
-        view.setLabel("Lista "+utilizzatore);
+       // view.setLabel("Lista "+utilizzatore);
 
         gestione = new GestioneModel(appoggio);
         UTENTI = gestione.Schede(Utilizzatore);
 
         basicframe.setdestra(view.getIntermedio0());
         stampalista();
-        Listener();
 
     }
+
+   private void SettaggioView(){
+
+        switch(utilizzatore){
+
+            case "listacandidati":{
+
+                view.VisibilitaAccettaButton(true);
+                view.VisibilitaVisionaSchedaButton(true);
+                view.VisibilitaRitornaButton(true);
+                appoggio = "vol_o_cand=0 and Conf_Archivista=0";
+                RitornaAiCompitiDaArchivistaListener();
+                VisionaSchedaListener();
+                AccettaListener();
+                break;
+
+
+            }
+
+            case "listavolontari":{
+
+                view.VisibilitaVisionaSchedaButton(true);
+                view.VisibilitaRitornaButton(true);
+                appoggio = "vol_o_cand=1";
+                VisionaSchedaListener();
+                RitornaAiCompitiDaArchivistaListener();
+                break;
+
+            }
+
+        }
+
+   }
 
 
     public void stampalista() {
@@ -72,7 +95,7 @@ public class ListaggiController {
     /**
      * Ascolto azioni dell utente
      */
-    private void Listener() {
+    private void RitornaAiCompitiDaArchivistaListener() {
 
         /*Ritorna ai compiti*/
         JButton ritornaAiCompitiDaArchivista = view.getRitornaButton();
@@ -80,11 +103,14 @@ public class ListaggiController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                ArchivistaController controller;
-                controller = new ArchivistaController(basicframe);
+                ArchivistaHome controller;
+                controller = new ArchivistaHome(basicframe);
 
             }
         });
+    }
+
+    private void VisionaSchedaListener() {
 
         JButton visionaSchedaButton = view.getVisionaSchedaButton();
         visionaSchedaButton.addActionListener(new ActionListener() {
@@ -95,13 +121,16 @@ public class ListaggiController {
 
             }
         });
+    }
+
+    private void AccettaListener(){
 
         JButton AccettaButton = view.getAccettaButton();
         AccettaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                AccettaAction();
+                AccettaArchivistaAction();
 
             }
         });
@@ -121,7 +150,7 @@ public class ListaggiController {
 
     }
 
-    private void AccettaAction() {
+    private void AccettaArchivistaAction() {
 
         int Indice;
         Indice = Box.getSelectedIndex();

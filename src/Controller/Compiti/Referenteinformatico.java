@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class ReferenteinformaticoController {
+public class Referenteinformatico {
 
     private BasicFrameView basicframe;
     private ListaggiView view;
@@ -24,7 +24,7 @@ public class ReferenteinformaticoController {
 
 
     /*costruttore*/
-    public ReferenteinformaticoController(BasicFrameView frame) {
+    public Referenteinformatico(BasicFrameView frame) {
 
         basicframe = frame;
 
@@ -34,7 +34,9 @@ public class ReferenteinformaticoController {
 
 
         Box = view.getBox1();
+
         appoggio = "vol_o_cand=1 or vol_o_cand=0";
+
         model = new GestioneModel(appoggio);
 
         if(model.SearchSQL())

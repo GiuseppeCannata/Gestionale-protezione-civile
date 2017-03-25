@@ -10,20 +10,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class ArchivistaController {
+public class ArchivistaHome {
 
     private BasicFrameView basicframe;
     private ArchivistaHomeView archivistaHomeView;
 
 /*costruttore*/
 
-    public ArchivistaController(BasicFrameView frame) {
+    public ArchivistaHome(BasicFrameView frame) {
 
         basicframe = frame;
         archivistaHomeView = new ArchivistaHomeView();
         basicframe.setdestra(archivistaHomeView.getIntermedio0());
 
-        ArchivistaContriollerListener();
+        ArchivistaHomeContriollerListener();
 
     }
 
@@ -31,7 +31,7 @@ public class ArchivistaController {
      * Ascolto azioni dell utente
      */
 
-    public void ArchivistaContriollerListener() {
+    public void ArchivistaHomeContriollerListener() {
 
 
         /*listacandidatibutton*/
@@ -41,7 +41,7 @@ public class ArchivistaController {
             public void actionPerformed(ActionEvent e) {
 
                 ListaggiController controller;
-                controller = new ListaggiController(basicframe, "candidato");
+                controller = new ListaggiController(basicframe, "listacandidati");
 
             }
         });
@@ -53,7 +53,7 @@ public class ArchivistaController {
             public void actionPerformed(ActionEvent e) {
 
                 ListaggiController controller;
-                controller = new ListaggiController(basicframe, "volontario");
+                controller = new ListaggiController(basicframe, "listavolontari");
 
             }
         });

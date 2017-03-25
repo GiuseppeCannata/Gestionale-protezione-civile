@@ -17,6 +17,8 @@ public class VolontarioDView extends JPanel{
     private JButton cambiaButton;
     private JLabel STATOLabel;
     private JButton master_ChiefButton;
+    private JTabbedPane tabbedPane1;
+    private JList list1;
 
 
     public VolontarioDView() {

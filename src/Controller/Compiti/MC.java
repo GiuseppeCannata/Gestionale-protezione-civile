@@ -15,7 +15,7 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 
-public class MCController {
+public class MC {
 
     private BasicFrameView basicframe;
     private GestioneModel model;
@@ -28,7 +28,7 @@ public class MCController {
     private ArrayList<Persona> UTENTI;
 
 
-    public MCController(BasicFrameView frame, String Utilizzatore, MCHomeView HomeView) {
+    public MC(BasicFrameView frame, String Utilizzatore, MCHomeView HomeView) {
 
         basicframe = frame;
         view = new MCView();
@@ -115,7 +115,7 @@ public class MCController {
 
                         if (utente.UpdateSQL(app)) {
                             basicframe.Message("Assegnato!");
-                             new MCController(basicframe, "compiti", homeView);
+                             new MC(basicframe, "compiti", homeView);
                         }
                     }
 
@@ -140,7 +140,7 @@ public class MCController {
 
                         if (utente.UpdateSQL(app)) {
                             basicframe.Message("Eliminato!");
-                            new MCController(basicframe, "compiti", homeView);
+                            new MC(basicframe, "compiti", homeView);
                         }
                     }
 
@@ -165,7 +165,7 @@ public class MCController {
 
                         if (utente.UpdateSQL(app)) {
                             basicframe.Message("Assegnato!");
-                            new MCController(basicframe, "ruoli", homeView);
+                            new MC(basicframe, "ruoli", homeView);
                         }
                     }
 
@@ -190,7 +190,7 @@ public class MCController {
 
                         if (utente.UpdateSQL(app)) {
                             basicframe.Message("Eliminato!");
-                            new MCController(basicframe, "ruoli", homeView);
+                            new MC(basicframe, "ruoli", homeView);
                         }
                     }
 

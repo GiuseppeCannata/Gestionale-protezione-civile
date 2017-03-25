@@ -8,12 +8,12 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MCHomeController {
+public class MCHome {
 
     private BasicFrameView basicframe;
     private MCHomeView mcHomeview;
 
-    public MCHomeController(BasicFrameView frame) {
+    public MCHome(BasicFrameView frame) {
 
         basicframe = frame;
         mcHomeview = new MCHomeView();
@@ -32,8 +32,8 @@ public class MCHomeController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                MCController controller;
-                controller = new MCController(basicframe, "compiti", mcHomeview);
+                MC controller;
+                controller = new MC(basicframe, "compiti", mcHomeview);
 
             }
         });
@@ -45,8 +45,8 @@ public class MCHomeController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                MCController controller;
-                controller = new MCController(basicframe, "ruoli", mcHomeview);
+                MC controller;
+                controller = new MC(basicframe, "ruoli", mcHomeview);
 
             }
         });

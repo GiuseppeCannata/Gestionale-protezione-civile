@@ -1,9 +1,10 @@
 package Controller;
 
 
-import Controller.Compiti.ArchivistaController;
-import Controller.Compiti.MCHomeController;
-import Controller.Compiti.ReferenteinformaticoController;
+import Controller.Compiti.Add_Giunta;
+import Controller.Compiti.ArchivistaHome;
+import Controller.Compiti.MCHome;
+import Controller.Compiti.Referenteinformatico;
 import Model.Volontario;
 import View.BasicFrameView;
 import View.UtenteSinistraView;
@@ -54,6 +55,7 @@ public class VolontarioController{
         ArchivistaListner();
         ReferenteInformaticoListner();
         MasterChiefListner();
+        Add_GiuntaListener();
 
     }
 
@@ -120,8 +122,8 @@ public class VolontarioController{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                ArchivistaController controller;
-                controller = new ArchivistaController(basicframe);
+                ArchivistaHome controller;
+                controller = new ArchivistaHome(basicframe);
 
             }
 
@@ -135,8 +137,8 @@ public class VolontarioController{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                ReferenteinformaticoController controller;
-                controller = new ReferenteinformaticoController(basicframe);
+                Referenteinformatico controller;
+                controller = new Referenteinformatico(basicframe);
 
             }
 
@@ -150,13 +152,29 @@ public class VolontarioController{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                MCHomeController controller;
-                controller = new MCHomeController(basicframe);
+                MCHome controller;
+                controller = new MCHome(basicframe);
 
             }
 
         });
     }
+
+    private void Add_GiuntaListener(){
+
+        JButton Add_Giunta = Dview.getAddGiuntaComunaleButton();
+        Add_Giunta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                Add_Giunta controller;
+                controller = new Add_Giunta(basicframe);
+
+            }
+
+        });
+    }
+
 
     private void LogoutAction(){
 
