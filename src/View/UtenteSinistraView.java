@@ -37,6 +37,10 @@ public class UtenteSinistraView extends JPanel{
 
     }
 
+    public JButton getHomeButton() {
+        return homeButton;
+    }
+
     public JButton getDatiPersonaliButton() {
 
         return datiPersonaliButton;

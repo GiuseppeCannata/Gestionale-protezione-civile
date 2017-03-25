@@ -95,6 +95,42 @@ public class GestioneModel extends Model{
 
     }
 
+    public ArrayList<Persona> Ruoli() {
+
+        try {
+
+            openConnection();
+
+            String sql = "select * from a,pass where "+appoggio+" and a.cf=pass.cf order by cognome,nome ";
+
+            ResultSet query = selectQuery(sql);
+
+            while (query.next()) {
+
+                Persona utente = new Volontario();
+
+                utente.setCodice_Fiscale(query.getString("cf"));
+                utente.setNome(query.getString("nome"));
+                utente.setCognome(query.getString("cognome"));
+
+                Volontario VOLONTARIO = (Volontario) utente;
+                VOLONTARIO.popolaruolo();
+
+                listutenti.add(listutenti.size(), utente);
+
+            }
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }finally{
+            closeConnection();
+            return listutenti;
+        }
+
+    }
+
+
+
     @Override
     public  boolean InsertSQL(){
 

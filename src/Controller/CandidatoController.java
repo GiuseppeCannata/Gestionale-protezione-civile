@@ -39,13 +39,13 @@ public class CandidatoController {
 
         if(Utente.getConf_Giunta() == 1 && Utente.getConf_Archivista() == 1)
             Dview.MessaggioSchermo("Puoi finalmente evolvere in Volontario.\nFai click su evolvi per dare la tua conferma!");
-        else {
-            if (Utente.getConf_Archivista() == 1)
+
+        if (Utente.getConf_Archivista() == 1)
               Dview.setConf_Archivista(true);
 
-            if (Utente.getConf_Giunta() == 1)
+        if (Utente.getConf_Giunta() == 1)
                 Dview.setConf_giunta(true);
-        }
+
         DatiPersonali = 0;
         //Settaggio della basicframe con inserimento dei due pannelli a destra e sinistra
         basicframe.setdestra(Dview.getIntermedio0());
@@ -72,7 +72,7 @@ public class CandidatoController {
                     AnagraficaController datipersonali;
                     datipersonali = new AnagraficaController(basicframe, Dview, Utente, Utente.getCodice_Fiscale(),
                             CandidatoController.this);
-                 }
+                }
 
             }
 
@@ -101,8 +101,7 @@ public class CandidatoController {
 
         });
 
-
-    }
+      }
 
 
     private void EvolviAction(){

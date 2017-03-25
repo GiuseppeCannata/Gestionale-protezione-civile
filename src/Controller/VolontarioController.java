@@ -2,7 +2,7 @@ package Controller;
 
 
 import Controller.Compiti.ArchivistaController;
-import Controller.Compiti.MCController;
+import Controller.Compiti.MCHomeController;
 import Controller.Compiti.ReferenteinformaticoController;
 import Model.Volontario;
 import View.BasicFrameView;
@@ -47,6 +47,7 @@ public class VolontarioController{
         Dview.setNOMEVOLabel(Utente.getNome());
         Dview.setCOGNOMEVOLabel(Utente.getCognome());
         Dview.setSTATOLabel(Utente.getStato());
+        Dview.setRUOLOVOLabel(Utente.getRuolo());
 
         VolontarioControllerListener();
 
@@ -76,8 +77,6 @@ public class VolontarioController{
 
         });
 
-
-
         /*Logout*/
         JButton Logout = Sview.getLogoutButton();
         Logout.addActionListener(new ActionListener() {
@@ -85,6 +84,17 @@ public class VolontarioController{
             public void actionPerformed(ActionEvent e) {
 
                 LogoutAction();
+            }
+
+        });
+
+        JButton Home = Sview.getHomeButton();
+        Home.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                basicframe.setdestra(Dview.getIntermedio0());
+
             }
 
         });
@@ -140,8 +150,8 @@ public class VolontarioController{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                MCController controller;
-                controller = new MCController(basicframe);
+                MCHomeController controller;
+                controller = new MCHomeController(basicframe);
 
             }
 

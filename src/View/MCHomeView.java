@@ -5,8 +5,8 @@ import javax.swing.*;
 
 public class MCHomeView extends JPanel {
 
-    private JButton daiCompitiButton;
-    private JButton daiRuoliButton;
+    private JButton compitiButton;
+    private JButton ruoliButton;
     private JButton rimuoviRuoliButton;
     private JButton rimuoviCompitiButton;
     private JPanel Intermedio0;
@@ -27,12 +27,12 @@ public class MCHomeView extends JPanel {
 
     }
 
-    public JButton getDaiCompitiButton() {
-        return daiCompitiButton;
+    public JButton getCompitiButton() {
+        return compitiButton;
     }
 
-    public JButton getDaiRuoliButton() {
-        return daiRuoliButton;
+    public JButton getRuoliButton() {
+        return ruoliButton;
     }
 
     public JButton getRimuoviRuoliButton() {

@@ -20,7 +20,7 @@ public class Volontario extends Persona {
 
     private String primoaccesso;
 
-   /* private String ruolo;*/
+    private String ruolo;
     private String stato;
 
     private String archivista;
@@ -41,9 +41,11 @@ public class Volontario extends Persona {
         super(userInserito);
 
         popolaD();
-        popolacompiti();
-        popolastato();
         popolaprimoaccesso();
+        popolaruolo();
+        popolastato();
+        popolacompiti();
+
 
     }
 
@@ -150,6 +152,28 @@ public class Volontario extends Persona {
             closeConnection();
         }
 
+
+    }
+
+    protected void popolaruolo(){
+
+        openConnection();
+
+        try {
+
+
+            String sql = "select ruolo from flagvolontario where cf ='"+getCodice_Fiscale()+"'";
+
+
+            ResultSet query = selectQuery(sql);
+            if(query.next())
+
+                ruolo = query.getString("ruolo");
+        }catch(SQLException se){
+            se.printStackTrace();
+        }finally{
+            closeConnection();
+        }
 
     }
 
@@ -300,5 +324,9 @@ public class Volontario extends Persona {
 
     public void setStato(String Stato) {
         stato = Stato;
+    }
+
+    public String getRuolo() {
+        return ruolo;
     }
 }

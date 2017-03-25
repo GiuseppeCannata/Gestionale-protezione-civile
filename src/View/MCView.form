@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="View.MCcompitiView">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="View.MCView">
   <grid id="27dc6" binding="Intermedio0" layout-manager="GridLayoutManager" row-count="10" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="10">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="516" height="400"/>
+      <xy x="20" y="20" width="713" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
       <vspacer id="6d4e8">
         <constraints>
-          <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="9" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
       <component id="b69a9" class="javax.swing.JList" binding="lista">
@@ -36,22 +36,12 @@
           <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
-      <hspacer id="945a">
-        <constraints>
-          <grid row="2" column="3" row-span="4" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </hspacer>
       <component id="d050e" class="javax.swing.JComboBox" binding="Box2">
         <constraints>
-          <grid row="7" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <model>
-            <item value="Archivista"/>
-            <item value="Referente_Informatico"/>
-            <item value="Magazzino_Divise"/>
-            <item value="Comunicazioni_Giunta"/>
-          </model>
+          <model/>
         </properties>
       </component>
       <component id="dfd14" class="javax.swing.JLabel">
@@ -72,7 +62,7 @@
       </component>
       <component id="be8a7" class="javax.swing.JComboBox" binding="Box1">
         <constraints>
-          <grid row="3" column="1" row-span="2" col-span="2" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="1" row-span="2" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
@@ -84,14 +74,39 @@
           <text value="Compiti posseduti"/>
         </properties>
       </component>
-      <component id="418c" class="javax.swing.JButton" binding="assegnaCompitoButton" default-binding="true">
+      <grid id="7dc6a" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
         <constraints>
-          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="1" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties>
-          <text value="Assegna compito"/>
-        </properties>
-      </component>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="418c" class="javax.swing.JButton" binding="assegnaCompitoButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Assegna compito"/>
+            </properties>
+          </component>
+          <component id="fbc63" class="javax.swing.JButton" binding="rimuoviCompitoButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Rimuovi compito"/>
+            </properties>
+          </component>
+          <component id="99e2" class="javax.swing.JButton" binding="assegnaRuoloButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Assegna ruolo"/>
+            </properties>
+          </component>
+          <component id="13ca6" class="javax.swing.JButton" binding="rimuoviRuoloButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Rimuovi ruolo"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
     </children>
   </grid>
 </form>
