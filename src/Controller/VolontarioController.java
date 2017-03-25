@@ -52,10 +52,25 @@ public class VolontarioController{
 
         VolontarioControllerListener();
 
-        ArchivistaListner();
-        ReferenteInformaticoListner();
-        MasterChiefListner();
-        Add_GiuntaListener();
+        if(Utente.getArchivista().equals("si")) {
+            Dview.VisibilitaArchivistaButton(true);
+            ArchivistaListner();
+
+        }
+        if(Utente.getAdd_giunta().equals("si")) {
+            Dview.VisibilitaGiuntaButton(true);
+            Add_GiuntaListener();
+        }
+        if(Utente.getReferenteinformatico().equals("si")) {
+            Dview.VisibilitaReferenteInformaticoButton(true);
+            ReferenteInformaticoListner();
+        }
+
+        if(Utente.getRuolo().equals("Cordinatore") || Utente.getRuolo().equals("Vicecordinatore")) {
+            Dview.VisibilitaMasterChiefButton(true);
+            MasterChiefListner();
+        }
+
 
     }
 

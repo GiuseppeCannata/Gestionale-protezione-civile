@@ -23,6 +23,10 @@ public class VolontarioDView extends JPanel{
 
     public VolontarioDView() {
 
+        archivistaButton.setVisible(false);
+        referenteInformaticoButton.setVisible(false);
+        addGiuntaComunaleButton.setVisible(false);
+        master_ChiefButton.setVisible(false);
         setVisible(true);
 
     }
@@ -65,6 +69,10 @@ public class VolontarioDView extends JPanel{
 
     }
 
+    public JList getList1() {
+        return list1;
+    }
+
     public void setRUOLOVOLabel(String testo) {
 
         RUOLOVOLabel.setText(testo);
@@ -88,4 +96,22 @@ public class VolontarioDView extends JPanel{
        NOMEVOLabel.setText(testo);
 
     }
+
+    public void VisibilitaArchivistaButton(boolean visibilita){
+        archivistaButton.setVisible(visibilita);
+    }
+
+    public void VisibilitaGiuntaButton(boolean visibilita){
+        addGiuntaComunaleButton.setVisible(visibilita);
+    }
+    public void VisibilitaReferenteInformaticoButton(boolean visibilita){
+        referenteInformaticoButton.setVisible(visibilita);
+    }
+    public void VisibilitaMasterChiefButton(boolean visibilita){
+        master_ChiefButton.setVisible(visibilita);
+    }
+
+
+
+
 }
