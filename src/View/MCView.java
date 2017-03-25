@@ -13,6 +13,7 @@ public class MCView extends JPanel {
     private JButton rimuoviCompitoButton;
     private JButton assegnaRuoloButton;
     private JButton rimuoviRuoloButton;
+    private JButton RitornaButton;
 
     public MCView() {
 
@@ -55,6 +56,10 @@ public class MCView extends JPanel {
 
         return lista;
 
+    }
+
+    public JButton getRitornaButton() {
+        return RitornaButton;
     }
 
     public JComboBox getBox2() {

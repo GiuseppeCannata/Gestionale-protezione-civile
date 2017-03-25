@@ -33,7 +33,7 @@ public class MCHomeController {
             public void actionPerformed(ActionEvent e) {
 
                 MCController controller;
-                controller = new MCController(basicframe, "compiti");
+                controller = new MCController(basicframe, "compiti", mcHomeview);
 
             }
         });
@@ -46,7 +46,7 @@ public class MCHomeController {
             public void actionPerformed(ActionEvent e) {
 
                 MCController controller;
-                controller = new MCController(basicframe, "ruoli");
+                controller = new MCController(basicframe, "ruoli", mcHomeview);
 
             }
         });

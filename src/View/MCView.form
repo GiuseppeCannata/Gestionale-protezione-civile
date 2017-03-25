@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="Intermedio0" layout-manager="GridLayoutManager" row-count="10" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="10">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="713" height="400"/>
+      <xy x="20" y="20" width="784" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -81,6 +81,12 @@
         <properties/>
         <border type="none"/>
         <children>
+          <component id="fa472" class="javax.swing.JButton" binding="RitornaButton">
+            <constraints/>
+            <properties>
+              <text value="&lt;--"/>
+            </properties>
+          </component>
           <component id="418c" class="javax.swing.JButton" binding="assegnaCompitoButton" default-binding="true">
             <constraints/>
             <properties>

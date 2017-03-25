@@ -4,6 +4,7 @@ import Model.GestioneModel;
 import Model.Persona;
 import Model.Volontario;
 import View.BasicFrameView;
+import View.MCHomeView;
 import View.MCView;
 
 import javax.swing.*;
@@ -22,14 +23,16 @@ public class MCController {
     private JComboBox Box;
     private MCView view;
     private JComboBox Box2;
+    private MCHomeView homeView;
     private String utilizzatore;
     private ArrayList<Persona> UTENTI;
 
 
-    public MCController(BasicFrameView frame, String Utilizzatore) {
+    public MCController(BasicFrameView frame, String Utilizzatore, MCHomeView HomeView) {
 
         basicframe = frame;
         view = new MCView();
+        homeView = HomeView;
         appoggio = "vol_o_cand = 1";
 
         utilizzatore = Utilizzatore;
@@ -112,7 +115,7 @@ public class MCController {
 
                         if (utente.UpdateSQL(app)) {
                             basicframe.Message("Assegnato!");
-                             new MCController(basicframe, "compiti");
+                             new MCController(basicframe, "compiti", homeView);
                         }
                     }
 
@@ -137,7 +140,7 @@ public class MCController {
 
                         if (utente.UpdateSQL(app)) {
                             basicframe.Message("Eliminato!");
-                            new MCController(basicframe, "compiti");
+                            new MCController(basicframe, "compiti", homeView);
                         }
                     }
 
@@ -162,7 +165,7 @@ public class MCController {
 
                         if (utente.UpdateSQL(app)) {
                             basicframe.Message("Assegnato!");
-                            new MCController(basicframe, "ruoli");
+                            new MCController(basicframe, "ruoli", homeView);
                         }
                     }
 
@@ -187,13 +190,25 @@ public class MCController {
 
                         if (utente.UpdateSQL(app)) {
                             basicframe.Message("Eliminato!");
-                            new MCController(basicframe, "ruoli");
+                            new MCController(basicframe, "ruoli", homeView);
                         }
                     }
 
+            }
+        });
+
+        JButton RitornaButton = view.getRitornaButton();
+        RitornaButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                basicframe.setdestra(homeView.getIntermedio0());
 
             }
         });
+
+
     }
 
     private void listCompitiListner(){
