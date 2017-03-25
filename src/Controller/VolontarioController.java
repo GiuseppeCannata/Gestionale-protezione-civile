@@ -5,6 +5,7 @@ import Controller.Compiti.Add_Giunta;
 import Controller.Compiti.ArchivistaHome;
 import Controller.Compiti.MCHome;
 import Controller.Compiti.Referenteinformatico;
+import Model.Messaggio;
 import Model.Volontario;
 import View.BasicFrameView;
 import View.UtenteSinistraView;
@@ -13,6 +14,7 @@ import View.VolontarioDView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 public class VolontarioController{
@@ -21,6 +23,7 @@ public class VolontarioController{
     private VolontarioDView Dview;
     private UtenteSinistraView Sview;
     private Volontario Utente;
+    private ArrayList<Messaggio> MESSAGGI;
 
     private int DatiPersonali;
 
@@ -44,14 +47,27 @@ public class VolontarioController{
             DatiPersonali= 0;
         }
 
+        //selezione dati importanti
         basicframe.setsinistra(Sview.getIntermedio0());
         Dview.setNOMEVOLabel(Utente.getNome());
         Dview.setCOGNOMEVOLabel(Utente.getCognome());
         Dview.setSTATOLabel(Utente.getStato());
         Dview.setRUOLOVOLabel(Utente.getRuolo());
 
-        VolontarioControllerListener();
 
+        //selezione messaggi
+        MESSAGGI = Utente.getMESSAGGI();
+        JTextArea textArea = Dview.getTextArea();
+
+        if(MESSAGGI.size() !=0){
+
+            for(Messaggio messaggio: MESSAGGI)
+                textArea.setText("< "+messaggio.getMittente()+" > : "+messaggio.getMessaggio()+".\n");
+        }
+        else
+            textArea.setText("<NESSUN MESSAGGIO DA VISUALIZZARE>");
+
+        //selezione compiti
         if(Utente.getArchivista().equals("si")) {
             Dview.VisibilitaArchivistaButton(true);
             ArchivistaListner();
@@ -70,6 +86,8 @@ public class VolontarioController{
             Dview.VisibilitaMasterChiefButton(true);
             MasterChiefListner();
         }
+
+        VolontarioControllerListener();
 
 
     }

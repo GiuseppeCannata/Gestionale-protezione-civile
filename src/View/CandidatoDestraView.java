@@ -14,12 +14,18 @@ public class CandidatoDestraView extends JPanel {
     private JLabel labelConf_giuntaLabel;
     private JCheckBox checkBox1;
     private JCheckBox checkBox2;
+    private JTabbedPane tabbedPane1;
+    private JTextArea textArea;
+
 
     public CandidatoDestraView() {
 
+
+        textArea.setEditable(false);
+        checkBox1.setEnabled(false);
+        checkBox2.setEnabled(false);
         setVisible(true);
-       checkBox1.setEnabled(false);
-       checkBox2.setEnabled(false);
+
 
     }
 
@@ -29,6 +35,9 @@ public class CandidatoDestraView extends JPanel {
 
     }
 
+    public JTextArea getTextArea() {
+        return textArea;
+    }
 
     public void MessaggioSchermo(String testo){
 

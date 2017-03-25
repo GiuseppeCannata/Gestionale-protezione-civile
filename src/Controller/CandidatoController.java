@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Candidato;
+import Model.Messaggio;
 import View.BasicFrameView;
 import View.CandidatoDestraView;
 import View.UtenteSinistraView;
@@ -8,6 +9,7 @@ import View.UtenteSinistraView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * CandidatoController --> Controller per la CandidatoView
@@ -19,6 +21,7 @@ public class CandidatoController {
    private CandidatoDestraView Dview;
    private UtenteSinistraView Sview;
    private int DatiPersonali;
+   private ArrayList<Messaggio> MESSAGGI;
 
 
     /*COSTRUTTORI*/
@@ -45,6 +48,18 @@ public class CandidatoController {
 
         if (Utente.getConf_Giunta() == 1)
                 Dview.setConf_giunta(true);
+
+        //selezione messaggi
+        MESSAGGI = Utente.getMESSAGGI();
+        JTextArea textArea = Dview.getTextArea();
+
+        if(MESSAGGI.size() !=0){
+
+            for(Messaggio messaggio: MESSAGGI)
+                textArea.setText("< "+messaggio.getMittente()+" > : "+messaggio.getMessaggio()+".\n");
+        }
+        else
+            textArea.setText("<NESSUN MESSAGGIO DA VISUALIZZARE>");
 
         DatiPersonali = 0;
         //Settaggio della basicframe con inserimento dei due pannelli a destra e sinistra

@@ -1,7 +1,7 @@
 package View;
 
 import javax.swing.*;
-
+import java.awt.*;
 
 
 public class VolontarioDView extends JPanel{
@@ -18,7 +18,8 @@ public class VolontarioDView extends JPanel{
     private JLabel STATOLabel;
     private JButton master_ChiefButton;
     private JTabbedPane tabbedPane1;
-    private JList list1;
+    private JTextArea textArea;
+
 
 
     public VolontarioDView() {
@@ -27,6 +28,7 @@ public class VolontarioDView extends JPanel{
         referenteInformaticoButton.setVisible(false);
         addGiuntaComunaleButton.setVisible(false);
         master_ChiefButton.setVisible(false);
+        textArea.setEditable(false);
         setVisible(true);
 
     }
@@ -69,8 +71,8 @@ public class VolontarioDView extends JPanel{
 
     }
 
-    public JList getList1() {
-        return list1;
+    public JTextArea getTextArea() {
+        return textArea;
     }
 
     public void setRUOLOVOLabel(String testo) {

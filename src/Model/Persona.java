@@ -1,5 +1,6 @@
 package Model;
 
+import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -43,6 +44,8 @@ public abstract class Persona extends Model{
     private String Username;
     private String Password;
 
+    private ArrayList<Messaggio> MESSAGGI;
+
 
     /*COSTRUTTORI*/
 
@@ -60,6 +63,7 @@ public abstract class Persona extends Model{
         popolaA();
         popolaB();
         popolaC();
+        popolamessaggi();
 
     }
 
@@ -212,8 +216,34 @@ public abstract class Persona extends Model{
             se.printStackTrace();
         }finally{
             closeConnection();
-            System.out.println("C tutto bene");
         }
+    }
+
+    private void popolamessaggi(){
+
+        openConnection();
+        MESSAGGI= new ArrayList<>(5);
+
+        String sql = "select * from messaggi where Destinatario ='"+Codice_Fiscale+"' or Destinatario='Broadcast'";
+
+        ResultSet query = selectQuery(sql);
+
+        try {
+
+            while(query.next()){
+
+                Messaggio messaggio = new Messaggio(query.getString("Mittente"),
+                        query.getString("messaggio"));
+
+                MESSAGGI.add(MESSAGGI.size(), messaggio);
+
+            }
+        }catch(SQLException se){
+            se.printStackTrace();
+        }finally{
+            closeConnection();
+        }
+
     }
 
 
@@ -412,6 +442,10 @@ public abstract class Persona extends Model{
 
         return IBAN;
 
+    }
+
+    public ArrayList<Messaggio> getMESSAGGI() {
+        return MESSAGGI;
     }
 
     public void setIBAN(String iBAN) {
