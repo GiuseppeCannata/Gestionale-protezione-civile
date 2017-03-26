@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.Candidato;
-import Model.Messaggio;
 import View.BasicFrameView;
 import View.CandidatoDestraView;
 import View.UtenteSinistraView;
@@ -22,6 +21,7 @@ public class CandidatoController {
    private UtenteSinistraView Sview;
    private int DatiPersonali;
 
+   private ArrayList<String> BROADCAST;
    private ArrayList<String> MESSAGGI;
 
 
@@ -39,7 +39,6 @@ public class CandidatoController {
         Utente = utente;
         Dview = new CandidatoDestraView();
         Sview = new UtenteSinistraView();
-        Sview.VisibilitaHomeButton(false);
 
         if(Utente.getConf_Giunta() == 1 && Utente.getConf_Archivista() == 1)
             Dview.MessaggioSchermo("Puoi finalmente evolvere in Volontario.\nFai click su evolvi per dare la tua conferma!");
@@ -50,17 +49,42 @@ public class CandidatoController {
         if (Utente.getConf_Giunta() == 1)
                 Dview.setConf_giunta(true);
 
+        //selezione broadcast
+        BROADCAST = Utente.getBROADCAST();
+
+        if(BROADCAST.size() !=0){
+
+            for(String messaggio: BROADCAST)
+                Dview.setBroadcast(BROADCAST);
+        }
+
+        DatiPersonali = 0;
+
+        //Settaggio della basicframe con inserimento dei due pannelli a destra e sinistra
+        basicframe.setdestra(Dview.getIntermedio0());
+        basicframe.setsinistra(Sview.getIntermedio0());
+
         //selezione messaggi
         MESSAGGI = Utente.getMESSAGGI();
 
         if(MESSAGGI.size() !=0){
 
-            for(String messaggio: MESSAGGI)
-                Dview.setTextList(MESSAGGI);
+            for(String messaggio: MESSAGGI) {
+                Dview.seteMessaggi(MESSAGGI);
+
+                //pone la lettura del messaggio a si
+                String[] appoggio = new String[3];
+
+                appoggio[0] = "messaggi";
+                appoggio[1] = "letto";
+                appoggio[2] = "si";
+
+                if(Utente.UpdateSQL(appoggio))
+                    System.out.print("ok");
+            }
+
+            basicframe.Message("Hai "+MESSAGGI.size()+" messaggi! Vedili nella sezione messaggi");
         }
-
-
-        DatiPersonali = 0;
 
         //Settaggio della basicframe con inserimento dei due pannelli a destra e sinistra
         basicframe.setdestra(Dview.getIntermedio0());
@@ -116,6 +140,18 @@ public class CandidatoController {
 
         });
 
+          JButton Home = Sview.getHomeButton();
+          Home.addActionListener(new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent e) {
+
+                  DatiPersonali = 0;
+                  basicframe.setdestra(Dview.getIntermedio0());
+
+              }
+
+          });
+
       }
 
 
@@ -123,28 +159,29 @@ public class CandidatoController {
 
         if(Utente.getConf_Giunta() != 1 || Utente.getConf_Archivista() != 1){
 
-            basicframe.ErrorMessage("Attenti la conferma dei nostri collaboratori!");
+            basicframe.ErrorMessage("Attendi la conferma dei nostri collaboratori!");
         }else if(basicframe.OpotionalMessage("Confermi a diventare Volontario?") == 0 ) {
 
-            String[] appoggio = new String[4];
+            String[] appoggio = new String[3];
 
             appoggio[0] = "pass";
-            appoggio[1] = Utente.getCodice_Fiscale();
-            appoggio[2] = "vol_o_cand";
-            appoggio[3] = "1";
+            appoggio[1] = "vol_o_cand";
+            appoggio[2] = "1";
+
 
             if(Utente.UpdateSQL(appoggio)) {
 
-                appoggio[2] ="primoaccesso";
-                appoggio[3] = "si";
+                appoggio[1] = "primoaccesso";
+                appoggio[2] = "si";
 
-                if(Utente.UpdateSQL(appoggio)) {
+                if(Utente.UpdateSQL(appoggio) && Utente.InsertSQL()) {
 
                     LoginController login;
                     login = new LoginController(basicframe);
 
                 }
             }
+
         }
 
 
@@ -155,13 +192,6 @@ public class CandidatoController {
         if(basicframe.OpotionalMessage("Vuoi davvero uscire?") == 0) {
             LoginController loginController = new LoginController(basicframe);
         }
-
-    }
-
-
-    public void setDatiPersonali(int datiPersonali) {
-
-        DatiPersonali = datiPersonali;
 
     }
 

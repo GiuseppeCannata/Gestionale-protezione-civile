@@ -62,7 +62,6 @@ public class AnagraficaController {
 
         Anagraficaview.VisibilitaModificaButton(false);
         Anagraficaview.VisibilitaPaginaLoginButton(false);
-        Anagraficaview.VisibilitaHomeButton(false);
         Anagraficaview.VisibilitaSalvaButton(false);
         Anagraficaview.VisibilitaListaButton(true);
 
@@ -87,13 +86,13 @@ public class AnagraficaController {
 
 
     //PRIMOACCESSO
-    public AnagraficaController(BasicFrameView frame, VolontarioDView view, Volontario utente) {
+    public AnagraficaController(BasicFrameView frame, VolontarioController controller, Volontario utente) {
 
         basicframe = frame;
         utilizzatore = "primoaccesso";
         Utente = utente;
         sez_Dview = new Sez_DView();
-        vDview = view;
+        vController = controller;
         basicframe.setdestra(sez_Dview.getIntermedio0());
 
         primoaccessoListner();
@@ -116,7 +115,6 @@ public class AnagraficaController {
         utilizzatore = "registrazione";
 
         Salvabutton = Anagraficaview.getSalvaButton();
-        Salvabutton.setContentAreaFilled(false);
 
         sez_Aview = new Sez_AView();
         sez_Bview = new Sez_BView();
@@ -125,8 +123,10 @@ public class AnagraficaController {
 
         Anagraficaview.VisibilitaPaginaLoginButton(true);
         Anagraficaview.VisibilitaModificaButton(false);
-        Anagraficaview.VisibilitaHomeButton(false);
+
         Anagraficaview.VisibilitaListaButton(false);
+        Anagraficaview.VisibilitaSalvaButton(false);
+
         sceltapannelli();
         //Setto il mio manager di pagine
         Pagine_Manager.setPagina_Corrente();
@@ -151,6 +151,7 @@ public class AnagraficaController {
         Modifica = 0;
         cController = CController;
         Salvabutton = Anagraficaview.getSalvaButton();
+        Salvabutton.setVisible(false);
         utilizzatore = "candidato";
 
         sez_Aview = new Sez_AView();
@@ -161,7 +162,7 @@ public class AnagraficaController {
 
         Anagraficaview.VisibilitaPaginaLoginButton(false);
         Anagraficaview.VisibilitaModificaButton(true);
-        Anagraficaview.VisibilitaHomeButton(true);
+
         Anagraficaview.VisibilitaListaButton(false);
         sceltapannelli();
 
@@ -190,6 +191,7 @@ public class AnagraficaController {
         vDview = view;
         Modifica = 0;
         Salvabutton = Anagraficaview.getSalvaButton();
+        Salvabutton.setVisible(false);
         utilizzatore = "volontario";
 
 
@@ -201,7 +203,7 @@ public class AnagraficaController {
 
         Anagraficaview.VisibilitaPaginaLoginButton(false);
         Anagraficaview.VisibilitaModificaButton(true);
-        Anagraficaview.VisibilitaHomeButton(true);
+
         Anagraficaview.VisibilitaListaButton(false);
         System.out.println("ok");
         sceltapannelli();
@@ -249,7 +251,7 @@ public class AnagraficaController {
 
                 if (sez_Dview.getGStext().length() != 0 && SalvataggioPrimoAccesso()) {
 
-                    basicframe.setdestra(vDview.getIntermedio0());
+                    vController.InizializzaGUI();
                     basicframe.Message("Hai completato la tua iscrizione.\n Benvenuto nella tua home");
 
 
@@ -288,7 +290,7 @@ public class AnagraficaController {
                 if (Pagine_Manager.getPagina_Corrente() == 3) {
                     sez_managerviewAvanti.setContentAreaFilled(false);
                     if(utilizzatore.equals("registrazione"))
-                    Salvabutton.setContentAreaFilled(true);
+                    Salvabutton.setVisible(true);
                 }
 
                 if (Pagine_Manager.getPagina_Corrente() > 1)
@@ -348,10 +350,7 @@ public class AnagraficaController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if (Pagine_Manager.getFine_Pagina() == 3)
-                    SalvataggioRegistrazione();
-                else
-                    basicframe.ErrorMessage("Ancora non è possibile salvare!");
+                SalvataggioRegistrazione();
 
             }
         });
@@ -374,6 +373,8 @@ public class AnagraficaController {
 
                 Modifica = 1;
 
+                Salvabutton.setVisible(true);
+
                 sez_Aview.Abilita_Disabilita_Campi(true);
 
                 sez_Bview.Abilita_Disabilita_Campi(true);
@@ -391,27 +392,6 @@ public class AnagraficaController {
 
             }
         });
-
-        /*Home*/
-        JButton Homebutton = Anagraficaview.getHomeButton();
-        Homebutton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-
-                if (utilizzatore.equals("candidato")) {
-                    basicframe.setdestra(cDview.getIntermedio0());
-                    cController.setDatiPersonali(0);
-                } else if (utilizzatore.equals("volontario")) {
-                    basicframe.setdestra(vDview.getIntermedio0());
-                    vController.setDatiPersonali(0);
-                }
-
-
-            }
-        });
-
-
 
         /*Salva*/
         Salvabutton.addActionListener(new ActionListener() {

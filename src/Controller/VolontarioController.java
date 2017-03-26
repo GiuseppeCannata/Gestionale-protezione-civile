@@ -5,7 +5,6 @@ import Controller.Compiti.Add_Giunta;
 import Controller.Compiti.ArchivistaHome;
 import Controller.Compiti.MCHome;
 import Controller.Compiti.Referenteinformatico;
-import Model.Messaggio;
 import Model.Volontario;
 import View.BasicFrameView;
 import View.UtenteSinistraView;
@@ -20,54 +19,100 @@ import java.util.ArrayList;
 public class VolontarioController{
 
     private BasicFrameView basicframe;
+    private int DatiPersonali;
+    private Volontario Utente;
     private VolontarioDView Dview;
     private UtenteSinistraView Sview;
-    private Volontario Utente;
+    private ArrayList<String> BROADCAST;
     private ArrayList<String> MESSAGGI;
 
-    private int DatiPersonali;
 
     public VolontarioController(BasicFrameView frame, Volontario utente){
 
         basicframe = frame;
         DatiPersonali = 0;
         Utente = utente;
-        Dview = new VolontarioDView();
-        Sview = new UtenteSinistraView();
-        Sview.setEvolviButton(false);
-        basicframe.setdestra(Dview.getIntermedio0());
 
+        if(!Primoaccesso()){
+            InizializzaGUI();
+        }
 
+    }
+
+    private boolean Primoaccesso(){
+
+        boolean controllo = false;
         if(Utente.getPrimoaccesso().equals("si")) {
-            new AnagraficaController(basicframe, Dview, utente);
-            DatiPersonali = 1; //senno si puo aprire questa sezione
+
+            controllo = true;
+            AnagraficaController controller;
+            controller = new AnagraficaController(basicframe, VolontarioController.this, Utente);
+
             basicframe.Message("Ciao sei appena diventato un Volontario!\nPer completa la tua iscrizione " +
                     "completa la sezione D di seguito riportata");
 
-            DatiPersonali= 0;
         }
 
-        //selezione dati importanti
-        basicframe.setsinistra(Sview.getIntermedio0());
+        return controllo;
+
+    }
+
+    public void InizializzaGUI(){
+
+        Dview = new VolontarioDView();
+        Sview = new UtenteSinistraView();
+
+        Sview.setEvolviButton(false);
+
         Dview.setNOMEVOLabel(Utente.getNome());
         Dview.setCOGNOMEVOLabel(Utente.getCognome());
         Dview.setSTATOLabel(Utente.getStato());
         Dview.setRUOLOVOLabel(Utente.getRuolo());
 
 
+        //selezione broadcast
+        BROADCAST = Utente.getBROADCAST();
+
+        if(BROADCAST.size() !=0){
+
+            for(String messaggio: BROADCAST)
+                Dview.setBroadcast(BROADCAST);
+        }
+
+        basicframe.setdestra(Dview.getIntermedio0());
+        basicframe.setsinistra(Sview.getIntermedio0());
+
         //selezione messaggi
         MESSAGGI = Utente.getMESSAGGI();
 
         if(MESSAGGI.size() !=0){
 
-            for(String messaggio: MESSAGGI)
-                Dview.setTextList(MESSAGGI);
+            for(String messaggio: MESSAGGI) {
+                Dview.seteMessaggi(MESSAGGI);
+
+                //pone la lettura del messaggio a si
+                String[] appoggio = new String[3];
+
+                appoggio[0] = "messaggi";
+                appoggio[1] = "letto";
+                appoggio[2] = "si";
+
+                if(Utente.UpdateSQL(appoggio))
+                    System.out.print("ok");
+            }
+
+            basicframe.Message("Hai "+MESSAGGI.size()+" messaggi! Vedili nella sezione messaggi");
         }
 
+        Selezionecompiti();
 
+        VolontarioControllerListener();
+    }
 
-        //selezione compiti
+    private void Selezionecompiti(){
+
         if(Utente.getArchivista().equals("si")) {
+            System.out.println("io");
             Dview.VisibilitaArchivistaButton(true);
             ArchivistaListner();
 
@@ -81,14 +126,10 @@ public class VolontarioController{
             ReferenteInformaticoListner();
         }
 
-        if(Utente.getRuolo().equals("Cordinatore") || Utente.getRuolo().equals("Vicecordinatore")) {
+       if(Utente.getRuolo().equals("Cordinatore") || Utente.getRuolo().equals("Vicecordinatore")) {
             Dview.VisibilitaMasterChiefButton(true);
             MasterChiefListner();
         }
-
-        VolontarioControllerListener();
-
-
     }
 
     private void VolontarioControllerListener(){
@@ -127,6 +168,7 @@ public class VolontarioController{
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                DatiPersonali = 0;
                 basicframe.setdestra(Dview.getIntermedio0());
 
             }
@@ -200,13 +242,12 @@ public class VolontarioController{
             public void actionPerformed(ActionEvent e) {
 
                 Add_Giunta controller;
-                controller = new Add_Giunta(basicframe);
+                controller = new Add_Giunta(basicframe, Utente);
 
             }
 
         });
     }
-
 
     private void LogoutAction(){
 
@@ -216,9 +257,4 @@ public class VolontarioController{
 
     }
 
-    public void setDatiPersonali(int datiPersonali) {
-
-        DatiPersonali = datiPersonali;
-
-    }
 }

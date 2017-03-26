@@ -1,9 +1,6 @@
 package View;
 
-import Model.Messaggio;
-
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 
 
@@ -21,7 +18,8 @@ public class VolontarioDView extends JPanel{
     private JLabel STATOLabel;
     private JButton master_ChiefButton;
     private JTabbedPane tabbedPane1;
-    private JScrollPane ScrollPane;
+    private JScrollPane ScrollPaneBroadcast;
+    private JScrollPane ScrollPaneMessaggi;
 
 
     public VolontarioDView() {
@@ -73,10 +71,17 @@ public class VolontarioDView extends JPanel{
     }
 
 
-    public void setTextList(ArrayList<String> MESSAGGI){
+    public void setBroadcast(ArrayList<String> MESSAGGI){
 
-        JList list = new JList(MESSAGGI.toArray());
-        ScrollPane.setViewportView(list);
+        JList listBroadcast = new JList(MESSAGGI.toArray());
+        ScrollPaneBroadcast.setViewportView(listBroadcast);
+
+    }
+
+    public void seteMessaggi(ArrayList<String> MESSAGGI){
+
+        JList listMessaggi = new JList(MESSAGGI.toArray());
+        ScrollPaneMessaggi.setViewportView(listMessaggi);
 
     }
 

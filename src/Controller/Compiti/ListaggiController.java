@@ -156,8 +156,6 @@ public class ListaggiController {
                 Indice = Box.getSelectedIndex();
 
                 MessaggioController controller;
-                System.out.println(UtenteLoggato.getNome()+UtenteLoggato.getCognome());
-
                 controller = new MessaggioController(basicframe, UTENTI.get(Indice).getCodice_Fiscale(), UtenteLoggato.getNome()+" "+UtenteLoggato.getCognome());
 
             }

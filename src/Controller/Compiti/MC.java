@@ -229,7 +229,6 @@ public class MC {
 
                             Volontario Utente = (Volontario) utente;
                             String[] compiti = new String[]{"Referente_Informatico : " + Utente.getReferenteinformatico(),
-                                    "Magazzino_Divise : " + Utente.getMagazzinodivise(),
                                     "Add_Giunta : " + Utente.getAdd_giunta(),
                                     "Archivista : " + Utente.getArchivista()};
 

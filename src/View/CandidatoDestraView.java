@@ -15,8 +15,8 @@ public class CandidatoDestraView extends JPanel {
     private JLabel labelConf_giuntaLabel;
     private JCheckBox checkBox1;
     private JCheckBox checkBox2;
-    private JTabbedPane tabbedPane1;
-    private JScrollPane ScrollPane;
+    private JScrollPane ScrollPaneBroadcast;
+    private JScrollPane ScrollPaneMessaggi;
 
 
     public CandidatoDestraView() {
@@ -53,10 +53,17 @@ public class CandidatoDestraView extends JPanel {
 
     }
 
-    public void setTextList(ArrayList<String> MESSAGGI){
+    public void setBroadcast(ArrayList<String> MESSAGGI){
 
-        JList list = new JList(MESSAGGI.toArray());
-        ScrollPane.setViewportView(list);
+        JList listBroadcast = new JList(MESSAGGI.toArray());
+        ScrollPaneBroadcast.setViewportView(listBroadcast);
+
+    }
+
+    public void seteMessaggi(ArrayList<String> MESSAGGI){
+
+        JList listMessaggi = new JList(MESSAGGI.toArray());
+        ScrollPaneMessaggi.setViewportView(listMessaggi);
 
     }
 

@@ -20,7 +20,6 @@ public class AnagraficaView extends JPanel{
     private JButton indietroButton;
     private JButton avantiButton;
     private JButton modificaButton;
-    private JButton homeButton;
     private JPanel SezD;
     private JButton listaButton;
 
@@ -49,12 +48,6 @@ public class AnagraficaView extends JPanel{
 
         //QUI HO IL CARD LAYOUT
         return Intermedio1;
-
-    }
-
-    public JButton getHomeButton() {
-
-        return homeButton;
 
     }
 
@@ -131,11 +124,6 @@ public class AnagraficaView extends JPanel{
 
     }
 
-    public void VisibilitaHomeButton(boolean visibilita) {
-
-        homeButton.setVisible(visibilita);
-
-    }
 
     public void VisibilitaListaButton(boolean visibilita){
 

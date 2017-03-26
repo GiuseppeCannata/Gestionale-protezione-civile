@@ -19,15 +19,17 @@ public class MessaggioController {
 
     public MessaggioController(BasicFrameView frame, String destinatario, String mittente) {
 
+
         basicframe = frame;
         Destinatario = destinatario;
         Mittente = mittente;
 
         view = new MessaggioView(basicframe);
-        Listener();
 
         view.setTextAa(Destinatario);
         view.setTextDa(Mittente);
+
+        Listener();
 
         view.setVisible(true);
 

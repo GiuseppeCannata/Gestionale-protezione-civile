@@ -1,8 +1,10 @@
 package Controller.Compiti;
 
 import Controller.AnagraficaController;
+import Controller.MessaggioController;
 import Model.GestioneModel;
 import Model.Persona;
+import Model.Volontario;
 import View.BasicFrameView;
 import View.ListaggiView;
 
@@ -20,23 +22,27 @@ public class Add_Giunta {
     private GestioneModel model;
     private JComboBox Box;
     private String appoggio;
+    private Volontario UtenteLoggato;
     private int Indice;
 
     private ArrayList<Persona> UTENTI;
 
 
     /*costruttore*/
-    public Add_Giunta(BasicFrameView frame) {
+    public Add_Giunta(BasicFrameView frame, Volontario Utenteloggato) {
 
         basicframe = frame;
 
         view = new ListaggiView();
+
+        UtenteLoggato = Utenteloggato;
 
         Indice = 0;
 
         view.setLabel("Lista utenti");
         view.VisibilitaVisionaSchedaButton(true);
         view.VisibilitaAccettaButton(true);
+        view.VisibilitaInviomessaggio(true);
 
 
         Box = view.getBox1();
@@ -55,7 +61,6 @@ public class Add_Giunta {
 
     }
 
-
     public void stampalista () {
 
 
@@ -65,9 +70,7 @@ public class Add_Giunta {
 
     }
 
-
-
-   private void Listener() {
+    private void Listener() {
 
         JButton Accetta = view.getAccettaButton();
         Accetta.addActionListener(new ActionListener() {
@@ -92,10 +95,19 @@ public class Add_Giunta {
            }
        });
 
+        JButton InvioMessaggio = view.getInviagliUnMessaggioButton();
+        InvioMessaggio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
+                Indice = Box.getSelectedIndex();
+                System.out.print(UtenteLoggato.getNome());
+                MessaggioController controller;
+                controller = new MessaggioController(basicframe, UTENTI.get(Indice).getCodice_Fiscale(), UtenteLoggato.getNome()+" "+UtenteLoggato.getCognome());
 
+            }
+        });
     }
-
 
     private void AccettaAction(){
 

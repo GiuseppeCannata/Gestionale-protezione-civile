@@ -91,8 +91,59 @@ public class Candidato extends Persona {
     @Override
     public boolean InsertSQL() {
 
-        return false;
+        boolean controllo = false;
 
+        if(InsertCompiti() && InsertFlagVolontario())
+            controllo = true;
+
+        return controllo;
+
+    }
+
+    private boolean InsertCompiti(){
+
+        boolean controllo = false;
+        openConnection();
+
+        String sql = "Insert into Compiti(cf,Archivista,Add_Giunta,Referente_Informatico) values('" +
+                getCodice_Fiscale()            + "','" +
+                "no"                           + "','" +
+                "no"                           + "','" +
+                "no"                           + "')";
+
+
+
+
+        if(updateQuery(sql))
+            controllo=true;
+
+
+
+        closeConnection();
+        return controllo;
+
+    }
+
+    private boolean InsertFlagVolontario(){
+
+        boolean controllo = false;
+        openConnection();
+
+        String sql = "Insert into flagvolontario(cf,stato,ruolo) values('" +
+                getCodice_Fiscale()            + "','" +
+                "Attivo"                       + "','" +
+                "Semplice"                     + "')";
+
+
+
+
+        if(updateQuery(sql))
+            controllo=true;
+
+
+
+        closeConnection();
+        return controllo;
     }
 
     @Override

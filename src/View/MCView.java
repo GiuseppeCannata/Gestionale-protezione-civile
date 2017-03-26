@@ -21,7 +21,6 @@ public class MCView extends JPanel {
         assegnaCompitoButton.setVisible(false);
         rimuoviCompitoButton.setVisible(false);
         rimuoviRuoloButton.setVisible(false);
-        lista.setEnabled(false);
         setVisible(true);
 
     }

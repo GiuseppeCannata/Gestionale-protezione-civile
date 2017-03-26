@@ -1,6 +1,5 @@
 package Model;
 
-import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -44,6 +43,7 @@ public abstract class Persona extends Model{
     private String Username;
     private String Password;
 
+    private ArrayList<String> BROADCAST;
     private ArrayList<String> MESSAGGI;
 
 
@@ -63,7 +63,8 @@ public abstract class Persona extends Model{
         popolaA();
         popolaB();
         popolaC();
-        popolamessaggi();
+        popolaBroadcast();
+        popolaMessaggi();
 
     }
 
@@ -219,12 +220,12 @@ public abstract class Persona extends Model{
         }
     }
 
-    private void popolamessaggi(){
+    private void popolaBroadcast(){
 
         openConnection();
-        MESSAGGI= new ArrayList<>(5);
+        BROADCAST = new ArrayList<>(5);
 
-        String sql = "select * from messaggi where Destinatario ='"+Codice_Fiscale+"' or Destinatario='Broadcast'";
+        String sql = "select * from messaggi where cf='Broadcast'";
 
         ResultSet query = selectQuery(sql);
 
@@ -236,7 +237,36 @@ public abstract class Persona extends Model{
 
                 String Messaggio = query.getString("messaggio");
 
+                BROADCAST.add(BROADCAST.size(), "< "+Mittente+" > : "+Messaggio+".\n");
+
+            }
+        }catch(SQLException se){
+            se.printStackTrace();
+        }finally{
+            closeConnection();
+        }
+
+    }
+
+    private void popolaMessaggi(){
+
+        openConnection();
+        MESSAGGI = new ArrayList<>(5);
+
+        String sql = "select * from messaggi where cf='"+Codice_Fiscale+"' and letto='no'";
+
+        ResultSet query = selectQuery(sql);
+
+        try {
+
+            while(query.next()){
+
+                String Mittente = query.getString("Mittente");
+
+                String Messaggio = query.getString("messaggio");
                 MESSAGGI.add(MESSAGGI.size(), "< "+Mittente+" > : "+Messaggio+".\n");
+
+                String[] appoggio = new String[3];
 
             }
         }catch(SQLException se){
@@ -445,8 +475,8 @@ public abstract class Persona extends Model{
 
     }
 
-    public ArrayList<String> getMESSAGGI() {
-        return MESSAGGI;
+    public ArrayList<String> getBROADCAST() {
+        return BROADCAST;
     }
 
     public void setIBAN(String iBAN) {
@@ -489,5 +519,9 @@ public abstract class Persona extends Model{
 
         return CERTIFICAZIONI;
 
+    }
+
+    public ArrayList<String> getMESSAGGI() {
+        return MESSAGGI;
     }
 }

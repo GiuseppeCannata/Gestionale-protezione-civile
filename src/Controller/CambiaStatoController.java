@@ -79,10 +79,10 @@ public class CambiaStatoController {
 
             //aggiorno la lista dei mesaggi locale
 
-            ArrayList<String> MESSAGGI = Utente.getMESSAGGI();
-            MESSAGGI.add("< "+Utente.getNome()+" "+Utente.getCognome()+" > : "+
+            ArrayList<String> BROADCAST = Utente.getBROADCAST();
+            BROADCAST.add("< "+Utente.getNome()+" "+Utente.getCognome()+" > : "+
                     "Ha cambiato il suo stato in : "+stato);
-            Dview.setTextList(MESSAGGI);
+            Dview.setBroadcast(BROADCAST);
             controllo = true;
 
         }

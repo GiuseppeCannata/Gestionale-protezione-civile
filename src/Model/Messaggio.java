@@ -36,10 +36,11 @@ public class Messaggio extends Model {
 
         openConnection();
 
-        String sql = "Insert messaggi (Destinatario,Mittente,messaggio) values('" +
+        String sql = "Insert messaggi (cf,Mittente,messaggio,letto) values('" +
                 Destinatario                  + "','" +
                 Mittente                      + "','" +
-                Messaggio                     + "')";
+                Messaggio                     + "','" +
+                "no"                          + "')";
 
 
         if(updateQuery(sql)) {

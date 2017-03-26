@@ -42,12 +42,6 @@
               <text value="Pagina Login"/>
             </properties>
           </component>
-          <component id="8b143" class="javax.swing.JButton" binding="homeButton" default-binding="true">
-            <constraints/>
-            <properties>
-              <text value="Home"/>
-            </properties>
-          </component>
           <component id="902e7" class="javax.swing.JButton" binding="listaButton">
             <constraints/>
             <properties>

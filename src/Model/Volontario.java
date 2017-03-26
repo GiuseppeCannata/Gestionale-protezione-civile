@@ -24,7 +24,6 @@ public class Volontario extends Persona {
     private String stato;
 
     private String archivista;
-    private String magazzinodivise;
     private String add_giunta;
     private String referenteinformatico;
 
@@ -95,7 +94,6 @@ public class Volontario extends Persona {
             if(query.next()) {
 
                 archivista = query.getString("Archivista");
-                magazzinodivise = query.getString("Magazzino_Divise");
                 add_giunta = query.getString("Add_Giunta");
                 referenteinformatico = query.getString("Referente_Informatico");
 
@@ -276,10 +274,6 @@ public class Volontario extends Persona {
 
     public String getArchivista() {
         return archivista;
-    }
-
-    public String getMagazzinodivise() {
-        return magazzinodivise;
     }
 
     public String getAdd_giunta() {
