@@ -224,7 +224,7 @@ public abstract class Persona extends Model{
         openConnection();
         MESSAGGI= new ArrayList<>(5);
 
-        String sql = "select * from messaggi where Destinatario ='"+Codice_Fiscale+"' or Destinatario='Broadcast'";
+        String sql = "select * from messaggi where Destinatario ='"+Codice_Fiscale+"' or Destinatario='BroadcastV'";
 
         ResultSet query = selectQuery(sql);
 
@@ -232,7 +232,7 @@ public abstract class Persona extends Model{
 
             while(query.next()){
 
-                Messaggio messaggio = new Messaggio(query.getString("Mittente"),
+                Messaggio messaggio = new Messaggio(Codice_Fiscale ,query.getString("Mittente"),
                         query.getString("messaggio"));
 
                 MESSAGGI.add(MESSAGGI.size(), messaggio);

@@ -1,6 +1,7 @@
 package Controller.Compiti;
 
 
+import Model.Volontario;
 import View.BasicFrameView;
 import View.ArchivistaHomeView;
 
@@ -13,12 +14,15 @@ public class ArchivistaHome {
 
     private BasicFrameView basicframe;
     private ArchivistaHomeView archivistaHomeView;
+    private Volontario UtenteLoggato;
 
 /*costruttore*/
 
-    public ArchivistaHome(BasicFrameView frame) {
+    public ArchivistaHome(BasicFrameView frame, Volontario Utenteloggato) {
 
         basicframe = frame;
+        UtenteLoggato=Utenteloggato;
+
         archivistaHomeView = new ArchivistaHomeView();
         basicframe.setdestra(archivistaHomeView.getIntermedio0());
 
@@ -40,7 +44,7 @@ public class ArchivistaHome {
             public void actionPerformed(ActionEvent e) {
 
                 ListaggiController controller;
-                controller = new ListaggiController(basicframe, "listacandidati");
+                controller = new ListaggiController(basicframe, "listacandidati", UtenteLoggato);
 
             }
         });
@@ -52,7 +56,7 @@ public class ArchivistaHome {
             public void actionPerformed(ActionEvent e) {
 
                 ListaggiController controller;
-                controller = new ListaggiController(basicframe, "listavolontari");
+                controller = new ListaggiController(basicframe, "listavolontari", UtenteLoggato);
 
             }
         });

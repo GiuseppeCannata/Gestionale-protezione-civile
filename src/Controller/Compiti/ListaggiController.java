@@ -3,8 +3,10 @@ package Controller.Compiti;
 
 import Controller.AnagraficaController;
 import Controller.Compiti.ArchivistaHome;
+import Controller.MessaggioController;
 import Model.GestioneModel;
 import Model.Persona;
+import Model.Volontario;
 import View.ListaggiView;
 import View.BasicFrameView;
 
@@ -24,18 +26,19 @@ public class ListaggiController {
     private JComboBox Box;
     private String utilizzatore;
     private String appoggio;
+    private Volontario UtenteLoggato;
 
     private ArrayList<Persona> UTENTI;
 
 
     /*COSTRUTTORE*/
-    public ListaggiController(BasicFrameView frame, String Utilizzatore) {
+    public ListaggiController(BasicFrameView frame, String Utilizzatore, Volontario Utenteloggato) {
 
         basicframe = frame;
+        utilizzatore = Utilizzatore;
+        UtenteLoggato = Utenteloggato;
 
         view = new ListaggiView();
-
-        utilizzatore = Utilizzatore;
 
         SettaggioView();
 
@@ -58,10 +61,13 @@ public class ListaggiController {
                 view.VisibilitaAccettaButton(true);
                 view.VisibilitaVisionaSchedaButton(true);
                 view.VisibilitaRitornaButton(true);
+                view.VisibilitaInviomessaggio(true);
+                view.setLabel("Lista candidati");
                 appoggio = "vol_o_cand=0 and Conf_Archivista=0";
                 RitornaAiCompitiDaArchivistaListener();
                 VisionaSchedaListener();
                 AccettaListener();
+                InvioMessaggioListener();
                 break;
 
 
@@ -69,8 +75,10 @@ public class ListaggiController {
 
             case "listavolontari":{
 
-                view.VisibilitaVisionaSchedaButton(true);
                 view.VisibilitaRitornaButton(true);
+                view.VisibilitaVisionaSchedaButton(true);
+               // view.VisibilitaInviomessaggio(true);
+                view.setLabel("Lista volontari");
                 appoggio = "vol_o_cand=1";
                 VisionaSchedaListener();
                 RitornaAiCompitiDaArchivistaListener();
@@ -104,7 +112,7 @@ public class ListaggiController {
             public void actionPerformed(ActionEvent e) {
 
                 ArchivistaHome controller;
-                controller = new ArchivistaHome(basicframe);
+                controller = new ArchivistaHome(basicframe, UtenteLoggato);
 
             }
         });
@@ -137,6 +145,26 @@ public class ListaggiController {
 
     }
 
+    private void InvioMessaggioListener(){
+
+        JButton InvioMessaggio = view.getInviagliUnMessaggioButton();
+        InvioMessaggio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int Indice;
+                Indice = Box.getSelectedIndex();
+
+                MessaggioController controller;
+                System.out.println(UtenteLoggato.getNome()+UtenteLoggato.getCognome());
+
+                controller = new MessaggioController(basicframe, UTENTI.get(Indice).getCodice_Fiscale(), UtenteLoggato.getNome()+" "+UtenteLoggato.getCognome());
+
+            }
+        });
+
+    }
+
 
     private void VisionaSchedaAction() {
 
@@ -145,8 +173,6 @@ public class ListaggiController {
 
             AnagraficaController controller;
             controller = new AnagraficaController(basicframe, UTENTI.get(Indice), view, utilizzatore);
-
-
 
     }
 

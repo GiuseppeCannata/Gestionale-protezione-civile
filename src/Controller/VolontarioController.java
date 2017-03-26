@@ -156,7 +156,7 @@ public class VolontarioController{
             public void actionPerformed(ActionEvent e) {
 
                 ArchivistaHome controller;
-                controller = new ArchivistaHome(basicframe);
+                controller = new ArchivistaHome(basicframe, Utente);
 
             }
 
