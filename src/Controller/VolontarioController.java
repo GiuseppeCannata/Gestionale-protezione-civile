@@ -23,7 +23,7 @@ public class VolontarioController{
     private VolontarioDView Dview;
     private UtenteSinistraView Sview;
     private Volontario Utente;
-    private ArrayList<Messaggio> MESSAGGI;
+    private ArrayList<String> MESSAGGI;
 
     private int DatiPersonali;
 
@@ -57,15 +57,14 @@ public class VolontarioController{
 
         //selezione messaggi
         MESSAGGI = Utente.getMESSAGGI();
-        JTextArea textArea = Dview.getTextArea();
 
         if(MESSAGGI.size() !=0){
 
-            for(Messaggio messaggio: MESSAGGI)
-                textArea.setText("< "+messaggio.getMittente()+" > : "+messaggio.getMessaggio()+".\n");
+            for(String messaggio: MESSAGGI)
+                Dview.setTextList(MESSAGGI);
         }
-        else
-            textArea.setText("<NESSUN MESSAGGIO DA VISUALIZZARE>");
+
+
 
         //selezione compiti
         if(Utente.getArchivista().equals("si")) {

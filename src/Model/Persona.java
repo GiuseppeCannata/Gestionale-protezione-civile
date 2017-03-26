@@ -44,7 +44,7 @@ public abstract class Persona extends Model{
     private String Username;
     private String Password;
 
-    private ArrayList<Messaggio> MESSAGGI;
+    private ArrayList<String> MESSAGGI;
 
 
     /*COSTRUTTORI*/
@@ -224,7 +224,7 @@ public abstract class Persona extends Model{
         openConnection();
         MESSAGGI= new ArrayList<>(5);
 
-        String sql = "select * from messaggi where Destinatario ='"+Codice_Fiscale+"' or Destinatario='BroadcastV'";
+        String sql = "select * from messaggi where Destinatario ='"+Codice_Fiscale+"' or Destinatario='Broadcast'";
 
         ResultSet query = selectQuery(sql);
 
@@ -232,10 +232,11 @@ public abstract class Persona extends Model{
 
             while(query.next()){
 
-                Messaggio messaggio = new Messaggio(Codice_Fiscale ,query.getString("Mittente"),
-                        query.getString("messaggio"));
+                String Mittente = query.getString("Mittente");
 
-                MESSAGGI.add(MESSAGGI.size(), messaggio);
+                String Messaggio = query.getString("messaggio");
+
+                MESSAGGI.add(MESSAGGI.size(), "< "+Mittente+" > : "+Messaggio+".\n");
 
             }
         }catch(SQLException se){
@@ -444,7 +445,7 @@ public abstract class Persona extends Model{
 
     }
 
-    public ArrayList<Messaggio> getMESSAGGI() {
+    public ArrayList<String> getMESSAGGI() {
         return MESSAGGI;
     }
 

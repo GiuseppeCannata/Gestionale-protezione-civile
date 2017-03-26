@@ -1,7 +1,10 @@
 package View;
 
+import Model.Messaggio;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 
 public class VolontarioDView extends JPanel{
@@ -18,8 +21,7 @@ public class VolontarioDView extends JPanel{
     private JLabel STATOLabel;
     private JButton master_ChiefButton;
     private JTabbedPane tabbedPane1;
-    private JTextArea textArea;
-
+    private JScrollPane ScrollPane;
 
 
     public VolontarioDView() {
@@ -28,7 +30,6 @@ public class VolontarioDView extends JPanel{
         referenteInformaticoButton.setVisible(false);
         addGiuntaComunaleButton.setVisible(false);
         master_ChiefButton.setVisible(false);
-        textArea.setEditable(false);
         setVisible(true);
 
     }
@@ -71,9 +72,14 @@ public class VolontarioDView extends JPanel{
 
     }
 
-    public JTextArea getTextArea() {
-        return textArea;
+
+    public void setTextList(ArrayList<String> MESSAGGI){
+
+        JList list = new JList(MESSAGGI.toArray());
+        ScrollPane.setViewportView(list);
+
     }
+
 
     public void setRUOLOVOLabel(String testo) {
 
@@ -100,17 +106,25 @@ public class VolontarioDView extends JPanel{
     }
 
     public void VisibilitaArchivistaButton(boolean visibilita){
+
         archivistaButton.setVisible(visibilita);
+
     }
 
     public void VisibilitaGiuntaButton(boolean visibilita){
+
         addGiuntaComunaleButton.setVisible(visibilita);
+
     }
     public void VisibilitaReferenteInformaticoButton(boolean visibilita){
+
         referenteInformaticoButton.setVisible(visibilita);
+
     }
     public void VisibilitaMasterChiefButton(boolean visibilita){
+
         master_ChiefButton.setVisible(visibilita);
+
     }
 
 

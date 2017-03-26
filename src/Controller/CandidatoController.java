@@ -21,7 +21,8 @@ public class CandidatoController {
    private CandidatoDestraView Dview;
    private UtenteSinistraView Sview;
    private int DatiPersonali;
-   private ArrayList<Messaggio> MESSAGGI;
+
+   private ArrayList<String> MESSAGGI;
 
 
     /*COSTRUTTORI*/
@@ -51,17 +52,16 @@ public class CandidatoController {
 
         //selezione messaggi
         MESSAGGI = Utente.getMESSAGGI();
-        JTextArea textArea = Dview.getTextArea();
 
         if(MESSAGGI.size() !=0){
 
-            for(Messaggio messaggio: MESSAGGI)
-                textArea.setText("< "+messaggio.getMittente()+" > : "+messaggio.getMessaggio()+".\n");
+            for(String messaggio: MESSAGGI)
+                Dview.setTextList(MESSAGGI);
         }
-        else
-            textArea.setText("<NESSUN MESSAGGIO DA VISUALIZZARE>");
+
 
         DatiPersonali = 0;
+
         //Settaggio della basicframe con inserimento dei due pannelli a destra e sinistra
         basicframe.setdestra(Dview.getIntermedio0());
         basicframe.setsinistra(Sview.getIntermedio0());

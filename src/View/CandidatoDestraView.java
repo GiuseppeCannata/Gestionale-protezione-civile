@@ -1,6 +1,7 @@
 package View;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 /**
  * CandidatoDestraView
@@ -15,13 +16,11 @@ public class CandidatoDestraView extends JPanel {
     private JCheckBox checkBox1;
     private JCheckBox checkBox2;
     private JTabbedPane tabbedPane1;
-    private JTextArea textArea;
+    private JScrollPane ScrollPane;
 
 
     public CandidatoDestraView() {
 
-
-        textArea.setEditable(false);
         checkBox1.setEnabled(false);
         checkBox2.setEnabled(false);
         setVisible(true);
@@ -35,9 +34,6 @@ public class CandidatoDestraView extends JPanel {
 
     }
 
-    public JTextArea getTextArea() {
-        return textArea;
-    }
 
     public void MessaggioSchermo(String testo){
 
@@ -54,6 +50,13 @@ public class CandidatoDestraView extends JPanel {
     public void setConf_giunta(boolean visibilita){
 
         checkBox2.setSelected(visibilita);
+
+    }
+
+    public void setTextList(ArrayList<String> MESSAGGI){
+
+        JList list = new JList(MESSAGGI.toArray());
+        ScrollPane.setViewportView(list);
 
     }
 
