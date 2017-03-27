@@ -22,7 +22,15 @@ public class CFVerificaController {
 
 
    /*COSTRUTTORE*/
-   public CFVerificaController(BasicFrameView frame, LoginView view) {
+
+   /*costurttore vuoto*/
+    public CFVerificaController() {
+
+        return;
+
+    }
+
+    public CFVerificaController(BasicFrameView frame, LoginView view) {
 
         basicframe = frame;
         loginview = view;
@@ -65,7 +73,7 @@ public class CFVerificaController {
 
     /**
      * Metodo di servizio.
-     * VerificaCodiceFiscale gestisce eventuali errori dell utente nella digitazione del codice fiscale, o nella mancata
+     * Gestisce eventuali errori dell utente nella digitazione del codice fiscale, o nella mancata
      * immisione di quest'ultimo.
      * Nel caso di errori l utente verrà avvertito con un messaggio di errore.
      */

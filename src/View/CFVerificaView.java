@@ -44,4 +44,9 @@ public class CFVerificaView extends JPanel {
         return paginaLoginButton;
 
     }
+
+    @Override
+    public String toString() {
+        return "CFVerificaView{}";
+    }
 }

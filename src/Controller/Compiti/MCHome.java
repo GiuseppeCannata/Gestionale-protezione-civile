@@ -22,6 +22,8 @@ public class MCHome {
         Listener();
     }
 
+
+
     private void Listener() {
 
 
@@ -54,4 +56,11 @@ public class MCHome {
 
     }
 
+    public MCHomeView getMcHomeview() {
+        return mcHomeview;
+    }
+
+    public BasicFrameView getBasicframe() {
+        return basicframe;
+    }
 }

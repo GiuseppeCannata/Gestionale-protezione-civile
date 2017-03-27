@@ -9,6 +9,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe che rappresenta i compiti dell Archivista
+ */
 
 public class ArchivistaHome {
 
@@ -16,7 +19,12 @@ public class ArchivistaHome {
     private ArchivistaHomeView archivistaHomeView;
     private Volontario UtenteLoggato;
 
-/*costruttore*/
+   /*costruttore*/
+    public ArchivistaHome() {
+
+        return;
+
+    }
 
     public ArchivistaHome(BasicFrameView frame, Volontario Utenteloggato) {
 
@@ -32,9 +40,9 @@ public class ArchivistaHome {
 
     /**
      * Ascolto azioni dell utente
+     * -->Listacandidati,TuttiIVolontari
      */
-
-    public void ArchivistaHomeContriollerListener() {
+    private void ArchivistaHomeContriollerListener() {
 
 
         /*listacandidatibutton*/
@@ -65,9 +73,10 @@ public class ArchivistaHome {
 
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "ArchivistaHome{}";
+    }
 }
 
 

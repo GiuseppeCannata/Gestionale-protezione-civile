@@ -3,7 +3,9 @@ package View;
 import javax.swing.*;
 import java.util.ArrayList;
 
-
+/**
+ * View della home del volontario
+ */
 public class VolontarioDView extends JPanel{
 
 
@@ -20,6 +22,7 @@ public class VolontarioDView extends JPanel{
     private JTabbedPane tabbedPane1;
     private JScrollPane ScrollPaneBroadcast;
     private JScrollPane ScrollPaneMessaggi;
+    private JButton adminButton;
 
 
     public VolontarioDView() {
@@ -28,11 +31,13 @@ public class VolontarioDView extends JPanel{
         referenteInformaticoButton.setVisible(false);
         addGiuntaComunaleButton.setVisible(false);
         master_ChiefButton.setVisible(false);
+        adminButton.setVisible(false);
         setVisible(true);
 
     }
 
 
+    //GETTER e Setter
     public JPanel getIntermedio0() {
 
         return Intermedio0;
@@ -44,7 +49,6 @@ public class VolontarioDView extends JPanel{
         return addGiuntaComunaleButton;
 
     }
-
 
     public JButton getArchivistaButton() {
 
@@ -70,6 +74,11 @@ public class VolontarioDView extends JPanel{
 
     }
 
+    public JButton getAdminButton() {
+
+        return adminButton;
+
+    }
 
     public void setBroadcast(ArrayList<String> MESSAGGI){
 
@@ -132,7 +141,14 @@ public class VolontarioDView extends JPanel{
 
     }
 
+    public void VisibilitaAdminButton(boolean visibilita){
 
+        adminButton.setVisible(visibilita);
 
+    }
 
+    @Override
+    public String toString() {
+        return "VolontarioDView{}";
+    }
 }

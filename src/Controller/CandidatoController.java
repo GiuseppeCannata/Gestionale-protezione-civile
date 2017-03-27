@@ -37,6 +37,18 @@ public class CandidatoController {
 
         basicframe = frame;
         Utente = utente;
+        DatiPersonali = 0;
+
+        InizializzaGUI();
+
+    }
+
+
+    /**
+     * Inzializza la home del candidato
+     */
+    private void InizializzaGUI(){
+
         Dview = new CandidatoDestraView();
         Sview = new UtenteSinistraView();
 
@@ -44,10 +56,10 @@ public class CandidatoController {
             Dview.MessaggioSchermo("Puoi finalmente evolvere in Volontario.\nFai click su evolvi per dare la tua conferma!");
 
         if (Utente.getConf_Archivista() == 1)
-              Dview.setConf_Archivista(true);
+            Dview.setConf_Archivista(true);
 
         if (Utente.getConf_Giunta() == 1)
-                Dview.setConf_giunta(true);
+            Dview.setConf_giunta(true);
 
         //selezione broadcast
         BROADCAST = Utente.getBROADCAST();
@@ -57,8 +69,6 @@ public class CandidatoController {
             for(String messaggio: BROADCAST)
                 Dview.setBroadcast(BROADCAST);
         }
-
-        DatiPersonali = 0;
 
         //Settaggio della basicframe con inserimento dei due pannelli a destra e sinistra
         basicframe.setdestra(Dview.getIntermedio0());
@@ -91,13 +101,13 @@ public class CandidatoController {
         basicframe.setsinistra(Sview.getIntermedio0());
 
         CandidatoControllerListener();
-
     }
 
     /**
-     * Ascolto azioni dell utente --> DatiPersonali, Evolvi
+     * Ascolto azioni dell utente
+     * --> DatiPersonali, Evolvi, logout,home
      */
-      private void  CandidatoControllerListener(){
+    private void  CandidatoControllerListener(){
 
         /*DatiPersonali*/
         JButton DatiPersonaliButton = Sview.getDatiPersonaliButton();
@@ -154,7 +164,12 @@ public class CandidatoController {
 
       }
 
-
+    /**
+     * Metodo che
+     * 1)verifica se Il candidato puo diventare un volontario
+     * 2)se puo, chiede la conferma all utente
+     * 3)effettua il logout in caso di risposta affermativa del candidato
+     */
     private void EvolviAction(){
 
         if(Utente.getConf_Giunta() != 1 || Utente.getConf_Archivista() != 1){
@@ -187,20 +202,15 @@ public class CandidatoController {
 
     }
 
+    /**
+     * Effettua il logout
+     */
     private void LogoutAction(){
 
         if(basicframe.OpotionalMessage("Vuoi davvero uscire?") == 0) {
             LoginController loginController = new LoginController(basicframe);
         }
 
-    }
-
-    public void setBasicframe(BasicFrameView basicframe) {
-        this.basicframe = basicframe;
-    }
-
-    public void setSview(UtenteSinistraView sview) {
-        Sview = sview;
     }
 
     @Override

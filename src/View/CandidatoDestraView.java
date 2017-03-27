@@ -28,6 +28,7 @@ public class CandidatoDestraView extends JPanel {
 
     }
 
+    //GETTER e SETTER
     public JPanel getIntermedio0() {
 
         return Intermedio0;

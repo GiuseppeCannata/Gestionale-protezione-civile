@@ -12,6 +12,11 @@ public class GestioneModel extends Model{
 
 
     /*Costruttore*/
+
+    public GestioneModel() {
+        super();
+    }
+
     public GestioneModel(String Appoggio){
 
         super();
@@ -25,7 +30,6 @@ public class GestioneModel extends Model{
 
 
         try {
-
             openConnection();
 
             String sql = "select * from a,pass where "+appoggio+" and a.cf=pass.cf order by cognome,nome";
@@ -34,12 +38,14 @@ public class GestioneModel extends Model{
 
             while (query.next()) {
 
+
                Persona utente = new Volontario();
 
                 utente.setCodice_Fiscale(query.getString("cf"));
                 utente.popolaA();
                 utente.popolaB();
                 utente.popolaC();
+
 
                 if(utilizzatore.equals("listavolontari")) {
 
@@ -177,7 +183,19 @@ public class GestioneModel extends Model{
 
     @Override
     public boolean UpdateSQL(String[] Appoggio){
-        return false;
+
+        boolean controllo = false;
+
+        openConnection();
+
+        String sql = "update "+Appoggio[0]+" set "+Appoggio[1]+"='"+Appoggio[2]+"' where cf='"+Appoggio[3]+"'";
+
+
+        if(updateQuery(sql)){
+            controllo = true;
+        }
+        closeConnection();
+        return controllo;
 
     };
 

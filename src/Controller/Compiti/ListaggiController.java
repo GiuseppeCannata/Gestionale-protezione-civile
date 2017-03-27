@@ -106,60 +106,66 @@ public class ListaggiController {
     private void RitornaAiCompitiDaArchivistaListener() {
 
         /*Ritorna ai compiti*/
-        JButton ritornaAiCompitiDaArchivista = view.getRitornaButton();
-        ritornaAiCompitiDaArchivista.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+            JButton ritornaAiCompitiDaArchivista = view.getRitornaButton();
+            ritornaAiCompitiDaArchivista.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
 
-                ArchivistaHome controller;
-                controller = new ArchivistaHome(basicframe, UtenteLoggato);
+                    ArchivistaHome controller;
+                    controller = new ArchivistaHome(basicframe, UtenteLoggato);
 
-            }
-        });
+                }
+            });
     }
 
     private void VisionaSchedaListener() {
 
-        JButton visionaSchedaButton = view.getVisionaSchedaButton();
-        visionaSchedaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-                VisionaSchedaAction();
+            JButton visionaSchedaButton = view.getVisionaSchedaButton();
+            visionaSchedaButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
 
-            }
-        });
+                    VisionaSchedaAction();
+
+                }
+            });
+
     }
 
     private void AccettaListener(){
 
-        JButton AccettaButton = view.getAccettaButton();
-        AccettaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-                AccettaArchivistaAction();
+            JButton AccettaButton = view.getAccettaButton();
+            AccettaButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
 
-            }
-        });
+                    AccettaArchivistaAction();
+
+                }
+            });
+
 
     }
 
     private void InvioMessaggioListener(){
 
-        JButton InvioMessaggio = view.getInviagliUnMessaggioButton();
-        InvioMessaggio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-                int Indice;
-                Indice = Box.getSelectedIndex();
+            JButton InvioMessaggio = view.getInviagliUnMessaggioButton();
+            InvioMessaggio.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
 
-                MessaggioController controller;
-                controller = new MessaggioController(basicframe, UTENTI.get(Indice).getCodice_Fiscale(), UtenteLoggato.getNome()+" "+UtenteLoggato.getCognome());
+                    int Indice;
+                    Indice = Box.getSelectedIndex();
 
-            }
-        });
+                    MessaggioController controller;
+                    controller = new MessaggioController(basicframe, UTENTI.get(Indice).getCodice_Fiscale(), UtenteLoggato.getNome() + " " + UtenteLoggato.getCognome());
+
+                }
+            });
+
 
     }
 

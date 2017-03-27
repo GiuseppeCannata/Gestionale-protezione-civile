@@ -124,7 +124,6 @@ public class AnagraficaView extends JPanel{
 
     }
 
-
     public void VisibilitaListaButton(boolean visibilita){
 
         listaButton.setVisible(visibilita);

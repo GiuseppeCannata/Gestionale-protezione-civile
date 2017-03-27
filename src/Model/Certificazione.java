@@ -16,7 +16,7 @@ public class Certificazione extends Model{
     private String entedirilascio;
     private String n_documento;
 
-    private String flag;
+    private String flag; //-->serve per taggare la certificazione come da eliminare o aggiornare, in fase di modifica
 
 
     public Certificazione(){
@@ -36,12 +36,9 @@ public class Certificazione extends Model{
         n_documento = NDocumento;
 
         flag = "nessuna";
-
-
-
-
     }
 
+    @Override
     public boolean InsertSQL(){
 
         boolean controllo=false;
@@ -66,16 +63,21 @@ public class Certificazione extends Model{
 
     @Override
     public boolean SearchSQL() {
+
         return false;
+
     }
 
     @Override
     public boolean UpdateSQL(String[] Appoggio) {
+
         return false;
+
     }
 
     /**
      * Esegue l update della certificazione nel DB
+     * @return true --> andato a buon fine
      **/
     public boolean updatesql(){
 
@@ -100,7 +102,7 @@ public class Certificazione extends Model{
     /**
      * Elimina la certificazinoe dal DB
      *
-     * @return
+     * @return true--> eliminazione andata a buon fine
      */
     public boolean DeleteSQL(){
 

@@ -1,7 +1,5 @@
 package Controller.Compiti;
 
-
-
 import Model.GestioneModel;
 import Model.Persona;
 import View.BasicFrameView;
@@ -12,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Classe che rappresenta il compito del referente informatico
+ */
 public class Referenteinformatico {
 
     private BasicFrameView basicframe;
@@ -24,6 +25,12 @@ public class Referenteinformatico {
 
 
     /*costruttore*/
+    public Referenteinformatico() {
+
+        return;
+
+    }
+
     public Referenteinformatico(BasicFrameView frame) {
 
         basicframe = frame;
@@ -53,15 +60,16 @@ public class Referenteinformatico {
 
     public void stampalista () {
 
-
-            for(Persona candidato : UTENTI)
-                Box.addItem(candidato.getCognome() + "    -    " +candidato.getNome());
-
+        for(Persona candidato : UTENTI)
+            Box.addItem(candidato.getCognome() + "    -    " +candidato.getNome());
 
     }
 
 
-
+    /**
+     * Ascolto le azioni dell utente
+     * -->ResettaPassword
+     */
     private void Listener() {
 
         JButton resettaPasswordButton =  view.getResettaPasswordButton();
@@ -76,13 +84,16 @@ public class Referenteinformatico {
 
     }
 
-
+    /**
+     * Metodo di servizio
+     * Avvia l update(dell utente selezionato) per effettuare l aggiornamento della password
+     * Richiede al referente informatico l immissione dell nuova password
+     */
     private void ResettaAction(){
 
         int Indice;
         Indice = Box.getSelectedIndex();
         String[] appoggio = new String[3];
-
 
 
         if(basicframe.OpotionalMessage("Reset password per "+UTENTI.get(Indice).getNome()+" ?") == 0) {
@@ -103,5 +114,10 @@ public class Referenteinformatico {
                 }
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Referenteinformatico{}";
     }
 }

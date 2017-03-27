@@ -1,10 +1,7 @@
 package Controller;
 
 
-import Controller.Compiti.Add_Giunta;
-import Controller.Compiti.ArchivistaHome;
-import Controller.Compiti.MCHome;
-import Controller.Compiti.Referenteinformatico;
+import Controller.Compiti.*;
 import Model.Volontario;
 import View.BasicFrameView;
 import View.UtenteSinistraView;
@@ -15,7 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-
+/**
+ * Controler per la Home del volontario
+ */
 public class VolontarioController{
 
     private BasicFrameView basicframe;
@@ -26,6 +25,12 @@ public class VolontarioController{
     private ArrayList<String> BROADCAST;
     private ArrayList<String> MESSAGGI;
 
+
+    public VolontarioController() {
+
+        return;
+
+    }
 
     public VolontarioController(BasicFrameView frame, Volontario utente){
 
@@ -39,6 +44,11 @@ public class VolontarioController{
 
     }
 
+    /**
+     * Metodo che controlla se l utente è la prima volta che effettua l accesso come volontario
+     * @return true --> primo acccesso
+     * @return false --> non primo accesso
+     */
     private boolean Primoaccesso(){
 
         boolean controllo = false;
@@ -57,6 +67,9 @@ public class VolontarioController{
 
     }
 
+    /**
+     * Inizializza la home del volontario
+     */
     public void InizializzaGUI(){
 
         Dview = new VolontarioDView();
@@ -109,6 +122,9 @@ public class VolontarioController{
         VolontarioControllerListener();
     }
 
+    /**
+     * Controlla quali compiti possiede il volontaruio e setta i bottoni dei compiti di conseguenza(visibili o non visibili)
+     */
     private void Selezionecompiti(){
 
         if(Utente.getArchivista().equals("si")) {
@@ -130,8 +146,19 @@ public class VolontarioController{
             Dview.VisibilitaMasterChiefButton(true);
             MasterChiefListner();
         }
+
+        if(Utente.getRuolo().equals("Admin") ){
+
+            Dview.VisibilitaAdminButton(true);
+            AdminListener();
+
+        }
     }
 
+    /**
+     * Ascolto delle azioni del volontario
+     * -->Datipersonali,logout,home,cambiastato
+     */
     private void VolontarioControllerListener(){
 
         /*DatiPersonali*/
@@ -189,6 +216,13 @@ public class VolontarioController{
 
     }
 
+    /**
+     * A seguire tutti i listener dei vari compiti
+     * --> Archivista
+     * --> Referente informatico
+     * --> Master chief
+     * --> Add Giunta
+     */
     private void ArchivistaListner(){
 
         JButton Archivista = Dview.getArchivistaButton();
@@ -249,6 +283,21 @@ public class VolontarioController{
         });
     }
 
+    private void AdminListener(){
+
+        JButton Admin = Dview.getAdminButton();
+        Admin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                AdminHome controller;
+                controller = new AdminHome(basicframe, Utente );
+
+            }
+
+        });
+    }
+
     private void LogoutAction(){
 
         if(basicframe.OpotionalMessage("Vuoi davvero uscire?") == 0) {
@@ -257,4 +306,8 @@ public class VolontarioController{
 
     }
 
+    @Override
+    public String toString() {
+        return "VolontarioController{}";
+    }
 }

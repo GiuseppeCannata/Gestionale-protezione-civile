@@ -27,7 +27,6 @@ public class Pagine_Manager {
     public static void addPagina_Corrente() {
 
         Pagina_Corrente += 1;
-        Fine_Pagina += 1;
 
     }
 
@@ -37,10 +36,4 @@ public class Pagine_Manager {
         Pagina_Corrente -= 1;
 
     }
-
-    public static int getFine_Pagina(){
-
-        return Fine_Pagina;
-    }
-
 }

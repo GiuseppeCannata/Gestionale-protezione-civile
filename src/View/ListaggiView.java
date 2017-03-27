@@ -2,8 +2,9 @@ package View;
 
 import javax.swing.*;
 
-
-
+/**
+ * View per referente informatico e Archivista
+ */
 public class ListaggiView extends JPanel{
 
     private JButton visionaSchedaButton;
@@ -30,8 +31,11 @@ public class ListaggiView extends JPanel{
 
     }
 
+    //GETTERE e SETTER
     public JList getList() {
+
         return list;
+
     }
 
     public JButton getRitornaButton() {
@@ -39,8 +43,6 @@ public class ListaggiView extends JPanel{
         return ritornaButton;
 
     }
-
-
 
     public JButton getVisionaSchedaButton() {
 
@@ -112,5 +114,10 @@ public class ListaggiView extends JPanel{
     public void  VisibilitaInviomessaggio(boolean visibilita){
 
         inviagliUnMessaggioButton.setVisible(visibilita);
+    }
+
+    @Override
+    public String toString() {
+        return "ListaggiView{}";
     }
 }

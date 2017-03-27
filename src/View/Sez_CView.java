@@ -3,8 +3,7 @@ package View;
 import javax.swing.*;
 
 /**
- * Sez_CView
- * Form per la sezione C
+ * View per la sezione C
  */
 
 public class Sez_CView extends JPanel{
@@ -23,7 +22,7 @@ public class Sez_CView extends JPanel{
     private JLabel numCodPostaleLabel;
     private JLabel IBANLabel;
 
-    //Costruttore vuoto
+
     public Sez_CView() {
 
         setVisible(true);
@@ -101,8 +100,6 @@ public class Sez_CView extends JPanel{
         ibantext.setText(Ibantext);
 
     }
-
-
 
     public void Abilita_Disabilita_Campi(boolean editabile){
 

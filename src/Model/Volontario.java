@@ -5,6 +5,9 @@ package Model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Classe che rappresenta il volontatio
+ */
 
 public class Volontario extends Persona {
 
@@ -48,7 +51,9 @@ public class Volontario extends Persona {
 
     }
 
-
+    /**
+     * Popola la sezione D
+     */
     protected void popolaD(){
 
         openConnection();
@@ -81,6 +86,9 @@ public class Volontario extends Persona {
 
     }
 
+    /**
+     * Polpola la sezione relativa ai compiti posseduti dall utente
+     */
     protected void popolacompiti(){
 
         openConnection();
@@ -107,6 +115,9 @@ public class Volontario extends Persona {
 
     }
 
+    /**
+     * Vede se è la prima volta che accede come volontario
+     */
     private void popolaprimoaccesso(){
 
         openConnection();
@@ -129,6 +140,9 @@ public class Volontario extends Persona {
         }
     }
 
+    /**
+     * popola lo stato del volontario
+     */
     private void popolastato(){
 
         openConnection();
@@ -153,6 +167,9 @@ public class Volontario extends Persona {
 
     }
 
+    /**
+     * popola il ruolo del volontario
+     */
     protected void popolaruolo(){
 
         openConnection();
@@ -175,7 +192,36 @@ public class Volontario extends Persona {
 
     }
 
+    public boolean ResetCompiti(){
 
+        boolean controllo = false;
+        openConnection();
+
+        String sql = "Update compiti set Archivista='no', Add_Giunta='no', Referente_Informatico='no' where cf ='"+getCodice_Fiscale()+"'";
+
+
+        if(updateQuery(sql))
+            controllo=true;
+
+        closeConnection();
+        return controllo;
+    }
+
+    public boolean ResetRuoli(){
+
+        boolean controllo = false;
+        openConnection();
+
+        String sql = "Update flagvolontario set ruolo='Volonatrio_semplice' where cf ='"+getCodice_Fiscale()+"'";
+
+
+        if(updateQuery(sql))
+            controllo=true;
+
+        closeConnection();
+        return controllo;
+
+    }
 
 
     @Override
@@ -198,7 +244,9 @@ public class Volontario extends Persona {
 
     @Override
     public boolean SearchSQL() {
+
         return false;
+
     }
 
     @Override
@@ -238,89 +286,135 @@ public class Volontario extends Persona {
     }
 
 
-    //GETTER
+    //GETTER e SETTER
     public String getGrupposanguigno() {
+
         return grupposanguigno;
+
     }
 
     public String getTagliatesta() {
+
         return tagliatesta;
+
     }
 
     public String getTagliabusto() {
+
         return tagliabusto;
+
     }
 
-
     public String getTagliamano() {
+
         return tagliamano;
+
     }
 
     public String getTagliapantaloni() {
+
         return tagliapantaloni;
+
     }
 
     public String getTagliascarpe() {
+
         return tagliascarpe;
+
     }
 
     public String getAbilita() {
+
         return abilita;
+
     }
 
     public String getStato() {
+
         return stato;
+
     }
 
     public String getArchivista() {
+
         return archivista;
+
     }
 
     public String getAdd_giunta() {
+
         return add_giunta;
+
     }
 
     public String getReferenteinformatico() {
+
         return referenteinformatico;
+
     }
 
     public String getPrimoaccesso() {
+
         return primoaccesso;
+
     }
 
     public void setGrupposanguigno(String Grupposanguigno) {
+
         grupposanguigno = Grupposanguigno;
+
     }
 
     public void setTagliatesta(String Tagliatesta) {
+
         tagliatesta = Tagliatesta;
+
     }
 
     public void setTagliabusto(String Tagliabusto) {
+
         tagliabusto = Tagliabusto;
+
     }
 
     public void setTagliamano(String Tagliamano) {
+
         tagliamano = Tagliamano;
+
     }
 
     public void setTagliapantaloni(String Tagliapantaloni) {
+
         tagliapantaloni = Tagliapantaloni;
+
     }
 
     public void setTagliascarpe(String Tagliascarpe) {
+
         tagliascarpe = Tagliascarpe;
+
     }
 
     public void setAbilita(String Abilita) {
+
         abilita = Abilita;
+
     }
 
     public void setStato(String Stato) {
+
         stato = Stato;
+
     }
 
     public String getRuolo() {
+
         return ruolo;
+
+    }
+
+    @Override
+    public String toString() {
+        return "Volontario{}";
     }
 }

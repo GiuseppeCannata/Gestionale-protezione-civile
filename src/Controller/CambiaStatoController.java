@@ -29,14 +29,15 @@ public class CambiaStatoController {
 
         basicframe.setdestra(CambiaStatoview.getIntemedio0());
 
-        CambiaStatoControllerListener();
+        Listener();
 
     }
 
     /**
-     * ascoltatore
+     * Ascolto delle azioni svolte dall utente
+     * -->cambiastato
      **/
-    public void CambiaStatoControllerListener(){
+    public void Listener(){
 
         /*cambia stato*/
         JButton cambiastatoButton = CambiaStatoview.getCambiaStatoButton();
@@ -50,6 +51,12 @@ public class CambiaStatoController {
         });
     }
 
+    /**
+     * Metodo di servizio
+     * Metodo che richiama l update dell utente loggato affinche il suo stato possa essere modificato
+     * Seil tuo avviene correttamente informa l utente di cio
+     * Richiama --> MessaggioDiBroadcast
+     */
     private void CambiaStatoAction(){
 
         stato = (String) CambiaStatoview.getBox().getSelectedItem();
@@ -67,6 +74,12 @@ public class CambiaStatoController {
 
     }
 
+    /**
+     * Se l utente cambia lo stato, questa informazione viene resa pubblica ai volontari attraverso un messaggio di broadcast.
+     * Per fare questo utilizziamo questo metodo
+     * @return true --> messaggio salvato
+     * @return false --> messaggio non salvatio
+     */
     private boolean MessaggioDiBroadcast(){
 
         boolean controllo = false;
@@ -89,6 +102,11 @@ public class CambiaStatoController {
 
 
         return controllo;
+    }
+
+    @Override
+    public String toString() {
+        return "CambiaStatoController{}";
     }
 }
 

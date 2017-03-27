@@ -14,7 +14,7 @@ public class MainApplicazione {
 
         LoginController ApplicazioneStart;
 
-        //look and feel
+        //setto look and feel del mio sistema
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException e) {
@@ -30,8 +30,6 @@ public class MainApplicazione {
         //Genero la frame principale(BasicFrameView) passandola al LoginController che porrà all interno il
         //pannello di login
         ApplicazioneStart=new LoginController(new BasicFrameView());
-
-
 
     }
 }

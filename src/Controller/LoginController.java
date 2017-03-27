@@ -43,7 +43,7 @@ public class LoginController {
 
     /**
      * Metodo di servizio.
-     * loginListener gestisce gli eventi scatenati dall utente interagendo con la LoginView
+     * Gestisce gli eventi scatenati dall utente interagendo con la LoginView
      *
      *  Ascolto azioni dell' utente --> Registrazione,Accesso
      */
@@ -75,7 +75,7 @@ public class LoginController {
 
     /**
      * Metodo di servizio.
-     * AccediAction controlla se:
+     * Controlla se:
      *      1)L'utente non ha completato uno dei due campi(Userame, Password) nella pagina Login
      *      2)Segnala all'utente,grazie ad una finestra di errore, se l username e la password inseriti sono non corretti
      *

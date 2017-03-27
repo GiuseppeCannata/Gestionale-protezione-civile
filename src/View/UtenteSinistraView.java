@@ -38,7 +38,9 @@ public class UtenteSinistraView extends JPanel{
     }
 
     public JButton getHomeButton() {
+
         return homeButton;
+
     }
 
     public JButton getDatiPersonaliButton() {
@@ -58,8 +60,8 @@ public class UtenteSinistraView extends JPanel{
         evolviButton.setVisible(visibilita);
     }
 
-    public void VisibilitaHomeButton(boolean visibilita){
-
-        homeButton.setVisible(visibilita);
+    @Override
+    public String toString() {
+        return "UtenteSinistraView{}";
     }
 }

@@ -28,6 +28,18 @@ public class MC {
     private ArrayList<Persona> UTENTI;
 
 
+    public MC(String Utilizzatore) {
+
+        appoggio = "vol_o_cand = 1";
+        utilizzatore = Utilizzatore;
+        model = new GestioneModel(appoggio);
+
+        if(Utilizzatore.equals("compiti"))
+        UTENTI = model.Compiti();
+        if(utilizzatore.equals("ruoli"))
+        UTENTI = model.Ruoli();
+    }
+
     public MC(BasicFrameView frame, String Utilizzatore, MCHomeView HomeView) {
 
         basicframe = frame;
@@ -62,7 +74,6 @@ public class MC {
                 Box2.removeAllItems();
                 Box2.addItem("Archivista");
                 Box2.addItem("Referente_Informatico");
-                Box2.addItem("Magazzino_Divise");
                 Box2.addItem("Add_Giunta");
 
                 UTENTI = model.Compiti();
@@ -80,7 +91,6 @@ public class MC {
                 Box2.addItem("Volontario_semplice");
                 Box2.addItem("Direttivo");
                 Box2.addItem("Vicecordinatore");
-                Box2.addItem("Cordinatore");
 
                 UTENTI = model.Ruoli();
 
@@ -281,5 +291,20 @@ public class MC {
         for (Persona utente : UTENTI)
             Box.addItem(utente.getCognome() + "    -    " + utente.getNome());
 
+    }
+
+
+    public MCView getView() {
+        return view;
+    }
+
+    public ArrayList<Persona> getUTENTI() {
+
+        return UTENTI;
+
+    }
+
+    public String getUtilizzatore() {
+        return utilizzatore;
     }
 }

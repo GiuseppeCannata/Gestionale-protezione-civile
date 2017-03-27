@@ -2,6 +2,9 @@ package View;
 
 import javax.swing.*;
 
+/**
+ * View della sezione D
+ */
 
 public class Sez_DView extends JPanel {
 
@@ -22,6 +25,7 @@ public class Sez_DView extends JPanel {
 
     }
 
+    //GETTER e SETTER
     public JPanel getIntermedio0() {
 
         return Intermedio0;
@@ -133,5 +137,10 @@ public class Sez_DView extends JPanel {
 
         salvaButton.setVisible(visibilita);
 
+    }
+
+    @Override
+    public String toString() {
+        return "Sez_DView{}";
     }
 }

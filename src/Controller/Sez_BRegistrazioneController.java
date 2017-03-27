@@ -23,6 +23,11 @@ public class Sez_BRegistrazioneController {
     private ArrayList<Certificazione> CERTIFICAZIONI;
     private int aggiungi;
 
+    public Sez_BRegistrazioneController() {
+
+        return;
+
+    }
 
     public Sez_BRegistrazioneController(BasicFrameView frame, Sez_BView view2, String CodiceFiscale) {
 
@@ -41,8 +46,8 @@ public class Sez_BRegistrazioneController {
     }
 
     /**
-     * Ascolto azioni dell' utente --> Aggiungi,boxcertificazioni
-     *
+     * Ascolto azioni dell' utente
+     * --> Aggiungi,boxcertificazioni
      */
     private void Listener(){
 
@@ -177,7 +182,6 @@ public class Sez_BRegistrazioneController {
 
             }
     }
-
 
 
     public ArrayList<Certificazione> getCERTIFICAZIONI() {

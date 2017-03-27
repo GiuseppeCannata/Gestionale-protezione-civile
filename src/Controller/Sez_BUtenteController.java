@@ -27,6 +27,12 @@ public class Sez_BUtenteController {
 
     /*COSTRUTTORE*/
 
+    public Sez_BUtenteController() {
+
+        return;
+
+    }
+
     public Sez_BUtenteController(Sez_BView view2, ArrayList<Certificazione> Certificazioni, BasicFrameView frame,
                                  String CodiceFiscale) {
 
@@ -47,7 +53,8 @@ public class Sez_BUtenteController {
     }
 
     /**
-     * Ascolto azioni dell' utente --> boxcertificazioni,boxlist, Update,Elimina
+     * Ascolto azioni dell' utente
+     * --> boxcertificazioni,boxlist, Update,Elimina
      *
      */
 
@@ -226,4 +233,8 @@ public class Sez_BUtenteController {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Sez_BUtenteController{}";
+    }
 }

@@ -2,7 +2,9 @@ package View;
 
 import javax.swing.*;
 
-
+/**
+ * View per il compito Maste Chief
+ */
 public class MCView extends JPanel {
 
     private JPanel Intermedio0;
@@ -38,11 +40,15 @@ public class MCView extends JPanel {
     }
 
     public JButton getAssegnaRuoloButton() {
+
         return assegnaRuoloButton;
+
     }
 
     public JButton getRimuoviRuoloButton() {
+
         return rimuoviRuoloButton;
+
     }
 
     public JButton getAssegnaCompitoButton() {
@@ -58,7 +64,9 @@ public class MCView extends JPanel {
     }
 
     public JButton getRitornaButton() {
+
         return RitornaButton;
+
     }
 
     public JComboBox getBox2() {
@@ -95,5 +103,8 @@ public class MCView extends JPanel {
 
     }
 
-
+    @Override
+    public String toString() {
+        return "MCView{}";
+    }
 }

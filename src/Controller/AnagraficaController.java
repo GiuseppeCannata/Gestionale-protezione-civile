@@ -806,7 +806,6 @@ public class AnagraficaController {
 
                 controllo = true;
                 Certificazione certificazione = CERTIFICAZIONI.get(i);
-                System.out.println(certificazione.getNome());
                 certificazione.updatesql();
 
             }

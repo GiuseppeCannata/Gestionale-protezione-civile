@@ -51,12 +51,14 @@ public class BasicFrameView extends JFrame{
     }
 
     public void Message(String nomeMessage){
-        JOptionPane.showMessageDialog(BasicFrameView.this, nomeMessage, "Messaggio",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(BasicFrameView.this, nomeMessage, "Messaggio",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     public String InputMessage(String nomeMessage){
 
-        return JOptionPane.showInputDialog(BasicFrameView.this, nomeMessage, "Reset password",JOptionPane.INFORMATION_MESSAGE);
+        return JOptionPane.showInputDialog(BasicFrameView.this, nomeMessage, "Reset password",
+                JOptionPane.INFORMATION_MESSAGE);
 
     }
 

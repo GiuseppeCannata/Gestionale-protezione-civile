@@ -2,12 +2,14 @@ package View;
 
 import javax.swing.*;
 
+/**
+ * View della home del copito archivista
+ */
 public class ArchivistaHomeView extends JPanel {
 
     private JPanel Intermedio0;
 
     private JButton listaCandidatiButton;
-    private JButton volontariNonAttiviButton;
     private JButton tuttiIVolontariButton;
 
 
@@ -21,10 +23,6 @@ public class ArchivistaHomeView extends JPanel {
         return listaCandidatiButton;
     }
 
-    public JButton getvolontariNonAttiviButton() {
-        return volontariNonAttiviButton;
-    }
-
     public JButton gettuttiIVolontariButton() {
         return tuttiIVolontariButton;
     }
@@ -33,6 +31,8 @@ public class ArchivistaHomeView extends JPanel {
         return Intermedio0;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "ArchivistaHomeView{}";
+    }
 }

@@ -72,9 +72,7 @@ public class Sez_AView extends JPanel{
 
     public String getDatadinascitatext() {
 
-        //System.out.println((String)comboBox1.getSelectedItem()+"-"+(String)comboBox2.getSelectedItem()+"-"+(String)comboBox3.getSelectedItem());
-
-        return (String)comboBox1.getSelectedItem()+"-"+(String)comboBox2.getSelectedItem()+"-"+(String)comboBox3.getSelectedItem();
+       return (String)comboBox1.getSelectedItem()+"-"+(String)comboBox2.getSelectedItem()+"-"+(String)comboBox3.getSelectedItem();
 
     }
 
@@ -119,9 +117,6 @@ public class Sez_AView extends JPanel{
 
         return usernametext.getText();
     }
-
-
-
 
     public void setNometext(String Nometext) {
 
@@ -191,8 +186,6 @@ public class Sez_AView extends JPanel{
         usernametext.setText(Usernametext);
 
     }
-
-
 
     public void setDataDiNascitaComboBox(String anno, String mese, String giorno){
 

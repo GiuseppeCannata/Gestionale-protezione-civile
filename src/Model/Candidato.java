@@ -3,7 +3,9 @@ package Model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
+/**
+ * Classe che rappresenta il candidato
+ */
 public class Candidato extends Persona {
 
 	/*VARIABILI D'ISTANZA DI PERSONA*/
@@ -32,8 +34,7 @@ public class Candidato extends Persona {
 
       ResultSet query = selectQuery(sql);
 
-
-      try {
+        try {
 
             if(query.next()) {
                 Conf_Giunta = query.getInt("conf_giunta");
@@ -50,17 +51,6 @@ public class Candidato extends Persona {
 
     }
 
-
-    /*OPERAZIONI*/
-    public int getConf_Giunta() {
-
-        return Conf_Giunta;
-
-    }
-
-    public int getConf_Archivista(){
-        return Conf_Archivista;
-    }
 
     @Override
     public boolean UpdateSQL(String[] Appoggio) {
@@ -100,6 +90,11 @@ public class Candidato extends Persona {
 
     }
 
+    /**
+     * Query inserimento nella tabella compiti
+     * Inserimento di default--> questo metodo setta tutti i campi a no
+     * @return true --> inserimento andato bene
+     */
     private boolean InsertCompiti(){
 
         boolean controllo = false;
@@ -111,19 +106,19 @@ public class Candidato extends Persona {
                 "no"                           + "','" +
                 "no"                           + "')";
 
-
-
-
         if(updateQuery(sql))
             controllo=true;
-
-
 
         closeConnection();
         return controllo;
 
     }
 
+    /**
+     * Query inserimento nella tabella flagvolontario
+     * Inserimento di default --> stato: attivo , ruolo: semplice
+     * @return true --> inserimento andato a buon fine
+     */
     private boolean InsertFlagVolontario(){
 
         boolean controllo = false;
@@ -135,15 +130,24 @@ public class Candidato extends Persona {
                 "Semplice"                     + "')";
 
 
-
-
         if(updateQuery(sql))
             controllo=true;
 
-
-
         closeConnection();
         return controllo;
+    }
+
+    /*GETTER*/
+    public int getConf_Giunta() {
+
+        return Conf_Giunta;
+
+    }
+
+    public int getConf_Archivista(){
+
+        return Conf_Archivista;
+
     }
 
     @Override

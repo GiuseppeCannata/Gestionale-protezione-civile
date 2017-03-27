@@ -2,18 +2,27 @@ package View;
 
 import javax.swing.*;
 
+/**
+ * View per la home di masterchief
+ */
 
 public class MCHomeView extends JPanel {
 
     private JButton compitiButton;
     private JButton ruoliButton;
-    private JButton rimuoviRuoliButton;
-    private JButton rimuoviCompitiButton;
     private JPanel Intermedio0;
+
+    private JButton resetMCButton;
+    private JButton resetCompitiButton;
+    private JButton resetRuoliButton;
 
     /*costruttore*/
 
-    public void MCHomeView(){
+    public MCHomeView(){
+
+        resetCompitiButton.setVisible(false);
+        resetRuoliButton.setVisible(false);
+        resetMCButton.setVisible(false);
 
         setVisible(true);
 
@@ -28,21 +37,51 @@ public class MCHomeView extends JPanel {
     }
 
     public JButton getCompitiButton() {
+
         return compitiButton;
+
     }
 
     public JButton getRuoliButton() {
+
         return ruoliButton;
+
     }
 
-    public JButton getRimuoviRuoliButton() {
-        return rimuoviRuoliButton;
+    public JButton getResetMCButton() {
+
+        return resetMCButton;
+
     }
 
-    public JButton getRimuoviCompitiButton() {
-        return rimuoviCompitiButton;
+    public JButton getResetCompitiButton() {
+        return resetCompitiButton;
+    }
+
+    public JButton getResetRuoliButton() {
+        return resetRuoliButton;
+    }
+
+    public void VisibilitaResetButton(boolean visibilita){
+
+        resetMCButton.setVisible(visibilita);
+    }
+
+    public void VisibilitaResetCompitiButton(boolean visibilita){
+
+        resetCompitiButton.setVisible(visibilita);
+    }
+
+    public void VisibilitaResetRuoliButton(boolean visibilita){
+
+        resetRuoliButton.setVisible(visibilita);
     }
 
 
+
+    @Override
+    public String toString() {
+        return "MCHomeView{}";
+    }
 }
 

@@ -73,13 +73,16 @@ public abstract class Persona extends Model{
         try {
 
             openConnection();
-        String sql = "select cf,pass from pass where user='"+Username+"'";
-        ResultSet query = selectQuery(sql);
-        while(query.next()) {
-            Codice_Fiscale = query.getString("cf");
-            Password = query.getString("pass");
+            String sql = "select cf,pass from pass where user='"+Username+"'";
+            ResultSet query = selectQuery(sql);
 
-        }
+            while(query.next()) {
+
+                Codice_Fiscale = query.getString("cf");
+                Password = query.getString("pass");
+
+            }
+
         }catch(SQLException se){
             se.printStackTrace();
         }finally{
@@ -127,7 +130,7 @@ public abstract class Persona extends Model{
 
     /**
      * Metodo di servizio
-     * Popola con l ausilio del DB le variabili di istanza, della sez A
+     * Popola le variabili di istanza, della sez B
      */
     protected void popolaB(){
 
@@ -191,7 +194,7 @@ public abstract class Persona extends Model{
 
     /**
      * Metodo di servizio
-     * Popola con l ausilio del DB le variabili di istanza, della sez A
+     * Popola  le variabili di istanza, della sez C
      */
     protected void popolaC(){
 
@@ -220,6 +223,9 @@ public abstract class Persona extends Model{
         }
     }
 
+    /**
+     * Popola i messaggi di broadcast dell utente
+     */
     private void popolaBroadcast(){
 
         openConnection();
@@ -248,6 +254,9 @@ public abstract class Persona extends Model{
 
     }
 
+    /**
+     * Popola i messaggi privati del utente
+     */
     private void popolaMessaggi(){
 
         openConnection();
@@ -522,6 +531,8 @@ public abstract class Persona extends Model{
     }
 
     public ArrayList<String> getMESSAGGI() {
+
         return MESSAGGI;
+
     }
 }

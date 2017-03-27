@@ -168,8 +168,6 @@ public class Sez_BView extends JPanel{
 
     }
 
-
-
     /**
      * Reset resetta,per l appunto, la pagina, cancellando i vari campi ogni volta che è stato eseguito un aggiorna
      */

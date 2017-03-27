@@ -3,7 +3,8 @@ package View;
 import javax.swing.*;
 
 /**
- * Created by Giuseppe on 26/03/2017.
+ * E una JDialog
+ * Frame per la scrittura e l invio di un messaggio
  */
 public class MessaggioView extends JDialog{
 
@@ -23,6 +24,7 @@ public class MessaggioView extends JDialog{
 
     }
 
+    //GETTER e SETTER
     public JPanel getIntermedio0() {
 
         return Intermedio0;
@@ -52,4 +54,8 @@ public class MessaggioView extends JDialog{
         text2.setText(testo);
     }
 
+    @Override
+    public String toString() {
+        return "MessaggioView{}";
+    }
 }
