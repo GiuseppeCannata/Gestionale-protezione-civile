@@ -78,22 +78,15 @@ public class RegistrazioneModel extends Model {
 
         Boolean controllo = false;
 
-        String sql ="select user from pass ";
+        String sql ="select user from pass where user='"+UsernameInserito+"'";
         ResultSet query = selectQuery(sql);
-        String user;
 
         try {
 
-            while (!controllo && query.next()) {
+            if(query.next())
+                controllo = true;
 
-                user = query.getString("user");
-                 //System.out.println(user);
 
-                if (user.equals(UsernameInserito)) {
-                    controllo = true;
-                }
-
-            }
         }catch(SQLException se){
             se.printStackTrace();
         }finally{
@@ -167,20 +160,16 @@ public class RegistrazioneModel extends Model {
        //System.out.println("\nB");
        boolean controllo = false;
 
-       ArrayList<Certificazione> listaCERTIFICAZIONI = sez_bRegistrazioneController.getCERTIFICAZIONI();
+       ArrayList<Certificazione> CERTIFICAZIONI = sez_bRegistrazioneController.getCERTIFICAZIONI();
 
-       int i = 0;
-
-       if(listaCERTIFICAZIONI.size() == 0 )
+       if(CERTIFICAZIONI.size() == 0 )
            controllo = true;
        else{
 
-           while (i < listaCERTIFICAZIONI.size()) {
+           for(Certificazione certificazione : CERTIFICAZIONI) {
 
-               if (listaCERTIFICAZIONI.get(i).InsertSQL()) ;
+               if (certificazione.InsertSQL()) ;
                controllo = true;
-              // System.out.println("tutto bene,per inserimento della b");
-               i++;
            }
 
        }
@@ -200,7 +189,6 @@ public class RegistrazioneModel extends Model {
      */
    private boolean insertCSQL(){
 
-       System.out.println("C");
        Boolean controllo = false;
 
        openConnection();

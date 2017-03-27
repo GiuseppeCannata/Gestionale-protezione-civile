@@ -137,6 +137,25 @@ public class Candidato extends Persona {
         return controllo;
     }
 
+    public boolean DeleteSQL(String Appoggio){
+
+        boolean controllo=false;
+
+        openConnection();
+
+
+        String sql = "delete from "+Appoggio+" where cf='"+getCodice_Fiscale()+"' ";
+
+        if (updateQuery(sql))
+            controllo = true;
+
+        closeConnection();
+
+        return controllo;
+
+    }
+
+
     /*GETTER*/
     public int getConf_Giunta() {
 

@@ -16,10 +16,12 @@ public class UtenteSinistraView extends JPanel{
     private JPanel Bottonbar;
     private JPanel Logopannel;
     private JButton homeButton;
+    private JButton disiscrivimiButton;
 
 
     public UtenteSinistraView() {
 
+        disiscrivimiButton.setVisible(false);
         setVisible(true);
 
     }
@@ -55,9 +57,20 @@ public class UtenteSinistraView extends JPanel{
 
     }
 
-    public void setEvolviButton(boolean visibilita) {
+    public JButton getDisiscrivimiButton() {
+
+        return disiscrivimiButton;
+
+    }
+
+    public void VisibilitaEvolvi(boolean visibilita) {
 
         evolviButton.setVisible(visibilita);
+    }
+
+    public void VisibilitaDisiscrivimi(boolean visibilita){
+
+        disiscrivimiButton.setVisible(visibilita);
     }
 
     @Override

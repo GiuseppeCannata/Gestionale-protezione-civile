@@ -51,6 +51,7 @@ public class GestioneModel extends Model{
 
                     Volontario VOLONTARIO = (Volontario) utente;
                     VOLONTARIO.popolaD();
+                    VOLONTARIO.popolastato();
 
                 }
 
@@ -152,7 +153,7 @@ public class GestioneModel extends Model{
 
             openConnection();
 
-            String sql = "select * from a,pass where "+appoggio+" and a.cf=pass.cf order by cognome,nome";
+            String sql = "select * from a,pass where a.cf=pass.cf "+appoggio+" order by cognome,nome";
 
             ResultSet query = selectQuery(sql);
 

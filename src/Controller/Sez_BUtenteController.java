@@ -70,16 +70,15 @@ public class Sez_BUtenteController {
                 if (e.getSource() == sez_Bview.getCertif_Box()) {
 
                     sez_Bview.Reset();
-                    int i = 0;
 
-                    while (i < CERTIFICAZIONI.size()) {
+                    for(Certificazione certificazione : CERTIFICAZIONI) {
 
-                        if (boxcertificazioni.getSelectedItem().equals(CERTIFICAZIONI.get(i).getTipo())
-                                && !CERTIFICAZIONI.get(i).getFlag().equals("elimina")) {
-                            boxlist.addItem(CERTIFICAZIONI.get(i).getNome());
+                        if (boxcertificazioni.getSelectedItem().equals(certificazione.getTipo())
+                                && !certificazione.getFlag().equals("elimina")) {
+                            boxlist.addItem(certificazione.getNome());
                         }
 
-                        i++;
+
                     }
                 }
 
@@ -93,19 +92,17 @@ public class Sez_BUtenteController {
 
                 if (e.getSource() == sez_Bview.getBoxlist() && sez_Bview.getBoxlist().getSelectedItem() != null) {
 
-                    int i = 0;
 
-                    while (i < CERTIFICAZIONI.size()) {
+                    for(Certificazione certificazione : CERTIFICAZIONI) {
 
-                        if (boxlist.getSelectedItem().equals(CERTIFICAZIONI.get(i).getNome())) {
+                        if (boxlist.getSelectedItem().equals(certificazione.getNome())) {
 
-                            sez_Bview.setComboboxDataAcquisizione(CERTIFICAZIONI.get(i).getDataacquisizione());
-                            sez_Bview.setComboboxDataScadenza(CERTIFICAZIONI.get(i).getDatascadenza());
+                            sez_Bview.setComboboxDataAcquisizione(certificazione.getDataacquisizione());
+                            sez_Bview.setComboboxDataScadenza(certificazione.getDatascadenza());
 
-                            sez_Bview.setnDoc_Text(CERTIFICAZIONI.get(i).getN_documento());
-                            sez_Bview.setEnte_r_Text(CERTIFICAZIONI.get(i).getEntedirilascio());
+                            sez_Bview.setnDoc_Text(certificazione.getN_documento());
+                            sez_Bview.setEnte_r_Text(certificazione.getEntedirilascio());
                         }
-                        i++;
                     }
                 }
             }
@@ -119,8 +116,10 @@ public class Sez_BUtenteController {
             public void actionPerformed(ActionEvent e) {
 
                 if (Ricerca()) {
+
                     ModificaCertificazione();
                     sez_Bview.HardReset();
+
                 }
 
 

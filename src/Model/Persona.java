@@ -327,8 +327,6 @@ public abstract class Persona extends Model{
 
     public String getData_di_Nascita() {
 
-        System.out.println(Data_di_Nascita);
-
         return Data_di_Nascita;
 
     }

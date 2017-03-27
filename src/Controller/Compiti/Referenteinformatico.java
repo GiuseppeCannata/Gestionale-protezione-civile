@@ -42,7 +42,7 @@ public class Referenteinformatico {
 
         Box = view.getBox1();
 
-        appoggio = "vol_o_cand=1 or vol_o_cand=0";
+        appoggio = " ";
 
         model = new GestioneModel(appoggio);
 

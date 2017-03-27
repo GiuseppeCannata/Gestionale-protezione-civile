@@ -75,7 +75,7 @@ public class VolontarioController{
         Dview = new VolontarioDView();
         Sview = new UtenteSinistraView();
 
-        Sview.setEvolviButton(false);
+        Sview.VisibilitaEvolvi(false);
 
         Dview.setNOMEVOLabel(Utente.getNome());
         Dview.setCOGNOMEVOLabel(Utente.getCognome());

@@ -15,6 +15,8 @@ public class ListaggiView extends JPanel{
     private JButton resettaPasswordButton;
     private JComboBox Box1;
     private JButton inviagliUnMessaggioButton;
+    private JTextField text;
+    private JLabel statoLabel;
     private JList list;
     private JButton assegnaCompitoButton;
     private JComboBox BoxAcomparsa;
@@ -27,6 +29,8 @@ public class ListaggiView extends JPanel{
         resettaPasswordButton.setVisible(false);
         visionaSchedaButton.setVisible(false);
         ritornaButton.setVisible(false);
+        text.setVisible(false);
+        statoLabel.setVisible(false);
         setVisible(true);
 
     }
@@ -75,17 +79,25 @@ public class ListaggiView extends JPanel{
 
     }
 
+    public JComboBox getBox1() {
+
+        return Box1;
+
+    }
+
     public void setLabel(String Nome){
 
         Label.setText(Nome);
 
     }
 
-    public JComboBox getBox1() {
+    public void setText(String testo){
 
-        return Box1;
+        text.setText(testo);
 
     }
+
+
 
     public void VisibilitaAccettaButton(boolean visibilita){
 
@@ -114,6 +126,17 @@ public class ListaggiView extends JPanel{
     public void  VisibilitaInviomessaggio(boolean visibilita){
 
         inviagliUnMessaggioButton.setVisible(visibilita);
+    }
+
+    public void  VisibilitaText(boolean visibilita){
+
+        text.setVisible(visibilita);
+
+    }
+
+    public void VisibilitaStatoLabel(boolean visibilita){
+
+        statoLabel.setVisible(visibilita);
     }
 
     @Override

@@ -143,7 +143,7 @@ public class Volontario extends Persona {
     /**
      * popola lo stato del volontario
      */
-    private void popolastato(){
+    protected void popolastato(){
 
         openConnection();
 

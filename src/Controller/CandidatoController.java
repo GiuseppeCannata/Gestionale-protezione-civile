@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Candidato;
+import Model.Certificazione;
 import View.BasicFrameView;
 import View.CandidatoDestraView;
 import View.UtenteSinistraView;
@@ -51,6 +52,7 @@ public class CandidatoController {
 
         Dview = new CandidatoDestraView();
         Sview = new UtenteSinistraView();
+        Sview.VisibilitaDisiscrivimi(true);
 
         if(Utente.getConf_Giunta() == 1 && Utente.getConf_Archivista() == 1)
             Dview.MessaggioSchermo("Puoi finalmente evolvere in Volontario.\nFai click su evolvi per dare la tua conferma!");
@@ -157,6 +159,31 @@ public class CandidatoController {
 
                   DatiPersonali = 0;
                   basicframe.setdestra(Dview.getIntermedio0());
+
+              }
+
+          });
+
+          JButton Disiscrivimi = Sview.getDisiscrivimiButton();
+          Disiscrivimi.addActionListener(new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent e) {
+
+                  if(basicframe.OpotionalMessage("Sei sicuro di volerti disiscrivere? ") == 0){
+
+                      String Appoggio;
+
+                      Appoggio = "a";
+                      Utente.DeleteSQL(Appoggio);
+                      for(Certificazione certificazione : Utente.getCERTIFICAZIONI())
+                          certificazione.DeleteSQL();
+                      Appoggio = "c";
+                      Utente.DeleteSQL(Appoggio);
+                      Appoggio = "pass";
+                      Utente.DeleteSQL(Appoggio);
+
+
+                  }
 
               }
 

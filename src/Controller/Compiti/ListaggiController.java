@@ -2,7 +2,6 @@ package Controller.Compiti;
 
 
 import Controller.AnagraficaController;
-import Controller.Compiti.ArchivistaHome;
 import Controller.MessaggioController;
 import Model.GestioneModel;
 import Model.Persona;
@@ -14,6 +13,8 @@ import View.BasicFrameView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 
@@ -37,12 +38,10 @@ public class ListaggiController {
         basicframe = frame;
         utilizzatore = Utilizzatore;
         UtenteLoggato = Utenteloggato;
-
         view = new ListaggiView();
+        Box = view.getBox1();
 
         SettaggioView();
-
-       // view.setLabel("Lista "+utilizzatore);
 
         gestione = new GestioneModel(appoggio);
         UTENTI = gestione.Schede(Utilizzatore);
@@ -79,9 +78,12 @@ public class ListaggiController {
                 view.VisibilitaVisionaSchedaButton(true);
                // view.VisibilitaInviomessaggio(true);
                 view.setLabel("Lista volontari");
+                view.VisibilitaStatoLabel(true);
+                view.VisibilitaText(true);
                 appoggio = "vol_o_cand=1";
                 VisionaSchedaListener();
                 RitornaAiCompitiDaArchivistaListener();
+                Boxlistener();
                 break;
 
             }
@@ -93,10 +95,11 @@ public class ListaggiController {
 
     public void stampalista() {
 
-        Box = view.getBox1();
 
             for (Persona candidato : UTENTI)
                 Box.addItem(candidato.getCognome() + "    -    " + candidato.getNome());
+
+
 
     }
 
@@ -120,7 +123,8 @@ public class ListaggiController {
 
     private void VisionaSchedaListener() {
 
-
+        String Item = (String) Box.getSelectedItem();
+        if(Item != null) {
             JButton visionaSchedaButton = view.getVisionaSchedaButton();
             visionaSchedaButton.addActionListener(new ActionListener() {
                 @Override
@@ -130,12 +134,13 @@ public class ListaggiController {
 
                 }
             });
-
+        }
     }
 
     private void AccettaListener(){
 
-
+        String Item = (String) Box.getSelectedItem();
+        if(Item != null) {
             JButton AccettaButton = view.getAccettaButton();
             AccettaButton.addActionListener(new ActionListener() {
                 @Override
@@ -145,13 +150,15 @@ public class ListaggiController {
 
                 }
             });
+        }
 
 
     }
 
     private void InvioMessaggioListener(){
 
-
+        String Item = (String) Box.getSelectedItem();
+        if(Item != null) {
             JButton InvioMessaggio = view.getInviagliUnMessaggioButton();
             InvioMessaggio.addActionListener(new ActionListener() {
                 @Override
@@ -165,7 +172,7 @@ public class ListaggiController {
 
                 }
             });
-
+        }
 
     }
 
@@ -179,6 +186,29 @@ public class ListaggiController {
             controller = new AnagraficaController(basicframe, UTENTI.get(Indice), view, utilizzatore);
 
     }
+
+    private void Boxlistener(){
+
+
+        Box.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+
+                if (e.getSource() == view.getBox1()) {
+
+                  int Indice =  Box.getSelectedIndex();
+
+                   Volontario volontario = (Volontario) UTENTI.get(Indice);
+
+                   view.setText(volontario.getStato());
+
+
+                }
+
+            }
+        });
+    }
+
 
     private void AccettaArchivistaAction() {
 
