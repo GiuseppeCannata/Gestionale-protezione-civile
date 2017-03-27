@@ -261,7 +261,7 @@ public class VolontarioController{
             public void actionPerformed(ActionEvent e) {
 
                 MCHome controller;
-                controller = new MCHome(basicframe);
+                controller = new MCHome(basicframe, Utente);
 
             }
 

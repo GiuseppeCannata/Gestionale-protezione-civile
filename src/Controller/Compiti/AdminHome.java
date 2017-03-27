@@ -1,6 +1,5 @@
 package Controller.Compiti;
 
-import Model.GestioneModel;
 import Model.Volontario;
 import View.BasicFrameView;
 
@@ -11,12 +10,9 @@ import java.awt.event.ActionListener;
 
 public class AdminHome extends MCHome{
 
-    private Volontario utenteloggato;
-
     public AdminHome(BasicFrameView frame, Volontario UtenteLoggato) {
 
-        super(frame);
-        utenteloggato = UtenteLoggato;
+        super(frame, UtenteLoggato);
         getMcHomeview().VisibilitaResetButton(true);
 
         getMcHomeview().VisibilitaResetCompitiButton(true);
@@ -33,19 +29,10 @@ public class AdminHome extends MCHome{
             @Override
             public void actionPerformed(ActionEvent e) {
 
+            Admin controller;
+            controller = new Admin();
+            controller.ResetMC(getBasicframe());
 
-              String cf = getBasicframe().InputMessage("Inserire Codice fiscale del nuovo Master: ");
-              if(cf != null && cf.length() == 16 ) {
-
-                  GestioneModel model = new GestioneModel();
-                  String[] appoggio = new String[4];
-                  appoggio[0] = "flagvolontario";
-                  appoggio[1] = "ruolo";
-                  appoggio[2] = "Cordinatore";
-                  appoggio[3] = cf;
-                  model.UpdateSQL(appoggio);
-
-              }
             }
         });
 
@@ -58,7 +45,7 @@ public class AdminHome extends MCHome{
                 if(getBasicframe().OpotionalMessage("Resettare tutti i compiti ?")==0) {
                     Admin controller;
                     controller = new Admin("compiti");
-                    controller.ResetAction(utenteloggato);
+                    controller.ResetAction(getUtenteloggato());
                 }
 
             }
@@ -73,7 +60,7 @@ public class AdminHome extends MCHome{
                 if(getBasicframe().OpotionalMessage("Resettare tutti i ruoli ?")==0) {
                     Admin controller;
                     controller = new Admin("ruoli");
-                    controller.ResetAction(utenteloggato);
+                    controller.ResetAction(getUtenteloggato());
                 }
 
             }

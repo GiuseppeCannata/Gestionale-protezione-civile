@@ -25,8 +25,15 @@ public class MC {
     private JComboBox Box2;
     private MCHomeView homeView;
     private String utilizzatore;
+    private Volontario utenteloggato;
     private ArrayList<Persona> UTENTI;
 
+
+    public MC(){
+
+        return;
+
+    }
 
     public MC(String Utilizzatore) {
 
@@ -40,11 +47,12 @@ public class MC {
         UTENTI = model.Ruoli();
     }
 
-    public MC(BasicFrameView frame, String Utilizzatore, MCHomeView HomeView) {
+    public MC(BasicFrameView frame, String Utilizzatore, MCHomeView HomeView, Volontario UtenteLoggato) {
 
         basicframe = frame;
         view = new MCView();
         homeView = HomeView;
+        utenteloggato = UtenteLoggato;
         appoggio = "vol_o_cand = 1";
 
         utilizzatore = Utilizzatore;
@@ -90,6 +98,7 @@ public class MC {
                 Box2.removeAllItems();
                 Box2.addItem("Volontario_semplice");
                 Box2.addItem("Direttivo");
+                if(utenteloggato.getRuolo().equals("Cordinatore"))
                 Box2.addItem("Vicecordinatore");
 
                 UTENTI = model.Ruoli();
@@ -125,7 +134,7 @@ public class MC {
 
                         if (utente.UpdateSQL(app)) {
                             basicframe.Message("Assegnato!");
-                             new MC(basicframe, "compiti", homeView);
+                             new MC(basicframe, "compiti", homeView,utenteloggato);
                         }
                     }
 
@@ -150,7 +159,7 @@ public class MC {
 
                         if (utente.UpdateSQL(app)) {
                             basicframe.Message("Eliminato!");
-                            new MC(basicframe, "compiti", homeView);
+                            new MC(basicframe, "compiti", homeView, utenteloggato);
                         }
                     }
 
@@ -175,7 +184,7 @@ public class MC {
 
                         if (utente.UpdateSQL(app)) {
                             basicframe.Message("Assegnato!");
-                            new MC(basicframe, "ruoli", homeView);
+                            new MC(basicframe, "ruoli", homeView, utenteloggato);
                         }
                     }
 
@@ -200,7 +209,7 @@ public class MC {
 
                         if (utente.UpdateSQL(app)) {
                             basicframe.Message("Eliminato!");
-                            new MC(basicframe, "ruoli", homeView);
+                            new MC(basicframe, "ruoli", homeView, utenteloggato);
                         }
                     }
 

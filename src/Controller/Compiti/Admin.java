@@ -1,30 +1,27 @@
 package Controller.Compiti;
 
 
+import Model.GestioneModel;
 import Model.Persona;
 import Model.Volontario;
 import View.BasicFrameView;
-import View.MCHomeView;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Admin extends MC {
+
+
+    public Admin() {
+
+        super();
+
+    }
 
     public Admin(String Utilizzatore) {
 
         super(Utilizzatore);
 
     }
-
-    public Admin(BasicFrameView frame, String utilizzatore, MCHomeView view) {
-
-        super(frame, utilizzatore, view);
-
-    }
-
 
     public void ResetAction(Volontario UtenteLoggato) {
 
@@ -43,5 +40,21 @@ public class Admin extends MC {
                     volontario.ResetRuoli();
             }
         }
-     }
+    }
+
+    public void ResetMC(BasicFrameView frame){
+
+        String cf = frame.InputMessage("Inserire Codice fiscale del nuovo Master: ");
+        if(cf != null && cf.length() == 16 ) {
+
+            GestioneModel model = new GestioneModel();
+            String[] appoggio = new String[4];
+            appoggio[0] = "flagvolontario";
+            appoggio[1] = "ruolo";
+            appoggio[2] = "Cordinatore";
+            appoggio[3] = cf;
+            model.UpdateSQL(appoggio);
+
+        }
+    }
 }

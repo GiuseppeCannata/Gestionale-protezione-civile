@@ -1,6 +1,7 @@
 package Controller.Compiti;
 
 
+import Model.Volontario;
 import View.BasicFrameView;
 import View.MCHomeView;
 
@@ -12,11 +13,13 @@ public class MCHome {
 
     private BasicFrameView basicframe;
     private MCHomeView mcHomeview;
+    private Volontario utenteloggato;
 
-    public MCHome(BasicFrameView frame) {
+    public MCHome(BasicFrameView frame, Volontario UtenteLoggato) {
 
         basicframe = frame;
         mcHomeview = new MCHomeView();
+        utenteloggato = UtenteLoggato;
         basicframe.setdestra(mcHomeview.getIntermedio0());
 
         Listener();
@@ -35,7 +38,7 @@ public class MCHome {
             public void actionPerformed(ActionEvent e) {
 
                 MC controller;
-                controller = new MC(basicframe, "compiti", mcHomeview);
+                controller = new MC(basicframe, "compiti", mcHomeview, utenteloggato);
 
             }
         });
@@ -48,7 +51,7 @@ public class MCHome {
             public void actionPerformed(ActionEvent e) {
 
                 MC controller;
-                controller = new MC(basicframe, "ruoli", mcHomeview);
+                controller = new MC(basicframe, "ruoli", mcHomeview, utenteloggato);
 
             }
         });
@@ -62,5 +65,9 @@ public class MCHome {
 
     public BasicFrameView getBasicframe() {
         return basicframe;
+    }
+
+    public Volontario getUtenteloggato() {
+        return utenteloggato;
     }
 }
