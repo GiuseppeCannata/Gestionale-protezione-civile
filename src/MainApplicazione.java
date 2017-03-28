@@ -5,7 +5,9 @@ import javax.swing.*;
 
 
 /**
- * Applicazione per la gestione dei dati personali dei volontari della Protezione Civile di Falconara Marittima
+ * ProtezioneCivileGestionale
+ * Applicazione per la gestione dei dati personali dei volontari e candidati della Protezione Civile di
+ * Falconara Marittima
  */
 
 public class MainApplicazione {

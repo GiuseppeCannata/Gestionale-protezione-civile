@@ -37,7 +37,7 @@ public class VolontarioDView extends JPanel{
     }
 
 
-    //GETTER e Setter
+    //GETTER e SETTER
     public JPanel getIntermedio0() {
 
         return Intermedio0;
@@ -119,6 +119,7 @@ public class VolontarioDView extends JPanel{
 
     }
 
+    /*metodi per la visibilita dei vari elementi della view*/
     public void VisibilitaArchivistaButton(boolean visibilita){
 
         archivistaButton.setVisible(visibilita);

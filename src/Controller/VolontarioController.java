@@ -25,7 +25,9 @@ public class VolontarioController{
     private ArrayList<String> BROADCAST;
     private ArrayList<String> MESSAGGI;
 
+    /*COSTRUTTORI*/
 
+    /*costruttore vuoto*/
     public VolontarioController() {
 
         return;
@@ -46,6 +48,7 @@ public class VolontarioController{
 
     /**
      * Metodo che controlla se l utente è la prima volta che effettua l accesso come volontario
+     *
      * @return true --> primo acccesso
      * @return false --> non primo accesso
      */
@@ -128,23 +131,31 @@ public class VolontarioController{
     private void Selezionecompiti(){
 
         if(Utente.getArchivista().equals("si")) {
-            System.out.println("io");
+
             Dview.VisibilitaArchivistaButton(true);
             ArchivistaListner();
 
         }
+
         if(Utente.getAdd_giunta().equals("si")) {
+
             Dview.VisibilitaGiuntaButton(true);
             Add_GiuntaListener();
-        }
-        if(Utente.getReferenteinformatico().equals("si")) {
-            Dview.VisibilitaReferenteInformaticoButton(true);
-            ReferenteInformaticoListner();
+
         }
 
-       if(Utente.getRuolo().equals("Cordinatore") || Utente.getRuolo().equals("Vicecordinatore")) {
+        if(Utente.getReferenteinformatico().equals("si")) {
+
+            Dview.VisibilitaReferenteInformaticoButton(true);
+            ReferenteInformaticoListner();
+
+        }
+
+        if(Utente.getRuolo().equals("Cordinatore") || Utente.getRuolo().equals("Vicecordinatore")) {
+
             Dview.VisibilitaMasterChiefButton(true);
             MasterChiefListner();
+
         }
 
         if(Utente.getRuolo().equals("Admin") ){
@@ -308,6 +319,22 @@ public class VolontarioController{
 
     @Override
     public String toString() {
+
         return "VolontarioController{}";
+
     }
+
+    //se hanno lo stesso pannello di destra e di sinistra allora "controllano" la medesima GUI
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        VolontarioController that = (VolontarioController) o;
+
+        if (Dview != null ? !Dview.equals(that.Dview) : that.Dview != null) return false;
+        return Sview != null ? Sview.equals(that.Sview) : that.Sview == null;
+    }
+
 }

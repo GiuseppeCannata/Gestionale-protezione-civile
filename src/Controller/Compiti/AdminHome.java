@@ -7,8 +7,13 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Controller per la home dell Admin
+ */
 
 public class AdminHome extends MCHome{
+
+    /*Costruttore*/
 
     public AdminHome(BasicFrameView frame, Volontario UtenteLoggato) {
 
@@ -21,6 +26,10 @@ public class AdminHome extends MCHome{
         AdminHomeListener();
     }
 
+    /**
+     * Ascolto delle azioni dell utente
+     * -->ResetMC, ResetCompiti,ResetRuoli
+     */
     private void AdminHomeListener(){
 
         JButton ResetMC = getMcHomeview().getResetMCButton();
@@ -66,4 +75,14 @@ public class AdminHome extends MCHome{
             }
         });
     }
+
+    @Override
+    public String toString() {
+
+        return "AdminHome{}";
+
+    }
+
+    //equals ereditato da MC
+
 }

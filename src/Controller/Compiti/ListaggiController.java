@@ -9,7 +9,6 @@ import Model.Volontario;
 import View.ListaggiView;
 import View.BasicFrameView;
 
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -123,8 +122,8 @@ public class ListaggiController {
 
     private void VisionaSchedaListener() {
 
-        String Item = (String) Box.getSelectedItem();
-        if(Item != null) {
+        if(Box.getSelectedItem() != null) {
+
             JButton visionaSchedaButton = view.getVisionaSchedaButton();
             visionaSchedaButton.addActionListener(new ActionListener() {
                 @Override
@@ -135,12 +134,13 @@ public class ListaggiController {
                 }
             });
         }
+
     }
 
     private void AccettaListener(){
 
-        String Item = (String) Box.getSelectedItem();
-        if(Item != null) {
+        if(Box.getSelectedItem() != null) {
+
             JButton AccettaButton = view.getAccettaButton();
             AccettaButton.addActionListener(new ActionListener() {
                 @Override
@@ -152,13 +152,12 @@ public class ListaggiController {
             });
         }
 
-
     }
 
     private void InvioMessaggioListener(){
 
-        String Item = (String) Box.getSelectedItem();
-        if(Item != null) {
+        if(Box.getSelectedItem() != null) {
+
             JButton InvioMessaggio = view.getInviagliUnMessaggioButton();
             InvioMessaggio.addActionListener(new ActionListener() {
                 @Override
@@ -173,6 +172,7 @@ public class ListaggiController {
                 }
             });
         }
+
 
     }
 
@@ -234,5 +234,25 @@ public class ListaggiController {
 
 
     }
+
+    @Override
+    public String toString() {
+
+        return "ListaggiController{}";
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ListaggiController that = (ListaggiController) o;
+
+        return view != null ? view.equals(that.view) : that.view == null;
+
+    }
+
 }
 

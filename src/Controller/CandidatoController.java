@@ -28,6 +28,7 @@ public class CandidatoController {
 
     /*COSTRUTTORI*/
 
+    /*costruttore vuoto*/
     public CandidatoController() {
 
         return;
@@ -54,9 +55,11 @@ public class CandidatoController {
         Sview = new UtenteSinistraView();
         Sview.VisibilitaDisiscrivimi(true);
 
+        //controllo sul messaggio a schermo
         if(Utente.getConf_Giunta() == 1 && Utente.getConf_Archivista() == 1)
             Dview.MessaggioSchermo("Puoi finalmente evolvere in Volontario.\nFai click su evolvi per dare la tua conferma!");
 
+        //controllo sul set della checbox
         if (Utente.getConf_Archivista() == 1)
             Dview.setConf_Archivista(true);
 
@@ -76,7 +79,7 @@ public class CandidatoController {
         basicframe.setdestra(Dview.getIntermedio0());
         basicframe.setsinistra(Sview.getIntermedio0());
 
-        //selezione messaggi
+        //selezione messaggi(privati)
         MESSAGGI = Utente.getMESSAGGI();
 
         if(MESSAGGI.size() !=0){
@@ -94,7 +97,7 @@ public class CandidatoController {
                 if(Utente.UpdateSQL(appoggio))
                     System.out.print("ok");
             }
-
+            //mnotifica all utente la presenza di messaggi privati
             basicframe.Message("Hai "+MESSAGGI.size()+" messaggi! Vedili nella sezione messaggi");
         }
 
@@ -196,6 +199,7 @@ public class CandidatoController {
      * 1)verifica se Il candidato puo diventare un volontario
      * 2)se puo, chiede la conferma all utente
      * 3)effettua il logout in caso di risposta affermativa del candidato
+     * 4)se l utente non puo ancora evolvere notifica di questo
      */
     private void EvolviAction(){
 
@@ -246,4 +250,17 @@ public class CandidatoController {
         return "CandidatoController";
 
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CandidatoController that = (CandidatoController) o;
+
+        if (Dview != null ? !Dview.equals(that.Dview) : that.Dview != null) return false;
+        return Sview != null ? Sview.equals(that.Sview) : that.Sview == null;
+    }
+
 }

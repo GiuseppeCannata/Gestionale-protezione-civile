@@ -6,8 +6,7 @@ import java.sql.*;
 
 /**
  * Classe abstract padre di tutte le classi del model
- * <p>
- * contiene i metodi basi per usare una tabella del DB
+ * contiene i metodi base per usare una tabella del DB
  */
 public abstract class Model {
 
@@ -15,8 +14,6 @@ public abstract class Model {
     private Statement stmt;
     private ResultSet rs;
     private DBConnessione db;
-
-
 
 
     /**
@@ -67,10 +64,10 @@ public abstract class Model {
     }
 
     /**
-     * updateQuery  esegue una query sql per l'update dei dati (nel dattaglio: inserimento, modifica e eliminazione)
+     * updateQuery  esegue una query sql per l'update dei dati (inserimento, modifica e eliminazione)
      *
      * @param sql stringa sql
-     * @return true se andata a buon fine altrim
+     * @return true --> avvenuta con successo
      */
     protected boolean updateQuery(String sql) {
 

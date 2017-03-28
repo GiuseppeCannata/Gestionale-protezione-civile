@@ -28,8 +28,9 @@ public class Add_Giunta {
     private ArrayList<Persona> UTENTI;
 
 
-    /*costruttore*/
+    /*COSTRUTTORI*/
 
+    /*costruttore vouto*/
     public Add_Giunta() {
 
         return;
@@ -62,7 +63,7 @@ public class Add_Giunta {
     }
 
     /**
-     * Stampa nel box della view tutti i candidati che non hanno ancora avuto la conferma da parte della giunta
+     * Stampa nel box della view i candidati
      */
     public void stampalista () {
 
@@ -149,4 +150,17 @@ public class Add_Giunta {
         return "Add_Giunta{}";
 
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Add_Giunta that = (Add_Giunta) o;
+
+        return view != null ? view.equals(that.view) : that.view == null;
+
+    }
+
 }

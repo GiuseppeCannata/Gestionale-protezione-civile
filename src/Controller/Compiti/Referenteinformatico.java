@@ -24,7 +24,9 @@ public class Referenteinformatico {
     private ArrayList<Persona> UTENTI;
 
 
-    /*costruttore*/
+    /*COSTRUTTORI*/
+
+    /*costruttore vuoto*/
     public Referenteinformatico() {
 
         return;
@@ -118,6 +120,20 @@ public class Referenteinformatico {
 
     @Override
     public String toString() {
+
         return "Referenteinformatico{}";
+
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Referenteinformatico that = (Referenteinformatico) o;
+
+        return view != null ? view.equals(that.view) : that.view == null;
+    }
+
 }

@@ -21,7 +21,7 @@ public class ListaggiView extends JPanel{
     private JButton assegnaCompitoButton;
     private JComboBox BoxAcomparsa;
 
-
+    /*costruttore*/
     public ListaggiView(){
 
         inviagliUnMessaggioButton.setVisible(false);
@@ -98,7 +98,7 @@ public class ListaggiView extends JPanel{
     }
 
 
-
+    /*metodi per il set delle visibilita dei vai elementi della view*/
     public void VisibilitaAccettaButton(boolean visibilita){
 
         accettaButton.setVisible(visibilita);

@@ -24,6 +24,7 @@ public class AnagraficaView extends JPanel{
     private JButton listaButton;
 
 
+    /*COSTRUTTORE*/
     public AnagraficaView() {
 
        setVisible(true);
@@ -128,8 +129,6 @@ public class AnagraficaView extends JPanel{
 
         listaButton.setVisible(visibilita);
     }
-
-
 
     @Override
     public String toString() {

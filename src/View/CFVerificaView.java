@@ -14,6 +14,7 @@ public class CFVerificaView extends JPanel {
     private JButton okButton;
     private JTextField textField1;
 
+    /*COSTRUTTORE*/
     public CFVerificaView() {
 
         setVisible(true);

@@ -7,22 +7,20 @@ package Controller;
 public class Pagine_Manager {
 
     private static int Pagina_Corrente;
-    private static int Fine_Pagina;
 
 
+    /**
+     * Setta inizialmente Pagina Corrente a 1
+     */
     public static void setPagina_Corrente() {
 
         Pagina_Corrente = 1;
-        Fine_Pagina = 1;
 
     }
 
-    public static int getPagina_Corrente() {
-
-        return Pagina_Corrente;
-
-    }
-
+    /**
+     * Incremento Pagina Corrente
+     */
 
     public static void addPagina_Corrente() {
 
@@ -30,10 +28,20 @@ public class Pagine_Manager {
 
     }
 
+    /**
+     * Decremento Pagina Corrente
+     */
 
     public static void subctractPagina_Corrente() {
 
         Pagina_Corrente -= 1;
+
+    }
+
+    //GETTER
+    public static int getPagina_Corrente() {
+
+        return Pagina_Corrente;
 
     }
 }

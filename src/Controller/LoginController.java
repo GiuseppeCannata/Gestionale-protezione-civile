@@ -45,7 +45,8 @@ public class LoginController {
      * Metodo di servizio.
      * Gestisce gli eventi scatenati dall utente interagendo con la LoginView
      *
-     *  Ascolto azioni dell' utente --> Registrazione,Accesso
+     *  Ascolto azioni dell' utente
+     *  --> Registrazione,Accesso
      */
     private void loginListener(){
 
@@ -88,6 +89,7 @@ public class LoginController {
 
         try{
 
+            //non è inserita nessun user e pass
             if(userInserito.length() == 0 || passInserita.length() == 0)
                 throw new Exception("Completare tutti i campi");
 
@@ -99,11 +101,14 @@ public class LoginController {
 
             if(RichiestaDiAccesso.getVolocand().equals("0")) {
 
+                //chi sta acedendo è uncanddiato
                 CandidatoController UController;
                 Candidato utente = new Candidato(userInserito);
                 UController = new CandidatoController(basicframe, utente);
 
             }else{
+
+                //chi sta accedendo è un volontario
                 VolontarioController UController;
                 Volontario utente = new Volontario(userInserito);
                 UController = new VolontarioController(basicframe, utente);
@@ -120,6 +125,17 @@ public class LoginController {
     public String toString() {
 
         return "Sono LoginController";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LoginController that = (LoginController) o;
+
+        return loginview != null ? loginview.equals(that.loginview) : that.loginview == null;
     }
 
 }

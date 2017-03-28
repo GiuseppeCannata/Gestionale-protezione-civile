@@ -15,6 +15,7 @@ public class CFVerificaModel extends Model {
 
     /*COSTRUTTORI*/
 
+    /*costruttore vuoto*/
     public CFVerificaModel() {
 
         return;
@@ -35,7 +36,6 @@ public class CFVerificaModel extends Model {
      * @return false --> il codice fiscale non è nel DB(l utente ha bisogno di registrarsi)
      *
      */
-
     @Override
     public boolean SearchSQL() {
 
@@ -85,5 +85,18 @@ public class CFVerificaModel extends Model {
 
         return "CFVerificaModel";
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CFVerificaModel that = (CFVerificaModel) o;
+
+        return CodiceFiscaleInserito != null ? CodiceFiscaleInserito.equals(that.CodiceFiscaleInserito) : that.CodiceFiscaleInserito == null;
+    }
+
+
 }
 

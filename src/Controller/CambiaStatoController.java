@@ -10,7 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-
+/**
+ * Controller per la View del cambia stato
+ */
 public class CambiaStatoController {
 
     private BasicFrameView basicframe;
@@ -54,7 +56,8 @@ public class CambiaStatoController {
     /**
      * Metodo di servizio
      * Metodo che richiama l update dell utente loggato affinche il suo stato possa essere modificato
-     * Seil tuo avviene correttamente informa l utente di cio
+     * Se il cambiamento avviene correttamente informa l utente di cio
+     *
      * Richiama --> MessaggioDiBroadcast
      */
     private void CambiaStatoAction(){
@@ -77,6 +80,7 @@ public class CambiaStatoController {
     /**
      * Se l utente cambia lo stato, questa informazione viene resa pubblica ai volontari attraverso un messaggio di broadcast.
      * Per fare questo utilizziamo questo metodo
+     *
      * @return true --> messaggio salvato
      * @return false --> messaggio non salvatio
      */
@@ -106,7 +110,21 @@ public class CambiaStatoController {
 
     @Override
     public String toString() {
+
         return "CambiaStatoController{}";
+
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CambiaStatoController that = (CambiaStatoController) o;
+
+        return Dview != null ? Dview.equals(that.Dview) : that.Dview == null;
+    }
+
 }
 

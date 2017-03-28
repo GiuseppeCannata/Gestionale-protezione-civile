@@ -19,13 +19,12 @@ public class CandidatoDestraView extends JPanel {
     private JScrollPane ScrollPaneMessaggi;
 
 
+    /*COSTRUTORE*/
     public CandidatoDestraView() {
 
         checkBox1.setEnabled(false);
         checkBox2.setEnabled(false);
         setVisible(true);
-
-
     }
 
     //GETTER e SETTER

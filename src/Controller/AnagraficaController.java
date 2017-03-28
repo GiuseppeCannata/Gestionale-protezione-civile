@@ -21,27 +21,23 @@ public class AnagraficaController {
     private Persona Utente;
     private CandidatoDestraView cDview;
     private CandidatoController cController;
-
     private VolontarioDView vDview;
     private VolontarioController vController;
-
     private Sez_AView sez_Aview;
     private Sez_BView sez_Bview;
-    private Sez_BRegistrazioneController sez_bRegistrazioneController;
+    private Sez_BUtenteController sez_bRegistrazioneController;
     private Sez_BUtenteController sez_bUtenteController;
     private Sez_CView sez_Cview;
     private Sez_DView sez_Dview;
-
     private JButton Salvabutton;
     private int Modifica;
-
     private String utilizzatore;
     private ListaggiView listacandidatiview;
 
 
     /*COSTRUTTORI*/
 
-    //ARCHIVISTA
+    //ARCHIVISTA,ADD_GIUNTA
     public AnagraficaController(BasicFrameView frame, Persona utente, ListaggiView view, String Utilizzatore ){
 
         basicframe = frame;
@@ -108,17 +104,14 @@ public class AnagraficaController {
         loginview = view;
         codicefiscale = CodiceFiscale;
 
-        Utente = null;
-        cDview = null;
         Modifica = 0;
-        cController = null;
         utilizzatore = "registrazione";
 
         Salvabutton = Anagraficaview.getSalvaButton();
 
         sez_Aview = new Sez_AView();
         sez_Bview = new Sez_BView();
-        sez_bRegistrazioneController = new Sez_BRegistrazioneController(basicframe, sez_Bview, codicefiscale);
+        sez_bRegistrazioneController = new Sez_BUtenteController(basicframe, sez_Bview, codicefiscale);
         sez_Cview = new Sez_CView();
 
         Anagraficaview.VisibilitaPaginaLoginButton(true);
@@ -182,7 +175,6 @@ public class AnagraficaController {
 
         basicframe = frame;
         Anagraficaview = new AnagraficaView();
-        loginview = null;
         Utente = VUtente;
 
         codicefiscale = Utente.getCodice_Fiscale() ;
@@ -205,7 +197,6 @@ public class AnagraficaController {
         Anagraficaview.VisibilitaModificaButton(true);
 
         Anagraficaview.VisibilitaListaButton(false);
-        System.out.println("ok");
         sceltapannelli();
 
 
@@ -242,6 +233,11 @@ public class AnagraficaController {
 
     }
 
+    /**
+     * Listener per il primo accesso
+     * -->Salva
+     */
+
     private void primoaccessoListner() {
 
         JButton Salva = sez_Dview.getSalvaButton();
@@ -259,13 +255,12 @@ public class AnagraficaController {
                     basicframe.ErrorMessage("Completare i campi obbligatori!");
             }
         });
-
-
     }
 
     /**
-     * Ascolto operazioni dell'utente   --> avanti, indietro
-     * Listener generale alla base della AnagraficaView
+     * Ascolto operazioni dell'utente
+     * --> avanti, indietro
+     *
      */
     private void Listener() {
 
@@ -359,7 +354,7 @@ public class AnagraficaController {
     }
 
     /**
-     * Listener utilizzato esclusivamete dal Candidato
+     * Listener utilizzato esclusivamete dalL utente(sia canddiato sia volontario)
      * --> Modifica, Home, salva
      */
     private void UtenteListner() {
@@ -371,24 +366,7 @@ public class AnagraficaController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Modifica = 1;
-
-                Salvabutton.setVisible(true);
-
-                sez_Aview.Abilita_Disabilita_Campi(true);
-
-                sez_Bview.Abilita_Disabilita_Campi(true);
-                sez_Bview.VisibilitàEliminaButton(true);
-                sez_Bview.VisibilitàAggiungiButton(true);
-                sez_Bview.VisibilitàUpdateButton(true);
-
-                sez_Cview.Abilita_Disabilita_Campi(true);
-
-                if (utilizzatore.equals("volontario"))
-                    sez_Dview.Abilita_Disabilita_Campi(true);
-
-                Anagraficaview.VisibilitaModificaButton(false);
-
+                ModificaAction();
 
             }
         });
@@ -398,54 +376,83 @@ public class AnagraficaController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-
-                try {
-
-                    if(utilizzatore.equals("candidato")) {
-
-                        if (!VerificaCampiObbligatoriA())
-                            throw new Exception("Completa campi obbligatori");
-
-
-                        boolean a,b,c;
-                        a = UpdateA();
-                        b = UpdateB();
-                        c = UpdateC();
-
-                       if(!a && !b && !c)
-                        throw new Exception("Nessun cambiamento");
-
-                    }else if(utilizzatore.equals("volontario")){
-
-                        if (!VerificaCampiObbligatoriA() && !VerificaCampiObbligatoriD())
-                            throw new Exception("Completa campi obbligatori");
-
-                        boolean a,b,c,d;
-                        a = UpdateA();
-                        b = UpdateB();   //deve eseguirle le funzioni
-                        c = UpdateC();
-                        d = UpdateD();
-
-                        UpdateA();
-                        UpdateB();
-                        UpdateC();
-                        UpdateD();
-
-                        if(!a && !b && !c && !d)
-                            throw new Exception("Nessun cambiamento");
-
-
-                    }
-
-
-                } catch (Exception es) {
-                    basicframe.ErrorMessage(es.getMessage());
-                }
-
+                SalvaAction();
 
             }
         });
 
+
+    }
+
+    /**
+     *
+     */
+    private void ModificaAction(){
+
+        Modifica = 1;
+
+        Salvabutton.setVisible(true);
+
+        sez_Aview.Abilita_Disabilita_Campi(true);
+
+        sez_Bview.Abilita_Disabilita_Campi(true);
+        sez_Bview.VisibilitàEliminaButton(true);
+        sez_Bview.VisibilitàAggiungiButton(true);
+        sez_Bview.VisibilitàUpdateButton(true);
+
+        sez_Cview.Abilita_Disabilita_Campi(true);
+
+        if (utilizzatore.equals("volontario"))
+            sez_Dview.Abilita_Disabilita_Campi(true);
+
+        Anagraficaview.VisibilitaModificaButton(false);
+
+    }
+
+    private void SalvaAction(){
+
+        try {
+
+            if(utilizzatore.equals("candidato")) {
+
+                if (!VerificaCampiObbligatoriA())
+                    throw new Exception("Completa campi obbligatori");
+
+
+                boolean a,b,c;
+                a = UpdateA();
+                b = UpdateB();
+                c = UpdateC();
+
+                if(!a && !b && !c)
+                    throw new Exception("Nessun cambiamento");
+
+            }else if(utilizzatore.equals("volontario")){
+
+                if (!VerificaCampiObbligatoriA() && !VerificaCampiObbligatoriD())
+                    throw new Exception("Completa campi obbligatori");
+
+                boolean a,b,c,d;
+                a = UpdateA();
+                b = UpdateB();   //deve eseguirle le funzioni
+                c = UpdateC();
+                d = UpdateD();
+
+                UpdateA();
+                UpdateB();
+                UpdateC();
+                UpdateD();
+
+                if(!a && !b && !c && !d)
+                    throw new Exception("Nessun cambiamento");
+
+
+            }
+
+
+        } catch (Exception es) {
+            basicframe.ErrorMessage(es.getMessage());
+        }
 
     }
 
@@ -1015,6 +1022,4 @@ public class AnagraficaController {
         return "Sez_ManagerController{}";
 
     }
-
-
 }

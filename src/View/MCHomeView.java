@@ -55,16 +55,22 @@ public class MCHomeView extends JPanel {
     }
 
     public JButton getResetCompitiButton() {
+
         return resetCompitiButton;
+
     }
 
     public JButton getResetRuoliButton() {
+
         return resetRuoliButton;
+
     }
 
+    /*vmetodi per la visibilita dei vari elementi della view*/
     public void VisibilitaResetButton(boolean visibilita){
 
         resetMCButton.setVisible(visibilita);
+
     }
 
     public void VisibilitaResetCompitiButton(boolean visibilita){
@@ -75,13 +81,14 @@ public class MCHomeView extends JPanel {
     public void VisibilitaResetRuoliButton(boolean visibilita){
 
         resetRuoliButton.setVisible(visibilita);
+
     }
-
-
 
     @Override
     public String toString() {
+
         return "MCHomeView{}";
+
     }
 }
 

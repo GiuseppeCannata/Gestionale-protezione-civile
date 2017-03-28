@@ -19,6 +19,9 @@ public class Certificazione extends Model{
     private String flag; //-->serve per taggare la certificazione come da eliminare o aggiornare, in fase di modifica
 
 
+    /*COSTRUTTORI*/
+
+    /*costruttore vuoto*/
     public Certificazione(){
 
         return;
@@ -38,6 +41,11 @@ public class Certificazione extends Model{
         flag = "nessuna";
     }
 
+
+    /**
+     * Inserimento della certificazione nel DB
+     * @return
+     */
     @Override
     public boolean InsertSQL(){
 
@@ -77,6 +85,7 @@ public class Certificazione extends Model{
 
     /**
      * Esegue l update della certificazione nel DB
+     *
      * @return true --> andato a buon fine
      **/
     public boolean updatesql(){
@@ -84,7 +93,6 @@ public class Certificazione extends Model{
         boolean controllo = false;
         openConnection();
 
-        System.out.print(codicefiscale);
         String sql = "update "+tipo+" set datascadenza='"+datascadenza+"'" +
                 ",dataacquisizione='"+dataacquisizione+"' ,entedirilascio='"+entedirilascio+
                 "' ,n_documento='"+n_documento+"' where cf='"+codicefiscale+"' and nome='"+nome+"'";
@@ -95,7 +103,6 @@ public class Certificazione extends Model{
         }
         closeConnection();
         return controllo;
-
 
     }
 
@@ -122,12 +129,6 @@ public class Certificazione extends Model{
 
     }
 
-    @Override
-    public String toString() {
-
-        return "Certificazione";
-
-    }
 
     //GETTER e SETTER
     public String getNome() {
@@ -215,4 +216,24 @@ public class Certificazione extends Model{
         flag = Flag;
 
     }
+
+    @Override
+    public String toString() {
+
+        return "Certificazione";
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Certificazione that = (Certificazione) o;
+
+       return nome != null && nome.equals(that.getNome());
+
+    }
+
 }

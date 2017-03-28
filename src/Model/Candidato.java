@@ -18,6 +18,7 @@ public class Candidato extends Persona {
 
     /*COSTRUTTORI*/
 
+    /*costruttore vuoto*/
     public Candidato() {
 
         return;
@@ -92,7 +93,8 @@ public class Candidato extends Persona {
 
     /**
      * Query inserimento nella tabella compiti
-     * Inserimento di default--> questo metodo setta tutti i campi a no
+     *  E' un inserimento di default cioè setta tutti i campi a no
+     *
      * @return true --> inserimento andato bene
      */
     private boolean InsertCompiti(){
@@ -116,7 +118,8 @@ public class Candidato extends Persona {
 
     /**
      * Query inserimento nella tabella flagvolontario
-     * Inserimento di default --> stato: attivo , ruolo: semplice
+     * E' un inserimento di default --> stato: attivo , ruolo: semplice
+     *
      * @return true --> inserimento andato a buon fine
      */
     private boolean InsertFlagVolontario(){
@@ -175,4 +178,5 @@ public class Candidato extends Persona {
         return "Candidato";
 
     }
+
 }

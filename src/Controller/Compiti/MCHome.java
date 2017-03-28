@@ -9,6 +9,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Controller per la home del MC
+ */
 public class MCHome {
 
     private BasicFrameView basicframe;
@@ -25,8 +28,10 @@ public class MCHome {
         Listener();
     }
 
-
-
+    /**
+     * Ascolto le azioni dell utente
+     * -->Compiti, Ruoli
+     */
     private void Listener() {
 
 
@@ -55,19 +60,44 @@ public class MCHome {
 
             }
         });
-
-
     }
 
+    //GETTER
     public MCHomeView getMcHomeview() {
+
         return mcHomeview;
+
     }
 
     public BasicFrameView getBasicframe() {
+
         return basicframe;
+
     }
 
     public Volontario getUtenteloggato() {
+
         return utenteloggato;
+
     }
+
+    @Override
+    public String toString() {
+
+        return "MCHome{}";
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MCHome mcHome = (MCHome) o;
+
+        return mcHomeview != null ? mcHomeview.equals(mcHome.mcHomeview) : mcHome.mcHomeview == null;
+
+    }
+
 }

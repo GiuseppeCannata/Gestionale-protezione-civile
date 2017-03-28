@@ -1,7 +1,5 @@
 package Model;
 
-
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -30,8 +28,9 @@ public class Volontario extends Persona {
     private String add_giunta;
     private String referenteinformatico;
 
+    /*COSTRUTTORI*/
 
-
+    /*costruttori vuoti*/
     public Volontario() {
 
         return;
@@ -47,7 +46,6 @@ public class Volontario extends Persona {
         popolaruolo();
         popolastato();
         popolacompiti();
-
 
     }
 
@@ -192,6 +190,10 @@ public class Volontario extends Persona {
 
     }
 
+    /**
+     * Metodo che permette di settare tutti i compiti dell utente a no
+     * @return
+     */
     public boolean ResetCompiti(){
 
         boolean controllo = false;
@@ -206,6 +208,11 @@ public class Volontario extends Persona {
         closeConnection();
         return controllo;
     }
+
+    /**
+     * Metodo che permette di settare il ruolo dell utente a Volontario_semplice
+     * @return
+     */
 
     public boolean ResetRuoli(){
 
@@ -256,6 +263,11 @@ public class Volontario extends Persona {
 
     }
 
+    /**
+     * Consente di effettuare l inserimento nel DB dei dati relativi alla sezione D
+     *
+     * @return true --> inserimento andato a buon fine
+     */
     private boolean InsertD(){
 
         boolean controllo = false;
@@ -415,6 +427,9 @@ public class Volontario extends Persona {
 
     @Override
     public String toString() {
+
         return "Volontario{}";
+
     }
+
 }

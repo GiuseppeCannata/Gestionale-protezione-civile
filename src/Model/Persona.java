@@ -6,7 +6,8 @@ import java.util.ArrayList;
 
 /**
  * Persona
- * Rappresenta la struttura fondamentale(sez A,B,C) di ogni candidato o volontario
+ * Classe abstact poiche non implementa i metodi della classe padre
+ * Rappresenta la struttura fondamentale(sez A,B,C,PASS,MESSAGGI) di ogni candidato o volontario
  * Estende Model ma non implementa i suoi metodi astratti
  */
 public abstract class Persona extends Model{
@@ -43,6 +44,7 @@ public abstract class Persona extends Model{
     private String Username;
     private String Password;
 
+
     private ArrayList<String> BROADCAST;
     private ArrayList<String> MESSAGGI;
 
@@ -68,6 +70,9 @@ public abstract class Persona extends Model{
 
     }
 
+    /**
+     * Ricerca il codice fiscale servendosi del UserInserito
+     */
     private void User(){
 
         try {
@@ -76,7 +81,7 @@ public abstract class Persona extends Model{
             String sql = "select cf,pass from pass where user='"+Username+"'";
             ResultSet query = selectQuery(sql);
 
-            while(query.next()) {
+            if(query.next()) {
 
                 Codice_Fiscale = query.getString("cf");
                 Password = query.getString("pass");
@@ -533,4 +538,16 @@ public abstract class Persona extends Model{
         return MESSAGGI;
 
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Persona persona = (Persona) o;
+
+        return Codice_Fiscale != null ? Codice_Fiscale.equals(persona.Codice_Fiscale) : persona.Codice_Fiscale == null;
+    }
+
 }

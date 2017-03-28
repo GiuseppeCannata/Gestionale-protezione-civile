@@ -44,7 +44,8 @@ public class CFVerificaController {
    }
 
     /**
-     * Ascolto operazioni dell'utente --> OK,paginaLogin
+     * Ascolto operazioni dell'utente
+     * --> OK,paginaLogin
      */
     private void CFVerificaListener(){
 
@@ -116,4 +117,16 @@ public class CFVerificaController {
         return "Sono CFVerificaController";
 
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CFVerificaController that = (CFVerificaController) o;
+
+        return verificaview != null ? verificaview.equals(that.verificaview) : that.verificaview == null;
+    }
+
 }

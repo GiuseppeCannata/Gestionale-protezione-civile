@@ -1,6 +1,6 @@
 package Model;
 
-import Controller.Sez_BRegistrazioneController;
+import Controller.Sez_BUtenteController;
 import View.Sez_AView;
 import View.Sez_BView;
 import View.Sez_CView;
@@ -22,11 +22,12 @@ public class RegistrazioneModel extends Model {
     private Sez_BView sez_Bview;
     private Sez_CView sez_Cview;
     private String UsernameInserito;
-    private Sez_BRegistrazioneController sez_bRegistrazioneController;
+    private Sez_BUtenteController sez_bRegistrazioneController;
 
 
     /*COSTRUTTORI*/
 
+    /*costruttore vuoto*/
     public RegistrazioneModel() {
 
         return;
@@ -34,7 +35,7 @@ public class RegistrazioneModel extends Model {
     }
 
     public RegistrazioneModel(String CodiceFiscale, Sez_AView view1, Sez_BView view2, Sez_CView view3,
-                              Sez_BRegistrazioneController controller) {
+                              Sez_BUtenteController controller) {
 
           super();
           codicefiscale = CodiceFiscale;
@@ -243,5 +244,25 @@ public class RegistrazioneModel extends Model {
        closeConnection();
        return controllo;
    }
+
+
+    @Override
+    public String toString() {
+
+        return "RegistrazioneModel{}";
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        RegistrazioneModel that = (RegistrazioneModel) o;
+
+        return codicefiscale != null ? !codicefiscale.equals(that.codicefiscale) : that.codicefiscale != null;
+
+    }
 
 }

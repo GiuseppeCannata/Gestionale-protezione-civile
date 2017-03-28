@@ -5,6 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Classe che consente ai vari compiti di interagire al meglio con il DB, in base a cio che ognuno di questi
+ * richiede
+ */
+
 public class GestioneModel extends Model{
 
     private ArrayList<Persona> listutenti;
@@ -13,8 +18,11 @@ public class GestioneModel extends Model{
 
     /*Costruttore*/
 
+    /*costruttore vuoto*/
     public GestioneModel() {
+
         super();
+
     }
 
     public GestioneModel(String Appoggio){
@@ -25,12 +33,16 @@ public class GestioneModel extends Model{
 
     }
 
-
-
+    /**
+     * Consente di popolare le varie schede degli utenti
+     *
+     * @param utilizzatore
+     * @return Un ArrayList contentente i vari utenti
+     */
     public ArrayList<Persona> Schede(String utilizzatore) {
 
-
         try {
+
             openConnection();
 
             String sql = "select * from a,pass where "+appoggio+" and a.cf=pass.cf order by cognome,nome";
@@ -50,6 +62,7 @@ public class GestioneModel extends Model{
 
                 if(utilizzatore.equals("listavolontari")) {
 
+                    //conversione esplicita
                     Volontario VOLONTARIO = (Volontario) utente;
                     VOLONTARIO.popolaD();
                     VOLONTARIO.popolastato();
@@ -63,12 +76,19 @@ public class GestioneModel extends Model{
         } catch (SQLException se) {
             se.printStackTrace();
         }finally{
+
             closeConnection();
             return listutenti;
+
         }
 
     }
 
+    /**
+     * Consete di popolare la sezione compiti
+     *
+     * @return Un ArrayList contentente i vari utenti
+     */
     public ArrayList<Persona> Compiti(){
 
         try {
@@ -87,6 +107,7 @@ public class GestioneModel extends Model{
                 utente.setNome(query.getString("nome"));
                 utente.setCognome(query.getString("cognome"));
 
+                //conversione esplicita
                 Volontario VOLONTARIO = (Volontario) utente;
                 VOLONTARIO.popolacompiti();
 
@@ -103,6 +124,11 @@ public class GestioneModel extends Model{
 
     }
 
+    /**
+     * Consete di popolare la sezione ruoli
+     *
+     * @return Un ArrayList contentente i vari utenti
+     */
     public ArrayList<Persona> Ruoli() {
 
         try {
@@ -121,6 +147,7 @@ public class GestioneModel extends Model{
                 utente.setNome(query.getString("nome"));
                 utente.setCognome(query.getString("cognome"));
 
+                //conversione eplicita
                 Volontario VOLONTARIO = (Volontario) utente;
                 VOLONTARIO.popolaruolo();
 
@@ -199,9 +226,31 @@ public class GestioneModel extends Model{
 
     };
 
+
+    //GETTER
     public ArrayList<Persona> getListutenti() {
 
         return listutenti;
 
     }
+
+    @Override
+    public String toString() {
+
+        return "GestioneModel{}";
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        GestioneModel that = (GestioneModel) o;
+
+        return listutenti != null ? !listutenti.equals(that.listutenti) : that.listutenti != null;
+
+    }
+
 }

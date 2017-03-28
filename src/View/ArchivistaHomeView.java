@@ -20,19 +20,27 @@ public class ArchivistaHomeView extends JPanel {
     }
 
     public JButton getCandidatiButtonButton() {
+
         return listaCandidatiButton;
+
     }
 
     public JButton gettuttiIVolontariButton() {
+
         return tuttiIVolontariButton;
+
     }
 
     public JPanel getIntermedio0() {
+
         return Intermedio0;
+
     }
 
     @Override
     public String toString() {
+
         return "ArchivistaHomeView{}";
+
     }
 }

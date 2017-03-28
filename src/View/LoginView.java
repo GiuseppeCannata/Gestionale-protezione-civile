@@ -19,6 +19,7 @@ public class LoginView extends JPanel{
     private JLabel usernameLabel;
     private JLabel passwordLabel;
 
+    /*costruttore*/
     public LoginView() {
 
         setVisible(true);

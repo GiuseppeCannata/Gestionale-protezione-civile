@@ -81,6 +81,7 @@ public class MCView extends JPanel {
 
     }
 
+    /*metodi per la visibilita dei vari elementi della view*/
     public void VisibilitaRimuoviCompito(boolean visibilita) {
 
         rimuoviCompitoButton.setVisible(visibilita);
@@ -105,6 +106,8 @@ public class MCView extends JPanel {
 
     @Override
     public String toString() {
+
         return "MCView{}";
+
     }
 }

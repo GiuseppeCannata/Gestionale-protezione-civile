@@ -18,7 +18,7 @@ public class UtenteSinistraView extends JPanel{
     private JButton homeButton;
     private JButton disiscrivimiButton;
 
-
+   /*costruttore*/
     public UtenteSinistraView() {
 
         disiscrivimiButton.setVisible(false);
@@ -75,6 +75,8 @@ public class UtenteSinistraView extends JPanel{
 
     @Override
     public String toString() {
+
         return "UtenteSinistraView{}";
+
     }
 }

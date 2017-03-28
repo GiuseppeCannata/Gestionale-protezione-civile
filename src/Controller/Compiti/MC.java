@@ -14,7 +14,9 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
-
+/**
+ * classe che rappresenta il compito del Master Chief
+ */
 public class MC {
 
     private BasicFrameView basicframe;
@@ -28,7 +30,9 @@ public class MC {
     private Volontario utenteloggato;
     private ArrayList<Persona> UTENTI;
 
+    /*COSTRUTTORI*/
 
+    /*costruttore vuoto*/
     public MC(){
 
         return;
@@ -70,6 +74,9 @@ public class MC {
 
     }
 
+    /**
+     * Settaggio della view
+     */
     private void settaggioview(){
 
         switch (utilizzatore){
@@ -111,6 +118,10 @@ public class MC {
 
     }
 
+    /**
+     * Ascolto dell azioni dell utente
+     * -->Assegnacompito, Rimuovicompito, Assegnaruolo, Rimuoviruolo, ritorna
+     */
     private void Listener(){
 
 
@@ -230,6 +241,10 @@ public class MC {
 
     }
 
+    /**
+     * Listner Item per la combobox
+     * In base all utente selezionato permette di stampare in Una Jlist i compiti del medesimo
+     */
     private void listCompitiListner(){
 
         JComboBox Box1 = view.getBox1();
@@ -262,6 +277,10 @@ public class MC {
         });
     }
 
+    /**
+     * Listener Item per la combobox
+     * In base all utente selezionato permette di stampare in una Jlist il ruolo del medesimo
+     */
     private void listRuoliListner(){
 
         JComboBox Box1 = view.getBox1();
@@ -273,13 +292,11 @@ public class MC {
 
                 if(e.getSource() ==  Box1) {
 
-
                     for (Persona utente : UTENTI) {
 
                         if (Box1.getSelectedItem().equals(utente.getCognome() + "    -    " + utente.getNome())) {
 
                             Volontario Utente = (Volontario) utente;
-                            System.out.println(Utente.getRuolo());
                             String[] ruolo = new String[]{Utente.getRuolo()};
 
                             list.setListData(ruolo);
@@ -293,6 +310,9 @@ public class MC {
         });
     }
 
+    /**
+     *  Stampa la lista degli utenti nella box
+     */
     public void stampalista() {
 
         Box = view.getBox1();
@@ -302,7 +322,7 @@ public class MC {
 
     }
 
-
+    //GETTER
     public MCView getView() {
         return view;
     }
@@ -316,4 +336,24 @@ public class MC {
     public String getUtilizzatore() {
         return utilizzatore;
     }
+
+    @Override
+    public String toString() {
+
+        return "MC{}";
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MC mc = (MC) o;
+
+        return view != null ? view.equals(mc.view) : mc.view == null;
+
+    }
+
 }

@@ -14,9 +14,13 @@ public class MessaggioView extends JDialog{
     private JTextArea TextArea;
     private JButton inviaButton;
 
+    /*costruttore*/
     public MessaggioView(BasicFrameView basicframe) {
 
+        //richiamo il costruttore della padre
+        //voglio una finestra modale di titolo messaggio e che blocchi basicframe
         super(basicframe,"Messaggio",true);
+
         setSize(400, 300);
         setLocation(400, 160);
         setContentPane(Intermedio0);
@@ -56,6 +60,8 @@ public class MessaggioView extends JDialog{
 
     @Override
     public String toString() {
+
         return "MessaggioView{}";
+
     }
 }

@@ -9,9 +9,15 @@ import View.BasicFrameView;
 
 import java.util.ArrayList;
 
+/**
+ * Classe rappresentate il compito dell' Admin
+ */
 public class Admin extends MC {
 
 
+    /*COSTRUTTORI*/
+
+    /*costruttore vuoto*/
     public Admin() {
 
         super();
@@ -24,6 +30,11 @@ public class Admin extends MC {
 
     }
 
+    /**
+     * Metodo che permette di resettare sia i compiti che i ruoli
+     *
+     * @param UtenteLoggato --> affinche il reset non incida sull utente che è loggato
+     */
     public void ResetAction(Volontario UtenteLoggato) {
 
         ArrayList<Persona> UTENTI = getUTENTI();
@@ -32,6 +43,7 @@ public class Admin extends MC {
 
             if(!utente.getCodice_Fiscale().equals(UtenteLoggato.getCodice_Fiscale())) {
 
+                //Conversione esplicita
                 Volontario volontario = (Volontario) utente;
 
                 if (getUtilizzatore().equals("compiti")) {
@@ -42,6 +54,13 @@ public class Admin extends MC {
             }
         }
     }
+
+    /**
+     * Metodo che permette di cancellare il vecchio MC, e di nominarne uno nuovo attraverso l immissione del codice fiscale
+     * dell utente a cui si vuole affidare questo ruolo
+     *
+     * @param frame
+     */
 
     public void ResetMC(BasicFrameView frame) {
 
@@ -63,7 +82,7 @@ public class Admin extends MC {
 
                     volontario.ResetRuoli();
 
-                    //avviso di broadcast
+                    //avviso di Broadcast
                     Messaggio messaggio = new Messaggio("Broadcast", "Admin",
                             volontario.getNome() + " " + volontario.getCognome() + " e' diventato un Volontario_Sempice");
 
@@ -108,4 +127,15 @@ public class Admin extends MC {
 
         }
     }
+
+    @Override
+    public String toString() {
+
+        return "Admin{}";
+
+    }
+
+    //equals ereditato da MC
+
+
 }

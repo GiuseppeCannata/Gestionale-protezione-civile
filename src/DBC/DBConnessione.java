@@ -26,7 +26,7 @@ public class DBConnessione{
     }
 
     /**
-     * Metodo per creare una connessione col DB
+     * Metodo che consente di creare una connessione col DB
      *
      * @return  Restituisce la connessione
      */
@@ -48,27 +48,7 @@ public class DBConnessione{
     }
 
     /**
-     * Metodo per creare una connessione con Mysql
-     *
-     * @return  Restituisce la connessione
-     */
-    public Connection connectMysql(){
-
-        try {
-            Class.forName(JDBC_DRIVER);
-            conn = DriverManager.getConnection(DB_URL, user, password);
-        } catch (SQLException se) {
-            se.getErrorCode();
-        } catch (Exception e) {
-            e.getMessage();
-        }
-
-        return conn;
-    }
-
-
-    /**
-     * Metodo per chiudere la connessione col DB
+     * Metodo che consente di chiudere la connessione col DB
      *
      * @return la connessione chiusa @return
      */
@@ -83,6 +63,7 @@ public class DBConnessione{
         }
         return conn;
     }
+
 
     public String getDbName(){
 

@@ -75,8 +75,23 @@ public class ArchivistaHome {
 
     @Override
     public String toString() {
+
         return "ArchivistaHome{}";
+
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ArchivistaHome that = (ArchivistaHome) o;
+
+        return archivistaHomeView != null ? archivistaHomeView.equals(that.archivistaHomeView) : that.archivistaHomeView == null;
+
+    }
+
 }
 
 

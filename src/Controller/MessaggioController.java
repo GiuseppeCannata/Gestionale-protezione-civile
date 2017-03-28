@@ -20,6 +20,9 @@ public class MessaggioController {
     private String Mittente;
     private  Messaggio messaggio;
 
+    /*COSTRUTTORI*/
+
+    /*costuttore vuoto*/
     public MessaggioController() {
 
         return;
@@ -68,24 +71,44 @@ public class MessaggioController {
      */
     private void InviaAction(){
 
-        //controllo sulla lunghezza del messaggio
-        if(view.getTextArea().length()>200)
-            basicframe.ErrorMessage("Testo troppo lungo");
-        else {
+        try {
+            //controllo sulla lunghezza del messaggio
+            if (view.getTextArea().length() > 200)
+                throw new Exception("Testo troppo lungo");
+
 
             messaggio = new Messaggio(Destinatario, Mittente, view.getTextArea());
             messaggio.setMessaggio(view.getTextArea());
 
             if (messaggio.InsertSQL()) {
-                view.dispose();
+                view.dispose();   //chiudo la frame
                 basicframe.Message("Inviato!");
             }
+
+        }catch (Exception e){
+            basicframe.ErrorMessage(e.getMessage());
         }
 
     }
 
     @Override
     public String toString() {
+
         return "MessaggioController{}";
+
     }
+
+    //se hanno lo stesso pannello controllano la stessa GUI
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MessaggioController that = (MessaggioController) o;
+
+        return view != null ? view.equals(that.view) : that.view == null;
+    }
+
 }

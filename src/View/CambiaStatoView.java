@@ -41,8 +41,10 @@ public class CambiaStatoView extends JPanel {
     }
 
     @Override
-    public String toString() {
+    public String toString(){
+
         return "CambiaStatoView{}";
+
     }
 }
 

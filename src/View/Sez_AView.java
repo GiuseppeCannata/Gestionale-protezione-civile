@@ -195,6 +195,7 @@ public class Sez_AView extends JPanel{
 
     }
 
+    /*metodi per la visibilita dei vari elementi della view*/
     public void VisibilitaPasswordLT(boolean visibile){
 
         passwordLabel.setVisible(visibile);

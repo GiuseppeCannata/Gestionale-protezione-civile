@@ -32,7 +32,6 @@ public class BasicFrameView extends JFrame{
 
     }
 
-    //GETTERS
 
     public void ErrorMessage(String nomeErrore){
         JOptionPane.showMessageDialog(BasicFrameView.this, nomeErrore, "Warning!", JOptionPane.ERROR_MESSAGE);
@@ -65,6 +64,7 @@ public class BasicFrameView extends JFrame{
 
     //GETTER
 
+
     public JPanel getIntermedio0() {
 
         return Intermedio0;
@@ -72,11 +72,23 @@ public class BasicFrameView extends JFrame{
     }
 
     //SETTER
+
+    /**
+     * Metodo che permette di settare la ScrollPane di destra
+     *
+     * @param DESTRA --> Panel di destra
+     */
     public void setdestra(Component DESTRA) {
 
        destra.setViewportView(DESTRA);
 
     }
+
+    /**
+     * Metodo che permette di settare lo ScrollPane di sinistra
+     *
+     * @param SINISTRA --> Panel di sinistra
+     */
 
     public void setsinistra(Component SINISTRA) {
 
@@ -86,7 +98,9 @@ public class BasicFrameView extends JFrame{
 
     @Override
     public String toString() {
+
         return "BasicFrameView";
+
     }
 
 }
