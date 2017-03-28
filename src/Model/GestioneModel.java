@@ -26,6 +26,7 @@ public class GestioneModel extends Model{
     }
 
 
+
     public ArrayList<Persona> Schede(String utilizzatore) {
 
 
@@ -136,8 +137,6 @@ public class GestioneModel extends Model{
 
     }
 
-
-
     @Override
     public  boolean InsertSQL(){
 
@@ -201,6 +200,8 @@ public class GestioneModel extends Model{
     };
 
     public ArrayList<Persona> getListutenti() {
+
         return listutenti;
+
     }
 }
