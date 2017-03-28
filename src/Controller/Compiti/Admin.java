@@ -1,6 +1,5 @@
 package Controller.Compiti;
 
-
 import Model.GestioneModel;
 import Model.Messaggio;
 import Model.Persona;
@@ -8,52 +7,94 @@ import Model.Volontario;
 import View.BasicFrameView;
 import View.VolontarioDView;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
- * Classe rappresentate il compito dell' Admin
+ * Controller per la home dell Admin
  */
+
 public class Admin extends MC {
 
+    private VolontarioDView Dview;
+    /*Costruttore*/
 
-    /*COSTRUTTORI*/
+    public Admin(BasicFrameView frame, Volontario UtenteLoggato, VolontarioDView view) {
 
-    /*costruttore vuoto*/
-    public Admin(BasicFrameView frame, Volontario utenteloggato) {
+        super(frame, UtenteLoggato);
+        Dview = view;
+        getMcHomeview().VisibilitaResetButton(true);
 
-        super(frame, utenteloggato);
+        getMcHomeview().VisibilitaResetCompitiButton(true);
+        getMcHomeview().VisibilitaResetRuoliButton(true);
 
-    }
-
-    public Admin(String Utilizzatore) {
-
-        super(Utilizzatore);
-
+        AdminHomeListener();
     }
 
     /**
-     * Metodo che permette di resettare sia i compiti che i ruoli
-     *
-     * @param UtenteLoggato --> affinche il reset non incida sull utente che è loggato
+     * Ascolto delle azioni dell utente
+     * -->ResetMC, ResetCompiti,ResetRuoli
      */
-    public void ResetAction(Volontario UtenteLoggato) {
+    private void AdminHomeListener(){
 
-        ArrayList<Persona> UTENTI = getUTENTI();
+        JButton ResetMC = getMcHomeview().getResetMCButton();
+        ResetMC.addActionListener(new ActionListener() {
 
-        for(Persona utente :UTENTI){
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-            if(!utente.getCodice_Fiscale().equals(UtenteLoggato.getCodice_Fiscale())) {
+           // Admin controller;
+           // controller = new Admin(getBasicframe(), getUtenteloggato());
+            //controller.
+                ResetMC();
 
-                //Conversione esplicita
-                Volontario volontario = (Volontario) utente;
-
-                if (getUtilizzatore().equals("compiti")) {
-                    volontario.ResetCompiti();
-                }
-                if (getUtilizzatore().equals("ruoli"))
-                    volontario.ResetRuoli();
             }
-        }
+        });
+
+        JButton ResetCompiti = getMcHomeview().getResetCompitiButton();
+        ResetCompiti.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if(getBasicframe().OpotionalMessage("Resettare tutti i compiti ?")==0) {
+                   // MC controller;
+                   // controller = new MC("compiti");
+                   // controller.
+
+                    setAppoggio("vol_o_cand = 1");
+                    setUtilizzatore("compiti");
+
+                    setModel(new GestioneModel(getAppoggio()));
+
+                    setUTENTI(getModel().Compiti());
+                    ResetAction(getUtenteloggato());
+                }
+
+            }
+        });
+
+        JButton ResetRuoli = getMcHomeview().getResetRuoliButton();
+        ResetRuoli.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if(getBasicframe().OpotionalMessage("Resettare tutti i ruoli ?")==0) {
+
+                    setAppoggio("vol_o_cand = 1");
+                    setUtilizzatore("ruoli");
+
+                    setModel(new GestioneModel(getAppoggio()));
+
+                    setUTENTI(getModel().Ruoli());
+                    ResetAction(getUtenteloggato());
+                }
+
+            }
+        });
     }
 
     /**
@@ -62,7 +103,7 @@ public class Admin extends MC {
      *
      */
 
-    public void ResetMC(VolontarioDView Dview) {
+    private void ResetMC() {
 
         ArrayList<Persona> UTENTI;
 
@@ -142,6 +183,31 @@ public class Admin extends MC {
 
     }
 
+    /**
+     * Metodo che permette di resettare sia i compiti che i ruoli
+     *
+     * @param UtenteLoggato --> affinche il reset non incida sull utente che è loggato
+     */
+    public void ResetAction(Volontario UtenteLoggato) {
+
+        ArrayList<Persona> UTENTI = getUTENTI();
+
+        for(Persona utente :UTENTI){
+
+            if(!utente.getCodice_Fiscale().equals(UtenteLoggato.getCodice_Fiscale())) {
+
+                //Conversione esplicita
+                Volontario volontario = (Volontario) utente;
+
+                if (getUtilizzatore().equals("compiti")) {
+                    volontario.ResetCompiti();
+                }
+                if (getUtilizzatore().equals("ruoli"))
+                    volontario.ResetRuoli();
+            }
+        }
+    }
+
     @Override
     public String toString() {
 
@@ -150,4 +216,5 @@ public class Admin extends MC {
     }
 
     //equals ereditato da MC
+
 }

@@ -1,5 +1,6 @@
 package Controller.Compiti;
 
+
 import Model.GestioneModel;
 import Model.Persona;
 import Model.Volontario;
@@ -15,30 +16,21 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 /**
- * classe che rappresenta il compito del Master Chief
+ * Controller per la home del MC
  */
 public class MC {
 
     private BasicFrameView basicframe;
+    private MCHomeView mcHomeview;
+    private Volontario utenteloggato;
+
     private GestioneModel model;
     private String appoggio;
     private JComboBox Box;
     private MCView view;
     private JComboBox Box2;
-    private MCHomeView homeView;
     private String utilizzatore;
-    private Volontario utenteloggato;
     private ArrayList<Persona> UTENTI;
-
-    /*COSTRUTTORI*/
-
-    /*costruttore vuoto*/
-    public MC(BasicFrameView frame, Volontario Utenteloggato){
-
-       basicframe = frame;
-       utenteloggato = Utenteloggato;
-
-    }
 
     public MC(String Utilizzatore) {
 
@@ -47,20 +39,60 @@ public class MC {
         model = new GestioneModel(appoggio);
 
         if(Utilizzatore.equals("compiti"))
-        UTENTI = model.Compiti();
+            UTENTI = model.Compiti();
         if(utilizzatore.equals("ruoli"))
-        UTENTI = model.Ruoli();
+            UTENTI = model.Ruoli();
     }
 
-    public MC(BasicFrameView frame, String Utilizzatore, MCHomeView HomeView, Volontario UtenteLoggato) {
+    public MC(BasicFrameView frame, Volontario UtenteLoggato) {
 
         basicframe = frame;
-        view = new MCView();
-        homeView = HomeView;
+        mcHomeview = new MCHomeView();
         utenteloggato = UtenteLoggato;
+        basicframe.setdestra(mcHomeview.getIntermedio0());
+
+        Listener();
+    }
+
+    /**
+     * Ascolto le azioni dell utente
+     * -->Compiti, Ruoli
+     */
+    private void Listener() {
+
+
+        /*Compiti*/
+        JButton Compiti = mcHomeview.getCompitiButton();
+        Compiti.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                CompitiAction();
+
+            }
+        });
+
+
+        JButton Ruoli = mcHomeview.getRuoliButton();
+        Ruoli.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+                RuoliAction();
+
+            }
+        });
+    }
+
+    private void CompitiAction(){
+
+        view = new MCView();
         appoggio = "vol_o_cand = 1";
 
-        utilizzatore = Utilizzatore;
+        utilizzatore = "compiti";
         Box2 = view.getBox2();
 
         model = new GestioneModel(appoggio);
@@ -71,7 +103,30 @@ public class MC {
 
         basicframe.setdestra(view.getIntermedio0());
 
-        Listener();
+        listener();
+    }
+
+    private void RuoliAction(){
+
+        view = new MCView();
+
+
+        appoggio = "vol_o_cand = 1";
+
+        utilizzatore = "ruoli";
+        Box2 = view.getBox2();
+
+        model = new GestioneModel(appoggio);
+
+        settaggioview();
+
+
+        stampalista();
+
+        basicframe.setdestra(view.getIntermedio0());
+
+        listener();
+
 
     }
 
@@ -107,7 +162,7 @@ public class MC {
                 Box2.addItem("Volontario_semplice");
                 Box2.addItem("Direttivo");
                 if(utenteloggato.getRuolo().equals("Cordinatore"))
-                Box2.addItem("Vicecordinatore");
+                    Box2.addItem("Vicecordinatore");
 
                 UTENTI = model.Ruoli();
 
@@ -123,7 +178,7 @@ public class MC {
      * Ascolto dell azioni dell utente
      * -->Assegnacompito, Rimuovicompito, Assegnaruolo, Rimuoviruolo, ritorna
      */
-    private void Listener(){
+    private void listener(){
 
 
         JComboBox Box1 = view.getBox1();
@@ -146,7 +201,7 @@ public class MC {
 
                         if (utente.UpdateSQL(app)) {
                             basicframe.Message("Assegnato!");
-                             new MC(basicframe, "compiti", homeView,utenteloggato);
+                            CompitiAction();
                         }
                     }
 
@@ -171,7 +226,7 @@ public class MC {
 
                         if (utente.UpdateSQL(app)) {
                             basicframe.Message("Eliminato!");
-                            new MC(basicframe, "compiti", homeView, utenteloggato);
+                            CompitiAction();
                         }
                     }
 
@@ -196,7 +251,7 @@ public class MC {
 
                         if (utente.UpdateSQL(app)) {
                             basicframe.Message("Assegnato!");
-                            new MC(basicframe, "ruoli", homeView, utenteloggato);
+                            RuoliAction();
                         }
                     }
 
@@ -221,7 +276,7 @@ public class MC {
 
                         if (utente.UpdateSQL(app)) {
                             basicframe.Message("Eliminato!");
-                            new MC(basicframe, "ruoli", homeView, utenteloggato);
+                           RuoliAction();
                         }
                     }
 
@@ -234,11 +289,23 @@ public class MC {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                basicframe.setdestra(homeView.getIntermedio0());
+                basicframe.setdestra(mcHomeview.getIntermedio0());
 
             }
         });
 
+
+    }
+
+    /**
+     *  Stampa la lista degli utenti nella box
+     */
+    public void stampalista() {
+
+        Box = view.getBox1();
+
+        for (Persona utente : UTENTI)
+            Box.addItem(utente.getCognome() + "    -    " + utente.getNome());
 
     }
 
@@ -311,31 +378,11 @@ public class MC {
         });
     }
 
-    /**
-     *  Stampa la lista degli utenti nella box
-     */
-    public void stampalista() {
-
-        Box = view.getBox1();
-
-        for (Persona utente : UTENTI)
-            Box.addItem(utente.getCognome() + "    -    " + utente.getNome());
-
-    }
-
     //GETTER
-    public MCView getView() {
-        return view;
-    }
+    public MCHomeView getMcHomeview() {
 
-    public ArrayList<Persona> getUTENTI() {
+        return mcHomeview;
 
-        return UTENTI;
-
-    }
-
-    public String getUtilizzatore() {
-        return utilizzatore;
     }
 
     public BasicFrameView getBasicframe() {
@@ -350,6 +397,37 @@ public class MC {
 
     }
 
+    public void setUtilizzatore(String utilizzatore) {
+        this.utilizzatore = utilizzatore;
+    }
+
+    public void setAppoggio(String appoggio) {
+        this.appoggio = appoggio;
+    }
+
+    public void setModel(GestioneModel model) {
+        this.model = model;
+    }
+
+    public String getAppoggio() {
+        return appoggio;
+    }
+
+    public String getUtilizzatore() {
+        return utilizzatore;
+    }
+
+    public void setUTENTI(ArrayList<Persona> UTENTI) {
+        this.UTENTI = UTENTI;
+    }
+
+    public GestioneModel getModel() {
+        return model;
+    }
+
+    public ArrayList<Persona> getUTENTI() {
+        return UTENTI;
+    }
 
     @Override
     public String toString() {
@@ -364,9 +442,9 @@ public class MC {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        MC mc = (MC) o;
+        MC mcHome = (MC) o;
 
-        return view != null ? view.equals(mc.view) : mc.view == null;
+        return mcHomeview != null ? mcHomeview.equals(mcHome.mcHomeview) : mcHome.mcHomeview == null;
 
     }
 

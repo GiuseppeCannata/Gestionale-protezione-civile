@@ -241,8 +241,8 @@ public class VolontarioController{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                ArchivistaHome controller;
-                controller = new ArchivistaHome(basicframe, Utente);
+                Controller.Compiti.Archivista controller;
+                controller = new Archivista(basicframe, Utente);
 
             }
 
@@ -271,8 +271,8 @@ public class VolontarioController{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                MCHome controller;
-                controller = new MCHome(basicframe, Utente);
+                MC controller;
+                controller = new MC(basicframe, Utente);
 
             }
 
@@ -301,8 +301,8 @@ public class VolontarioController{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                AdminHome controller;
-                controller = new AdminHome(basicframe, Utente, Dview);
+                Controller.Compiti.Admin controller;
+                controller = new Admin(basicframe, Utente, Dview);
 
             }
 
