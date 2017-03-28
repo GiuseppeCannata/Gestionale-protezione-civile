@@ -32,17 +32,6 @@ public class MC {
     private String utilizzatore;
     private ArrayList<Persona> UTENTI;
 
-    public MC(String Utilizzatore) {
-
-        appoggio = "vol_o_cand = 1";
-        utilizzatore = Utilizzatore;
-        model = new GestioneModel(appoggio);
-
-        if(Utilizzatore.equals("compiti"))
-            UTENTI = model.Compiti();
-        if(utilizzatore.equals("ruoli"))
-            UTENTI = model.Ruoli();
-    }
 
     public MC(BasicFrameView frame, Volontario UtenteLoggato) {
 
