@@ -19,9 +19,9 @@ public class Admin extends MC {
     /*COSTRUTTORI*/
 
     /*costruttore vuoto*/
-    public Admin() {
+    public Admin(BasicFrameView frame, Volontario utenteloggato) {
 
-        super();
+        super(frame, utenteloggato);
 
     }
 
@@ -60,14 +60,13 @@ public class Admin extends MC {
      * Metodo che permette di cancellare il vecchio MC, e di nominarne uno nuovo attraverso l immissione del codice fiscale
      * dell utente a cui si vuole affidare questo ruolo
      *
-     * @param frame
      */
 
-    public void ResetMC(BasicFrameView frame, Volontario Utente, VolontarioDView Dview) {
+    public void ResetMC(VolontarioDView Dview) {
 
         ArrayList<Persona> UTENTI;
 
-        String cf = frame.InputMessage("Inserire Codice fiscale del nuovo Master: ");
+        String cf = getBasicframe().InputMessage("Inserire Codice fiscale del nuovo Master: ");
 
 
         try {
@@ -78,9 +77,8 @@ public class Admin extends MC {
             if (cf.length() < 16)
                 throw new Exception("Lungezza codice fiscale errata");
 
-            if (cf.equals(Utente.getCodice_Fiscale()))
+            if (cf.equals(getUtenteloggato().getCodice_Fiscale()))
                 throw new Exception("Errore è il suo codice fiscale");
-
 
             GestioneModel model = new GestioneModel("vol_o_cand=1");
             UTENTI = model.Ruoli();
@@ -100,7 +98,7 @@ public class Admin extends MC {
                             "Sei diventato un Volontario_semplice");
 
                     if (sms.InsertSQL())
-                        frame.Message("Il vecchio cordinatore è stato cancellato");
+                        getBasicframe().Message("Il vecchio cordinatore è stato cancellato");
 
                 }
 
@@ -124,13 +122,13 @@ public class Admin extends MC {
 
                         if (messaggio.InsertSQL()) {
 
-                            messaggio.AggiornaBroadcast(Utente, Dview);
+                            messaggio.AggiornaBroadcast(getUtenteloggato(), Dview);
 
                             //messaggio privato per il nuovo cordinatore
                             Messaggio sms = new Messaggio(cf, "Admin", "Sei diventato un Cordinatore");
 
                             if (sms.InsertSQL())
-                                frame.Message("Cambiamento avvenuto!\nHo inoltre avvertito il nuovo Codinatore");
+                                getBasicframe().Message("Cambiamento avvenuto!\nHo inoltre avvertito il nuovo Codinatore");
                         }
                     }
 

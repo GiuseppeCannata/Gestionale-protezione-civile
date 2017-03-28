@@ -122,57 +122,54 @@ public class ListaggiController {
 
     private void VisionaSchedaListener() {
 
-        if(Box.getSelectedItem() != null) {
+        JButton visionaSchedaButton = view.getVisionaSchedaButton();
+        visionaSchedaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-            JButton visionaSchedaButton = view.getVisionaSchedaButton();
-            visionaSchedaButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
+                System.out.print(Box.getSelectedItem());
+                if(Box.getSelectedItem() != null)
+                VisionaSchedaAction();
 
-                    VisionaSchedaAction();
-
-                }
-            });
-        }
+            }
+        });
 
     }
 
     private void AccettaListener(){
 
-        if(Box.getSelectedItem() != null) {
 
             JButton AccettaButton = view.getAccettaButton();
             AccettaButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
+                    if(Box.getSelectedItem() != null)
                     AccettaArchivistaAction();
 
                 }
             });
-        }
 
     }
 
     private void InvioMessaggioListener(){
 
-        if(Box.getSelectedItem() != null) {
 
             JButton InvioMessaggio = view.getInviagliUnMessaggioButton();
             InvioMessaggio.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-                    int Indice;
-                    Indice = Box.getSelectedIndex();
+                    if(Box.getSelectedItem() != null){
+                        int Indice;
+                        Indice = Box.getSelectedIndex();
 
-                    MessaggioController controller;
-                    controller = new MessaggioController(basicframe, UTENTI.get(Indice).getCodice_Fiscale(), UtenteLoggato.getNome() + " " + UtenteLoggato.getCognome());
+                        MessaggioController controller;
+                        controller = new MessaggioController(basicframe, UTENTI.get(Indice).getCodice_Fiscale(), UtenteLoggato.getNome() + " " + UtenteLoggato.getCognome());
 
+                    }
                 }
             });
-        }
-
 
     }
 

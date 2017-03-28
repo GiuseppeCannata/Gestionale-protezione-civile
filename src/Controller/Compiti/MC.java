@@ -33,9 +33,10 @@ public class MC {
     /*COSTRUTTORI*/
 
     /*costruttore vuoto*/
-    public MC(){
+    public MC(BasicFrameView frame, Volontario Utenteloggato){
 
-        return;
+       basicframe = frame;
+       utenteloggato = Utenteloggato;
 
     }
 
@@ -342,6 +343,13 @@ public class MC {
         return basicframe;
 
     }
+
+    public Volontario getUtenteloggato() {
+
+        return utenteloggato;
+
+    }
+
 
     @Override
     public String toString() {

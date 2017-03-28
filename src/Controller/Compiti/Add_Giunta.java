@@ -81,13 +81,13 @@ public class Add_Giunta {
     private void Listener() {
 
            //SE NON C E NESSUN ITEM RESTITUISCE NULL
-        if(Box.getSelectedItem() != null) {
-
-            JButton Accetta = view.getAccettaButton();
+        JButton Accetta = view.getAccettaButton();
             Accetta.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
+
+                    if(Box.getSelectedItem() != null)
                     AccettaAction();
 
                 }
@@ -98,10 +98,12 @@ public class Add_Giunta {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-                    Indice = Box.getSelectedIndex();
+                    if(Box.getSelectedItem() != null) {
+                        Indice = Box.getSelectedIndex();
 
-                    AnagraficaController controller;
-                    controller = new AnagraficaController(basicframe, UTENTI.get(Indice), view, "listacandidati");
+                        AnagraficaController controller;
+                        controller = new AnagraficaController(basicframe, UTENTI.get(Indice), view, "listacandidati");
+                    }
 
                 }
             });
@@ -111,14 +113,16 @@ public class Add_Giunta {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-                    Indice = Box.getSelectedIndex();
+                    if(Box.getSelectedItem() != null){
 
-                    MessaggioController controller;
-                    controller = new MessaggioController(basicframe, UTENTI.get(Indice).getCodice_Fiscale(), UtenteLoggato.getNome() + " " + UtenteLoggato.getCognome());
+                       Indice = Box.getSelectedIndex();
 
+                       MessaggioController controller;
+                       controller = new MessaggioController(basicframe, UTENTI.get(Indice).getCodice_Fiscale(), UtenteLoggato.getNome() + " " + UtenteLoggato.getCognome());
+                    }
                 }
             });
-        }
+
     }
 
     /**

@@ -42,8 +42,8 @@ public class AdminHome extends MCHome{
             public void actionPerformed(ActionEvent e) {
 
             Admin controller;
-            controller = new Admin();
-            controller.ResetMC(getBasicframe(), getUtenteloggato(), Dview);
+            controller = new Admin(getBasicframe(), getUtenteloggato());
+            controller.ResetMC(Dview);
 
             }
         });
