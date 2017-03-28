@@ -76,7 +76,7 @@ public class AnagraficaController {
 
 
         basicframe.setdestra(Anagraficaview.getIntermedio0());
-        ArchivistaListner();
+        AAListner();  //A--> archivista   A--> add_giunta
 
     }
 
@@ -385,6 +385,9 @@ public class AnagraficaController {
     }
 
     /**
+     * Setta tutti i campi della sezione A,B,C editabili
+     * Fa comparire i bottoni update e elimina della sezione B
+     * Fa scomparire il bottone di modifica
      *
      */
     private void ModificaAction(){
@@ -409,6 +412,10 @@ public class AnagraficaController {
 
     }
 
+    /**
+     * Richiama i metodi di Update per aggiornare eventuali modifiche delle sezioni A,B,C(per il candidato)
+     * A,B,C,D(per il volontario)
+     */
     private void SalvaAction(){
 
         try {
@@ -426,6 +433,9 @@ public class AnagraficaController {
 
                 if(!a && !b && !c)
                     throw new Exception("Nessun cambiamento");
+
+                basicframe.Message("Salvataggio avvenuto con successo");
+
 
             }else if(utilizzatore.equals("volontario")){
 
@@ -446,11 +456,10 @@ public class AnagraficaController {
                 if(!a && !b && !c && !d)
                     throw new Exception("Nessun cambiamento");
 
+                basicframe.Message("Salvataggio avvenuto con successo");
 
             }
-
-
-        } catch (Exception es) {
+        }catch (Exception es) {
             basicframe.ErrorMessage(es.getMessage());
         }
 
@@ -515,10 +524,14 @@ public class AnagraficaController {
         });
     }
 
-    private  void ArchivistaListner(){
+    /**
+     * Listener utilizzato escusivamente dall addetto giunta e archivista per uscire dalla sezione anagrafica
+     */
 
-        JButton ArchivistaButton = Anagraficaview.getListaButton();
-        ArchivistaButton.addActionListener(new ActionListener() {
+    private  void AAListner(){
+
+        JButton listaButton = Anagraficaview.getListaButton();
+        listaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -530,7 +543,7 @@ public class AnagraficaController {
     }
 
     /**
-     * Metodo Privato.
+     *
      * Salvataggio si preoccupa di verificare la compilazione,da parte dell utente di tutti i campi contrassegnati
      * come obbligatori, (per fare questo ricorre all utilizzo di un metodo privato VerificaCampiObbligatoriA().
      * Una volta accertata la compilazione avvia l inserimento nel DB
@@ -553,7 +566,6 @@ public class AnagraficaController {
     }
 
     /**
-     * Metodo di servizio.
      * VerificaCampiObbligatoriA si preoccupa di controllare se l utente per sbaglio o volutamente abbia mancato
      * l inserimento dei campi necessari alla sua scheda anagrafica
      *
@@ -591,7 +603,11 @@ public class AnagraficaController {
 
     }
 
-
+    /**
+     * Verifica se i campi della sezione D sono stati completati da parte del utente
+     *
+     * @return true --> completati
+     */
     private boolean VerificaCampiObbligatoriD(){
 
         boolean controllo = false;
@@ -606,7 +622,6 @@ public class AnagraficaController {
     }
 
     /**
-     * Metodo privato
      * Inizializza i vari campi testo delle sezioni A
      * Pone i vari campi delle sezioni A  non editabili
      */
@@ -629,11 +644,9 @@ public class AnagraficaController {
     }
 
     /**
-     * Metodo privato
      * Inizializza i vari campi testo delle sezioni C
      * Pone i vari campi delle sezioni C non editabili
      */
-
     private void SettaggioCampi_C() {
 
 
@@ -667,7 +680,6 @@ public class AnagraficaController {
         sez_Dview.setTagliaScarpetext(UTENTE.getTagliascarpe());
 
         sez_Dview.Abilita_Disabilita_Campi(false);
-
 
     }
 
@@ -799,6 +811,7 @@ public class AnagraficaController {
 
         boolean controllo = false;
         int i = 0;
+
         //B
         ArrayList<Certificazione> CERTIFICAZIONI = Utente.getCERTIFICAZIONI();
 
@@ -988,12 +1001,19 @@ public class AnagraficaController {
         return controllo;
     }
 
+    /**
+     * Effettua il salvatazggio in locale dei dati dell utente(relativi alla sezione D)
+     * Effettua il salvataggio degli stesi dati nel DB
+     * Setta il primo accesso a no
+     * @return
+     */
 
     private boolean SalvataggioPrimoAccesso(){
 
         boolean controllo = false;
 
         String[] appoggio = new String[4];
+        //conversione esplicita
         Volontario VOLONTARIO = (Volontario) Utente;
 
         VOLONTARIO.setGrupposanguigno(sez_Dview.getGStext());
