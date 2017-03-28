@@ -302,7 +302,7 @@ public class VolontarioController{
             public void actionPerformed(ActionEvent e) {
 
                 AdminHome controller;
-                controller = new AdminHome(basicframe, Utente );
+                controller = new AdminHome(basicframe, Utente, Dview);
 
             }
 

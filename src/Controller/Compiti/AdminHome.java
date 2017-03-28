@@ -2,6 +2,7 @@ package Controller.Compiti;
 
 import Model.Volontario;
 import View.BasicFrameView;
+import View.VolontarioDView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,11 +14,13 @@ import java.awt.event.ActionListener;
 
 public class AdminHome extends MCHome{
 
+    private VolontarioDView Dview;
     /*Costruttore*/
 
-    public AdminHome(BasicFrameView frame, Volontario UtenteLoggato) {
+    public AdminHome(BasicFrameView frame, Volontario UtenteLoggato, VolontarioDView view) {
 
         super(frame, UtenteLoggato);
+        Dview = view;
         getMcHomeview().VisibilitaResetButton(true);
 
         getMcHomeview().VisibilitaResetCompitiButton(true);
@@ -40,7 +43,7 @@ public class AdminHome extends MCHome{
 
             Admin controller;
             controller = new Admin();
-            controller.ResetMC(getBasicframe());
+            controller.ResetMC(getBasicframe(), getUtenteloggato(), Dview);
 
             }
         });

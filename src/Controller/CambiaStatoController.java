@@ -95,11 +95,11 @@ public class CambiaStatoController {
         if (messaggio.InsertSQL()){
 
             //aggiorno la lista dei mesaggi locale
-
-            ArrayList<String> BROADCAST = Utente.getBROADCAST();
+            messaggio.AggiornaBroadcast(Utente, Dview);
+           /* ArrayList<String> BROADCAST = Utente.getBROADCAST();
             BROADCAST.add("< "+Utente.getNome()+" "+Utente.getCognome()+" > : "+
                     "Ha cambiato il suo stato in : "+stato);
-            Dview.setBroadcast(BROADCAST);
+            Dview.setBroadcast(BROADCAST);*/
             controllo = true;
 
         }

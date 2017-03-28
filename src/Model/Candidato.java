@@ -130,7 +130,7 @@ public class Candidato extends Persona {
         String sql = "Insert into flagvolontario(cf,stato,ruolo) values('" +
                 getCodice_Fiscale()            + "','" +
                 "Attivo"                       + "','" +
-                "Semplice"                     + "')";
+                "Volontario_semplice"          + "')";
 
 
         if(updateQuery(sql))

@@ -337,6 +337,12 @@ public class MC {
         return utilizzatore;
     }
 
+    public BasicFrameView getBasicframe() {
+
+        return basicframe;
+
+    }
+
     @Override
     public String toString() {
 

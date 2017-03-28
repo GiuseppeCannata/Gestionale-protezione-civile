@@ -1,5 +1,9 @@
 package Model;
 
+import View.VolontarioDView;
+
+import java.util.ArrayList;
+
 /**
  * Classe che consente di interagire con il DB per l invio del messaggio
  */
@@ -54,7 +58,7 @@ public class Messaggio extends Model {
 
         openConnection();
 
-        String sql = "Insert messaggi (cf,Mittente,messaggio,letto) values('" +
+        String sql = "Insert messaggi(cf,Mittente,messaggio,letto) values('" +
                 Destinatario                  + "','" +
                 Mittente                      + "','" +
                 Messaggio                     + "','" +
@@ -71,6 +75,17 @@ public class Messaggio extends Model {
 
     }
 
+    public void AggiornaBroadcast(Volontario Utente, VolontarioDView Dview){
+
+        //avviso di broadcast in locale
+        ArrayList<String> BROADCAST = Utente.getBROADCAST();
+
+        BROADCAST.add("< "+Mittente+" > : "+Messaggio);
+
+        Dview.setBroadcast(BROADCAST);
+
+    }
+
     //GETTER e SETTERS
     public String getMessaggio() {
 
@@ -83,6 +98,7 @@ public class Messaggio extends Model {
         Messaggio = messaggio;
 
     }
+
 
     @Override
     public String toString() {

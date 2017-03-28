@@ -219,7 +219,7 @@ public class Volontario extends Persona {
         boolean controllo = false;
         openConnection();
 
-        String sql = "Update flagvolontario set ruolo='Volonatrio_semplice' where cf ='"+getCodice_Fiscale()+"'";
+        String sql = "Update flagvolontario set ruolo='Volontario_semplice' where cf ='"+getCodice_Fiscale()+"'";
 
 
         if(updateQuery(sql))

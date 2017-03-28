@@ -5,7 +5,6 @@ import java.sql.*;
 
 public class DBConnessione{
 
-    // Costanti per la connessione al DB
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static final String DB_URL = "jdbc:mysql://localhost/dbogg?autoReconnect=false&useSSL=false";
     private static final String DB_NAME = "dbogg";
@@ -54,7 +53,6 @@ public class DBConnessione{
      */
     public Connection closeConnection() {
 
-
         try {
             conn.close();
             System.out.println("Chiudo connessione");
@@ -65,6 +63,7 @@ public class DBConnessione{
     }
 
 
+    //GETTER
     public String getDbName(){
 
         return DB_NAME;
@@ -83,4 +82,10 @@ public class DBConnessione{
 
     }
 
+    @Override
+    public String toString() {
+
+        return "DBConnessione{}";
+
+    }
 }
