@@ -15,6 +15,7 @@ public class MCHomeView extends JPanel {
     private JButton resetMCButton;
     private JButton resetCompitiButton;
     private JButton resetRuoliButton;
+    private JButton nominaNuovoAdminButton;
 
     /*costruttore*/
 
@@ -23,6 +24,7 @@ public class MCHomeView extends JPanel {
         resetCompitiButton.setVisible(false);
         resetRuoliButton.setVisible(false);
         resetMCButton.setVisible(false);
+        nominaNuovoAdminButton.setVisible(false);
 
         setVisible(true);
 
@@ -66,6 +68,12 @@ public class MCHomeView extends JPanel {
 
     }
 
+    public JButton getNominaNuovoAdminButton() {
+
+        return nominaNuovoAdminButton;
+
+    }
+
     /*vmetodi per la visibilita dei vari elementi della view*/
     public void VisibilitaResetButton(boolean visibilita){
 
@@ -82,6 +90,11 @@ public class MCHomeView extends JPanel {
 
         resetRuoliButton.setVisible(visibilita);
 
+    }
+
+    public void VisibilitaNominaNuovoAdmin(boolean visibilita){
+
+        nominaNuovoAdminButton.setVisible(visibilita);
     }
 
     @Override
