@@ -37,7 +37,7 @@ public class CambiaStatoController {
 
     /**
      * Ascolto delle azioni svolte dall utente
-     * cambiastato
+     * Botton:cambiastato
      **/
     public void Listener(){
 
@@ -54,9 +54,8 @@ public class CambiaStatoController {
     }
 
     /**
-     * Metodo di servizio
-     * Metodo che richiama l update dell utente loggato affinche il suo stato possa essere modificato
-     * Se il cambiamento avviene correttamente informa l utente di cio
+     * Metodo che richiama l update dell utente loggato affinche il suo stato possa essere modificato.
+     * Se il cambiamento avviene correttamente informa l utente di cio.
      *
      * Richiama MessaggioDiBroadcast
      */

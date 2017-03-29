@@ -45,7 +45,7 @@ public class CFVerificaController {
 
     /**
      * Ascolto operazioni dell'utente
-     * OK,paginaLogin
+     * Botton:OK,paginaLogin
      */
     private void CFVerificaListener(){
 
@@ -73,7 +73,6 @@ public class CFVerificaController {
     }
 
     /**
-     * Metodo di servizio.
      * Gestisce eventuali errori dell utente nella digitazione del codice fiscale, o nella mancata
      * immisione di quest'ultimo.
      * Nel caso di errori l utente verrà avvertito con un messaggio di errore.

@@ -75,8 +75,8 @@ public class Add_Giunta {
     }
 
     /**
-     * Ascolto delle azioni dell utente interagendo con la view
-     * Accetta,Visionascheda,InvioMessaggio
+     * Ascolto delle azioni dell utente interagendo con la view.
+     * Botton:Accetta,Visionascheda,InvioMessaggio
      */
     private void Listener() {
 

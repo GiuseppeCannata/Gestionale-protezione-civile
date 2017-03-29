@@ -136,7 +136,7 @@ public class Archivista {
 
     /**
      * Ascolto azioni dell utente
-     * Ritornaaicompiti
+     * Botton:Ritornaaicompiti
      */
     private void RitornaAiCompitiDaArchivistaListener() {
 
@@ -155,7 +155,7 @@ public class Archivista {
 
     /**
      * Ascolto azioni dell utente
-     * VisionaScheda
+     * Botton:VisionaScheda
      */
 
     private void VisionaSchedaListener() {
@@ -176,7 +176,7 @@ public class Archivista {
 
     /**
      * Ascolto azioni dell utente
-     * Accetta
+     * Botton:Accetta
      */
     private void AccettaListener(){
 
@@ -196,7 +196,7 @@ public class Archivista {
 
     /**
      * Ascolto azioni dell utente
-     * Inviomessagio
+     * Botton:Inviomessagio
      */
 
     private void InvioMessaggioListener(){
@@ -223,7 +223,7 @@ public class Archivista {
 
 
     /**
-     * Metodo che permette di Visionare la scheda dell utente
+     * Metodo che permette di Visionare la scheda dell utente.
      * Richiama AnagraficaController
      */
     private void VisionaSchedaAction() {
@@ -237,7 +237,7 @@ public class Archivista {
     }
 
     /**
-     * Listener per la combobox
+     * Listener per la combobox.
      * In base all utente selezionato, verra visualizzato il suo stato settanto la sezione text della view
      */
     private void Boxlistener(){

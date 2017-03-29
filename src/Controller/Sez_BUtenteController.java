@@ -74,7 +74,7 @@ public class Sez_BUtenteController {
 
     /**
      * Ascolto azioni dell' utente
-     * Aggiungi,boxcertificazioni
+     * Botton:Aggiungi,boxcertificazioni
      */
     private void ListenerRegistrazione(){
 
@@ -150,7 +150,6 @@ public class Sez_BUtenteController {
     }
 
     /**
-     * Metodo di servizio.
      * Si occupa di controllare se l utente clicca erroneamente sul Button Aggiungi senza aver selezionato una
      * certificazion oppure senza aver inserito un Ente di rilascio o N Documento.
      * In seguito alle dovute verifice può procedere con la memorizzazione degli inserimenti
@@ -214,7 +213,7 @@ public class Sez_BUtenteController {
 
     /**
      * Ascolto azioni dell' utente
-     * boxcertificazioni,boxlist, Update,Elimina
+     * Botton:boxcertificazioni,boxlist, Update,Elimina
      *
      */
     private void Listner() {
@@ -367,7 +366,7 @@ public class Sez_BUtenteController {
     }
 
     /**
-     * Fa l update della certificazione in locale
+     * Fa l update della certificazione in locale.
      * Con "in locale" si intende che questo metodo tagga la gertificazione come "update"
      * ma verra veramente aggiornata ( nel DB) quando l utente cliccherà su salva
      */

@@ -48,8 +48,8 @@ public class MessaggioController {
     }
 
     /**
-     * Ascolto delle azioni dell utente
-     * Invia
+     * Ascolto delle azioni dell utente.
+     * Botton:Invia
      */
     private void Listener(){
 
@@ -65,9 +65,9 @@ public class MessaggioController {
     }
 
     /**
-     * Metodo che controlla se il testo inserito rispeta il numero dei caratteri consentiti
-     * In caso negativo avvisa l utente con una finestra di errore
-     * In caso affermativo Salva il messaggio, e avvisa l utente
+     * Metodo che controlla se il testo inserito rispeta il numero dei caratteri consentiti.
+     * In caso negativo avvisa l utente con una finestra di errore.
+     * In caso affermativo Salva il messaggio, e avvisa l utente.
      */
     private void InviaAction(){
 

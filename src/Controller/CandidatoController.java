@@ -110,7 +110,7 @@ public class CandidatoController {
 
     /**
      * Ascolto azioni dell utente
-     * DatiPersonali, Evolvi, logout,home
+     * Botton:DatiPersonali, Evolvi, logout,home
      */
     private void  CandidatoControllerListener(){
 

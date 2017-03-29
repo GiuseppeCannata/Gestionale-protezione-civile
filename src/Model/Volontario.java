@@ -266,7 +266,7 @@ public class Volontario extends Persona {
     /**
      * Consente di effettuare l inserimento nel DB dei dati relativi alla sezione D
      *
-     * @return true --> inserimento andato a buon fine
+     * @return true ,inserimento andato a buon fine
      */
     private boolean InsertD(){
 

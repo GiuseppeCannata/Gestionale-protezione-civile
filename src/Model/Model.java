@@ -46,7 +46,7 @@ public abstract class Model {
     }
 
     /**
-     * selectQuery esegue una query sql per la selezione di dati
+     * esegue una query sql per la selezione di dati
      *
      * @param sql stringa contenente la query in sql
      * @return risultato della query
@@ -64,7 +64,7 @@ public abstract class Model {
     }
 
     /**
-     * updateQuery  esegue una query sql per l'update dei dati (inserimento, modifica e eliminazione)
+     * esegue una query sql per l'update dei dati (inserimento, modifica e eliminazione)
      *
      * @param sql stringa sql
      * @return true , avvenuta con successo
@@ -83,8 +83,23 @@ public abstract class Model {
         return result;
     }
 
+    /**
+     * Metodo il cui corpo verra definito diversamente nelle varie classi figlie.
+     * Serve per l inserimento dei dati nel DB
+     * @return
+     */
     public abstract boolean InsertSQL();
+    /**
+     * Metodo il cui corpo verra definito diversamente nelle varie classi figlie.
+     * Serve per la ricerca dei dati nel DB
+     * @return
+     */
     public abstract boolean SearchSQL();
+    /**
+     * Metodo il cui corpo verra definito diversamente nelle varie classi figlie.
+     * Serve per l update dei dati nel DB
+     * @return
+     */
     public abstract boolean UpdateSQL(String[] Appoggio);
 
 }

@@ -53,8 +53,8 @@ public class MC {
     }
 
     /**
-     * Ascolto le azioni dell utente
-     * Compiti, Ruoli
+     * Ascolto le azioni dell utente.
+     * Botton:Compiti, Ruoli
      */
     private void Listener() {
 
@@ -173,8 +173,8 @@ public class MC {
     }
 
     /**
-     * Ascolto dell azioni dell utente
-     * Assegnacompito, Rimuovicompito, Assegnaruolo, Rimuoviruolo, ritorna
+     * Ascolto dell azioni dell utente.
+     * Botton:Assegnacompito, Rimuovicompito, Assegnaruolo, Rimuoviruolo, ritorna
      */
     private void listener(){
 
@@ -308,7 +308,7 @@ public class MC {
     }
 
     /**
-     * Listner Item per la combobox
+     * Listner Item per la combobox.
      * In base all utente selezionato permette di stampare in Una Jlist i compiti del medesimo
      */
     private void listCompitiListner(){
@@ -344,7 +344,7 @@ public class MC {
     }
 
     /**
-     * Listener Item per la combobox
+     * Listener Item per la combobox.
      * In base all utente selezionato permette di stampare in una Jlist il ruolo del medesimo
      */
     private void listRuoliListner(){

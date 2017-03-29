@@ -234,8 +234,8 @@ public class AnagraficaController {
     }
 
     /**
-     * Listener per il primo accesso
-     * Salva
+     * Listener per il primo accesso.
+     * Botton:Salva
      */
 
     private void primoaccessoListner() {
@@ -258,8 +258,8 @@ public class AnagraficaController {
     }
 
     /**
-     * Ascolto operazioni dell'utente
-     * avanti, indietro
+     * Ascolto operazioni dell'utente.
+     * Botton:avanti, indietro
      *
      */
     private void Listener() {
@@ -320,8 +320,8 @@ public class AnagraficaController {
     }
 
     /**
-     * Listener utilizzato escusivamente nella fase di resgistrazione
-     * PaginaLogin, Salva
+     * Listener utilizzato escusivamente nella fase di resgistrazione.
+     * Botton:PaginaLogin, Salva
      */
     private void RegistrazioneListner() {
 
@@ -354,8 +354,8 @@ public class AnagraficaController {
     }
 
     /**
-     * Listener utilizzato esclusivamete dalL utente(sia canddiato sia volontario)
-     * Modifica, Home, salva
+     * Listener utilizzato esclusivamete dalL utente(sia canddiato sia volontario).
+     * Botton:Modifica, Home, salva
      */
     private void UtenteListner() {
 
@@ -385,9 +385,9 @@ public class AnagraficaController {
     }
 
     /**
-     * Setta tutti i campi della sezione A,B,C editabili
-     * Fa comparire i bottoni update e elimina della sezione B
-     * Fa scomparire il bottone di modifica
+     * Setta tutti i campi della sezione A,B,C editabili.
+     * Fa comparire i bottoni update e elimina della sezione B.
+     * Fa scomparire il bottone di modifica.
      *
      */
     private void ModificaAction(){
@@ -466,8 +466,8 @@ public class AnagraficaController {
     }
 
     /**
-     * Listener utilizzato esclusivamete dal Candidato
-     * Avanti, Indietro
+     * Listener utilizzato esclusivamete dal Candidato.
+     * Botton:Avanti, Indietro
      */
     private void VolontarioListner() {
 
@@ -662,7 +662,6 @@ public class AnagraficaController {
     }
 
     /**
-     * Metodo privato
      * Inizializza i vari campi testo delle sezioni D
      * Pone i vari campi delle sezioni D  non editabili
      */
@@ -1002,9 +1001,9 @@ public class AnagraficaController {
     }
 
     /**
-     * Effettua il salvatazggio in locale dei dati dell utente(relativi alla sezione D)
-     * Effettua il salvataggio degli stesi dati nel DB
-     * Setta il primo accesso a no
+     * Effettua il salvatazggio in locale dei dati dell utente(relativi alla sezione D).
+     * Effettua il salvataggio degli stesi dati nel DB.
+     * Setta il primo accesso a no.
      *
      * @return
      */

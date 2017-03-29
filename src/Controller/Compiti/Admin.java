@@ -35,8 +35,8 @@ public class Admin extends MC {
     }
 
     /**
-     * Ascolto delle azioni dell utente
-     * ResetMC, ResetCompiti,ResetRuoli
+     * Ascolto delle azioni dell utente.
+     * Botton:ResetMC, ResetCompiti,ResetRuoli
      */
     private void AdminHomeListener(){
 

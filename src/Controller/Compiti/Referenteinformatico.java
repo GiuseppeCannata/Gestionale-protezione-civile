@@ -72,8 +72,8 @@ public class Referenteinformatico {
 
 
     /**
-     * Ascolto le azioni dell utente
-     * ResettaPassword
+     * Ascolto le azioni dell utente.
+     * Botton: ResettaPassword
      */
     private void Listener() {
 
@@ -90,8 +90,7 @@ public class Referenteinformatico {
     }
 
     /**
-     * Metodo di servizio
-     * Avvia l update(dell utente selezionato) per effettuare l aggiornamento della password
+     * Avvia l update(dell utente selezionato) per effettuare l aggiornamento della password.
      * Richiede al referente informatico l immissione dell nuova password
      */
     private void ResettaAction(){

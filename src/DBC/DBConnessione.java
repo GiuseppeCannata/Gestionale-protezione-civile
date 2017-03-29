@@ -2,7 +2,9 @@ package DBC;
 
 import java.sql.*;
 
-
+/**
+ * Classe contenente i dati e i metodi per consentire la connessione col DB
+ */
 public class DBConnessione{
 
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
