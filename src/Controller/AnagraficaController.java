@@ -400,7 +400,7 @@ public class AnagraficaController {
 
         sez_Bview.Abilita_Disabilita_Campi(true);
         sez_Bview.VisibilitaEliminaButton(true);
-        sez_Bview.VisibilitaAggiungiButton(true);
+        sez_Bview.VisibilitaAggiungiButton(false);
         sez_Bview.VisibilitaUpdateButton(true);
 
         sez_Cview.Abilita_Disabilita_Campi(true);

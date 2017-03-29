@@ -34,7 +34,7 @@ public class Sez_BUtenteController {
         return;
 
     }
-
+    //utente gia registrato
     public Sez_BUtenteController(Sez_BView view2, ArrayList<Certificazione> Certificazioni, BasicFrameView frame,
                                  String CodiceFiscale) {
 
@@ -49,12 +49,13 @@ public class Sez_BUtenteController {
         sez_Bview.VisibilitaUpdateButton(false);
         sez_Bview.VisibilitaEliminaButton(false);
 
+
         Listner();
 
 
     }
 
-
+   //registrazione
     public Sez_BUtenteController(BasicFrameView frame, Sez_BView view2, String CodiceFiscale) {
 
         basicframe = frame;
