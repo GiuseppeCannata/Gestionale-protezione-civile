@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 /**
- * CandidatoDestraView
  * View della parte destra della basicframe mostrata al login del Candidato
  */
 public class CandidatoDestraView extends JPanel {

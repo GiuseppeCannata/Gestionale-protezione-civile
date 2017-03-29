@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * LoginController --> Controller per la LoginView
+ * Controller per la LoginView
  */
 
 public class LoginController {
@@ -46,7 +46,7 @@ public class LoginController {
      * Gestisce gli eventi scatenati dall utente interagendo con la LoginView
      *
      *  Ascolto azioni dell' utente
-     *  --> Registrazione,Accesso
+     *  Registrazione,Accesso
      */
     private void loginListener(){
 

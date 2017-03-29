@@ -76,7 +76,7 @@ public class Add_Giunta {
 
     /**
      * Ascolto delle azioni dell utente interagendo con la view
-     * --> Accetta,Visionascheda,InvioMessaggio
+     * Accetta,Visionascheda,InvioMessaggio
      */
     private void Listener() {
 

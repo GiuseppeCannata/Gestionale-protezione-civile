@@ -3,7 +3,6 @@ package View;
 import javax.swing.*;
 
 /**
- * AnagraficaView
  * "Contenitore" per le varie sezioni
  */
 

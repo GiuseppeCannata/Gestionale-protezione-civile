@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
- * Controller per la home dell Admin
+ * Classe rappresentate il compito dell Admin
  */
 
 public class Admin extends MC {
@@ -36,7 +36,7 @@ public class Admin extends MC {
 
     /**
      * Ascolto delle azioni dell utente
-     * -->ResetMC, ResetCompiti,ResetRuoli
+     * ResetMC, ResetCompiti,ResetRuoli
      */
     private void AdminHomeListener(){
 

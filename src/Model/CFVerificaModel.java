@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * CFVerificaModel
  * Si preoccupa di stabilire la connessione col DB(per la CFVerificaController),
  * e di controllare la presenza o meno ,del codicefiscale passato, nel DB
  */
@@ -32,8 +31,8 @@ public class CFVerificaModel extends Model {
     /**
      * SearchSQL Controlla la presenza o meno dell codice fiscale inserito in fase di verifica.
      *
-     * @return true  --> il codice fiscale è presente nel DB(l utente era gia registrato)
-     * @return false --> il codice fiscale non è nel DB(l utente ha bisogno di registrarsi)
+     * @return true  ,il codice fiscale è presente nel DB(l utente era gia registrato)
+     * @return false , il codice fiscale non è nel DB(l utente ha bisogno di registrarsi)
      *
      */
     @Override

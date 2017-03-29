@@ -3,7 +3,6 @@ package View;
 import javax.swing.*;
 
 /**
- * UtenteSinistraView
  * View mostrata alla sinastra della basicframe al Login del candidato
  */
 

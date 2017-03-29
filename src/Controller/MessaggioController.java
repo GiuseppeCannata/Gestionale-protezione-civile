@@ -49,7 +49,7 @@ public class MessaggioController {
 
     /**
      * Ascolto delle azioni dell utente
-     * -->Invia
+     * Invia
      */
     private void Listener(){
 

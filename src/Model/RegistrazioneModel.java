@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * RegistrazioneModel
  * Classe che si occupa dell inserimento e verifica validita username in fase di registrazione
  *
  */
@@ -50,7 +49,7 @@ public class RegistrazioneModel extends Model {
 
     /**
      * Inserimeto,in fase di registrazione delle sez A,B,C
-     * Fa uso di 4 metodi privati:--> insertAIntoSQL, insertBIntoSQL , InsertCIntoSQL, InsertPASS
+     * Fa uso di 4 metodi privati: insertAIntoSQL, insertBIntoSQL , InsertCIntoSQL, InsertPASS
      *
      */
 
@@ -110,8 +109,8 @@ public class RegistrazioneModel extends Model {
      * Metodo di servizio.
      * insertAIntoSQL inserisce i dati inerenti alla sezione A nel DB
      *
-     * @return true --> inserimento andato a buon fine
-     * @return false --> problema in fase di inserimento
+     * @return true ,inserimento andato a buon fine
+     * @return false ,problema in fase di inserimento
      *
      */
     private boolean insertASQL(){
@@ -152,8 +151,8 @@ public class RegistrazioneModel extends Model {
      * insertBIntoSQL inserisce i dati inerenti alla sezione B nel DB
      *
      *
-     * @return true --> inserimento andato a buon fine
-     * @return false --> problema in fase di inserimento
+     * @return true  ,inserimento andato a buon fine
+     * @return false  ,problema in fase di inserimento
      *
      */
     private boolean insertBSQL() {
@@ -184,8 +183,8 @@ public class RegistrazioneModel extends Model {
      * insertCIntoSQL inserisce i dati inerenti alla sezione C nel DB
      *
      *
-     * @return true --> inserimento andato a buon fine
-     * @return false --> problema in fase di inserimento
+     * @return true  ,inserimento andato a buon fine
+     * @return false ,problema in fase di inserimento
      *
      */
    private boolean insertCSQL(){
@@ -218,8 +217,8 @@ public class RegistrazioneModel extends Model {
      * insertPASS inserisce i dati inerenti alla sezione C nel DB
      *
      *
-     * @return true --> inserimento andato a buon fine
-     * @return false --> problema in fase di inserimento
+     * @return true ,inserimento andato a buon fine
+     * @return false ,problema in fase di inserimento
      *
      */
     private boolean InsertPASS(){

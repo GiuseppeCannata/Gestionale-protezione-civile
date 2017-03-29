@@ -3,7 +3,6 @@ package View;
 import javax.swing.*;
 
 /**
- * Sez_BView
  * Form per la sezione B
  */
 
@@ -112,18 +111,18 @@ public class Sez_BView extends JPanel{
 
     }
 
-    public void VisibilitàAggiungiButton(boolean visibilita){
+    public void VisibilitaAggiungiButton(boolean visibilita){
 
         aggiungiButton.setVisible(visibilita);
 
     }
-    public void VisibilitàEliminaButton(boolean visibilita){
+    public void VisibilitaEliminaButton(boolean visibilita){
 
         eliminaButton.setVisible(visibilita);
 
     }
 
-    public void VisibilitàUpdateButton(boolean visibilita){
+    public void VisibilitaUpdateButton(boolean visibilita){
 
         updateButton.setVisible(visibilita);
 

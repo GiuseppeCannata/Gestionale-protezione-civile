@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
- * CandidatoController --> Controller per la CandidatoView
+ * Controller per la CandidatoView
  */
 public class CandidatoController {
 
@@ -110,7 +110,7 @@ public class CandidatoController {
 
     /**
      * Ascolto azioni dell utente
-     * --> DatiPersonali, Evolvi, logout,home
+     * DatiPersonali, Evolvi, logout,home
      */
     private void  CandidatoControllerListener(){
 

@@ -37,7 +37,7 @@ public class CambiaStatoController {
 
     /**
      * Ascolto delle azioni svolte dall utente
-     * -->cambiastato
+     * cambiastato
      **/
     public void Listener(){
 
@@ -58,7 +58,7 @@ public class CambiaStatoController {
      * Metodo che richiama l update dell utente loggato affinche il suo stato possa essere modificato
      * Se il cambiamento avviene correttamente informa l utente di cio
      *
-     * Richiama --> MessaggioDiBroadcast
+     * Richiama MessaggioDiBroadcast
      */
     private void CambiaStatoAction(){
 
@@ -81,8 +81,8 @@ public class CambiaStatoController {
      * Se l utente cambia lo stato, questa informazione viene resa pubblica ai volontari attraverso un messaggio di broadcast.
      * Per fare questo utilizziamo questo metodo
      *
-     * @return true --> messaggio salvato
-     * @return false --> messaggio non salvatio
+     * @return true ,messaggio salvato
+     * @return false  ,messaggio non salvatio
      */
     private boolean MessaggioDiBroadcast(){
 

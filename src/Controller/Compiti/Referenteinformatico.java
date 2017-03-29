@@ -59,6 +59,9 @@ public class Referenteinformatico {
 
     }
 
+    /**
+     * Permette di stampare la lista degli utenti nella Combobox
+     */
 
     public void stampalista () {
 
@@ -70,7 +73,7 @@ public class Referenteinformatico {
 
     /**
      * Ascolto le azioni dell utente
-     * -->ResettaPassword
+     * ResettaPassword
      */
     private void Listener() {
 

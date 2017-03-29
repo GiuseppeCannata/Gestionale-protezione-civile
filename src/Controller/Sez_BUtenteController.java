@@ -12,7 +12,7 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 /**
- * Sez_BUtenteController --> Controller per la sezione B --> l utilizzatore è un utente gia registrato
+ * Controller per la sezione B l utilizzatore è un utente gia registrato
  */
 
 public class Sez_BUtenteController {
@@ -45,9 +45,9 @@ public class Sez_BUtenteController {
         basicframe = frame;
         codicefiscale = CodiceFiscale;
         sez_Bview.Abilita_Disabilita_Campi(false);
-        sez_Bview.VisibilitàAggiungiButton(false);
-        sez_Bview.VisibilitàUpdateButton(false);
-        sez_Bview.VisibilitàEliminaButton(false);
+        sez_Bview.VisibilitaAggiungiButton(false);
+        sez_Bview.VisibilitaUpdateButton(false);
+        sez_Bview.VisibilitaEliminaButton(false);
 
         Listner();
 
@@ -60,8 +60,8 @@ public class Sez_BUtenteController {
         basicframe = frame;
         codicefiscale = CodiceFiscale;
         sez_Bview = view2;
-        sez_Bview.VisibilitàEliminaButton(false);
-        sez_Bview.VisibilitàUpdateButton(false);
+        sez_Bview.VisibilitaEliminaButton(false);
+        sez_Bview.VisibilitaUpdateButton(false);
 
         CERTIFICAZIONI = new ArrayList<>(25);
 
@@ -74,7 +74,7 @@ public class Sez_BUtenteController {
 
     /**
      * Ascolto azioni dell' utente
-     * --> Aggiungi,boxcertificazioni
+     * Aggiungi,boxcertificazioni
      */
     private void ListenerRegistrazione(){
 
@@ -214,7 +214,7 @@ public class Sez_BUtenteController {
 
     /**
      * Ascolto azioni dell' utente
-     * --> boxcertificazioni,boxlist, Update,Elimina
+     * boxcertificazioni,boxlist, Update,Elimina
      *
      */
     private void Listner() {
@@ -340,8 +340,8 @@ public class Sez_BUtenteController {
     /**
      * Certca all interno dell ArrayList l indice della certificazione selezionata
      *
-     * @return true --> trovata
-     * @return false --> non trovata
+     * @return true ,trovata
+     * @return false ,non trovata
      */
 
     private boolean Ricerca(){

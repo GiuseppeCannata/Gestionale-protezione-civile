@@ -3,7 +3,6 @@ package View;
 import javax.swing.*;
 
 /**
- * Sez_AView
  * Form per la sezione A
  */
 

@@ -3,8 +3,6 @@ package View;
 import javax.swing.*;
 
 /**
- * LoginView
- * estende JPanel.
  * E' il pannello di login
  */
 public class LoginView extends JPanel{

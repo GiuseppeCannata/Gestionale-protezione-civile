@@ -3,7 +3,6 @@ package View;
 import javax.swing.*;
 
 /**
- * CFVerificaView estende JPanel.
  * E' il pannello di verifica dell codice fiscale
  */
 

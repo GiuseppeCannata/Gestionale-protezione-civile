@@ -2,7 +2,6 @@ package Model;
 
 
 /**
- * Certificazione
  * Raffigura la struttura(presente nel DB) dei corsi, patenti, abilitazioni dell utente
  */
 public class Certificazione extends Model{
@@ -86,7 +85,7 @@ public class Certificazione extends Model{
     /**
      * Esegue l update della certificazione nel DB
      *
-     * @return true --> andato a buon fine
+     * @return true ,andato a buon fine
      **/
     public boolean updatesql(){
 
@@ -109,7 +108,7 @@ public class Certificazione extends Model{
     /**
      * Elimina la certificazinoe dal DB
      *
-     * @return true--> eliminazione andata a buon fine
+     * @return true , eliminazione andata a buon fine
      */
     public boolean DeleteSQL(){
 

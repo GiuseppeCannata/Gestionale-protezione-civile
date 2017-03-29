@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * LoginModel
  * Si preoccupa di stabilire la connessione col DB, e di controllare la presenza o meno dell username e password nel DB
  */
 public class LoginModel extends Model {
@@ -33,10 +32,10 @@ public class LoginModel extends Model {
 
     /**
      * SearchSQL controlla l' esatezza dell username e password inseriti dall'utente, cercandoli all interno del DB.
-     * Fa uso di due metodi di servizio. --> TrovaUser, TrovaPass
+     * Fa uso di due metodi di servizio TrovaUser, TrovaPass
      *
-     * @return true --> ok, user e pass corretti
-     * @return false --> username e password errati
+     * @return true ,ok, user e pass corretti
+     * @return false ,username e password errati
      *
      **/
 

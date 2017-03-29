@@ -34,6 +34,8 @@ public class Archivista {
     private String utilizzatore;
 
    /*costruttore*/
+
+   /*costruttore vuoto*/
     public Archivista() {
 
         return;
@@ -54,7 +56,7 @@ public class Archivista {
 
     /**
      * Ascolto azioni dell utente
-     * -->Listacandidati,TuttiIVolontari
+     * Listacandidati,TuttiIVolontari
      */
     private void ArchivistaHomeContriollerListener() {
 
@@ -134,7 +136,7 @@ public class Archivista {
 
     /**
      * Ascolto azioni dell utente
-     * -->Ritornaaicompiti,
+     * Ritornaaicompiti
      */
     private void RitornaAiCompitiDaArchivistaListener() {
 
@@ -153,7 +155,7 @@ public class Archivista {
 
     /**
      * Ascolto azioni dell utente
-     * -->VisionaScheda
+     * VisionaScheda
      */
 
     private void VisionaSchedaListener() {
@@ -174,7 +176,7 @@ public class Archivista {
 
     /**
      * Ascolto azioni dell utente
-     * -->Accetta
+     * Accetta
      */
     private void AccettaListener(){
 
@@ -194,7 +196,7 @@ public class Archivista {
 
     /**
      * Ascolto azioni dell utente
-     * -->Inviomessagio
+     * Inviomessagio
      */
 
     private void InvioMessaggioListener(){
@@ -220,6 +222,10 @@ public class Archivista {
     }
 
 
+    /**
+     * Metodo che permette di Visionare la scheda dell utente
+     * Richiama AnagraficaController
+     */
     private void VisionaSchedaAction() {
 
         int Indice;
@@ -257,7 +263,7 @@ public class Archivista {
     }
 
     /**
-     *
+     * Metodo per la conferma della scheda dell utente
      */
     private void AccettaArchivistaAction() {
 

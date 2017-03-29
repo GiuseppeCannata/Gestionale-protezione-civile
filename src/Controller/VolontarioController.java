@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
- * Controler per la Home del volontario
+ * Controller per la Home del volontario
  */
 public class VolontarioController{
 
@@ -49,8 +49,8 @@ public class VolontarioController{
     /**
      * Metodo che controlla se l utente è la prima volta che effettua l accesso come volontario
      *
-     * @return true --> primo acccesso
-     * @return false --> non primo accesso
+     * @return true  primo acccesso
+     * @return false non primo accesso
      */
     private boolean Primoaccesso(){
 
@@ -168,7 +168,7 @@ public class VolontarioController{
 
     /**
      * Ascolto delle azioni del volontario
-     * -->Datipersonali,logout,home,cambiastato
+     * Datipersonali,logout,home,cambiastato
      */
     private void VolontarioControllerListener(){
 
@@ -227,12 +227,12 @@ public class VolontarioController{
 
     }
 
-    /**
+    /*
      * A seguire tutti i listener dei vari compiti
-     * --> Archivista
-     * --> Referente informatico
-     * --> Master chief
-     * --> Add Giunta
+     *  Archivista
+     *  Referente informatico
+     *  Master chief
+     *  Add Giunta
      */
     private void ArchivistaListner(){
 

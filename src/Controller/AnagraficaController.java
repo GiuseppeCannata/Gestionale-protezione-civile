@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
- * AnagraficaController --> Controller per la AnagraficaView
+ * Controller per la AnagraficaView
  */
 public class AnagraficaController {
 
@@ -235,7 +235,7 @@ public class AnagraficaController {
 
     /**
      * Listener per il primo accesso
-     * -->Salva
+     * Salva
      */
 
     private void primoaccessoListner() {
@@ -259,7 +259,7 @@ public class AnagraficaController {
 
     /**
      * Ascolto operazioni dell'utente
-     * --> avanti, indietro
+     * avanti, indietro
      *
      */
     private void Listener() {
@@ -321,7 +321,7 @@ public class AnagraficaController {
 
     /**
      * Listener utilizzato escusivamente nella fase di resgistrazione
-     * -->PaginaLogin, Salva
+     * PaginaLogin, Salva
      */
     private void RegistrazioneListner() {
 
@@ -355,7 +355,7 @@ public class AnagraficaController {
 
     /**
      * Listener utilizzato esclusivamete dalL utente(sia canddiato sia volontario)
-     * --> Modifica, Home, salva
+     * Modifica, Home, salva
      */
     private void UtenteListner() {
 
@@ -399,9 +399,9 @@ public class AnagraficaController {
         sez_Aview.Abilita_Disabilita_Campi(true);
 
         sez_Bview.Abilita_Disabilita_Campi(true);
-        sez_Bview.VisibilitàEliminaButton(true);
-        sez_Bview.VisibilitàAggiungiButton(true);
-        sez_Bview.VisibilitàUpdateButton(true);
+        sez_Bview.VisibilitaEliminaButton(true);
+        sez_Bview.VisibilitaAggiungiButton(true);
+        sez_Bview.VisibilitaUpdateButton(true);
 
         sez_Cview.Abilita_Disabilita_Campi(true);
 
@@ -467,7 +467,7 @@ public class AnagraficaController {
 
     /**
      * Listener utilizzato esclusivamete dal Candidato
-     * -->  Avanti, Indietro
+     * Avanti, Indietro
      */
     private void VolontarioListner() {
 
@@ -569,7 +569,7 @@ public class AnagraficaController {
      * VerificaCampiObbligatoriA si preoccupa di controllare se l utente per sbaglio o volutamente abbia mancato
      * l inserimento dei campi necessari alla sua scheda anagrafica
      *
-     * @return true  --> tutti i campi obbligatori sono completi
+     * @return true, tutti i campi obbligatori sono completi
      */
     private boolean VerificaCampiObbligatoriA() {
 
@@ -606,7 +606,7 @@ public class AnagraficaController {
     /**
      * Verifica se i campi della sezione D sono stati completati da parte del utente
      *
-     * @return true --> completati
+     * @return true ,completati
      */
     private boolean VerificaCampiObbligatoriD(){
 
@@ -686,8 +686,8 @@ public class AnagraficaController {
     /**
      * Controllo eventuali aggiornamenti fatti dall utente  ai suoi dati riguardo la sezione A
      *
-     * @return true  --> l utente ha effettuato delle modifiche che sono state saalvate con successo
-     * @return false --> non c è stato nessun cambiamento
+     * @return true  ,l utente ha effettuato delle modifiche che sono state saalvate con successo
+     * @return false ,non c è stato nessun cambiamento
      */
     private boolean UpdateA() {
 
@@ -803,8 +803,8 @@ public class AnagraficaController {
     /**
      * Controllo eventuali aggiornamenti fatti dall utente  ai suoi dati riguardo la sezione B
      *
-     * @return true  --> l utente ha effettuato delle modifiche che sono state saalvate con successo
-     * @return false --> non c è stato nessun cambiamento
+     * @return true , l utente ha effettuato delle modifiche che sono state saalvate con successo
+     * @return false ,non c è stato nessun cambiamento
      */
 
     private boolean UpdateB() {
@@ -838,8 +838,8 @@ public class AnagraficaController {
     /**
      * Controllo eventuali aggiornamenti fatti dall utente  ai suoi dati riguardo la sezione C
      *
-     * @return true  --> l utente ha effettuato delle modifiche che sono state saalvate con successo
-     * @return false --> non c è stato nessun cambiamento
+     * @return true , l utente ha effettuato delle modifiche che sono state saalvate con successo
+     * @return false ,non c è stato nessun cambiamento
      */
 
     private boolean UpdateC() {
@@ -915,8 +915,8 @@ public class AnagraficaController {
     /**
      * Controllo eventuali aggiornamenti fatti dall utente  ai suoi dati riguardo la sezione d
      *
-     * @return true  --> l utente ha effettuato delle modifiche che sono state saalvate con successo
-     * @return false --> non c è stato nessun cambiamento
+     * @return true, l utente ha effettuato delle modifiche che sono state saalvate con successo
+     * @return false, non c è stato nessun cambiamento
      */
 
     private boolean UpdateD(){
@@ -1005,6 +1005,7 @@ public class AnagraficaController {
      * Effettua il salvatazggio in locale dei dati dell utente(relativi alla sezione D)
      * Effettua il salvataggio degli stesi dati nel DB
      * Setta il primo accesso a no
+     *
      * @return
      */
 

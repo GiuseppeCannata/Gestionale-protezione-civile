@@ -49,7 +49,7 @@ public class Messaggio extends Model {
     /**
      * Inserimento nel DB del messaggio
      *
-     * @return true --> inserimento effettuato con successo
+     * @return true ,inserimento effettuato con successo
      */
     @Override
     public boolean InsertSQL() {

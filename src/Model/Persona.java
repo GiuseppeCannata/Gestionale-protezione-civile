@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Persona
  * Classe abstact poiche non implementa i metodi della classe padre
  * Rappresenta la struttura fondamentale(sez A,B,C,PASS,MESSAGGI) di ogni candidato o volontario
  * Estende Model ma non implementa i suoi metodi astratti

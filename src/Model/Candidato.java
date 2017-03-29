@@ -95,7 +95,7 @@ public class Candidato extends Persona {
      * Query inserimento nella tabella compiti
      *  E' un inserimento di default cioè setta tutti i campi a no
      *
-     * @return true --> inserimento andato bene
+     * @return true ,inserimento andato bene
      */
     private boolean InsertCompiti(){
 
@@ -118,9 +118,9 @@ public class Candidato extends Persona {
 
     /**
      * Query inserimento nella tabella flagvolontario
-     * E' un inserimento di default --> stato: attivo , ruolo: semplice
+     * E' un inserimento di default , stato: attivo , ruolo: semplice
      *
-     * @return true --> inserimento andato a buon fine
+     * @return true ,inserimento andato a buon fine
      */
     private boolean InsertFlagVolontario(){
 

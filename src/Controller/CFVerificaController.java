@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * CFVerificaController --> controller per la CFVerificaView
+ * Controller per la CFVerificaView
  */
 
 public class CFVerificaController {
@@ -45,7 +45,7 @@ public class CFVerificaController {
 
     /**
      * Ascolto operazioni dell'utente
-     * --> OK,paginaLogin
+     * OK,paginaLogin
      */
     private void CFVerificaListener(){
 

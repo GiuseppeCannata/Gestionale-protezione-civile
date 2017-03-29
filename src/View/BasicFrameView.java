@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * BasicFrameView
  * Estende JFrame.
  * E' la finestra principale dell applicazione
  */
@@ -76,7 +75,7 @@ public class BasicFrameView extends JFrame{
     /**
      * Metodo che permette di settare la ScrollPane di destra
      *
-     * @param DESTRA --> Panel di destra
+     * @param DESTRA Panel di destra
      */
     public void setdestra(Component DESTRA) {
 
@@ -87,7 +86,7 @@ public class BasicFrameView extends JFrame{
     /**
      * Metodo che permette di settare lo ScrollPane di sinistra
      *
-     * @param SINISTRA --> Panel di sinistra
+     * @param SINISTRA Panel di sinistra
      */
 
     public void setsinistra(Component SINISTRA) {

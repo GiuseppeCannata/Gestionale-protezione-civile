@@ -16,7 +16,7 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 /**
- * Controller per la home del MC
+ * Classe rappresentante il compito del Master Chief
  */
 public class MC {
 
@@ -33,6 +33,15 @@ public class MC {
     private ArrayList<Persona> UTENTI;
 
 
+    /*COSTRUTTORI*/
+
+    /*costruttore vuoto*/
+    public MC() {
+
+        return;
+
+    }
+
     public MC(BasicFrameView frame, Volontario UtenteLoggato) {
 
         basicframe = frame;
@@ -45,7 +54,7 @@ public class MC {
 
     /**
      * Ascolto le azioni dell utente
-     * -->Compiti, Ruoli
+     * Compiti, Ruoli
      */
     private void Listener() {
 
@@ -120,7 +129,7 @@ public class MC {
     }
 
     /**
-     * Settaggio della view
+     * Settaggio della view in base all utilizzatore(compiti,ruoli)
      */
     private void settaggioview(){
 
@@ -165,7 +174,7 @@ public class MC {
 
     /**
      * Ascolto dell azioni dell utente
-     * -->Assegnacompito, Rimuovicompito, Assegnaruolo, Rimuoviruolo, ritorna
+     * Assegnacompito, Rimuovicompito, Assegnaruolo, Rimuoviruolo, ritorna
      */
     private void listener(){
 
@@ -386,36 +395,52 @@ public class MC {
 
     }
 
-    public void setUtilizzatore(String utilizzatore) {
-        this.utilizzatore = utilizzatore;
+    public void setUtilizzatore(String Utilizzatore) {
+
+       utilizzatore = Utilizzatore;
+
     }
 
-    public void setAppoggio(String appoggio) {
-        this.appoggio = appoggio;
+    public void setAppoggio(String Appoggio) {
+
+        appoggio = Appoggio;
+
     }
 
-    public void setModel(GestioneModel model) {
-        this.model = model;
+    public void setModel(GestioneModel Model) {
+
+        model = Model;
+
     }
 
     public String getAppoggio() {
+
         return appoggio;
+
     }
 
     public String getUtilizzatore() {
+
         return utilizzatore;
+
     }
 
-    public void setUTENTI(ArrayList<Persona> UTENTI) {
-        this.UTENTI = UTENTI;
+    public void setUTENTI(ArrayList<Persona> uTENTI) {
+
+        UTENTI = uTENTI;
+
     }
 
     public GestioneModel getModel() {
+
         return model;
+
     }
 
     public ArrayList<Persona> getUTENTI() {
+
         return UTENTI;
+
     }
 
     @Override

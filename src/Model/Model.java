@@ -67,7 +67,7 @@ public abstract class Model {
      * updateQuery  esegue una query sql per l'update dei dati (inserimento, modifica e eliminazione)
      *
      * @param sql stringa sql
-     * @return true --> avvenuta con successo
+     * @return true , avvenuta con successo
      */
     protected boolean updateQuery(String sql) {
 
