@@ -295,7 +295,7 @@ public class MC {
     }
 
     /**
-     *  Stampa la lista degli utenti nella box
+     *  Stampa la lista degli utenti nella box in base al ruolo dell utente loggato
      */
     public void stampalista() {
 
@@ -303,22 +303,36 @@ public class MC {
 
         for (Persona utente : UTENTI) {
 
-            if(getUtenteloggato().getRuolo().equals("Admin"))
-                if (!utente.getCodice_Fiscale().equals(getUtenteloggato().getCodice_Fiscale()))
-                    Box.addItem(utente.getCognome() + "    -    " + utente.getNome());
+            switch (getUtenteloggato().getRuolo()) {
 
-            if(getUtenteloggato().getRuolo().equals("Vicecordinatore"))
-                if (!utente.getCodice_Fiscale().equals(getUtenteloggato().getCodice_Fiscale())
-                    && !((Volontario) utente).getRuolo().equals("Admin") && !((Volontario) utente).getRuolo().equals("Cordinatore"))
-                    Box.addItem(utente.getCognome() + "    -    " + utente.getNome());
+                case "Admin": {
 
-            if(getUtenteloggato().getRuolo().equals("Cordinatore"))
-              if (!utente.getCodice_Fiscale().equals(getUtenteloggato().getCodice_Fiscale())
-                    && !((Volontario) utente).getRuolo().equals("Admin"))
-                Box.addItem(utente.getCognome() + "    -    " + utente.getNome());
+                    if (!utente.getCodice_Fiscale().equals(getUtenteloggato().getCodice_Fiscale()))
+                        Box.addItem(utente.getCognome() + "    -    " + utente.getNome());
+                    break;
+
+                }
+
+                case "Vicecordinatore": {
+
+                    if (!utente.getCodice_Fiscale().equals(getUtenteloggato().getCodice_Fiscale())
+                            && !((Volontario) utente).getRuolo().equals("Admin") && !((Volontario) utente).getRuolo().equals("Cordinatore"))
+                        Box.addItem(utente.getCognome() + "    -    " + utente.getNome());
+                    break;
+
+                }
+
+                case "Cordinatore": {
+
+                    if (!utente.getCodice_Fiscale().equals(getUtenteloggato().getCodice_Fiscale())
+                            && !((Volontario) utente).getRuolo().equals("Admin"))
+                        Box.addItem(utente.getCognome() + "    -    " + utente.getNome());
+                    break;
+
+                }
 
 
-
+            }
         }
     }
 
