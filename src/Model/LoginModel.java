@@ -49,7 +49,7 @@ public class LoginModel extends Model {
      alla seconda chiamata si posiziona sulla seconda row e cosi via
     */
 
-        Boolean controllo = false;
+        boolean controllo = false;
 
         openConnection();
 

@@ -13,15 +13,22 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
- * Classe rappresentate il compito dell Admin
+ * Classe rappresentate il compito dell Master_Chief_Plus.
  */
 
-public class Admin extends MC {
+public class MCP extends MC {
 
     private VolontarioDView Dview;
-    /*Costruttore*/
 
-    public Admin(BasicFrameView frame, Volontario UtenteLoggato, VolontarioDView view) {
+    /*Costruttori*/
+
+    public MCP() {
+
+        super();
+
+    }
+
+    public MCP(BasicFrameView frame, Volontario UtenteLoggato, VolontarioDView view) {
 
         super(frame, UtenteLoggato);
         Dview = view;
@@ -82,7 +89,7 @@ public class Admin extends MC {
 
                     setModel(new GestioneModel(getAppoggio()));
 
-                    setUTENTI(getModel().Compiti());
+                    setUTENTI(getModel().CompitiRuoli());
                     ResetAction();
                 }
 
@@ -102,7 +109,7 @@ public class Admin extends MC {
 
                     setModel(new GestioneModel(getAppoggio()));
 
-                    setUTENTI(getModel().Ruoli());
+                    setUTENTI(getModel().CompitiRuoli());
                     ResetAction();
                 }
 
@@ -128,6 +135,8 @@ public class Admin extends MC {
 
             if(cf != null) {
 
+                setModel(new GestioneModel("vol_o_cand=1"));
+
                 if (cf.length() == 0)
                     throw new Exception("Inserire codice fiscale");
 
@@ -137,10 +146,11 @@ public class Admin extends MC {
                 if (cf.equals(getUtenteloggato().getCodice_Fiscale()))
                     throw new Exception("Errore è il suo codice fiscale");
 
+                if(!getModel().SearchUtente(cf))
+                    throw new Exception("Utente non trovato");
 
 
-                setModel(new GestioneModel("vol_o_cand=1"));
-                setUTENTI(getModel().Ruoli());
+                setUTENTI(getModel().CompitiRuoli());
 
                 //cerco il vecchio cordinatore per resettarlo a volontario semplice
                 for (Persona utente : getUTENTI()) {
@@ -153,7 +163,7 @@ public class Admin extends MC {
 
                         //messaggio privato --> lo informo del passaggio a volontario semplice
                         Messaggio sms;
-                        sms = new Messaggio(volontario.getCodice_Fiscale(), "Admin",
+                        sms = new Messaggio(volontario.getCodice_Fiscale(), "MCP",
                                 "Sei diventato un Volontario_semplice");
 
                         if (sms.InsertSQL())
@@ -184,7 +194,7 @@ public class Admin extends MC {
                                 messaggio.AggiornaBroadcast(getUtenteloggato(), Dview);
 
                                 //messaggio privato per il nuovo cordinatore
-                                Messaggio sms = new Messaggio(cf, "Admin", "Sei diventato un Cordinatore");
+                                Messaggio sms = new Messaggio(cf, "MCP", "Sei diventato un Cordinatore");
 
                                 if (sms.InsertSQL())
                                     getBasicframe().Message("Cambiamento avvenuto!\nHo inoltre avvertito il nuovo Codinatore");
@@ -227,7 +237,7 @@ public class Admin extends MC {
     }
 
     /**
-     * Metodo che permette di nominare il nuovo Admin
+     * Metodo che permette di nominare il nuovo MCP
      *
      */
     private void NominaNuovoAdminAction(){
@@ -238,6 +248,8 @@ public class Admin extends MC {
 
             if(cf != null) {
 
+                setModel(new GestioneModel());
+
                 if (cf.length() == 0)
                     throw new Exception("Inserire codice fiscale");
 
@@ -247,8 +259,9 @@ public class Admin extends MC {
                 if (cf.equals(getUtenteloggato().getCodice_Fiscale()))
                     throw new Exception("Errore è il suo codice fiscale");
 
-                setModel(new GestioneModel("vol_o_cand=1"));
-                setUTENTI(getModel().Ruoli());
+                if(!getModel().SearchUtente(cf))
+                    throw new Exception("Utente non trovato");
+
 
                 //Cancello il vecchio admin
                 String[] appoggio = new String[4];
@@ -257,31 +270,32 @@ public class Admin extends MC {
                 appoggio[2] = "Direttivo";
                 appoggio[3] = getUtenteloggato().getCodice_Fiscale();
 
-                if(getModel().UpdateSQL(appoggio)) {
+                                                    //il vecchio admin perde tutti i compiti prima posseduti
+                if(getModel().UpdateSQL(appoggio) && getUtenteloggato().ResetCompiti()) {
 
 
-                    //ELEGGO IL NUOVO Admin
+                    //ELEGGO IL NUOVO MCP
                     appoggio[0] = "flagvolontario";
                     appoggio[1] = "ruolo";
-                    appoggio[2] = "Admin";
+                    appoggio[2] = "Direttivo";
                     appoggio[3] = cf;
 
-                    if (getModel().UpdateSQL(appoggio)) {
+                    if (getModel().UpdateSQL(appoggio) && getModel().SetteggioNuovoAdmin(cf)) {
 
                         //messaggio di Broadcast
                         Messaggio messaggio = new Messaggio("Broadcast", "INFO",
                                 getUtenteloggato().getNome() + " " + getUtenteloggato().getCognome() +
-                                        " non è più l Admin ");
+                                        " non è più l MCP ");
 
                         if (messaggio.InsertSQL()) {
 
                             messaggio.AggiornaBroadcast(getUtenteloggato(), Dview);
 
                             //messaggio privato per il nuovo cordinatore
-                            Messaggio sms = new Messaggio(cf, "Admin", "Sei diventato il nuovo Admin");
+                            Messaggio sms = new Messaggio(cf, "MCP", "Sei diventato il nuovo MCP");
 
                             if (sms.InsertSQL())
-                                getBasicframe().Message("Cambiamento avvenuto!\nHo inoltre avvertito il nuovo Admin"
+                                getBasicframe().Message("Cambiamento avvenuto!\nHo inoltre avvertito il nuovo MCP"
                                         + "\nPer vedere le modifiche apportate effettuare un logout!");
                         }
                     }
@@ -300,7 +314,7 @@ public class Admin extends MC {
     @Override
     public String toString() {
 
-        return "Admin{}";
+        return "MCP{}";
 
     }
 

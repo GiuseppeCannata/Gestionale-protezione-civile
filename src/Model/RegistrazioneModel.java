@@ -55,7 +55,7 @@ public class RegistrazioneModel extends Model {
 
     public boolean InsertSQL(){
 
-        Boolean controllo = true;
+        boolean controllo = true;
 
 
         if(!insertASQL() || !insertBSQL() || !insertCSQL() || !InsertPASS() )
@@ -76,7 +76,7 @@ public class RegistrazioneModel extends Model {
 
         openConnection();
 
-        Boolean controllo = false;
+        boolean controllo = false;
 
         String sql ="select user from pass where user='"+UsernameInserito+"'";
         ResultSet query = selectQuery(sql);
@@ -115,7 +115,7 @@ public class RegistrazioneModel extends Model {
      */
     private boolean insertASQL(){
 
-        Boolean controllo = false;
+        boolean controllo = false;
 
          openConnection();
 
@@ -189,7 +189,7 @@ public class RegistrazioneModel extends Model {
      */
    private boolean insertCSQL(){
 
-       Boolean controllo = false;
+       boolean controllo = false;
 
        openConnection();
 
@@ -223,7 +223,7 @@ public class RegistrazioneModel extends Model {
      */
     private boolean InsertPASS(){
 
-       Boolean controllo = false;
+       boolean controllo = false;
        openConnection();
        String sql = "Insert into pass(cf,pass,user,vol_o_cand,conf_giunta,primoaccesso,Conf_Archivista) values('" +
                codicefiscale                                    + "','" +

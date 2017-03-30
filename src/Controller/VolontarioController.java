@@ -160,8 +160,8 @@ public class VolontarioController{
 
         if(Utente.getRuolo().equals("Admin") ){
 
-            Dview.VisibilitaAdminButton(true);
-            AdminListener();
+            Dview.VisibilitaMCPButton(true);
+            MCPListener();
 
         }
     }
@@ -294,15 +294,15 @@ public class VolontarioController{
         });
     }
 
-    private void AdminListener(){
+    private void MCPListener(){
 
-        JButton Admin = Dview.getAdminButton();
-        Admin.addActionListener(new ActionListener() {
+        JButton mcp = Dview.getMaster_Chief_PlusButton();
+        mcp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Controller.Compiti.Admin controller;
-                controller = new Admin(basicframe, Utente, Dview);
+                MCP controller;
+                controller = new MCP(basicframe, Utente, Dview);
 
             }
 

@@ -41,7 +41,7 @@ public class Add_Giunta {
 
         basicframe = frame;
         view = new ListaggiView();
-        appoggio = "conf_giunta=0";
+        appoggio = "vol_o_cand=0 and conf_giunta=0";
         model = new GestioneModel(appoggio);
         UtenteLoggato = Utenteloggato;
         Indice = 0;

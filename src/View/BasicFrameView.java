@@ -23,7 +23,7 @@ public class BasicFrameView extends JFrame{
         setSize(950, 500);
         setLocation(250, 100);
         setContentPane(Intermedio0);
-        Image icon = Toolkit.getDefaultToolkit().getImage("immagini/Logo_PC_Nazionale.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Giuseppe\\Downloads\\Università\\ProtezioneCivileGestionale\\immagini\\Logo_PC_Nazionale.png");
         setIconImage(icon);
         setResizable(false);
 

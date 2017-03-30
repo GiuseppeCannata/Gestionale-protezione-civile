@@ -85,11 +85,11 @@ public class GestioneModel extends Model{
     }
 
     /**
-     * Consete di popolare la sezione compiti
+     * Consete di popolare la sezione compiti e ruoli
      *
      * @return Un ArrayList contentente i vari utenti
      */
-    public ArrayList<Persona> Compiti(){
+    public ArrayList<Persona> CompitiRuoli(){
 
         try {
 
@@ -110,6 +110,7 @@ public class GestioneModel extends Model{
                 //conversione esplicita
                 Volontario VOLONTARIO = (Volontario) utente;
                 VOLONTARIO.popolacompiti();
+                VOLONTARIO.popolaruolo();
 
                 listutenti.add(listutenti.size(), utente);
 
@@ -125,42 +126,23 @@ public class GestioneModel extends Model{
     }
 
     /**
-     * Consete di popolare la sezione ruoli
-     *
-     * @return Un ArrayList contentente i vari utenti
+     * Metodo che permette si dare tutti i compiti all MCP quando viene nominato
+     * @param cf
+     * @return
      */
-    public ArrayList<Persona> Ruoli() {
+    public boolean SetteggioNuovoAdmin(String cf){
 
-        try {
+        boolean controllo = false;
+        openConnection();
 
-            openConnection();
+        String sql = "Update compiti set Archivista='si', Add_Giunta='si', Referente_Informatico='si' where cf ='"+cf+"'";
 
-            String sql = "select * from a,pass where "+appoggio+" and a.cf=pass.cf order by cognome,nome ";
 
-            ResultSet query = selectQuery(sql);
+        if(updateQuery(sql))
+            controllo=true;
 
-            while (query.next()) {
-
-                Persona utente = new Volontario();
-
-                utente.setCodice_Fiscale(query.getString("cf"));
-                utente.setNome(query.getString("nome"));
-                utente.setCognome(query.getString("cognome"));
-
-                //conversione eplicita
-                Volontario VOLONTARIO = (Volontario) utente;
-                VOLONTARIO.popolaruolo();
-
-                listutenti.add(listutenti.size(), utente);
-
-            }
-
-        } catch (SQLException se) {
-            se.printStackTrace();
-        }finally{
-            closeConnection();
-            return listutenti;
-        }
+        closeConnection();
+        return controllo;
 
     }
 
@@ -207,6 +189,39 @@ public class GestioneModel extends Model{
 
        return controllo;
     };
+
+    /**
+     * Metodo che permette di verificare la presenza nel DB dell utente
+     * @param cf
+     * @return
+     */
+    public boolean SearchUtente(String cf){
+
+
+        boolean controllo = false;
+
+        openConnection();
+
+        String sql ="select * from pass where cf='"+cf+"'";
+        ResultSet query = selectQuery(sql);
+
+        try {
+
+            if(query.next())
+                controllo = true;
+
+
+
+        }catch(SQLException se){
+            se.printStackTrace();
+        }finally{
+            closeConnection();
+        }
+
+        return controllo;
+
+
+    }
 
     @Override
     public boolean UpdateSQL(String[] Appoggio){

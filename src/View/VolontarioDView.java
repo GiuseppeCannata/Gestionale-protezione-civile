@@ -22,7 +22,7 @@ public class VolontarioDView extends JPanel{
     private JTabbedPane tabbedPane1;
     private JScrollPane ScrollPaneBroadcast;
     private JScrollPane ScrollPaneMessaggi;
-    private JButton adminButton;
+    private JButton master_Chief_PlusButton;
 
 
     public VolontarioDView() {
@@ -31,7 +31,7 @@ public class VolontarioDView extends JPanel{
         referenteInformaticoButton.setVisible(false);
         addGiuntaComunaleButton.setVisible(false);
         master_ChiefButton.setVisible(false);
-        adminButton.setVisible(false);
+        master_Chief_PlusButton.setVisible(false);
         setVisible(true);
 
     }
@@ -74,9 +74,9 @@ public class VolontarioDView extends JPanel{
 
     }
 
-    public JButton getAdminButton() {
+    public JButton getMaster_Chief_PlusButton() {
 
-        return adminButton;
+        return master_Chief_PlusButton;
 
     }
 
@@ -142,9 +142,9 @@ public class VolontarioDView extends JPanel{
 
     }
 
-    public void VisibilitaAdminButton(boolean visibilita){
+    public void VisibilitaMCPButton(boolean visibilita){
 
-        adminButton.setVisible(visibilita);
+        master_Chief_PlusButton.setVisible(visibilita);
 
     }
 

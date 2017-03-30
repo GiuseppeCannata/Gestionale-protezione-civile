@@ -1,6 +1,5 @@
 package Controller.Compiti;
 
-
 import Model.GestioneModel;
 import Model.Persona;
 import Model.Volontario;
@@ -16,7 +15,7 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 /**
- * Classe rappresentante il compito del Master Chief
+ * Classe rappresentante il compito del MasterChief.
  */
 public class MC {
 
@@ -54,12 +53,12 @@ public class MC {
 
     /**
      * Ascolto le azioni dell utente.
-     * Botton:Compiti, Ruoli
+     * Botton:CompitiRuoli, Ruoli
      */
     private void Listener() {
 
 
-        /*Compiti*/
+        /*CompitiRuoli*/
         JButton Compiti = mcHomeview.getCompitiButton();
         Compiti.addActionListener(new ActionListener() {
 
@@ -145,7 +144,7 @@ public class MC {
                 Box2.addItem("Referente_Informatico");
                 Box2.addItem("Add_Giunta");
 
-                UTENTI = model.Compiti();
+                UTENTI = model.CompitiRuoli();
 
                 listCompitiListner();
                 break;
@@ -162,7 +161,7 @@ public class MC {
                 if(utenteloggato.getRuolo().equals("Cordinatore"))
                     Box2.addItem("Vicecordinatore");
 
-                UTENTI = model.Ruoli();
+                UTENTI = model.CompitiRuoli();
 
                 listRuoliListner();
                 break;
@@ -302,9 +301,25 @@ public class MC {
 
         Box = view.getBox1();
 
-        for (Persona utente : UTENTI)
-            Box.addItem(utente.getCognome() + "    -    " + utente.getNome());
+        for (Persona utente : UTENTI) {
 
+            if(getUtenteloggato().getRuolo().equals("Admin"))
+                if (!utente.getCodice_Fiscale().equals(getUtenteloggato().getCodice_Fiscale()))
+                    Box.addItem(utente.getCognome() + "    -    " + utente.getNome());
+
+            if(getUtenteloggato().getRuolo().equals("Vicecordinatore"))
+                if (!utente.getCodice_Fiscale().equals(getUtenteloggato().getCodice_Fiscale())
+                    && !((Volontario) utente).getRuolo().equals("Admin") && !((Volontario) utente).getRuolo().equals("Cordinatore"))
+                    Box.addItem(utente.getCognome() + "    -    " + utente.getNome());
+
+            if(getUtenteloggato().getRuolo().equals("Cordinatore"))
+              if (!utente.getCodice_Fiscale().equals(getUtenteloggato().getCodice_Fiscale())
+                    && !((Volontario) utente).getRuolo().equals("Admin"))
+                Box.addItem(utente.getCognome() + "    -    " + utente.getNome());
+
+
+
+        }
     }
 
     /**
@@ -322,12 +337,12 @@ public class MC {
 
                 if(e.getSource() ==  Box1) {
 
-
                     for (Persona utente : UTENTI) {
 
                         if (Box1.getSelectedItem().equals(utente.getCognome() + "    -    " + utente.getNome())) {
 
                             Volontario Utente = (Volontario) utente;
+
                             String[] compiti = new String[]{"Referente_Informatico : " + Utente.getReferenteinformatico(),
                                     "Add_Giunta : " + Utente.getAdd_giunta(),
                                     "Archivista : " + Utente.getArchivista()};

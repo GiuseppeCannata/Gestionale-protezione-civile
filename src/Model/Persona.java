@@ -43,7 +43,6 @@ public abstract class Persona extends Model{
     private String Username;
     private String Password;
 
-
     private ArrayList<String> BROADCAST;
     private ArrayList<String> MESSAGGI;
 

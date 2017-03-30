@@ -81,7 +81,6 @@ public class Archivista {
                 UTENTI = gestione.Schede(utilizzatore);
 
                 basicframe.setdestra(view.getIntermedio0());
-                appoggio = "vol_o_cand=0 and Conf_Archivista=0";
                 RitornaAiCompitiDaArchivistaListener();
                 VisionaSchedaListener();
                 AccettaListener();
