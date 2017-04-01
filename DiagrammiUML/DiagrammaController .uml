@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="-1017.7519111446298" y="-208.4162949206543">Controller.Compiti.Add_Giunta</node>
+    <node x="-767.1278175317058" y="-782.3255734924348">Controller.AnagraficaController</node>
+    <node x="-482.66642868960116" y="27.17995186490839">Controller.Compiti.MC</node>
+    <node x="-1116.184361180624" y="-490.79609886531125">Controller.MessaggioController</node>
+    <node x="237.68746357684063" y="-364.3740015769083">Controller.LoginController</node>
+    <node x="282.7458595824453" y="-937.61923770637">Controller.CandidatoController</node>
+    <node x="252.19654570575608" y="-134.16745636300504">Controller.Compiti.Referenteinformatico</node>
+    <node x="-937.1311278473405" y="25.943114227249453">Controller.Compiti.MCP</node>
+    <node x="-579.1672749756009" y="-1043.3725101633775">Controller.Sez_BUtenteController</node>
+    <node x="596.4844134644075" y="-324.2114224627926">MainApplicazione</node>
+    <node x="-212.96410818964114" y="53.72243597130296">Controller.CambiaStatoController</node>
+    <node x="-460.1627643892907" y="-213.28003839429607">Controller.VolontarioController</node>
+    <node x="-1164.8482918562665" y="-817.0187872708603">Controller.Compiti.Archivista</node>
+    <node x="75.4044770491239" y="-716.2977614754376">Controller.CFVerificaController</node>
+    <node x="-197.3919658614575" y="-393.8793557556128">Controller.Pagine_Manager</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Controller.Compiti.Add_Giunta" target="Controller.AnagraficaController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.CFVerificaController" target="Controller.AnagraficaController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.AnagraficaController" target="Controller.Sez_BUtenteController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.VolontarioController" target="Controller.CambiaStatoController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.VolontarioController" target="Controller.Compiti.Archivista">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="MainApplicazione" target="Controller.LoginController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.VolontarioController" target="Controller.Compiti.Add_Giunta">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.Compiti.Archivista" target="Controller.AnagraficaController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.VolontarioController" target="Controller.Compiti.MCP">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.LoginController" target="Controller.CandidatoController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.VolontarioController" target="Controller.Compiti.Referenteinformatico">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.CandidatoController" target="Controller.LoginController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.VolontarioController" target="Controller.LoginController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.AnagraficaController" target="Controller.CandidatoController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.Compiti.MCP" target="Controller.Compiti.MC">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.LoginController" target="Controller.VolontarioController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.VolontarioController" target="Controller.Compiti.MC">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.LoginController" target="Controller.CFVerificaController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.Compiti.Archivista" target="Controller.MessaggioController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.VolontarioController" target="Controller.AnagraficaController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.Compiti.Add_Giunta" target="Controller.MessaggioController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.CandidatoController" target="Controller.AnagraficaController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.AnagraficaController" target="Controller.VolontarioController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Controller.AnagraficaController" target="Controller.LoginController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.8211046990931574" x="-176.5" y="-447.5" />
+  <SelectedNodes>
+    <node>Controller.CandidatoController</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
