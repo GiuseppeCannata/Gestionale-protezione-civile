@@ -128,8 +128,13 @@ public class Archivista {
 
     public void stampalista() {
 
-        for (Persona utente : UTENTI)
-            Box.addItem(utente.getCognome() + "    -    " +utente.getNome());
+        for (Persona utente : UTENTI) {
+
+            if (!utente.getCodice_Fiscale().equals(UtenteLoggato.getCodice_Fiscale()))
+                Box.addItem(utente.getCognome() + "    -    " + utente.getNome());
+        }
+
+
 
     }
 
