@@ -187,14 +187,14 @@ public class MCP extends MC {
 
                             //messaggio di Broadcast
                             Messaggio messaggio = new Messaggio("Broadcast", "INFO",
-                                    utente.getNome() + " " + utente.getCognome() + " è il nuovo cordinatore ");
+                                    utente.getNome() + " " + utente.getCognome() + " è il nuovo Cordinatore ");
 
                             if (messaggio.InsertSQL()) {
 
                                 messaggio.AggiornaBroadcast(getUtenteloggato(), Dview);
 
                                 //messaggio privato per il nuovo cordinatore
-                                Messaggio sms = new Messaggio(cf, "MCP", "Sei diventato un Cordinatore");
+                                Messaggio sms = new Messaggio(cf, "Admin", "Sei diventato un Cordinatore");
 
                                 if (sms.InsertSQL())
                                     getBasicframe().Message("Cambiamento avvenuto!\nHo inoltre avvertito il nuovo Codinatore");
@@ -277,7 +277,7 @@ public class MCP extends MC {
                     //ELEGGO IL NUOVO MCP
                     appoggio[0] = "flagvolontario";
                     appoggio[1] = "ruolo";
-                    appoggio[2] = "Direttivo";
+                    appoggio[2] = "Admin";
                     appoggio[3] = cf;
 
                     if (getModel().UpdateSQL(appoggio) && getModel().SetteggioNuovoAdmin(cf)) {
@@ -285,18 +285,18 @@ public class MCP extends MC {
                         //messaggio di Broadcast
                         Messaggio messaggio = new Messaggio("Broadcast", "INFO",
                                 getUtenteloggato().getNome() + " " + getUtenteloggato().getCognome() +
-                                        " non è più l MCP ");
+                                        " non è più l Admin ");
 
                         if (messaggio.InsertSQL()) {
 
                             messaggio.AggiornaBroadcast(getUtenteloggato(), Dview);
 
                             //messaggio privato per il nuovo cordinatore
-                            Messaggio sms = new Messaggio(cf, "MCP", "Sei diventato il nuovo MCP");
+                            Messaggio sms = new Messaggio(cf, "Admin", "Sei diventato il nuovo Admin");
 
                             if (sms.InsertSQL())
-                                getBasicframe().Message("Cambiamento avvenuto!\nHo inoltre avvertito il nuovo MCP"
-                                        + "\nPer vedere le modifiche apportate effettuare un logout!");
+                                getBasicframe().Message("Cambiamento avvenuto!\nHo inoltre avvertito il nuovo Admin"
+                                        + "\nPer vedere le modifiche apportate, effettuare un logout!");
                         }
                     }
                 }

@@ -6,7 +6,7 @@ import java.sql.*;
 
 /**
  * Classe abstract padre di tutte le classi del model
- * contiene i metodi base per usare una tabella del DB
+ * contiene i metodi per usare una tabella del DB
  */
 public abstract class Model {
 
@@ -101,5 +101,7 @@ public abstract class Model {
      * @return
      */
     public abstract boolean UpdateSQL(String[] Appoggio);
+
+
 
 }

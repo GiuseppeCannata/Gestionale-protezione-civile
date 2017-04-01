@@ -75,7 +75,7 @@ public class Archivista {
                 view.VisibilitaRitornaButton(true);
                 view.VisibilitaInviomessaggio(true);
                 view.setLabel("Lista candidati");
-                appoggio = "vol_o_cand=0 and Conf_Archivista=0";
+                appoggio = "vol_o_cand=0 and Conf_Archivista=0 and conf_giunta=1";
                 gestione = new GestioneModel(appoggio);
                 utilizzatore =  "listacandidati";
                 UTENTI = gestione.Schede(utilizzatore);

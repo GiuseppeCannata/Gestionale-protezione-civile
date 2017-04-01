@@ -58,7 +58,6 @@ public class Volontario extends Persona {
 
         try {
 
-
             String sql = "select grupposang,tagliatesta,tagliabusto,tagliamano,tagliapantaloni,tagliascarpe,abilita" +
                     " from d where cf ='"+getCodice_Fiscale()+"'";
 

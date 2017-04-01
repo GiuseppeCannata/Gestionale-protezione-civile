@@ -172,21 +172,8 @@ public class CandidatoController {
               @Override
               public void actionPerformed(ActionEvent e) {
 
-                  if(basicframe.OpotionalMessage("Sei sicuro di volerti disiscrivere? ") == 0){
-
-                      String Appoggio;
-
-                      Appoggio = "a";
-                      Utente.DeleteSQL(Appoggio);
-                      for(Certificazione certificazione : Utente.getCERTIFICAZIONI())
-                          certificazione.DeleteSQL();
-                      Appoggio = "c";
-                      Utente.DeleteSQL(Appoggio);
-                      Appoggio = "pass";
-                      Utente.DeleteSQL(Appoggio);
-
-
-                  }
+                  if(basicframe.OpotionalMessage("Sei sicuro di volerti disiscrivere? ") == 0)
+                      Disiscizione();
 
               }
 
@@ -206,7 +193,8 @@ public class CandidatoController {
         if(Utente.getConf_Giunta() != 1 || Utente.getConf_Archivista() != 1){
 
             basicframe.ErrorMessage("Attendi la conferma dei nostri collaboratori!");
-        }else if(basicframe.OpotionalMessage("Confermi a diventare Volontario?") == 0 ) {
+        }else if(basicframe.OpotionalMessage("Confermi a diventare Volontario?\nDigitando no si procederà alla " +
+                "disiscrizione") == 0 ) {
 
             String[] appoggio = new String[3];
 
@@ -228,9 +216,32 @@ public class CandidatoController {
                 }
             }
 
+        }else{
+
+            Disiscizione();
+
+
         }
 
 
+    }
+
+
+    private void Disiscizione(){
+
+        String Appoggio;
+
+        Appoggio = "a";
+        Utente.DeleteSQL(Appoggio);
+        for(Certificazione certificazione : Utente.getCERTIFICAZIONI())
+            certificazione.DeleteSQL();
+        Appoggio = "c";
+        Utente.DeleteSQL(Appoggio);
+        Appoggio = "pass";
+        Utente.DeleteSQL(Appoggio);
+
+        LoginController controller;
+        controller = new LoginController(basicframe);
     }
 
     /**

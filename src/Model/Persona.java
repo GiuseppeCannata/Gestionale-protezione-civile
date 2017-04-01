@@ -137,7 +137,7 @@ public abstract class Persona extends Model{
      */
     protected void popolaB(){
 
-        CERTIFICAZIONI = new ArrayList<>(25);
+        CERTIFICAZIONI = new ArrayList<Certificazione>(25);
 
 
         openConnection();
@@ -232,7 +232,7 @@ public abstract class Persona extends Model{
     private void popolaBroadcast(){
 
         openConnection();
-        BROADCAST = new ArrayList<>(5);
+        BROADCAST = new ArrayList<String>(5);
 
         String sql = "select * from messaggi where cf='Broadcast'";
 
@@ -263,7 +263,7 @@ public abstract class Persona extends Model{
     private void popolaMessaggi(){
 
         openConnection();
-        MESSAGGI = new ArrayList<>(5);
+        MESSAGGI = new ArrayList<String>(5);
 
         String sql = "select * from messaggi where cf='"+Codice_Fiscale+"' and letto='no'";
 

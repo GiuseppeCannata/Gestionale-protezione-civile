@@ -74,6 +74,7 @@ public class CambiaStatoController {
         if(Utente.UpdateSQL(appoggio) && MessaggioDiBroadcast())
             basicframe.Message("Il suo stato è mutato in: "+stato+" ");
 
+
     }
 
     /**

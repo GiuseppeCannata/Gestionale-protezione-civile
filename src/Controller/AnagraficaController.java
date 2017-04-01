@@ -448,11 +448,6 @@ public class AnagraficaController {
                 c = UpdateC();
                 d = UpdateD();
 
-                UpdateA();
-                UpdateB();
-                UpdateC();
-                UpdateD();
-
                 if(!a && !b && !c && !d)
                     throw new Exception("Nessun cambiamento");
 
@@ -797,6 +792,29 @@ public class AnagraficaController {
             Utente.UpdateSQL(appoggio);
 
         }
+
+        if (!sez_Aview.getUsernametext().equals(Utente.getUsername())) {
+
+            controllo = true;
+            appoggio[0] = "pass";
+            appoggio[1] = "user";
+            appoggio[2] = sez_Aview.getUsernametext();
+            Utente.setUsername(sez_Aview.getUsernametext());
+            Utente.UpdateSQL(appoggio);
+
+        }
+
+        if (!sez_Aview.getPasswordtext().equals(Utente.getPassword())) {
+
+            controllo = true;
+            appoggio[0] = "pass";
+            appoggio[1] = "pass";
+            appoggio[2] = sez_Aview.getPasswordtext();
+            Utente.setPassword(sez_Aview.getPasswordtext());
+            Utente.UpdateSQL(appoggio);
+
+        }
+
         return controllo;
     }
     /**
@@ -826,7 +844,7 @@ public class AnagraficaController {
                 controllo = true;
                 Certificazione certificazione = CERTIFICAZIONI.get(i);
                 certificazione.updatesql();
-
+                certificazione.setFlag("nessuno");
             }
             i++;
         }
@@ -872,7 +890,7 @@ public class AnagraficaController {
         if (!sez_Cview.getFaxDatoreDiLavorotext().equals(Utente.getFax_Datore_di_Lavoro())) {
 
             controllo = true;
-            appoggio[1] = "eventualespecializzazione";
+            appoggio[1] = "faxdatore";
             appoggio[2] = sez_Cview.getFaxDatoreDiLavorotext();
             Utente.setFax_Datore_di_Lavoro(sez_Cview.getFaxDatoreDiLavorotext());
             Utente.UpdateSQL(appoggio);
@@ -920,6 +938,7 @@ public class AnagraficaController {
 
     private boolean UpdateD(){
 
+        System.out.print("kkkkkk");
         Volontario VOLONTARIO = (Volontario) Utente;
         boolean controllo = false;
         String[] appoggio =  new String[3];
@@ -999,6 +1018,7 @@ public class AnagraficaController {
 
         return controllo;
     }
+
 
     /**
      * Effettua il salvatazggio in locale dei dati dell utente(relativi alla sezione D).
