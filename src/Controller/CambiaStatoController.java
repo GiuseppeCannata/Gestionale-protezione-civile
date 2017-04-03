@@ -110,9 +110,13 @@ public class CambiaStatoController {
 
     @Override
     public String toString() {
-
-        return "CambiaStatoController{}";
-
+        return "CambiaStatoController{" +
+                "basicframe=" + basicframe +
+                ", CambiaStatoview=" + CambiaStatoview +
+                ", Dview=" + Dview +
+                ", stato='" + stato + '\'' +
+                ", Utente=" + Utente +
+                '}';
     }
 
     @Override

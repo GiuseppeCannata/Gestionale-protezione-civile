@@ -257,9 +257,15 @@ public class CandidatoController {
 
     @Override
     public String toString() {
-
-        return "CandidatoController";
-
+        return "CandidatoController{" +
+                "basicframe=" + basicframe +
+                ", Utente=" + Utente +
+                ", Dview=" + Dview +
+                ", Sview=" + Sview +
+                ", DatiPersonali=" + DatiPersonali +
+                ", BROADCAST=" + BROADCAST +
+                ", MESSAGGI=" + MESSAGGI +
+                '}';
     }
 
     @Override

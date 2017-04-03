@@ -319,9 +319,15 @@ public class VolontarioController{
 
     @Override
     public String toString() {
-
-        return "VolontarioController{}";
-
+        return "VolontarioController{" +
+                "basicframe=" + basicframe +
+                ", DatiPersonali=" + DatiPersonali +
+                ", Utente=" + Utente +
+                ", Dview=" + Dview +
+                ", Sview=" + Sview +
+                ", BROADCAST=" + BROADCAST +
+                ", MESSAGGI=" + MESSAGGI +
+                '}';
     }
 
     //se hanno lo stesso pannello di destra e di sinistra allora "controllano" la medesima GUI

@@ -474,9 +474,18 @@ public class MC {
 
     @Override
     public String toString() {
-
-        return "MC{}";
-
+        return "MC{" +
+                "basicframe=" + basicframe +
+                ", mcHomeview=" + mcHomeview +
+                ", utenteloggato=" + utenteloggato +
+                ", model=" + model +
+                ", appoggio='" + appoggio + '\'' +
+                ", Box=" + Box +
+                ", view=" + view +
+                ", Box2=" + Box2 +
+                ", utilizzatore='" + utilizzatore + '\'' +
+                ", UTENTI=" + UTENTI +
+                '}';
     }
 
     @Override

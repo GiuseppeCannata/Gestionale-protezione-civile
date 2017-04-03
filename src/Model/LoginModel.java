@@ -103,12 +103,13 @@ public class LoginModel extends Model {
     }
 
 
-
     @Override
     public String toString() {
-
-        return "Sono LoginModel";
-
+        return "LoginModel{" +
+                "userInserito='" + userInserito + '\'' +
+                ", passInserita='" + passInserita + '\'' +
+                ", volocand='" + volocand + '\'' +
+                '}';
     }
 
     @Override

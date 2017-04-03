@@ -174,9 +174,9 @@ public class Candidato extends Persona {
 
     @Override
     public String toString() {
-
-        return "Candidato";
-
+        return "Candidato{" +
+                "Conf_Giunta=" + Conf_Giunta +
+                ", Conf_Archivista=" + Conf_Archivista +
+                '}';
     }
-
 }

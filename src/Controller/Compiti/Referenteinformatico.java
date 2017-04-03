@@ -122,9 +122,14 @@ public class Referenteinformatico {
 
     @Override
     public String toString() {
-
-        return "Referenteinformatico{}";
-
+        return "Referenteinformatico{" +
+                "basicframe=" + basicframe +
+                ", view=" + view +
+                ", model=" + model +
+                ", Box=" + Box +
+                ", appoggio='" + appoggio + '\'' +
+                ", UTENTI=" + UTENTI +
+                '}';
     }
 
     @Override

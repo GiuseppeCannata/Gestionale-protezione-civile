@@ -247,9 +247,14 @@ public class RegistrazioneModel extends Model {
 
     @Override
     public String toString() {
-
-        return "RegistrazioneModel{}";
-
+        return "RegistrazioneModel{" +
+                "codicefiscale='" + codicefiscale + '\'' +
+                ", sez_Aview=" + sez_Aview +
+                ", sez_Bview=" + sez_Bview +
+                ", sez_Cview=" + sez_Cview +
+                ", UsernameInserito='" + UsernameInserito + '\'' +
+                ", sez_bRegistrazioneController=" + sez_bRegistrazioneController +
+                '}';
     }
 
     @Override

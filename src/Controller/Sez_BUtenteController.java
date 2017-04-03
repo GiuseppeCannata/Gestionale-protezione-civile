@@ -400,9 +400,15 @@ public class Sez_BUtenteController {
 
     @Override
     public String toString() {
-
-        return "Sez_BUtenteController{}";
-
+        return "Sez_BUtenteController{" +
+                "basicframe=" + basicframe +
+                ", codicefiscale='" + codicefiscale + '\'' +
+                ", Indice=" + Indice +
+                ", sez_Bview=" + sez_Bview +
+                ", CERTIFICAZIONI=" + CERTIFICAZIONI +
+                ", boxlist=" + boxlist +
+                ", aggiungi=" + aggiungi +
+                '}';
     }
 
     //se hanno lo stesso pannello controllano la stessa GUI

@@ -296,9 +296,17 @@ public class Archivista {
 
     @Override
     public String toString() {
-
-        return "Archivista{}";
-
+        return "Archivista{" +
+                "basicframe=" + basicframe +
+                ", archivistaHomeView=" + archivistaHomeView +
+                ", UtenteLoggato=" + UtenteLoggato +
+                ", view=" + view +
+                ", Box=" + Box +
+                ", appoggio='" + appoggio + '\'' +
+                ", gestione=" + gestione +
+                ", UTENTI=" + UTENTI +
+                ", utilizzatore='" + utilizzatore + '\'' +
+                '}';
     }
 
     @Override

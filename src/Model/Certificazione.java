@@ -218,9 +218,16 @@ public class Certificazione extends Model{
 
     @Override
     public String toString() {
-
-        return "Certificazione";
-
+        return "Certificazione{" +
+                "codicefiscale='" + codicefiscale + '\'' +
+                ", tipo='" + tipo + '\'' +
+                ", nome='" + nome + '\'' +
+                ", datascadenza='" + datascadenza + '\'' +
+                ", dataacquisizione='" + dataacquisizione + '\'' +
+                ", entedirilascio='" + entedirilascio + '\'' +
+                ", n_documento='" + n_documento + '\'' +
+                ", flag='" + flag + '\'' +
+                '}';
     }
 
     @Override

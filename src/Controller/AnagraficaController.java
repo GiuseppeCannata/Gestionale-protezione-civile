@@ -867,6 +867,7 @@ public class AnagraficaController {
         appoggio[0] = "c";
         //C
 
+
         if (!sez_Cview.getDenominazioneDatoreDiLavorotext().equals(Utente.getDenominazione_Datore_di_Lavoro())) {
 
             controllo = true;
@@ -1058,7 +1059,26 @@ public class AnagraficaController {
     @Override
     public String toString() {
 
-        return "Sez_ManagerController{}";
-
+        return "AnagraficaController{" +
+                "basicframe=" + basicframe +
+                ", Anagraficaview=" + Anagraficaview +
+                ", loginview=" + loginview +
+                ", codicefiscale='" + codicefiscale + '\'' +
+                ", Utente=" + Utente +
+                ", cDview=" + cDview +
+                ", cController=" + cController +
+                ", vDview=" + vDview +
+                ", vController=" + vController +
+                ", sez_Aview=" + sez_Aview +
+                ", sez_Bview=" + sez_Bview +
+                ", sez_bRegistrazioneController=" + sez_bRegistrazioneController +
+                ", sez_bUtenteController=" + sez_bUtenteController +
+                ", sez_Cview=" + sez_Cview +
+                ", sez_Dview=" + sez_Dview +
+                ", Salvabutton=" + Salvabutton +
+                ", Modifica=" + Modifica +
+                ", utilizzatore='" + utilizzatore + '\'' +
+                ", listacandidatiview=" + listacandidatiview +
+                '}';
     }
 }

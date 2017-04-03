@@ -112,9 +112,12 @@ public class CFVerificaController {
 
     @Override
     public String toString() {
-
-        return "Sono CFVerificaController";
-
+        return "CFVerificaController{" +
+                "basicframe=" + basicframe +
+                ", loginview=" + loginview +
+                ", verificaview=" + verificaview +
+                ", codicefiscale='" + codicefiscale + '\'' +
+                '}';
     }
 
     @Override

@@ -150,9 +150,16 @@ public class Add_Giunta {
 
     @Override
     public String toString() {
-
-        return "Add_Giunta{}";
-
+        return "Add_Giunta{" +
+                "basicframe=" + basicframe +
+                ", view=" + view +
+                ", model=" + model +
+                ", UtenteLoggato=" + UtenteLoggato +
+                ", Indice=" + Indice +
+                ", Box=" + Box +
+                ", appoggio='" + appoggio + '\'' +
+                ", UTENTI=" + UTENTI +
+                '}';
     }
 
     @Override

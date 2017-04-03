@@ -426,9 +426,20 @@ public class Volontario extends Persona {
 
     @Override
     public String toString() {
-
-        return "Volontario{}";
-
+        return "Volontario{" +
+                "grupposanguigno='" + grupposanguigno + '\'' +
+                ", tagliatesta='" + tagliatesta + '\'' +
+                ", tagliabusto='" + tagliabusto + '\'' +
+                ", tagliamano='" + tagliamano + '\'' +
+                ", tagliapantaloni='" + tagliapantaloni + '\'' +
+                ", tagliascarpe='" + tagliascarpe + '\'' +
+                ", abilita='" + abilita + '\'' +
+                ", primoaccesso='" + primoaccesso + '\'' +
+                ", ruolo='" + ruolo + '\'' +
+                ", stato='" + stato + '\'' +
+                ", archivista='" + archivista + '\'' +
+                ", add_giunta='" + add_giunta + '\'' +
+                ", referenteinformatico='" + referenteinformatico + '\'' +
+                '}';
     }
-
 }

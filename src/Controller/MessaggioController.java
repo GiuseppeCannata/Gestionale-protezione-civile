@@ -93,9 +93,13 @@ public class MessaggioController {
 
     @Override
     public String toString() {
-
-        return "MessaggioController{}";
-
+        return "MessaggioController{" +
+                "basicframe=" + basicframe +
+                ", view=" + view +
+                ", Destinatario='" + Destinatario + '\'' +
+                ", Mittente='" + Mittente + '\'' +
+                ", messaggio=" + messaggio +
+                '}';
     }
 
     //se hanno lo stesso pannello controllano la stessa GUI

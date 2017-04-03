@@ -251,9 +251,10 @@ public class GestioneModel extends Model{
 
     @Override
     public String toString() {
-
-        return "GestioneModel{}";
-
+        return "GestioneModel{" +
+                "listutenti=" + listutenti +
+                ", appoggio='" + appoggio + '\'' +
+                '}';
     }
 
     @Override

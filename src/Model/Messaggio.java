@@ -102,7 +102,11 @@ public class Messaggio extends Model {
 
     @Override
     public String toString() {
-        return "Messaggio{}";
+        return "Messaggio{" +
+                "Destinatario='" + Destinatario + '\'' +
+                ", Mittente='" + Mittente + '\'' +
+                ", Messaggio='" + Messaggio + '\'' +
+                '}';
     }
 
     @Override

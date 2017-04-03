@@ -313,9 +313,9 @@ public class MCP extends MC {
 
     @Override
     public String toString() {
-
-        return "MCP{}";
-
+        return "MCP{" +
+                "Dview=" + Dview +
+                '}';
     }
 
     //equals ereditato da MC

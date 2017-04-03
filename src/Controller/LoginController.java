@@ -121,8 +121,10 @@ public class LoginController {
 
     @Override
     public String toString() {
-
-        return "Sono LoginController";
+        return "LoginController{" +
+                "basicframe=" + basicframe +
+                ", loginview=" + loginview +
+                '}';
     }
 
     @Override
