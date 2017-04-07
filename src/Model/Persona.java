@@ -30,7 +30,6 @@ public abstract class Persona extends Model{
     /*SEZIONE (B) */
     private ArrayList<Certificazione> CERTIFICAZIONI;
 
-
     /*SEZIONE (C) */
     private String Denominazione_Datore_di_Lavoro;
     private String Telefono_Datore_Lavoro;
@@ -288,6 +287,7 @@ public abstract class Persona extends Model{
         }
 
     }
+
 
 
     /*GETTERS&SETTERS*/

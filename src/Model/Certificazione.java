@@ -29,6 +29,7 @@ public class Certificazione extends Model{
     public Certificazione(String Tipo,String CodiceFiscale, String NomeCertificazione, String DataAcquisizione, String DataScadenza,
                           String EnteRilascio, String NDocumento) {
 
+
         tipo = Tipo;
         codicefiscale = CodiceFiscale;
         nome = NomeCertificazione;

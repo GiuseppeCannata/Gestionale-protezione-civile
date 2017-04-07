@@ -116,6 +116,7 @@ public class Sez_BUtenteController {
                         boxlist.addItem("blsd");
                         boxlist.addItem("cinofilo");
 
+
                     } else if(boxcertificazioni.getSelectedItem().equals("corsi")){
 
                         boxlist.removeAllItems();

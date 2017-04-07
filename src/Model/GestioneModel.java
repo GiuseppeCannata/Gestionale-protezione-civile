@@ -21,7 +21,7 @@ public class GestioneModel extends Model{
     /*costruttore vuoto*/
     public GestioneModel() {
 
-        super();
+        return;
 
     }
 
