@@ -139,6 +139,7 @@ public class Add_Giunta {
             appoggio[1] = "conf_giunta";
             appoggio[2] =  "1" ;
 
+            //POLIMORFISMO
             if (UTENTI.get(Indice).UpdateSQL(appoggio)) {
 
                 basicframe.Message("Conferma avvenuta con successo!");
