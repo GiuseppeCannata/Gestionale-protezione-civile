@@ -83,46 +83,46 @@ public class Add_Giunta {
 
 
         JButton Accetta = view.getAccettaButton();
-            Accetta.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
+        Accetta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-                    //SE NON C E NESSUN ITEM RESTITUISCE NULL
-                    if(Box.getSelectedItem() != null)
+                //SE NON C E NESSUN ITEM RESTITUISCE NULL
+                if(Box.getSelectedItem() != null)
                     AccettaAction();
 
+            }
+        });
+
+        JButton VisionaScheda = view.getVisionaSchedaButton();
+        VisionaScheda.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if(Box.getSelectedItem() != null) {
+                    Indice = Box.getSelectedIndex();
+
+                    AnagraficaController controller;
+                    controller = new AnagraficaController(basicframe, UTENTI.get(Indice), view, "listacandidati");
                 }
-            });
 
-            JButton VisionaScheda = view.getVisionaSchedaButton();
-            VisionaScheda.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
+            }
+        });
 
-                    if(Box.getSelectedItem() != null) {
-                        Indice = Box.getSelectedIndex();
+        JButton InvioMessaggio = view.getInviagliUnMessaggioButton();
+        InvioMessaggio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-                        AnagraficaController controller;
-                        controller = new AnagraficaController(basicframe, UTENTI.get(Indice), view, "listacandidati");
-                    }
+                if(Box.getSelectedItem() != null){
 
+                    Indice = Box.getSelectedIndex();
+
+                    MessaggioController controller;
+                    controller = new MessaggioController(basicframe, UTENTI.get(Indice).getCodice_Fiscale(), UtenteLoggato.getNome() + " " + UtenteLoggato.getCognome());
                 }
-            });
-
-            JButton InvioMessaggio = view.getInviagliUnMessaggioButton();
-            InvioMessaggio.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-
-                    if(Box.getSelectedItem() != null){
-
-                       Indice = Box.getSelectedIndex();
-
-                       MessaggioController controller;
-                       controller = new MessaggioController(basicframe, UTENTI.get(Indice).getCodice_Fiscale(), UtenteLoggato.getNome() + " " + UtenteLoggato.getCognome());
-                    }
-                }
-            });
+            }
+        });
 
     }
 
