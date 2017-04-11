@@ -10,7 +10,7 @@ import java.sql.*;
  */
 public abstract class Model {
 
-    protected Connection conn;
+    private Connection conn;
     private Statement stmt;
     private ResultSet rs;
     private DBConnessione db;
@@ -101,7 +101,5 @@ public abstract class Model {
      * @return
      */
     public abstract boolean UpdateSQL(String[] Appoggio);
-
-
 
 }

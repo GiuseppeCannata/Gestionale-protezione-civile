@@ -89,11 +89,9 @@ public class VolontarioController{
         //selezione broadcast
         BROADCAST = Utente.getBROADCAST();
 
-        if(BROADCAST.size() !=0){
-
-            for(String messaggio: BROADCAST)
+        if(BROADCAST.size() !=0)
                 Dview.setBroadcast(BROADCAST);
-        }
+
 
         basicframe.setdestra(Dview.getIntermedio0());
         basicframe.setsinistra(Sview.getIntermedio0());
@@ -103,8 +101,8 @@ public class VolontarioController{
 
         if(MESSAGGI.size() !=0){
 
+            Dview.seteMessaggi(MESSAGGI);
             for(String messaggio: MESSAGGI) {
-                Dview.seteMessaggi(MESSAGGI);
 
                 //pone la lettura del messaggio a si
                 String[] appoggio = new String[3];
@@ -183,7 +181,7 @@ public class VolontarioController{
                     DatiPersonali = 1;
 
                     AnagraficaController datipersonali;
-                    datipersonali = new AnagraficaController(basicframe, Dview, Utente, VolontarioController.this);
+                    datipersonali = new AnagraficaController(basicframe, Dview, Utente);
                 }
 
             }

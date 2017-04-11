@@ -132,8 +132,7 @@ public class AnagraficaController {
     }
 
     //CANDIDATO
-    public AnagraficaController(BasicFrameView frame, CandidatoDestraView view, Candidato utente, String CodiceFiscale,
-                                CandidatoController CController) {
+    public AnagraficaController(BasicFrameView frame, CandidatoDestraView view, Candidato utente, String CodiceFiscale) {
 
         basicframe = frame;
         Anagraficaview = new AnagraficaView();
@@ -142,7 +141,6 @@ public class AnagraficaController {
         Utente = utente;
         cDview = view;
         Modifica = 0;
-        cController = CController;
         Salvabutton = Anagraficaview.getSalvaButton();
         Salvabutton.setVisible(false);
         utilizzatore = "candidato";
@@ -171,7 +169,7 @@ public class AnagraficaController {
     }
 
     //VOLONTARIO
-    public AnagraficaController(BasicFrameView frame, VolontarioDView view, Volontario VUtente, VolontarioController VController) {
+    public AnagraficaController(BasicFrameView frame, VolontarioDView view, Volontario VUtente) {
 
         basicframe = frame;
         Anagraficaview = new AnagraficaView();
@@ -179,7 +177,6 @@ public class AnagraficaController {
 
         codicefiscale = Utente.getCodice_Fiscale() ;
 
-        vController = VController;
         vDview = view;
         Modifica = 0;
         Salvabutton = Anagraficaview.getSalvaButton();
@@ -939,7 +936,6 @@ public class AnagraficaController {
 
     private boolean UpdateD(){
 
-        System.out.print("kkkkkk");
         Volontario VOLONTARIO = (Volontario) Utente;
         boolean controllo = false;
         String[] appoggio =  new String[3];

@@ -37,6 +37,7 @@ public class Volontario extends Persona {
 
     }
 
+
     public Volontario(String userInserito){
 
         super(userInserito);

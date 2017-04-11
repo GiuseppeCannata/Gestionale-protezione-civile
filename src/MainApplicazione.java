@@ -19,6 +19,7 @@ public class MainApplicazione {
         //setto look and feel del mio sistema
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {

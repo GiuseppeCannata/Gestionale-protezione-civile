@@ -108,7 +108,7 @@ public abstract class Persona extends Model{
             ResultSet query = selectQuery(sql);
             if(query.next()){
 
-                Codice_Fiscale = query.getString("cf");
+               Codice_Fiscale = query.getString("cf");
                Nome = query.getString("nome");
                Cognome = query.getString("cognome");
                Luogo_di_Nascita = query.getString("luogodinascita");
@@ -277,7 +277,6 @@ public abstract class Persona extends Model{
                 String Messaggio = query.getString("messaggio");
                 MESSAGGI.add(MESSAGGI.size(), "< "+Mittente+" > : "+Messaggio+".\n");
 
-                String[] appoggio = new String[3];
 
             }
         }catch(SQLException se){
@@ -473,9 +472,9 @@ public abstract class Persona extends Model{
 
     }
 
-    public void setNumerocodicepostale(String numerocodicepostale) {
+    public void setNumerocodicepostale(String Numerocodicepostale) {
 
-        this.numerocodicepostale = numerocodicepostale;
+        numerocodicepostale = Numerocodicepostale;
 
     }
 

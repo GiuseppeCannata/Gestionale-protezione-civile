@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Controller per la sezione B l utilizzatore è un utente gia registrato
@@ -234,10 +235,8 @@ public class Sez_BUtenteController {
                     for(Certificazione certificazione : CERTIFICAZIONI) {
 
                         if (boxcertificazioni.getSelectedItem().equals(certificazione.getTipo())
-                                && !certificazione.getFlag().equals("elimina")) {
+                                && !certificazione.getFlag().equals("elimina"))
                             boxlist.addItem(certificazione.getNome());
-                        }
-
 
                     }
                 }
@@ -314,26 +313,27 @@ public class Sez_BUtenteController {
     private void EliminaCertificazione() {
 
         boolean controllo = false;
-        int i = 0;
 
         String DaEliminare = (String) sez_Bview.getBoxlist().getSelectedItem();
 
 
         if (basicframe.OpotionalMessage("Sei sicuro di voler eliminare " + DaEliminare + "?") == 0) {
 
+            Iterator<Certificazione> iteratore = CERTIFICAZIONI.iterator();
 
-            while (i < CERTIFICAZIONI.size() && !controllo) {
+            while (iteratore.hasNext() && !controllo) {
 
-                if (CERTIFICAZIONI.get(i).getNome().equals(DaEliminare)) {
+                Certificazione certificazione = iteratore.next();
 
-                    CERTIFICAZIONI.get(i).setFlag("elimina");
+                if (certificazione.getNome().equals(DaEliminare)) {
 
                     controllo = true;
+                    certificazione.setFlag("elimina");
+
                     boxlist.removeItem(DaEliminare);
                     sez_Bview.HardReset();
 
                 }
-             i++;
             }
         }
     }
@@ -352,12 +352,16 @@ public class Sez_BUtenteController {
 
         int i=0;
 
-            while (i < CERTIFICAZIONI.size() && !controllo) {
+        Iterator<Certificazione> iteratore = CERTIFICAZIONI.iterator();
 
-                if (CERTIFICAZIONI.get(i).getNome().equals(DaUpdate)) {
+            while (iteratore.hasNext() && !controllo) {
+
+                Certificazione certificazione = iteratore.next();
+
+                if (certificazione.getNome().equals(DaUpdate)) {
 
                     controllo = true;
-                    Indice= i;
+                    Indice = i;
 
                 }
              i++;
@@ -377,7 +381,6 @@ public class Sez_BUtenteController {
 
         Certificazione certificazione = CERTIFICAZIONI.get(Indice);
 
-        System.out.println(certificazione.getNome());
         if(!sez_Bview.getDataAcquisizone().equals(certificazione.getDataacquisizione())
                 || !sez_Bview.getDataScadenza().equals(certificazione.getDatascadenza())
                 || !sez_Bview.getEnte_r_Text().equals(certificazione.getEntedirilascio())
@@ -393,6 +396,7 @@ public class Sez_BUtenteController {
 
 
     //GETTER
+    //usato solo per registrazione
     public ArrayList<Certificazione> getCERTIFICAZIONI() {
 
         return CERTIFICAZIONI;

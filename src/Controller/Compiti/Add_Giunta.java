@@ -25,7 +25,7 @@ public class Add_Giunta {
     private int Indice;
     private JComboBox Box;
     private String appoggio;
-    private ArrayList<Persona> UTENTI;
+    private ArrayList<Volontario> UTENTI;
 
 
     /*COSTRUTTORI*/
@@ -52,6 +52,7 @@ public class Add_Giunta {
         view.VisibilitaInviomessaggio(true);
 
 
+        //POTEVO PASSARGLI DIRETTAMENTE L OGGETTO
         UTENTI = model.Schede("listacandidati");
 
         stampalista();
@@ -70,7 +71,7 @@ public class Add_Giunta {
         Box = view.getBox1();
 
         for(Persona candidato : UTENTI)
-            Box.addItem(candidato.getCognome() + "    -    " +candidato.getNome());
+            Box.addItem(candidato.getCognome()+ "    -    " +candidato.getNome());
 
     }
 
@@ -80,13 +81,13 @@ public class Add_Giunta {
      */
     private void Listener() {
 
-           //SE NON C E NESSUN ITEM RESTITUISCE NULL
+
         JButton Accetta = view.getAccettaButton();
             Accetta.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-
+                    //SE NON C E NESSUN ITEM RESTITUISCE NULL
                     if(Box.getSelectedItem() != null)
                     AccettaAction();
 
@@ -139,6 +140,7 @@ public class Add_Giunta {
             appoggio[1] = "conf_giunta";
             appoggio[2] =  "1" ;
 
+            //AVREI UTILIZZATO IL POLIMORFISMO
             if (UTENTI.get(Indice).UpdateSQL(appoggio)) {
 
                 basicframe.Message("Conferma avvenuta con successo!");

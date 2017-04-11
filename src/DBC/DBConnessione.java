@@ -87,7 +87,10 @@ public class DBConnessione{
     @Override
     public String toString() {
 
-        return "DBConnessione{}";
-
+        return "DBConnessione{" +
+                "user='" + user + '\'' +
+                ", password='" + password + '\'' +
+                ", conn=" + conn +
+                '}';
     }
 }

@@ -157,7 +157,6 @@ public class RegistrazioneModel extends Model {
      */
     private boolean insertBSQL() {
 
-       //System.out.println("\nB");
        boolean controllo = false;
 
        ArrayList<Certificazione> CERTIFICAZIONI = sez_bRegistrazioneController.getCERTIFICAZIONI();

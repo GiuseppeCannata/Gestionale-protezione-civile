@@ -2,6 +2,7 @@ package Controller.Compiti;
 
 import Model.GestioneModel;
 import Model.Persona;
+import Model.Volontario;
 import View.BasicFrameView;
 import View.ListaggiView;
 
@@ -21,7 +22,7 @@ public class Referenteinformatico {
     private JComboBox Box;
     private String appoggio;
 
-    private ArrayList<Persona> UTENTI;
+    private ArrayList<Volontario> UTENTI;
 
 
     /*COSTRUTTORI*/
@@ -49,6 +50,7 @@ public class Referenteinformatico {
         model = new GestioneModel(appoggio);
 
         if(model.SearchSQL())
+            //è GIUSTO MA POTEVO RISOLVERLO DIVERSAMENTE
             UTENTI = model.getListutenti();
 
         stampalista();
@@ -65,8 +67,8 @@ public class Referenteinformatico {
 
     public void stampalista () {
 
-        for(Persona candidato : UTENTI)
-            Box.addItem(candidato.getCognome() + "    -    " +candidato.getNome());
+        for(Volontario utente : UTENTI)
+            Box.addItem(utente.getCognome() + "    -    " +utente.getNome());
 
     }
 
@@ -103,12 +105,14 @@ public class Referenteinformatico {
         if(basicframe.OpotionalMessage("Reset password per "+UTENTI.get(Indice).getNome()+" ?") == 0) {
 
             String Nuovapass = basicframe.InputMessage("Inserire una nuova password: ");
+            //null per l annulla
             if(Nuovapass != null && Nuovapass.length() != 0) {
 
                 appoggio[0] = "pass";
                 appoggio[1] = "pass";
                 appoggio[2] = Nuovapass;
 
+                //AVREI UTILIZZATO IL POLIMORFISMO
                 if (UTENTI.get(Indice).UpdateSQL(appoggio)) {
 
                     basicframe.Message("Reset avvenuto con successo!");

@@ -29,7 +29,7 @@ public class MC {
     private MCView view;
     private JComboBox Box2;
     private String utilizzatore;
-    private ArrayList<Persona> UTENTI;
+    private ArrayList<Volontario> UTENTI;
 
 
     /*COSTRUTTORI*/
@@ -144,6 +144,7 @@ public class MC {
                 Box2.addItem("Referente_Informatico");
                 Box2.addItem("Add_Giunta");
 
+                //AVREI POTUTO PASSARGLI L OGGETTO
                 UTENTI = model.CompitiRuoli();
 
                 listCompitiListner();
@@ -156,7 +157,6 @@ public class MC {
                 view.VisibilitaAssegnaRuolo(true);
 
                 Box2.removeAllItems();
-                Box2.addItem("Volontario_semplice");
                 Box2.addItem("Direttivo");
                 if(utenteloggato.getRuolo().equals("Cordinatore"))
                     Box2.addItem("Vicecordinatore");
@@ -188,7 +188,7 @@ public class MC {
             public void actionPerformed(ActionEvent e) {
 
                 String compito = (String) Box2.getSelectedItem();
-                for (Persona utente : UTENTI)
+                for (Volontario utente : UTENTI)
                     if (Box1.getSelectedItem().equals(utente.getCognome() + "    -    " + utente.getNome())) {
                         String[] app = new String[3];
 
@@ -196,6 +196,7 @@ public class MC {
                         app[1] = compito;
                         app[2] = "si";
 
+                        //AVREI POTUTO UTILIZZARE IL POLIMORFISMO
                         if (utente.UpdateSQL(app)) {
                             basicframe.Message("Assegnato!");
                             CompitiAction();
@@ -213,7 +214,7 @@ public class MC {
             public void actionPerformed(ActionEvent e) {
 
                 String compito = (String) Box2.getSelectedItem();
-                for (Persona utente : UTENTI)
+                for (Volontario utente : UTENTI)
                     if (Box1.getSelectedItem().equals(utente.getCognome() + "    -    " + utente.getNome())) {
                         String[] app = new String[3];
 
@@ -221,6 +222,7 @@ public class MC {
                         app[1] = compito;
                         app[2] = "no";
 
+                        //AVREI UTILIZZATO IL POLIMORFISMO
                         if (utente.UpdateSQL(app)) {
                             basicframe.Message("Eliminato!");
                             CompitiAction();
@@ -238,7 +240,7 @@ public class MC {
             public void actionPerformed(ActionEvent e) {
 
                 String ruolo = (String) Box2.getSelectedItem();
-                for (Persona utente : UTENTI)
+                for (Volontario utente : UTENTI)
                     if (Box1.getSelectedItem().equals(utente.getCognome() + "    -    " + utente.getNome())) {
                         String[] app = new String[3];
 
@@ -263,14 +265,15 @@ public class MC {
             public void actionPerformed(ActionEvent e) {
 
                 String compito = (String) Box2.getSelectedItem();
-                for (Persona utente : UTENTI)
+                for (Volontario utente : UTENTI)
                     if (Box1.getSelectedItem().equals(utente.getCognome() + "    -    " + utente.getNome())) {
                         String[] app = new String[3];
 
                         app[0] = "flagvolontario";
                         app[1] = "ruolo";
-                        app[2] =  " ";
+                        app[2] = "Volontario_semplice";
 
+                        //AVREI UTILIZZATO IL POLIMORFIDMO
                         if (utente.UpdateSQL(app)) {
                             basicframe.Message("Eliminato!");
                            RuoliAction();
@@ -301,7 +304,7 @@ public class MC {
 
         Box = view.getBox1();
 
-        for (Persona utente : UTENTI) {
+        for (Volontario utente : UTENTI) {
 
             switch (getUtenteloggato().getRuolo()) {
 
@@ -351,7 +354,7 @@ public class MC {
 
                 if(e.getSource() ==  Box1) {
 
-                    for (Persona utente : UTENTI) {
+                    for (Volontario utente : UTENTI) {
 
                         if (Box1.getSelectedItem().equals(utente.getCognome() + "    -    " + utente.getNome())) {
 
@@ -387,12 +390,12 @@ public class MC {
 
                 if(e.getSource() ==  Box1) {
 
-                    for (Persona utente : UTENTI) {
+                    for (Volontario utente : UTENTI) {
 
                         if (Box1.getSelectedItem().equals(utente.getCognome() + "    -    " + utente.getNome())) {
 
-                            Volontario Utente = (Volontario) utente;
-                            String[] ruolo = new String[]{Utente.getRuolo()};
+
+                            String[] ruolo = new String[]{utente.getRuolo()};
 
                             list.setListData(ruolo);
                         }
@@ -454,7 +457,7 @@ public class MC {
 
     }
 
-    public void setUTENTI(ArrayList<Persona> uTENTI) {
+    public void setUTENTI(ArrayList<Volontario> uTENTI) {
 
         UTENTI = uTENTI;
 
@@ -466,7 +469,7 @@ public class MC {
 
     }
 
-    public ArrayList<Persona> getUTENTI() {
+    public ArrayList<Volontario> getUTENTI() {
 
         return UTENTI;
 

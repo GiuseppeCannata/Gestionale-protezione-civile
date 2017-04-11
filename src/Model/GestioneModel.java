@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class GestioneModel extends Model{
 
-    private ArrayList<Persona> listutenti;
+    private ArrayList<Volontario> listutenti;
     private String appoggio;
 
 
@@ -29,7 +29,7 @@ public class GestioneModel extends Model{
 
         super();
         appoggio = Appoggio;
-        listutenti = new ArrayList<Persona>(20);
+        listutenti = new ArrayList<Volontario>(20);
 
     }
 
@@ -39,7 +39,7 @@ public class GestioneModel extends Model{
      * @param utilizzatore
      * @return Un ArrayList contentente i vari utenti
      */
-    public ArrayList<Persona> Schede(String utilizzatore) {
+    public ArrayList<Volontario> Schede(String utilizzatore) {
 
         try {
 
@@ -52,7 +52,7 @@ public class GestioneModel extends Model{
             while (query.next()) {
 
 
-               Persona utente = new Volontario();
+               Volontario utente = new Volontario();
 
                 utente.setCodice_Fiscale(query.getString("cf"));
                 utente.popolaA();
@@ -62,10 +62,9 @@ public class GestioneModel extends Model{
 
                 if(utilizzatore.equals("listavolontari")) {
 
-                    //conversione esplicita
-                    Volontario VOLONTARIO = (Volontario) utente;
-                    VOLONTARIO.popolaD();
-                    VOLONTARIO.popolastato();
+
+                    utente.popolaD();
+                    utente.popolastato();
 
                 }
 
@@ -89,7 +88,7 @@ public class GestioneModel extends Model{
      *
      * @return Un ArrayList contentente i vari utenti
      */
-    public ArrayList<Persona> CompitiRuoli(){
+    public ArrayList<Volontario> CompitiRuoli(){
 
         try {
 
@@ -101,16 +100,16 @@ public class GestioneModel extends Model{
 
             while (query.next()) {
 
-                Persona utente = new Volontario();
+                Volontario utente = new Volontario();
 
                 utente.setCodice_Fiscale(query.getString("cf"));
                 utente.setNome(query.getString("nome"));
                 utente.setCognome(query.getString("cognome"));
 
                 //conversione esplicita
-                Volontario VOLONTARIO = (Volontario) utente;
-                VOLONTARIO.popolacompiti();
-                VOLONTARIO.popolaruolo();
+
+                utente.popolacompiti();
+                utente.popolaruolo();
 
                 listutenti.add(listutenti.size(), utente);
 
@@ -167,7 +166,7 @@ public class GestioneModel extends Model{
 
             while (query.next()) {
 
-                Persona utente = new Volontario();
+                Volontario utente = new Volontario();
 
                 controllo = false;
 
@@ -243,7 +242,7 @@ public class GestioneModel extends Model{
 
 
     //GETTER
-    public ArrayList<Persona> getListutenti() {
+    public ArrayList<Volontario> getListutenti() {
 
         return listutenti;
 

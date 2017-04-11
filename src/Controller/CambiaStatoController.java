@@ -8,7 +8,6 @@ import View.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 /**
  * Controller per la View del cambia stato
@@ -96,10 +95,6 @@ public class CambiaStatoController {
 
             //aggiorno la lista dei mesaggi locale
             messaggio.AggiornaBroadcast(Utente, Dview);
-           /* ArrayList<String> BROADCAST = Utente.getBROADCAST();
-            BROADCAST.add("< "+Utente.getNome()+" "+Utente.getCognome()+" > : "+
-                    "Ha cambiato il suo stato in : "+stato);
-            Dview.setBroadcast(BROADCAST);*/
             controllo = true;
 
         }

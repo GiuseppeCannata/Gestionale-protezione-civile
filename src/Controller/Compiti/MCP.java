@@ -15,7 +15,7 @@ import java.util.ArrayList;
 /**
  * Classe rappresentate il compito dell Master_Chief_Plus.
  */
-
+//AVREI POTUTO NOMINARE LE VARIABILI DI ISTANZA PROTECTED
 public class MCP extends MC {
 
     private VolontarioDView Dview;
@@ -53,7 +53,6 @@ public class MCP extends MC {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-
                 ResetMC();
 
             }
@@ -65,10 +64,7 @@ public class MCP extends MC {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-
-
-                    NominaNuovoAdminAction();
-
+                NominaNuovoAdminAction();
 
             }
         });
@@ -80,9 +76,6 @@ public class MCP extends MC {
             public void actionPerformed(ActionEvent e) {
 
                 if(getBasicframe().OpotionalMessage("Resettare tutti i compiti ?")==0) {
-                   // MC controller;
-                   // controller = new MC("compiti");
-                   // controller.
 
                     setAppoggio("vol_o_cand = 1");
                     setUtilizzatore("compiti");
@@ -109,6 +102,7 @@ public class MCP extends MC {
 
                     setModel(new GestioneModel(getAppoggio()));
 
+                    //AVREI potutto passarli l oggetto
                     setUTENTI(getModel().CompitiRuoli());
                     ResetAction();
                 }
@@ -150,20 +144,19 @@ public class MCP extends MC {
                     throw new Exception("Utente non trovato");
 
 
+                //AVREI POTUTTO PASSARGLI L OGGETTO
                 setUTENTI(getModel().CompitiRuoli());
 
                 //cerco il vecchio cordinatore per resettarlo a volontario semplice
-                for (Persona utente : getUTENTI()) {
+                for (Volontario utente : getUTENTI()) {
 
-                    Volontario volontario = (Volontario) utente;
+                    if (utente.getRuolo().equals("Cordinatore")) {
 
-                    if (volontario.getRuolo().equals("Cordinatore")) {
-
-                        volontario.ResetRuoli();
+                        utente.ResetRuoli();
 
                         //messaggio privato --> lo informo del passaggio a volontario semplice
                         Messaggio sms;
-                        sms = new Messaggio(volontario.getCodice_Fiscale(), "MCP",
+                        sms = new Messaggio(utente.getCodice_Fiscale(), "MCP",
                                 "Sei diventato un Volontario_semplice");
 
                         if (sms.InsertSQL())
@@ -182,7 +175,7 @@ public class MCP extends MC {
 
                 if (getModel().UpdateSQL(appoggio)) {
 
-                    for (Persona utente : getUTENTI())
+                    for (Volontario utente : getUTENTI())
                         if (utente.getCodice_Fiscale().equals(cf)) {
 
                             //messaggio di Broadcast
@@ -218,20 +211,19 @@ public class MCP extends MC {
      */
     public void ResetAction() {
 
-        ArrayList<Persona> UTENTI = getUTENTI();
+        //AVREI POTUTO METTERLO PROTECTED
+        ArrayList<Volontario> UTENTI = getUTENTI();
 
-        for(Persona utente :UTENTI){
+        for(Volontario utente : UTENTI){
 
             if(!utente.getCodice_Fiscale().equals(getUtenteloggato().getCodice_Fiscale())) {
 
-                //Conversione esplicita
-                Volontario volontario = (Volontario) utente;
 
                 if (getUtilizzatore().equals("compiti")) {
-                    volontario.ResetCompiti();
+                    utente.ResetCompiti();
                 }
                 if (getUtilizzatore().equals("ruoli"))
-                    volontario.ResetRuoli();
+                    utente.ResetRuoli();
             }
         }
     }

@@ -85,7 +85,6 @@ public class CFVerificaController {
 
             if(codicefiscale.length() == 0)
                 throw new Exception("Inserire Codice fiscale!");
-            else
                 //la lunghezza del codice fiscale puo essere massimo 16
             if((codicefiscale.length() > 16) || (codicefiscale.length() < 16))
                 throw new Exception("Lunghezza Codice fiscale errata!");

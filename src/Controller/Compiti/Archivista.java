@@ -30,7 +30,7 @@ public class Archivista {
     private JComboBox Box;
     private String appoggio;
     private GestioneModel gestione;
-    private ArrayList<Persona> UTENTI;
+    private ArrayList<Volontario> UTENTI;
     private String utilizzatore;
 
    /*costruttore*/
@@ -78,6 +78,7 @@ public class Archivista {
                 appoggio = "vol_o_cand=0 and Conf_Archivista=0 and conf_giunta=1";
                 gestione = new GestioneModel(appoggio);
                 utilizzatore =  "listacandidati";
+                //POTEVO PASSARGLI L OGGETTO
                 UTENTI = gestione.Schede(utilizzatore);
 
                 basicframe.setdestra(view.getIntermedio0());
@@ -108,6 +109,7 @@ public class Archivista {
                 appoggio = "vol_o_cand=1";
                 gestione = new GestioneModel(appoggio);
                 utilizzatore = "listavolontari";
+                //POTEVO  PASSARGLI L OGGETTO
                 UTENTI = gestione.Schede(utilizzatore);
                 basicframe.setdestra(view.getIntermedio0());
                 VisionaSchedaListener();
@@ -150,8 +152,7 @@ public class Archivista {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Archivista controller;
-                controller = new Archivista(basicframe, UtenteLoggato);
+              basicframe.setdestra(archivistaHomeView.getIntermedio0());
 
             }
         });
@@ -169,7 +170,6 @@ public class Archivista {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                System.out.print(Box.getSelectedItem());
                 if(Box.getSelectedItem() != null)
                     VisionaSchedaAction();
 
@@ -255,7 +255,7 @@ public class Archivista {
 
                     int Indice =  Box.getSelectedIndex();
 
-                    Volontario volontario = (Volontario) UTENTI.get(Indice);
+                    Volontario volontario = UTENTI.get(Indice);
 
                     view.setText(volontario.getStato());
 
@@ -282,6 +282,7 @@ public class Archivista {
             appoggio[1] = "Conf_Archivista";
             appoggio[2] = "1";
 
+            //AVREI UTILIZZATO IL POLIMORFISMO
             if (UTENTI.get(Indice).UpdateSQL(appoggio)) {
 
                 basicframe.Message("Conferma effettuata con successo!");

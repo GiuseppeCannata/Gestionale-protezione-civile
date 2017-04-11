@@ -1,5 +1,6 @@
 package Model;
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -179,4 +180,6 @@ public class Candidato extends Persona {
                 ", Conf_Archivista=" + Conf_Archivista +
                 '}';
     }
+
+
 }

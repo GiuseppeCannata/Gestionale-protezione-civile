@@ -69,11 +69,9 @@ public class CandidatoController {
         //selezione broadcast
         BROADCAST = Utente.getBROADCAST();
 
-        if(BROADCAST.size() !=0){
-
-            for(String messaggio: BROADCAST)
+        if(BROADCAST.size() !=0)
                 Dview.setBroadcast(BROADCAST);
-        }
+
 
         //Settaggio della basicframe con inserimento dei due pannelli a destra e sinistra
         basicframe.setdestra(Dview.getIntermedio0());
@@ -84,8 +82,9 @@ public class CandidatoController {
 
         if(MESSAGGI.size() !=0){
 
+            Dview.seteMessaggi(MESSAGGI);
+
             for(String messaggio: MESSAGGI) {
-                Dview.seteMessaggi(MESSAGGI);
 
                 //pone la lettura del messaggio a si
                 String[] appoggio = new String[3];
@@ -124,8 +123,7 @@ public class CandidatoController {
 
                     DatiPersonali = 1;
                     AnagraficaController datipersonali;
-                    datipersonali = new AnagraficaController(basicframe, Dview, Utente, Utente.getCodice_Fiscale(),
-                            CandidatoController.this);
+                    datipersonali = new AnagraficaController(basicframe, Dview, Utente, Utente.getCodice_Fiscale());
                 }
 
             }
@@ -190,10 +188,9 @@ public class CandidatoController {
      */
     private void EvolviAction(){
 
-        if(Utente.getConf_Giunta() != 1 || Utente.getConf_Archivista() != 1){
-
+        if(Utente.getConf_Giunta() != 1 || Utente.getConf_Archivista() != 1)
             basicframe.ErrorMessage("Attendi la conferma dei nostri collaboratori!");
-        }else if(basicframe.OpotionalMessage("Confermi a diventare Volontario?\nDigitando no si procederà alla " +
+        else if(basicframe.OpotionalMessage("Confermi a diventare Volontario?\nDigitando no si procederà alla " +
                 "disiscrizione") == 0 ) {
 
             String[] appoggio = new String[3];
@@ -233,8 +230,10 @@ public class CandidatoController {
 
         Appoggio = "a";
         Utente.DeleteSQL(Appoggio);
+        //ELIMINO TUTTE LE CERTIFICAZIONI RELATIVE AL UTENTE
         for(Certificazione certificazione : Utente.getCERTIFICAZIONI())
             certificazione.DeleteSQL();
+
         Appoggio = "c";
         Utente.DeleteSQL(Appoggio);
         Appoggio = "pass";
